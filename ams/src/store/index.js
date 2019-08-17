@@ -18,6 +18,7 @@ import dashboard from "./dashboard.module"
 import invoice from "./invoice.module"
 import paymentReceive from "./paymentReceive.module"
 import installment from "./installment.module"
+import area from "./area.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -39,6 +40,7 @@ export default new Vuex.Store({
     dashboard,
     invoice,
     paymentReceive,
-    installment
+    installment,
+    area
   }
 })

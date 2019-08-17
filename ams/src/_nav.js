@@ -10,6 +10,19 @@ export default {
       }
     },
     {
+      name: 'Settings',
+      url: '/settings',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'area',
+          url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },
+
+      ]
+    },
+    {
       name: 'Items',
       url: '/category',
       icon: 'fa fa-money',
@@ -43,7 +56,7 @@ export default {
         },
       ]
     },
-    
+
     // {
     //   name: 'Expense',
     //   url: '/expense',
@@ -381,7 +394,7 @@ export default {
     //   variant: 'danger',
     //   attributes: { target: '_blank', rel: 'noopener' }
     // },
-    
-    
+
+
   ],
 }

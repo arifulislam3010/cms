@@ -95,11 +95,15 @@ const Booking = () => import('@/views/account/Booking')
 const PaymentSchedule = () => import('@/views/account/PaymentSchedule')
 const OtherIncome = () => import('@/views/account/OtherIncome')
 const applicationStatus = () => import('@/views/recuiting/workersinfo/applicationStatus')
-// recuiting 
+// recuiting
 const workersinfo = () => import('@/views/recuiting/workersinfo/index')
 const RecruitingDetails = () => import ('@/views/recuiting/workersinfo/RecruitingDetails');
 const UserUpdate = () => import ('@/views/pages/user/update');
 const ContentIndex = () => import ('@/views/content/index');
+
+//settings
+const Area = () => import('@/views/settings/area/index');
+
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
@@ -123,6 +127,14 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/settings/area',
+          name: 'Area',
+          component: Area,
           meta:{
             forAuth:true
           }
@@ -304,7 +316,7 @@ export default new Router({
             forAuth:true
           }
         },
-       
+
         {
           path: 'installment',
           name: 'Installment',
@@ -361,7 +373,7 @@ export default new Router({
             forAuth:true
           }
         },
-        
+
         {
           path: 'workers-report',
           name: 'Workers Reports',
@@ -375,7 +387,7 @@ export default new Router({
           name: 'Test-excel',
           component: Excel
         },
-        
+
         // {
         //   path: 'income',
         //   redirect: '/income/advance-payment',
@@ -637,7 +649,7 @@ export default new Router({
         }
       ]
     },
-    
+
     {
       path: '/login',
       name: 'Login',
@@ -690,9 +702,10 @@ export default new Router({
           name: 'Page500',
           component: Page500
         },
-        
+
       ]
     },
-    
+
+
   ]
 })

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJournalsTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateJournalsTable extends Migration
      */
     public function up()
     {
-        
-        Schema::create('journals', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date')->nullable();
-            $table->string('reference')->nullable();
-            $table->longText('note')->nullable();
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
+            $table->string('title')->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();
         });
 
-        Schema::table('journals', function(Blueprint $table){
+        Schema::table('areas', function(Blueprint $table){
+            $table->foreign('parent_id')->references('id')->on('areas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -37,6 +36,6 @@ class CreateJournalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journals');
+        Schema::dropIfExists('areas');
     }
 }

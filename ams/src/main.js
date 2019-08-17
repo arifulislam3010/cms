@@ -17,6 +17,18 @@ import axios from 'axios'
 
 
 require('./assets/css/style.css');
+// require('./assets/core.js');
+// //frontEnd
+// require('./assets/css/frontend/colors.css');
+// require('./assets/css/frontend/common_styles.css');
+// require('./assets/css/frontend/custom.css');
+// require('./assets/css/frontend/font-jade-embedded.css');
+// require('./assets/css/frontend/media.css');
+// // require('./assets/css/frontend/print.css');
+// // require('./assets/css/frontend/style.css');
+// require('./assets/css/frontend/styleb91b.css');
+// require('./assets/css/frontend/widget_style.css');
+
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 import Auth from './packages/Auth'
 import iziToast from 'izitoast'
@@ -45,7 +57,7 @@ router.beforeEach(
       else
         next()
     }
-      
+
     else if(to.matched.some(record => record.meta.forAuth)){
       if(!Vue.auth.isAuthenticated())
       next({
@@ -54,9 +66,9 @@ router.beforeEach(
       else
         next()
     }
-      
+
     else
-      next()  
+      next()
   }
 )
 
