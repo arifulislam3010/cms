@@ -20,15 +20,15 @@ const getters = {
 }
 
 const actions = {
-    
+
     [REPORT]({commit}) {
         return new Promise((resolve, reject) => {
             axios
             .get("api/reports")
             .then(response => {
-                
+
                 commit(SET_REPORT,response.data);
-                
+
                 resolve(response);
             })
             .catch(function(error) {
@@ -41,9 +41,9 @@ const actions = {
             axios
             .get("api/current-leadger")
             .then(response => {
-                
+
                 commit(SET_CURRENT_LEADGER,response.data);
-                
+
                 resolve(response);
             })
             .catch(function(error) {
@@ -53,13 +53,13 @@ const actions = {
     },
     [SEARCH_LEADGER]({commit},data) {
         return new Promise((resolve, reject) => {
-            console.log(data)
+            // console.log(data)
             axios
             .post("api/search-leadger",data)
             .then(response => {
                 // console.log(response)
                 commit(SET_CURRENT_LEADGER,response.data);
-                
+
                 resolve(response);
             })
             .catch(function(error) {
@@ -75,7 +75,7 @@ const actions = {
             .then(response => {
                 // console.log(response)
                 commit(SET_SEARCH_WORKERS,response.data);
-                
+
                 resolve(response);
             })
             .catch(function(error) {
@@ -83,22 +83,22 @@ const actions = {
             });
         });
     },
-    
+
 }
 
 const mutations = {
-    [SET_SEARCH_WORKERS](state, data) 
+    [SET_SEARCH_WORKERS](state, data)
     {
         state.workersreports = data;
     },
-    [SET_CURRENT_LEADGER](state, data) 
+    [SET_CURRENT_LEADGER](state, data)
     {
         state.leadgerdatas = data;
     },
-    [SET_REPORT](state, data) 
+    [SET_REPORT](state, data)
     {
         state.reports = data;
-    } 
+    }
 }
 export default {
     state,

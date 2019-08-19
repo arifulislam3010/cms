@@ -19,6 +19,8 @@ import invoice from "./invoice.module"
 import paymentReceive from "./paymentReceive.module"
 import installment from "./installment.module"
 import area from "./area.module"
+import category from "./category.module"
+import topic from "./topic.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -41,6 +43,8 @@ export default new Vuex.Store({
     invoice,
     paymentReceive,
     installment,
-    area
+    area,
+    category,
+    topic
   }
 })

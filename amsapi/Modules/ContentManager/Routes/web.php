@@ -12,5 +12,5 @@
 */
 
 Route::prefix('contentmanager')->group(function() {
-    Route::get('/', 'ContentManagerController@index');
+    // Route::get('/', 'ContentManagerController@index');
 });

@@ -25,8 +25,7 @@ class AreaController extends Controller
         //        ->paginate(10);
         // }
         // if ($role->hasAccess(['department.viewall'])){
-          return $area = Area::when($search_item , function($q) use($search_item){return $q->where('name','like',"%$search_item%");})
-           ->paginate(10);
+             $area = Area::whereNull('parent_id')->paginate(10);
         // }
     	return AreaResource::collection($area);
     }

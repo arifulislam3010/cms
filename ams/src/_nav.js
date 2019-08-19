@@ -11,16 +11,59 @@ export default {
     },
     {
       name: 'Settings',
-      url: '/settings',
       icon: 'fa fa-money',
       children: [
+        {
+          name: 'category',
+          url: '/settings/category',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'topic',
+          url: '/settings/topic',
+          icon: 'fa fa-life-bouy'
+        },
         {
           name: 'area',
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },
 
+
       ]
+    },
+    {
+      name: 'Manage News',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'List News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Scheduled News',
+          url: '/news/scheduled',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: "reporter's news",
+          url: '/news/reporter',
+          icon: 'fa fa-life-bouy'
+        },
+
+
+      ]
+    },
+    {
+      name: 'Photo Gallery',
+      url: '/photo/gallery',
+      icon: 'fa fa-life-bouy'
+    },
+    {
+      name: 'Video Gallery',
+      url: '/photo/gallery',
+      icon: 'fa fa-life-bouy'
     },
     {
       name: 'Items',

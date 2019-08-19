@@ -4,9 +4,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::middleware('auth:api')->get('/setting', function (Request $request) {
-    return $request->user();
-});
+
 
 //Area
 Route::prefix('api')->middleware(['auth:api'])->group(function() {
