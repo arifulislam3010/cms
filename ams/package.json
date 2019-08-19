@@ -40,7 +40,7 @@
     "jspdf-autotable": "^3.0.13",
     "laravel-vue-pagination": "^2.3.0",
     "perfect-scrollbar": "^1.4.0",
-    "popper.js": "^1.14.6",
+    "popper.js": "^1.14.7",
     "simple-line-icons": "^2.4.1",
     "vee-validate": "^2.1.5",
     "vue": "^2.5.19",
@@ -69,6 +69,7 @@
     "https-proxy-agent": "^2.2.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
