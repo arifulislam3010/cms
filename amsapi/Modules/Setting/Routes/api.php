@@ -4,9 +4,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::middleware('auth:api')->get('/setting', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::prefix('setting')->group(function() {
     Route::get('/', 'SettingController@index');

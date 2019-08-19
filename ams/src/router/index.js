@@ -103,6 +103,11 @@ const ContentIndex = () => import ('@/views/content/index');
 
 //settings
 const Area = () => import('@/views/settings/area/index');
+const NewsCategory = () => import('@/views/settings/category/index');
+const NewsTopic = () => import('@/views/settings/topic/index');
+
+const ManageNews = () => import('@/views/newsPortal/ManageNews/index');
+
 
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
@@ -135,6 +140,30 @@ export default new Router({
           path: '/settings/area',
           name: 'Area',
           component: Area,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/settings/category',
+          name: 'NewsCategory',
+          component: NewsCategory,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/settings/topic',
+          name: 'NewsTopic',
+          component: NewsTopic,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/news/list',
+          name: 'ManageNews',
+          component: ManageNews,
           meta:{
             forAuth:true
           }

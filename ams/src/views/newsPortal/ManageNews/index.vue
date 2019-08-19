@@ -1,72 +1,8 @@
 <template>
   <div class="card">
 
-      <div>
-        <div class="just-padding">
-
-            <div class="list-group list-group-root well" v-for="(area,index) in areas" :key="index">
-
-                <div >
-                  <a :href="'#item-'+index" class="list-group-item" @click="listGroup(index)">
-                    <i class="fa fa-share-square-o fa-lg mt-4"></i> {{area.title}}
-                </a>
-                <div class="list-group" :id="'item-'+index" v-show="showSection(index)">
-
-                    <!-- <a href="#item-1-1" class="list-group-item" @click="listGroup2">
-                    <i class="fa fa-chevron-right fa-lg mt-4"></i> Item 1.1
-                    </a> -->
-                    <p class="list-group-item"  v-for="(child,key) in area.childs" :key="key">
-                      <i class="fa fa-chevron-right fa-lg mt-2"></i> {{child.title}}
-                    </p>
-
-                    <!-- <div class="list-group" id="item-1-1" v-show="showSection2">
-                    <a href="#" class="list-group-item">Item 1.1.1</a>
-                    <a href="#" class="list-group-item">Item 1.1.2</a>
-                    <a href="#" class="list-group-item">Item 1.1.3</a>
-                    </div> -->
-
-                </div>
-                </div>
-
-            </div>
-
-        </div>
-      </div>
-        <br>
-        <div>
-        <div class="just-padding">
-
-            <div class="list-group list-group-root well" v-for="(area,index) in areas" :key="index">
-
-                <div >
-                  <a :href="'#item-'+index" class="list-group-item" @click="listGroup(index)">
-                    <i class="fa fa-share-square-o fa-lg mt-4"></i> {{area.title}}
-                </a>
-                <div class="list-group" :id="'item-'+index" v-show="showSection(index)">
-
-                    <!-- <a href="#item-1-1" class="list-group-item" @click="listGroup2">
-                    <i class="fa fa-chevron-right fa-lg mt-4"></i> Item 1.1
-                    </a> -->
-                    <p class="list-group-item"  v-for="(child,key) in area.childs" :key="key">
-                      <i class="fa fa-chevron-right fa-lg mt-2"></i> {{child.title}}
-                    </p>
-
-                    <!-- <div class="list-group" id="item-1-1" v-show="showSection2">
-                    <a href="#" class="list-group-item">Item 1.1.1</a>
-                    <a href="#" class="list-group-item">Item 1.1.2</a>
-                    <a href="#" class="list-group-item">Item 1.1.3</a>
-                    </div> -->
-
-                </div>
-                </div>
-
-            </div>
-
-        </div>
-      </div>
-      <br/>
         <div class="container-fluid">
-            <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Area</button>
+            <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Topic</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -80,7 +16,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Title</th>
-                      <th scope="col">Parent_id</th>
+                      <th scope="col">Reporter</th>
                       <th scope="col">Created By</th>
                       <th scope="col">Updated By</th>
                       <th scope="col">Actions</th>
@@ -90,7 +26,7 @@
                     <tr v-for="(area,index) in areas" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{area.title}}</td>
-                      <td>{{area.parent_id}}</td>
+                      <td>Ragib shahriar</td>
                       <td>{{area.created_by}}</td>
                       <td>{{area.updated_by}}</td>
                       <td>
