@@ -21,6 +21,7 @@ import installment from "./installment.module"
 import area from "./area.module"
 import category from "./category.module"
 import topic from "./topic.module"
+import ContentManagement from "./ContentManagement"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -45,6 +46,7 @@ export default new Vuex.Store({
     installment,
     area,
     category,
-    topic
+    topic,
+    ContentManagement
   }
 })

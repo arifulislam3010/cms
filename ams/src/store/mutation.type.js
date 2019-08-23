@@ -97,5 +97,10 @@ export const AFTER_ADD_AREA = "AFTER_ADD_AREA"
 export const AFTER_UPDATE_AREA = "AFTER_UPDATE_AREA"
 export const AFTER_DELETE_AREA = "AFTER_DELETE_AREA"
 
+// Content Management 
+export const SET_GET_CONTENT = "SET_GET_CONTENT"
+export const SET_ADD_CONTENT = "SET_ADD_CONTENT"
+export const SET_DELETE_CONTENT = "SET_DELETE_CONTENT"
+
 
 

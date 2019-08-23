@@ -105,3 +105,9 @@ export const ADD_AREA = "ADD_AREA"
 export const UPDATE_AREA = "UPDATE_AREA"
 export const DELETE_AREA = "DELETE_AREA"
 export const SEARCH_AREA = "SEARCH_AREA"
+
+
+// Content Management 
+export const GET_CONTENT = "GET_CONTENT"
+export const ADD_CONTENT = "ADD_CONTENT"
+export const DELETE_CONTENT = "DELETE_CONTENT"

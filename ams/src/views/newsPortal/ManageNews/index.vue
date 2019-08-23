@@ -8,8 +8,10 @@
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
             </form>
-
-
+                <a href="#"  class="list-icons-item text-danger-600" data-toggle="modal" data-target="#content_manager"  v-b-tooltip.hover title="manage images" style="margin-left:1px;margin-right:1px;"><i class="fas fa-file-image"></i>Content Manager</a>
+                <button type="button" class="btn btn-primary" @click="ContentManagerModal">
+                Launch demo modal
+                </button>
 
             <table class="table table-sm">
                 <thead>
@@ -46,6 +48,8 @@
         <AddAreaModal ref="add_area_modal"></AddAreaModal>
         <EditAreaModal ref="edit_area_modal"></EditAreaModal>
         <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
+        <ContentManager ref="content_manager_modal"></ContentManager>
+        
 
   </div>
 </template>
@@ -58,7 +62,7 @@ import Loader from '@/views/common/Loader'
 import AddAreaModal from './AddAreaModal'
 import EditAreaModal from './EditAreaModal'
 import ViewAreaModal from './ViewAreaModal'
-
+import ContentManager from '../../content/index'
 
 import { mapState,mapGetters,mapActions } from "vuex"
 import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.type';
@@ -94,8 +98,10 @@ export default {
       listGroup2(){
         this.showSection2 = !this.showSection2
       },
-
-      addAreaModal(){
+        ContentManagerModal(){
+            this.$refs.content_manager_modal.openModal();
+        },
+        addAreaModal(){
             this.$refs.add_area_modal.openModal()
         },
 
@@ -202,7 +208,8 @@ export default {
         EditAreaModal,
         ViewAreaModal,
         pagination,
-        AddAreaModal
+        AddAreaModal,
+        ContentManager
     }
 }
 </script>
