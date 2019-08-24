@@ -19,7 +19,7 @@ import invoice from "./invoice.module"
 import paymentReceive from "./paymentReceive.module"
 import installment from "./installment.module"
 import area from "./area.module"
-import category from "./category.module"
+import ncategory from "./ncategory.module"
 import topic from "./topic.module"
 Vue.use(Vuex);
 
@@ -44,7 +44,7 @@ export default new Vuex.Store({
     paymentReceive,
     installment,
     area,
-    category,
+    ncategory,
     topic
   }
 })

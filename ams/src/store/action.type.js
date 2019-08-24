@@ -105,3 +105,17 @@ export const ADD_AREA = "ADD_AREA"
 export const UPDATE_AREA = "UPDATE_AREA"
 export const DELETE_AREA = "DELETE_AREA"
 export const SEARCH_AREA = "SEARCH_AREA"
+
+//Category
+export const All_NCATEGORY = "All_NCATEGORY"
+export const ADD_NCATEGORY = "ADD_NCATEGORY"
+export const UPDATE_NCATEGORY = "UPDATE_NCATEGORY"
+export const DELETE_NCATEGORY = "DELETE_NCATEGORY"
+export const SEARCH_NCATEGORY = "SEARCH_NCATEGORY"
+
+//Topic
+export const All_TOPIC = "All_TOPIC"
+export const ADD_TOPIC = "ADD_TOPIC"
+export const UPDATE_TOPIC = "UPDATE_TOPIC"
+export const DELETE_TOPIC = "DELETE_TOPIC"
+export const SEARCH_TOPIC = "SEARCH_TOPIC"

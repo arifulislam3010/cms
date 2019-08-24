@@ -1,31 +1,31 @@
 import axios from "axios"
 import iziToast from 'izitoast'
-import { All_AREA,ADD_AREA,UPDATE_AREA,DELETE_AREA,SEARCH_AREA} from "./action.type"
-import { AFTER_ADD_AREA,SET_AREA,AFTER_UPDATE_AREA,AFTER_DELETE_AREA } from "./mutation.type"
+import { All_NCATEGORY,ADD_NCATEGORY,UPDATE_NCATEGORY,DELETE_NCATEGORY,SEARCH_NCATEGORY} from "./action.type"
+import { AFTER_ADD_NCATEGORY,SET_NCATEGORY,AFTER_UPDATE_NCATEGORY,AFTER_DELETE_NCATEGORY } from "./mutation.type"
 
 const state = {
-  area: [],
-  area_p2:[]
+  ncategory: [],
+  ncategory_p2:[]
 };
 
 const getters = {
-  areas(state){
-    return state.area
+  ncategorys(state){
+    return state.ncategory
   },
-  areaP2(state){
-    return state.area_p2
+  ncategoryP2(state){
+    return state.ncategory_p2
   }
 };
 
 const actions = {
 
-  [All_AREA]({commit},page) {
+  [All_NCATEGORY]({commit},page) {
     return new Promise((resolve, reject) => {
         axios
-        .post('/api/areas?page=' + page)
+        .post('/api/ncategorys?page=' + page)
         .then(response => {
             // console.log(response)
-            commit(SET_AREA,response.data)
+            commit(SET_NCATEGORY,response.data)
             resolve(response);
         })
         .catch(function(error) {
@@ -34,12 +34,12 @@ const actions = {
     });
 },
 
-    [ADD_AREA]({commit},data) {
+    [ADD_NCATEGORY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post("area",data)
+          .post("ncategory",data)
           .then(response => {
-              commit(AFTER_ADD_AREA,response.data);
+              commit(AFTER_ADD_NCATEGORY,response.data);
 
               resolve(response);
           })
@@ -49,12 +49,12 @@ const actions = {
       });
     },
 
-    [SEARCH_AREA]({commit},data) {
+    [SEARCH_NCATEGORY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post('/api/areas?page=' + data.page,data.data)
+          .post('/api/ncategorys?page=' + data.page,data.data)
           .then(response => {
-              commit(SET_AREA,response.data);
+              commit(SET_NCATEGORY,response.data);
 
               resolve(response);
           })
@@ -63,14 +63,14 @@ const actions = {
           });
       });
   },
-  [UPDATE_AREA]({commit},data) {
+  [UPDATE_NCATEGORY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .put("/area",data.data)
+          .put("/ncategory",data.data)
           .then(response => {
               var update_data = response.data
               var index = data.index
-              commit("AFTER_UPDATE_AREA",{update_data,index});
+              commit("AFTER_UPDATE_NCATEGORY",{update_data,index});
 
               resolve(response);
           })
@@ -79,12 +79,12 @@ const actions = {
           });
       });
   },
-  [DELETE_AREA]({commit},data) {
+  [DELETE_NCATEGORY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .delete("/area/"+data.id)
+          .delete("/ncategory/"+data.id)
           .then(response => {
-              commit("AFTER_DELETE_AREA",data.index);
+              commit("AFTER_DELETE_NCATEGORY",data.index);
 
               resolve(response);
           })
@@ -96,25 +96,25 @@ const actions = {
 };
 
 const mutations = {
-  [SET_AREA](state, data)
+  [SET_NCATEGORY](state, data)
     {
-        state.area = data.data;
-        state.area_p2 = data;
+        state.ncategory = data.data;
+        state.ncategory_p2 = data;
     },
 
-    [AFTER_ADD_AREA](state, data)
+    [AFTER_ADD_NCATEGORY](state, data)
     {
-        state.area.push(data);
+        state.ncategory.push(data);
     },
-    [AFTER_UPDATE_AREA](state,payload){
-      state.area.splice(payload.index,0,payload.update_data)
-      state.area.splice(payload.index+1,1)
+    [AFTER_UPDATE_NCATEGORY](state,payload){
+      state.ncategory.splice(payload.index,0,payload.update_data)
+      state.ncategory.splice(payload.index+1,1)
 
       // state.branch_p2.splice(payload.index,0,payload.update_data)
       // state.branch_p2.splice(payload.index+1,1)
     },
-    [AFTER_DELETE_AREA](state,index){
-      state.area.splice(index,1)
+    [AFTER_DELETE_NCATEGORY](state,index){
+      state.ncategory.splice(index,1)
       // state.branch_p2.splice(index,1)
     },
 

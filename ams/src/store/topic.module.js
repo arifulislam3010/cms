@@ -1,31 +1,31 @@
 import axios from "axios"
 import iziToast from 'izitoast'
-import { All_AREA,ADD_AREA,UPDATE_AREA,DELETE_AREA,SEARCH_AREA} from "./action.type"
-import { AFTER_ADD_AREA,SET_AREA,AFTER_UPDATE_AREA,AFTER_DELETE_AREA } from "./mutation.type"
+import { All_TOPIC,ADD_TOPIC,UPDATE_TOPIC,DELETE_TOPIC,SEARCH_TOPIC} from "./action.type"
+import { AFTER_ADD_TOPIC,SET_TOPIC,AFTER_UPDATE_TOPIC,AFTER_DELETE_TOPIC } from "./mutation.type"
 
 const state = {
-  area: [],
-  area_p2:[]
+  topic: [],
+  topic_p2:[]
 };
 
 const getters = {
-  areas(state){
-    return state.area
+  topics(state){
+    return state.topic
   },
-  areaP2(state){
-    return state.area_p2
+  topicP2(state){
+    return state.topic_p2
   }
 };
 
 const actions = {
 
-  [All_AREA]({commit},page) {
+  [All_TOPIC]({commit},page) {
     return new Promise((resolve, reject) => {
         axios
-        .post('/api/areas?page=' + page)
+        .post('/api/topics?page=' + page)
         .then(response => {
             // console.log(response)
-            commit(SET_AREA,response.data)
+            commit(SET_TOPIC,response.data)
             resolve(response);
         })
         .catch(function(error) {
@@ -34,12 +34,12 @@ const actions = {
     });
 },
 
-    [ADD_AREA]({commit},data) {
+    [ADD_TOPIC]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post("area",data)
+          .post("topic",data)
           .then(response => {
-              commit(AFTER_ADD_AREA,response.data);
+              commit(AFTER_ADD_TOPIC,response.data);
 
               resolve(response);
           })
@@ -49,12 +49,12 @@ const actions = {
       });
     },
 
-    [SEARCH_AREA]({commit},data) {
+    [SEARCH_TOPIC]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post('/api/areas?page=' + data.page,data.data)
+          .post('/api/topics?page=' + data.page,data.data)
           .then(response => {
-              commit(SET_AREA,response.data);
+              commit(SET_TOPIC,response.data);
 
               resolve(response);
           })
@@ -63,14 +63,14 @@ const actions = {
           });
       });
   },
-  [UPDATE_AREA]({commit},data) {
+  [UPDATE_TOPIC]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .put("/area",data.data)
+          .put("/topic",data.data)
           .then(response => {
               var update_data = response.data
               var index = data.index
-              commit("AFTER_UPDATE_AREA",{update_data,index});
+              commit("AFTER_UPDATE_TOPIC",{update_data,index});
 
               resolve(response);
           })
@@ -79,12 +79,12 @@ const actions = {
           });
       });
   },
-  [DELETE_AREA]({commit},data) {
+  [DELETE_TOPIC]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .delete("/area/"+data.id)
+          .delete("/topic/"+data.id)
           .then(response => {
-              commit("AFTER_DELETE_AREA",data.index);
+              commit("AFTER_DELETE_TOPIC",data.index);
 
               resolve(response);
           })
@@ -96,25 +96,25 @@ const actions = {
 };
 
 const mutations = {
-  [SET_AREA](state, data)
+  [SET_TOPIC](state, data)
     {
-        state.area = data.data;
-        state.area_p2 = data;
+        state.topic = data.data;
+        state.topic_p2 = data;
     },
 
-    [AFTER_ADD_AREA](state, data)
+    [AFTER_ADD_TOPIC](state, data)
     {
-        state.area.push(data);
+        state.topic.push(data);
     },
-    [AFTER_UPDATE_AREA](state,payload){
-      state.area.splice(payload.index,0,payload.update_data)
-      state.area.splice(payload.index+1,1)
+    [AFTER_UPDATE_TOPIC](state,payload){
+      state.topic.splice(payload.index,0,payload.update_data)
+      state.topic.splice(payload.index+1,1)
 
       // state.branch_p2.splice(payload.index,0,payload.update_data)
       // state.branch_p2.splice(payload.index+1,1)
     },
-    [AFTER_DELETE_AREA](state,index){
-      state.area.splice(index,1)
+    [AFTER_DELETE_TOPIC](state,index){
+      state.topic.splice(index,1)
       // state.branch_p2.splice(index,1)
     },
 

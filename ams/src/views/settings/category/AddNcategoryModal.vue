@@ -1,18 +1,18 @@
 <template>
-    <b-modal title="Area" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-        <form @submit.prevent="addArea" >
+    <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
+        <form @submit.prevent="addNcategory" >
 
             <b-row>
               <b-col sm="12">
                 <b-card>
                   <div slot="header">
-                    <strong>Area </strong> <small>Form</small>
+                    <strong>Category </strong> <small>Form</small>
                   </div>
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Title">Name</label>
-                        <b-form-input type="text" name="Title" id="Title" v-model="newArea.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
+                        <b-form-input type="text" name="Title" id="Title" v-model="newNcategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
                         <div v-show="errors.has('Title')" class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div>
@@ -24,9 +24,9 @@
                       <b-form-group>
                         <label for="Parent">Parent</label>
                         <div class="input-group">
-                            <select name="Parent" v-model="newArea.parent_id"  id="parent" class="form-control" >
+                            <select name="Parent" v-model="newNcategory.parent_id"  id="parent" class="form-control" >
                                 <option value="" >Select Parent</option>
-                                <option v-for="(area,index) in areas" :key="index" :value="area.id">{{area.title}}</option>
+                                <option v-for="(ncategory,index) in ncategorys" :key="index" :value="ncategory.id">{{ncategory.title}}</option>
                             </select>
 
                         </div>
@@ -58,7 +58,7 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate)
 
-import { ADD_AREA,All_AREA} from "@/store/action.type"
+import { ADD_NCATEGORY,All_NCATEGORY} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
 
@@ -67,7 +67,7 @@ export default {
         return{
             largeModal:false,
             addLoader:false,
-            newArea: {
+            newNcategory: {
                 title: '',
                 parent_id: ''
             },
@@ -76,16 +76,16 @@ export default {
     },
     methods:{
 
-      addArea () {
+      addNcategory () {
             this.$validator.validateAll().then( result =>{
                 if(result){
-                    var data = this.newArea
+                    var data = this.newNcategory
                     this.addLoader = true
-                    this.$store.dispatch('ADD_AREA',data)
+                    this.$store.dispatch('ADD_NCATEGORY',data)
                     .then(response=>{
                         this.addLoader = false;
                         this.largeModal = false
-                        this.$iziToast.success({position:'topRight',title:'Ok',message:"Area Added Successsfully"})
+                        this.$iziToast.success({position:'topRight',title:'Ok',message:"CAtegory Added Successsfully"})
 
                     })
                     .catch(error=>{
@@ -100,8 +100,8 @@ export default {
 
         openModal(){
             this.largeModal = true
-            this.newArea.title =''
-            this.newArea.parent_id =''
+            this.newNcategory.title =''
+            this.newNcategory.parent_id =''
         },
         close(){
             this.largeModal = false
@@ -121,7 +121,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["areas","areaP2"]),
+      ...mapGetters(["ncategorys","ncategoryP2"]),
     },
 
 }

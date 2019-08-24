@@ -4,16 +4,23 @@ namespace Modules\Setting\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class Ncategory extends Model
 {
     protected $fillable = [
-        'cover',
-        'status',
+        'title',
+        'parent_id',
         'created_by',
         'updated_by'
     ];
 
-    protected $table = 'topics';
+    protected $table = 'ncategories';
+
+    public function parent(){
+        return $this->belongsTo('Modules\Setting\Entities\Category','parent_id');
+    }
+    public function child(){
+        return $this->hasMany('Modules\Setting\Entities\Category','parent_id');
+    }
 
     public function createdBy(){
         return $this->belongsTo('App\User','created_by');

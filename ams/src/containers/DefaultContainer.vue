@@ -1,11 +1,11 @@
 <template>
   <div class="app" style="text-transform: uppercase;font-family:Sans-Serif; font-size: 15px;">
     <AppHeader fixed>
-      <SidebarToggler class="d-lg-none" display="md" mobile v-if="navHide"/>
+      <SidebarToggler class="d-lg-none" display="md" mobile />
       <b-link class="navbar-brand" to="#">
         <img class="navbar-brand-full" src="../static/banglapress.png" width="89" height="25" alt="CoreUI Logo">
       </b-link>
-      <SidebarToggler  class="d-md-down-none" display="lg" v-if="navHide"/>
+      <SidebarToggler  class="d-md-down-none" display="lg"/>
       <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3" to="/dashboard">Dashboard</b-nav-item>
       </b-navbar-nav>
@@ -26,7 +26,7 @@
       <!-- <AsideToggler class="d-lg-none" mobile /> -->
     </AppHeader>
     <div class="app-body">
-      <div v-if="navHide">
+      <div>
         <AppSidebar fixed>
           <SidebarHeader/>
           <SidebarForm/>
@@ -96,7 +96,7 @@ export default {
     name () {
       return this.$route.name
     },
-    
+
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     },
@@ -114,7 +114,7 @@ export default {
           }
         })
     },
-    
+
     // menuAdd(){
     //   var roles =  this.user_roles
     //   this.nav[12].children = []
@@ -129,7 +129,7 @@ export default {
     // }
   },
   mounted(){
-    this.getPermission();    
+    this.getPermission();
     // var that = this
     // setInterval(function(){
     //     that.menuAdd()
