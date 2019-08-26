@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Modules\ContentManager\Entities\Content;
 use Illuminate\Support\Facades\Storage;
-use Modules\ContentBank\Transformers\ContentBank as ContentBankResource;
+use Modules\ContentManager\Transformers\Content as ContentResource;
 use DB;
 use Auth;
 use App\User;
@@ -22,8 +22,8 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
-        $Content = Content::all();
-        return ContentBankResource::collection($Content);
+        $Content = Content::paginate(15);
+        return ContentResource::collection($Content);
     }
 
     /**
@@ -66,17 +66,18 @@ class ContentManagerController extends Controller
             $type = $request->input('type');
         }
 
-        $Content->name = $file;
+        $Content->file_name = $file;
     	$Content->title = $request['title'];
     	$Content->type  = $type; 
 
         $log_user = Auth()->user();
+
         $request->isMethod('put') ?  $Content->updated_by = $log_user->id : '' ;
         $request->isMethod('post') ? $Content->created_at = $log_user->id : '' ;
         $request->isMethod('post') ? $Content->updated_at = $log_user->id : '' ;
 
         if($Content->save()){
-        	return new ContentBankResource($Content);
+        	return new ContentResource($Content);
         }else{
             return response()->json(['errors' =>['message'=>'No Data']],400);
         }	

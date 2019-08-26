@@ -56,6 +56,9 @@ const mutations = {
   {
         state.contents = data;
   },
+  [SET_ADD_CONTENT](state,data){
+    state.contents.data.push(data);
+  }
 };
 
 

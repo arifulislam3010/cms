@@ -48,7 +48,7 @@
         <AddAreaModal ref="add_area_modal"></AddAreaModal>
         <EditAreaModal ref="edit_area_modal"></EditAreaModal>
         <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
-        <ContentManager ref="content_manager_modal"></ContentManager>
+        <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
         
 
   </div>
@@ -69,6 +69,7 @@ import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.
 export default {
   data(){
         return {
+            content:{},
             loading:false,
             // showSection: false,
             showSection(index){

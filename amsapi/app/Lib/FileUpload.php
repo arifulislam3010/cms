@@ -9,6 +9,7 @@ class FileUpload
     private $image_ext = ['jpg','jpeg' ,'png' ,'gif'];
     private $video_ext = ['mp4', 'mpeg', 'avi', 'mov', 'mpeg-4', 'wmv', 'mpeg-ps', 'flv', '3gpp', 'webm'];
     private $document_ext = ['doc', 'docx', 'pdf', 'pptx', 'ppt', 'xls', 'xlsx'];
+    private $audio_ext = ['mp4'];
     private function getType($ext)
     {
         if (in_array($ext, $this->image_ext)) {

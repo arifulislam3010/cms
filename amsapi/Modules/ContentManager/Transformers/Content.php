@@ -12,8 +12,17 @@ class Content extends Resource
      * @param  \Illuminate\Http\Request
      * @return array
      */
+    
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=> $this->id,
+            'title'=> $this->title,
+            'file'=>config('global.file_path').$this->file_name,
+            'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
+            'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }
