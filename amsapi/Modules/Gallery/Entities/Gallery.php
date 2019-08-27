@@ -1,20 +1,23 @@
 <?php
 
-namespace Modules\Setting\Entities;
+namespace Modules\Gallery\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class Gallery extends Model
 {
     protected $fillable = [
         'title',
         'cover',
-        'status',
         'created_by',
         'updated_by'
     ];
 
-    protected $table = 'topics';
+    protected $table = 'galleries';
+
+    public function gContent(){
+        return $this->hasMany('Modules\Setting\Entities\Gallery','gallery_id');
+    }
 
     public function createdBy(){
         return $this->belongsTo('App\User','created_by');

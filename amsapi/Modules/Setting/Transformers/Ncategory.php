@@ -3,6 +3,7 @@
 namespace Modules\Setting\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Setting\Transformers\Ncategory as NcategoryResource;
 
 class Ncategory extends Resource
 {
@@ -18,7 +19,7 @@ class Ncategory extends Resource
             'id'=> $this->id,
             'title'=> $this->title,
             //'parent'=> $this->parent->title,
-            'childs'   => AreaResource::collection($this->child),
+            'childs'   => NcategoryResource::collection($this->child),
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,

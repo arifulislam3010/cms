@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Setting\Transformers;
+namespace Modules\Gallery\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Topic extends Resource
+class GalleryContent extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,9 @@ class Topic extends Resource
     {
         return [
             'id'=> $this->id,
-            'title'=> $this->title,
-            'cover'=> $this->cover,
-            'status'=> $this->status,
+            'caption'=> $this->caption,
+            'content'=> $this->content,
+            'gallery_id'=> $this->gallery_id,
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,

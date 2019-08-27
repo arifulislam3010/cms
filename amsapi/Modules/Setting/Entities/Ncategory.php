@@ -16,10 +16,10 @@ class Ncategory extends Model
     protected $table = 'ncategories';
 
     public function parent(){
-        return $this->belongsTo('Modules\Setting\Entities\Category','parent_id');
+        return $this->belongsTo('Modules\Setting\Entities\Ncategory','parent_id');
     }
     public function child(){
-        return $this->hasMany('Modules\Setting\Entities\Category','parent_id');
+        return $this->hasMany('Modules\Setting\Entities\Ncategory','parent_id');
     }
 
     public function createdBy(){

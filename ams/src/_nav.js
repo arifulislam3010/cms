@@ -56,15 +56,11 @@ export default {
       ]
     },
     {
-      name: 'Photo Gallery',
-      url: '/photo/gallery',
+      name: 'Gallery',
+      url: '/gallery/list',
       icon: 'fa fa-life-bouy'
     },
-    {
-      name: 'Video Gallery',
-      url: '/photo/gallery',
-      icon: 'fa fa-life-bouy'
-    },
+    
     {
       name: 'Items',
       url: '/category',

@@ -119,3 +119,17 @@ export const ADD_TOPIC = "ADD_TOPIC"
 export const UPDATE_TOPIC = "UPDATE_TOPIC"
 export const DELETE_TOPIC = "DELETE_TOPIC"
 export const SEARCH_TOPIC = "SEARCH_TOPIC"
+
+//Gallery
+export const All_GALLERY = "All_GALLERY"
+export const ADD_GALLERY = "ADD_GALLERY"
+export const UPDATE_GALLERY = "UPDATE_GALLERY"
+export const DELETE_GALLERY = "DELETE_GALLERY"
+export const SEARCH_GALLERY = "SEARCH_GALLERY"
+
+//Gallery Content
+export const All_GALLERYC = "All_GALLERYC"
+export const ADD_GALLERYC = "ADD_GALLERYC"
+export const UPDATE_GALLERYC = "UPDATE_GALLERYC"
+export const DELETE_GALLERYC = "DELETE_GALLERYC"
+export const SEARCH_GALLERYC = "SEARCH_GALLERYC"

@@ -21,6 +21,8 @@ import installment from "./installment.module"
 import area from "./area.module"
 import ncategory from "./ncategory.module"
 import topic from "./topic.module"
+import gallery from "./gallery.module"
+import gcontent from "./gcontent.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -45,6 +47,8 @@ export default new Vuex.Store({
     installment,
     area,
     ncategory,
-    topic
+    topic,
+    gallery,
+    gcontent
   }
 })

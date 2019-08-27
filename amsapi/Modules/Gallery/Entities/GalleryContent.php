@@ -1,20 +1,24 @@
 <?php
 
-namespace Modules\Setting\Entities;
+namespace Modules\Gallery\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class GalleryContent extends Model
 {
     protected $fillable = [
-        'title',
-        'cover',
-        'status',
+        'caption',
+        'content',
+        'gallery_id',
         'created_by',
         'updated_by'
     ];
 
-    protected $table = 'topics';
+    protected $table = 'gallery_contents';
+
+    public function gallery(){
+        return $this->belongsTo('Modules\Setting\Entities\GalleryContent','gallery_id');
+    }
 
     public function createdBy(){
         return $this->belongsTo('App\User','created_by');

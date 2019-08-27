@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Setting\Http\Controllers;
+namespace Modules\Gallery\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Setting\Entities\Topic;
+use Modules\Gallery\Entities\Gallery;
 
-use Modules\Setting\Transformers\Topic as TopicResource;
+use Modules\Gallery\Transformers\Gallery as GalleryResource;
 
-class TopicController extends Controller
+class GalleryController extends Controller
 {
     public function index(Request $request){
 
@@ -18,7 +18,7 @@ class TopicController extends Controller
         // $role = Sentinel::findRoleById($role_id);
         // $search_item = ($request->has('search_item'))?$request['search_item']:null;
         $search_item = ($request->has('search_item'))?$request['search_item']:null;
-        $topic = '';
+        $gallery = '';
 
         // if ($role->hasAccess(['department.view'])){
         //     $department = Department::when($search_item , function($q) use($search_item,$user_id){return $q->where('created_by',$user_id)->where('name','like',"%$search_item%");})
@@ -26,10 +26,10 @@ class TopicController extends Controller
         //        ->paginate(10);
         // }
         // if ($role->hasAccess(['department.viewall'])){
-          return $topic = Topic::when($search_item , function($q) use($search_item){return $q->where('name','like',"%$search_item%");})
+          return $gallery = Gallery::when($search_item , function($q) use($search_item){return $q->where('name','like',"%$search_item%");})
            ->paginate(10);
         // }
-    	return TopicResource::collection($topic);
+    	return GalleryResource::collection($gallery);
     }
 
 
@@ -37,29 +37,28 @@ class TopicController extends Controller
     public function store(Request $request)
     {
 
-        $topic = $request->isMethod('put') ? Topic::findOrFail($request->topic_id) : new Topic;
-        $topic -> title = $request->input('title');
-        $topic -> cover = $request->input('cover');
-        $topic -> status = $request->input('status');
+        $gallery = $request->isMethod('put') ? Gallery::findOrFail($request->gallery_id) : new Gallery;
+        $gallery -> title = $request->input('title');
+        $gallery -> cover = $request->input('cover');
 
         //vat_reg_no
         $log_user = Auth()->user();
-        $request->isMethod('put') ?  $topic ->updated_by = $log_user->id : '' ;
-        $request->isMethod('post') ? $topic ->created_by = $log_user->id : '' ;
-        $request->isMethod('post') ? $topic ->updated_by = $log_user->id : '' ;
+        $request->isMethod('put') ?  $gallery ->updated_by = $log_user->id : '' ;
+        $request->isMethod('post') ? $gallery ->created_by = $log_user->id : '' ;
+        $request->isMethod('post') ? $gallery ->updated_by = $log_user->id : '' ;
 
 
-        if($topic->save()){
-            return new TopicResource($topic);
+        if($gallery->save()){
+            return new GalleryResource($gallery);
         }
     }
 
     public function destroy($id)
     {
-        $topic = Topic::findOrFail($id);
+        $gallery = Gallery::findOrFail($id);
 
-        if($topic->delete()){
-        	return new TopicResource($topic);
+        if($gallery->delete()){
+        	return new GalleryResource($gallery);
         }
     }
 }
