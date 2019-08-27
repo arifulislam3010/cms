@@ -96,7 +96,7 @@ export default {
     name () {
       return this.$route.name
     },
-    
+
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     },
@@ -114,7 +114,7 @@ export default {
           }
         })
     },
-    
+
     // menuAdd(){
     //   var roles =  this.user_roles
     //   this.nav[12].children = []
@@ -129,7 +129,7 @@ export default {
     // }
   },
   mounted(){
-    this.getPermission();    
+    this.getPermission();
     // var that = this
     // setInterval(function(){
     //     that.menuAdd()

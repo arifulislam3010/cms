@@ -107,6 +107,7 @@ const NewsCategory = () => import('@/views/settings/category/index');
 const NewsTopic = () => import('@/views/settings/topic/index');
 
 const ManageNews = () => import('@/views/newsPortal/ManageNews/index');
+const Gallery = () => import('@/views/newsPortal/Gallery/index');
 
 
 export default new Router({
@@ -164,6 +165,14 @@ export default new Router({
           path: '/news/list',
           name: 'ManageNews',
           component: ManageNews,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/gallery/list',
+          name: 'Gallery',
+          component: Gallery,
           meta:{
             forAuth:true
           }
