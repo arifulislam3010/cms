@@ -1,31 +1,31 @@
 import axios from "axios"
 import iziToast from 'izitoast'
-import { All_TOPIC,ADD_TOPIC,UPDATE_TOPIC,DELETE_TOPIC,SEARCH_TOPIC} from "./action.type"
-import { AFTER_ADD_TOPIC,SET_TOPIC,AFTER_UPDATE_TOPIC,AFTER_DELETE_TOPIC } from "./mutation.type"
+import { All_GALLERY,ADD_GALLERY,UPDATE_GALLERY,DELETE_GALLERY,SEARCH_GALLERY} from "./action.type"
+import { AFTER_ADD_GALLERY,SET_GALLERY,AFTER_UPDATE_GALLERY,AFTER_DELETE_GALLERY } from "./mutation.type"
 
 const state = {
-  topic: [],
-  topic_p2:[]
+  gallery: [],
+  gallery_p2:[]
 };
 
 const getters = {
-  topics(state){
-    return state.topic
+  gallerys(state){
+    return state.gallery
   },
-  topicP2(state){
-    return state.topic_p2
+  galleryP2(state){
+    return state.gallery_p2
   }
 };
 
 const actions = {
 
-  [All_TOPIC]({commit},page) {
+  [All_GALLERY]({commit},page) {
     return new Promise((resolve, reject) => {
         axios
-        .post('/api/topics?page=' + page)
+        .post('/api/gallerys?page=' + page)
         .then(response => {
             // console.log(response)
-            commit(SET_TOPIC,response.data)
+            commit(SET_GALLERY,response.data)
             resolve(response);
         })
         .catch(function(error) {
@@ -34,12 +34,12 @@ const actions = {
     });
 },
 
-    [ADD_TOPIC]({commit},data) {
+    [ADD_GALLERY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post("topic",data)
+          .post("gallery",data)
           .then(response => {
-              commit(AFTER_ADD_TOPIC,response.data);
+              commit(AFTER_ADD_GALLERY,response.data);
 
               resolve(response);
           })
@@ -49,12 +49,12 @@ const actions = {
       });
     },
 
-    [SEARCH_TOPIC]({commit},data) {
+    [SEARCH_GALLERY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .post('/api/topics?page=' + data.page,data.data)
+          .post('/api/gallerys?page=' + data.page,data.data)
           .then(response => {
-              commit(SET_TOPIC,response.data);
+              commit(SET_GALLERY,response.data);
 
               resolve(response);
           })
@@ -63,14 +63,14 @@ const actions = {
           });
       });
   },
-  [UPDATE_TOPIC]({commit},data) {
+  [UPDATE_GALLERY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .put("/topic",data.data)
+          .put("/gallery",data.data)
           .then(response => {
               var update_data = response.data
               var index = data.index
-              commit("AFTER_UPDATE_TOPIC",{update_data,index});
+              commit("AFTER_UPDATE_GALLERY",{update_data,index});
 
               resolve(response);
           })
@@ -79,12 +79,12 @@ const actions = {
           });
       });
   },
-  [DELETE_TOPIC]({commit},data) {
+  [DELETE_GALLERY]({commit},data) {
       return new Promise((resolve, reject) => {
           axios
-          .delete("/topic/"+data.id)
+          .delete("/gallery/"+data.id)
           .then(response => {
-              commit("AFTER_DELETE_TOPIC",data.index);
+              commit("AFTER_DELETE_GALLERY",data.index);
 
               resolve(response);
           })
@@ -96,25 +96,25 @@ const actions = {
 };
 
 const mutations = {
-  [SET_TOPIC](state, data)
+  [SET_GALLERY](state, data)
     {
-        state.topic = data.data;
-        state.topic_p2 = data;
+        state.gallery = data.data;
+        state.gallery_p2 = data;
     },
 
-    [AFTER_ADD_TOPIC](state, data)
+    [AFTER_ADD_GALLERY](state, data)
     {
-        state.topic.push(data);
+        state.gallery.push(data);
     },
-    [AFTER_UPDATE_TOPIC](state,payload){
-      state.topic.splice(payload.index,0,payload.update_data)
-      state.topic.splice(payload.index+1,1)
+    [AFTER_UPDATE_GALLERY](state,payload){
+      state.gallery.splice(payload.index,0,payload.update_data)
+      state.gallery.splice(payload.index+1,1)
 
       // state.branch_p2.splice(payload.index,0,payload.update_data)
       // state.branch_p2.splice(payload.index+1,1)
     },
-    [AFTER_DELETE_TOPIC](state,index){
-      state.topic.splice(index,1)
+    [AFTER_DELETE_GALLERY](state,index){
+      state.gallery.splice(index,1)
       // state.branch_p2.splice(index,1)
     },
 

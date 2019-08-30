@@ -16,36 +16,38 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Title</th>
-                      <th scope="col">Parent_id</th>
+                      <th scope="col">Cover</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Created By</th>
                       <th scope="col">Updated By</th>
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(area,index) in areas" :key="index">
+                    <tr v-for="(topic,index) in topics" :key="index">
                       <td>{{index+1}}</td>
-                      <td>{{area.title}}</td>
-                      <td>{{area.parent_id}}</td>
-                      <td>{{area.created_by}}</td>
-                      <td>{{area.updated_by}}</td>
+                      <td>{{topic.title}}</td>
+                      <td>{{topic.cover}}</td>
+                      <td>{{topic.status}}</td>
+                      <td>{{topic.created_by}}</td>
+                      <td>{{topic.updated_by}}</td>
                       <td>
-                            <i  @click="editAreaModal(area,index)" class="icon-note icons actn"> </i>
-                            <i @click="viewAreaModal(area)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteArea(index,area.id)" class="icon-trash icons   actn"> </i>
+                            <i  @click="editTopicModal(topic,index)" class="icon-note icons actn"> </i>
+                            <i @click="viewTopicModal(topic)" class="icon-eye icons   actn"> </i>
+                            <i  @click="deleteTopic(index,topic.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
 
             </table>
             <nav aria-label="Page navigation example">
-                <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination>
+                <pagination :data="Object.assign({},topicP2)" @pagination-change-page="getResults"></pagination>
             </nav>
 
         </div>
-        <AddAreaModal ref="add_area_modal"></AddAreaModal>
-        <EditAreaModal ref="edit_area_modal"></EditAreaModal>
-        <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
+        <AddTopicModal ref="add_topic_modal"></AddTopicModal>
+        <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
+        <ViewTopicModal ref="view_topic_modal"></ViewTopicModal>
 
   </div>
 </template>
@@ -55,13 +57,13 @@ import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
 
-import AddAreaModal from './AddAreaModal'
-import EditAreaModal from './EditAreaModal'
-import ViewAreaModal from './ViewAreaModal'
+import AddTopicModal from './AddTopicModal'
+import EditTopicModal from './EditTopicModal'
+import ViewTopicModal from './ViewTopicModal'
 
 
 import { mapState,mapGetters,mapActions } from "vuex"
-import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.type';
+import { All_TOPIC,DELETE_TOPIC,SEARCH_TOPIC,ALL_USER_ROLE2 } from '@/store/action.type';
 export default {
   data(){
         return {
@@ -95,22 +97,22 @@ export default {
         this.showSection2 = !this.showSection2
       },
 
-      addAreaModal(){
-            this.$refs.add_area_modal.openModal()
+      TopicModal(){
+            this.$refs.add_topic_modal.openModal()
         },
 
-        editAreaModal(area,index){
-            this.$refs.edit_area_modal.openModal(area,index)
+        editTopicModal(topic,index){
+            this.$refs.edit_topic_modal.openModal(topic,index)
         },
-        viewAreaModal(area){
-            this.$refs.view_area_modal.openModal(area)
+        viewTopicModal(topic){
+            this.$refs.view_topic_modal.openModal(topic)
         },
 
-      searchArea(){
+      searchTopic(){
             this.loading = true
             var data = this.search
             var page = 1
-            this.$store.dispatch('SEARCH_AREA',{page,data})
+            this.$store.dispatch('SEARCH_TOPIC',{page,data})
                 .then(response=>{
                     this.loading=false;
                 })
@@ -122,7 +124,7 @@ export default {
             this.loading = true;
             var data = this.search
             if(data != ''){
-                this.$store.dispatch('SEARCH_AREA',{page,data})
+                this.$store.dispatch('SEARCH_TOPIC',{page,data})
                 .then(response=>{
                     this.loading=false;
                 })
@@ -132,7 +134,7 @@ export default {
             }
             else{
                 alert('sss');
-                this.$store.dispatch('All_AREA',page)
+                this.$store.dispatch('All_TOPIC',page)
                 .then(response=>{
                     this.loading=false;
                 })
@@ -142,7 +144,7 @@ export default {
             }
         },
 
-        deleteArea(index,id){
+        deleteTopic(index,id){
             var self = this
             this.$iziToast.question({
                 timeout: 10000,
@@ -156,9 +158,9 @@ export default {
                 position: 'center',
                 buttons: [
                     ['<button><b>YES</b></button>', function (instance, toast) {
-                        self.$store.dispatch('DELETE_AREA',{index,id})
+                        self.$store.dispatch('DELETE_TOPIC',{index,id})
                         .then(response=>{
-                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Area Delated Successsfully"})
+                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Delated Successsfully"})
 
                         })
                         .catch(error=>{
@@ -178,7 +180,7 @@ export default {
         },
 
       openModal(){
-            this.$refs.add_area_modal.openModal()
+            this.$refs.add_topic_modal.openModal()
         },
         // getPermission(){
         //     this.$store.dispatch('ALL_USER_ROLE2')
@@ -195,14 +197,14 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["areas","areaP2"]),
+      ...mapGetters(["topics","topicP2"]),
     },
 
     components: {
-        EditAreaModal,
-        ViewAreaModal,
+        EditTopicModal,
+        ViewTopicModal,
         pagination,
-        AddAreaModal
+        AddTopicModal
     }
 }
 </script>
