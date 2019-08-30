@@ -23,8 +23,8 @@ Route::get('/permission','RegistrationController@permission');
 Route::get('/register','RegistrationController@register');
 Route::post('/register','RegistrationController@postRegister');
 
-Route::get('/login','RegistrationController@login');
-Route::post('/login','RegistrationController@postLogin');
+Route::get('/api/login','RegistrationController@login');
+Route::post('/api/login','RegistrationController@postLogin');
 Route::get('/activate/{email}/{activationCode}','RegistrationController@activateAccount');
 
 Route::get('/forgot-password','RegistrationController@forgotPassword');
