@@ -1,6 +1,6 @@
 <template>
     <b-modal title="Gallery" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-        <form @submit.prevent="addGallery" >
+        <div>
 
             <b-row>
               <b-col sm="12">
@@ -31,56 +31,27 @@
                     </b-col>
                   </b-row>
                   <br>
-                  <h3>Photo/Video Album</h3>
-                  <b-row>
-                    <b-col sm="4">
-                      <button class="btn btn-info pull-left" type="button" @click="addMore">
-                    More
-                </button>
-                    </b-col>
-                  </b-row>
-                  <form @submit.prevent="addContents">
-                  <div v-for="(input, i) in inputs">
-                    <b-row>
-                    <b-col sm="12">
-                      <b-form-group>
-                        <label for="Title">Caption</label>
-
-                        <b-form-input type="text" name="Caption" id="Title" v-model="input.caption"  placeholder="Enter Caption..."></b-form-input>
-                        <div v-show="errors.has('Caption')" class="help-block alert alert-danger">
-                        {{ errors.first('Caption') }}
-                        </div>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col sm="12">
-                      <b-form-group>
-                        <label for="Content">Image/Video</label>
-                        <b-form-file name="Content" id="content" v-model="input.content" ></b-form-file>
-                        <div v-show="errors.has('Content')" class="help-block alert alert-danger">
-                        {{ errors.first('Content') }}
-                        </div>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
-                  <button @click="deleteMore(i)">Remove</button>
+                    <button @click="add_more">More</button>
+                   <!-- <div v-for="(gContent,key) in dynamicContents" v-bind:key="key" :title="gContent.caption" >
+                          <GalleryContent :gContent="gContent" ></GalleryContent>
+                  </div> -->
+                  <div v-for="(item,item_key) in temp_arr  " :key="item_key">
+                  <GalleryContent :item="item" :item_key="item_key"></GalleryContent>
+                  <button @click="$delete(temp_arr, item_key)">remove</button>
                   </div>
-                  </form>
                 </b-card>
               </b-col>
             </b-row>
             <div class="form-group row">
                 <div class="col-sm-12">
-                <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right"/>
-                <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Submitting...
-                </button>
-                <button v-if="!addLoader"  @click.prevent="close" class="btn btn-success pull-right" style="margin-right:5px;">Close</button>
+                <!-- <input type="submit" value="Next" class="btn btn-info pull-left" :disabled="{disabled}"/> -->
+                <button type="sumbit" @click="addGallery"  class="btn btn-info pull-left" >submit</button>
+
+
                 </div>
             </div>
-        </form>
+        </div>
+
     </b-modal>
 </template>
 
@@ -92,65 +63,64 @@ Vue.use(VeeValidate)
 import { ADD_GALLERY,All_GALLERY,ADD_GALLERYC,All_GALLERYC} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
-
+import GalleryContent from './GalleryContent'
 export default {
+  components:{GalleryContent},
     data(){
         return{
+
             largeModal:false,
             addLoader:false,
+            disable:true,
             newGallery: {
                 title: '',
-                cover: '',
+                cover: ''
+
 
             },
-            inputs: [
-
-            ]
+            temp_arr:[],
+            addContent: {
+                caption: '',
+                cover: '',
+                gallery_id: ''
+            },
 
         }
     },
     methods:{
+      submit_gal(){
+        console.log(this.temp_arr)
+      },
+      add_more() {
+        let ob = {
+                caption: '',
+                content: '',
+                gallery_id: ''
+        }
+        this.temp_arr.push(ob)
+      // this.galleryc.addContent.push(ob)
 
-      addMore() {
-      this.inputs.push({
-        caption: '',
-        content: ''
-      })
+      // this.$forceUpdate()
     },
-    deleteMore(i) {
-      this.inputs.splice(i,1)
-    },
+    // deleteMore(key) {
+    //   this.galleryc.addContent.splice(key,1)
+    //   this.$forceUpdate()
+    // },
 
-    addContents(){
-      this.$validator.validateAll().then( result =>{
-                if(result){
-                    var data = this.inputs
-                    this.addLoader = true
-                    this.$store.dispatch('ADD_GALLERYC',data)
-                    .then(response=>{
-                        this.addLoader = false;
-                        this.largeModal = false
-                        this.$iziToast.success({position:'topRight',title:'Ok',message:"Gallery Image/Video Added Successsfully"})
 
-                    })
-                    .catch(error=>{
-                        this.addLoader = false;
-                        this.$iziToast.error({position:'topRight',title:'Error',message:"Can't upload image/video !!"})
-                    });
-                }
 
-            })
-    },
 
       addGallery () {
             this.$validator.validateAll().then( result =>{
                 if(result){
-                    var data = this.newGallery
-                    this.addLoader = true
+                    var data = {}
+                    data.gallery = this.newGallery
+                    data.gallery_content = this.temp_arr
+                    // this.addLoader = true
                     this.$store.dispatch('ADD_GALLERY',data)
                     .then(response=>{
-                        this.addLoader = false;
-                        this.largeModal = false
+                        // this.addLoader = false;
+                        // this.largeModal = false
                         this.$iziToast.success({position:'topRight',title:'Ok',message:"Gallery Added Successsfully"})
 
                     })
@@ -187,12 +157,18 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["gallerys","galleryP2"]),
+      ...mapGetters(["gallerys","galleryP2","galleryc"]),
+      dynamicContents(){
+      return this.galleryc.addContent
+    }
     },
 
 }
 </script>
 
-<style>
-
+<style scoped>
+ .disable{
+    cursor: not-allowed;
+   pointer-events: none;
+ }
 </style>

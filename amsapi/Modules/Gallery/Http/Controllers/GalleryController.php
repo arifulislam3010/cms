@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Gallery\Entities\Gallery;
+use Modules\Gallery\Entities\GalleryContent;
 
 use Modules\Gallery\Transformers\Gallery as GalleryResource;
 
@@ -36,11 +37,20 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
-
+        // return  $request->gallery_content[0]['caption'];
         $gallery = $request->isMethod('put') ? Gallery::findOrFail($request->gallery_id) : new Gallery;
-        $gallery -> title = $request->input('title');
-        $gallery -> cover = $request->input('cover');
+        $gallery->save();
+        $gal_id = $gallery->id ;
+        $gallery -> title = $request->gallery['title'];
+        $gallery -> cover = $request->gallery['cover'];
 
+        foreach($request->gallery_content as $item){
+            $content =  new GalleryContent;
+            $content->caption = $item['caption'] ;
+            $content->content = $item['content'] ;
+            $content->gallery_id = $gal_id ;
+            $content->save();
+        }
         //vat_reg_no
         $log_user = Auth()->user();
         $request->isMethod('put') ?  $gallery ->updated_by = $log_user->id : '' ;

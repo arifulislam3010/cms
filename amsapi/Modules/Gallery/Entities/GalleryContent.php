@@ -17,7 +17,7 @@ class GalleryContent extends Model
     protected $table = 'gallery_contents';
 
     public function gallery(){
-        return $this->belongsTo('Modules\Setting\Entities\GalleryContent','gallery_id');
+        return $this->belongsTo('Modules\Gallery\Entities\Gallery','gallery_id');
     }
 
     public function createdBy(){
