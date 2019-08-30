@@ -1,7 +1,7 @@
 <template>
   <div class="app" style="text-transform: uppercase;font-family:Sans-Serif; font-size: 15px;">
     <AppHeader fixed>
-      <SidebarToggler class="d-lg-none" display="md" mobile />
+      <SidebarToggler class="d-lg-none" display="md" mobile/>
       <b-link class="navbar-brand" to="#">
         <img class="navbar-brand-full" src="../static/banglapress.png" width="89" height="25" alt="CoreUI Logo">
       </b-link>

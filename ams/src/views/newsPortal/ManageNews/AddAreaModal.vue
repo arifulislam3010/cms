@@ -6,7 +6,11 @@
               <b-col sm="12">
                 <b-card>
                   <div slot="header">
-                    <strong>Create </strong> <small>News Post</small>
+                    <strong>Create </strong> <small>News Post
+                    <button type="button" class="btn btn-primary" @click="$parent.ContentManagerModal">
+                      Content Manager
+                    </button>
+                    </small>
                   </div>
                   <b-row>
                     <b-col sm="6">
@@ -239,7 +243,11 @@
                   <b-row>
                     <b-col sm="6">
                       <b-form-group>
-                        <label for="Title">Video Url</label>
+                        <label for="Title">Video Url
+
+
+                           <a href="#"  class="list-icons-item text-danger-600" data-toggle="modal" data-target="#content_manager"  v-b-tooltip.hover title="manage images" style="margin-left:1px;margin-right:1px;"><i class="fas fa-file-image"></i>Content Manager</a>
+                        </label>
                         <b-form-input type="text" name="Title" id="Title" v-model="newArea.title" v-validate="'required'" placeholder="Enter Url..."></b-form-input>
                         <div v-show="errors.has('Title')" class="help-block alert alert-danger">
                         {{ errors.first('Title') }}

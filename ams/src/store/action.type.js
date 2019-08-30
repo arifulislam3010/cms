@@ -127,9 +127,8 @@ export const UPDATE_GALLERY = "UPDATE_GALLERY"
 export const DELETE_GALLERY = "DELETE_GALLERY"
 export const SEARCH_GALLERY = "SEARCH_GALLERY"
 
-//Gallery Content
-export const All_GALLERYC = "All_GALLERYC"
-export const ADD_GALLERYC = "ADD_GALLERYC"
-export const UPDATE_GALLERYC = "UPDATE_GALLERYC"
-export const DELETE_GALLERYC = "DELETE_GALLERYC"
-export const SEARCH_GALLERYC = "SEARCH_GALLERYC"
+
+// Content Management
+export const GET_CONTENT = "GET_CONTENT"
+export const ADD_CONTENT = "ADD_CONTENT"
+export const DELETE_CONTENT = "DELETE_CONTENT"
