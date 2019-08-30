@@ -39,6 +39,7 @@
                 </button>
                     </b-col>
                   </b-row>
+                  <form @submit.prevent="addContents">
                   <div v-for="(input, i) in inputs">
                     <b-row>
                     <b-col sm="12">
@@ -65,6 +66,7 @@
                   </b-row>
                   <button @click="deleteMore(i)">Remove</button>
                   </div>
+                  </form>
                 </b-card>
               </b-col>
             </b-row>
@@ -101,7 +103,9 @@ export default {
                 cover: '',
 
             },
-            inputs: []
+            inputs: [
+
+            ]
 
         }
     },
@@ -115,6 +119,27 @@ export default {
     },
     deleteMore(i) {
       this.inputs.splice(i,1)
+    },
+
+    addContents(){
+      this.$validator.validateAll().then( result =>{
+                if(result){
+                    var data = this.inputs
+                    this.addLoader = true
+                    this.$store.dispatch('ADD_GALLERYC',data)
+                    .then(response=>{
+                        this.addLoader = false;
+                        this.largeModal = false
+                        this.$iziToast.success({position:'topRight',title:'Ok',message:"Gallery Image/Video Added Successsfully"})
+
+                    })
+                    .catch(error=>{
+                        this.addLoader = false;
+                        this.$iziToast.error({position:'topRight',title:'Error',message:"Can't upload image/video !!"})
+                    });
+                }
+
+            })
     },
 
       addGallery () {
