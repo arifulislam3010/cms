@@ -15,8 +15,8 @@ class Gallery extends Model
 
     protected $table = 'galleries';
 
-    public function gContent(){
-        return $this->hasMany('Modules\Setting\Entities\Gallery','gallery_id');
+    public function gContents(){
+        return $this->hasMany('Modules\Gallery\Entities\GalleryContent','gallery_id');
     }
 
     public function createdBy(){
