@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/contentmanager', function (Request $request
 // Route::get('/contentmanager', function (Request $request) {
 //     return "ss";
 // });
-Route::prefix('contentmanager')->group(function() {
+Route::prefix('contentmanager')->middleware('auth:api')->group(function() {
 	Route::post('/','ContentManagerController@index');
 	Route::post('/store','ContentManagerController@store');
 	Route::delete('/delete/{id}','ContentManagerController@delete');

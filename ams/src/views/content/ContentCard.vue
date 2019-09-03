@@ -1,17 +1,38 @@
 <template>
+<div class="row">
+<div class="col-md-3" v-for="(item,key) in items" v-bind:key="key">
 <div class="card-content">
     <div class="card-img">
-        <img src="https://placeimg.com/380/230/nature" alt="">
-        <span>
-            <input class="form-check-input" id="inline-checkbox3" type="checkbox" style="top:0px" value="check3">
-        </span>
+        <img :src="item.file" alt="">
+        <span :class="{ select_content : item.id == content.id }"  @click="ContentSelectC(item)"></span>
     </div>
     <div class="card-desc">
-        <h3>Heading</h3>
-        <a href="#" class="btn-card">Read</a>   
+        <h3>{{item.title}}</h3>
+        <!-- <a href="#" class="btn-card">Read</a>    -->
     </div>
 </div>
+</div>
+</div>
 </template>
+<script>
+export default {
+    name:'CardView',
+    props:['content','items'],
+    data(){
+        return{
+            contentData:"",
+        }
+    },
+    methods:{
+        ContentSelectC(item){
+            alert('ss');
+            console.log(item);
+            this.$parent.$parent.$parent.$parent.content = item;
+            //this.$parent.ContentSelect(item);
+        }
+    }
+}
+</script>
 <style scoped>
 /* card details start  */
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Condensed:400,400i,700,700i');
@@ -41,12 +62,16 @@ section{
 	display: block;
 }
 
+.select_content{
+    background: #d70f0f !important;
+}
 .card-img span {
+    cursor: pointer;
 	position: absolute;
     top: 15%;
     left: 11%;
-    background: #1ABC9C;
     padding: 20px;
+    background: #1fc002;
     color: #fff;
     font-size: 12px;
     border-radius: 4px;

@@ -23,18 +23,7 @@
               <div class="col-md-12 row">
                   <div class="col-md-9">
                      <div class="row">
-                       <div class="col-md-3">
-                         <ContentCard></ContentCard>
-                       </div>
-                       <div class="col-md-3">
-                         <ContentCard></ContentCard>
-                       </div>
-                       <div class="col-md-3">
-                         <ContentCard></ContentCard>
-                       </div>
-                       <div class="col-md-3">
-                         <ContentCard></ContentCard>
-                       </div>
+                         <ContentCard :items="contents.data" :content="content"></ContentCard>
                      </div>
                   </div>
                   <div class="col-md-3">
@@ -93,6 +82,8 @@ import { GET_CONTENT,All_AREA,ADD_CONTENT} from "@/store/action.type"
 import { mapState,mapGetters } from "vuex"
 
 export default {
+  name:'ContentManager',
+  props:['content'],
   components: {
         ContentCard
     },
@@ -125,6 +116,10 @@ export default {
       this.getData();
     },
     methods:{
+      ContentSelect(item){
+        alert('ss');
+        //this.$parent.content = item;
+      },
       ContentTypeChange: function(val){
                 this.content_type = val;
       },

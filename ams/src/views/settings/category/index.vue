@@ -23,29 +23,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(area,index) in areas" :key="index">
+                    <tr v-for="(ncategory,index) in ncategorys" :key="index">
                       <td>{{index+1}}</td>
-                      <td>{{area.title}}</td>
-                      <td>{{area.parent_id}}</td>
-                      <td>{{area.created_by}}</td>
-                      <td>{{area.updated_by}}</td>
+                      <td>{{ncategory.title}}</td>
+                      <td>{{ncategory.parent_id}}</td>
+                      <td>{{ncategory.created_by}}</td>
+                      <td>{{ncategory.updated_by}}</td>
                       <td>
-                            <i  @click="editAreaModal(area,index)" class="icon-note icons actn"> </i>
-                            <i @click="viewAreaModal(area)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteArea(index,area.id)" class="icon-trash icons   actn"> </i>
+                            <i  @click="editNcategoryModal(ncategory,index)" class="icon-note icons actn"> </i>
+                            <i @click="viewNcategoryModal(ncategory)" class="icon-eye icons   actn"> </i>
+                            <i  @click="deleteNcategory(index,ncategory.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
 
             </table>
             <nav aria-label="Page navigation example">
-                <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination>
+                <pagination :data="Object.assign({},ncategoryP2)" @pagination-change-page="getResults"></pagination>
             </nav>
 
         </div>
-        <AddAreaModal ref="add_area_modal"></AddAreaModal>
-        <EditAreaModal ref="edit_area_modal"></EditAreaModal>
-        <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
+        <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
+        <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
+        <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
 
   </div>
 </template>
@@ -55,13 +55,13 @@ import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
 
-import AddAreaModal from './AddAreaModal'
-import EditAreaModal from './EditAreaModal'
-import ViewAreaModal from './ViewAreaModal'
+import AddNcategoryModal from './AddNcategoryModal'
+import EditNcategoryModal from './EditNcategoryModal'
+import ViewNcategoryModal from './ViewNcategoryModal'
 
 
 import { mapState,mapGetters,mapActions } from "vuex"
-import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.type';
+import { All_NCATEGORY,DELETE_NCATEGORY,SEARCH_NCATEGORY,ALL_USER_ROLE2 } from '@/store/action.type';
 export default {
   data(){
         return {
@@ -95,22 +95,22 @@ export default {
         this.showSection2 = !this.showSection2
       },
 
-      addAreaModal(){
-            this.$refs.add_area_modal.openModal()
+      addNcategoryModal(){
+            this.$refs.add_ncategory_modal.openModal()
         },
 
-        editAreaModal(area,index){
-            this.$refs.edit_area_modal.openModal(area,index)
+        editNcategoryModal(ncategory,index){
+            this.$refs.edit_ncategory_modal.openModal(ncategory,index)
         },
-        viewAreaModal(area){
-            this.$refs.view_area_modal.openModal(area)
+        viewNcategoryModal(ncategory){
+            this.$refs.view_ncategory_modal.openModal(ncategory)
         },
 
-      searchArea(){
+      searchNcategory(){
             this.loading = true
             var data = this.search
             var page = 1
-            this.$store.dispatch('SEARCH_AREA',{page,data})
+            this.$store.dispatch('SEARCH_NCATEGORY',{page,data})
                 .then(response=>{
                     this.loading=false;
                 })
@@ -122,7 +122,7 @@ export default {
             this.loading = true;
             var data = this.search
             if(data != ''){
-                this.$store.dispatch('SEARCH_AREA',{page,data})
+                this.$store.dispatch('SEARCH_NCATEGORY',{page,data})
                 .then(response=>{
                     this.loading=false;
                 })
@@ -132,7 +132,7 @@ export default {
             }
             else{
                 alert('sss');
-                this.$store.dispatch('All_AREA',page)
+                this.$store.dispatch('All_NCATEGORY',page)
                 .then(response=>{
                     this.loading=false;
                 })
@@ -142,7 +142,7 @@ export default {
             }
         },
 
-        deleteArea(index,id){
+        deleteNcategory(index,id){
             var self = this
             this.$iziToast.question({
                 timeout: 10000,
@@ -156,9 +156,9 @@ export default {
                 position: 'center',
                 buttons: [
                     ['<button><b>YES</b></button>', function (instance, toast) {
-                        self.$store.dispatch('DELETE_AREA',{index,id})
+                        self.$store.dispatch('DELETE_NCATEGORY',{index,id})
                         .then(response=>{
-                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Area Delated Successsfully"})
+                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Category Delated Successsfully"})
 
                         })
                         .catch(error=>{
@@ -178,7 +178,7 @@ export default {
         },
 
       openModal(){
-            this.$refs.add_area_modal.openModal()
+            this.$refs.add_ncategory_modal.openModal()
         },
         // getPermission(){
         //     this.$store.dispatch('ALL_USER_ROLE2')
@@ -195,14 +195,14 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["areas","areaP2"]),
+      ...mapGetters(["ncategorys","ncategoryP2"]),
     },
 
     components: {
-        EditAreaModal,
-        ViewAreaModal,
+        EditNcategoryModal,
+        ViewNcategoryModal,
         pagination,
-        AddAreaModal
+        AddNcategoryModal
     }
 }
 </script>

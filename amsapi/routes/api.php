@@ -216,41 +216,7 @@ Route::get('/test', function () {
 	]);
 });
 
-Route::prefix('api')->group(function() {
 
-	Route::post('/registers','RegisterLoginPasswordResetController@register');
-	Route::get('/activate/{email}/{activationCode}','RegisterLoginPasswordResetController@activateAccount');
-	Route::post('/login','RegisterLoginPasswordResetController@login');
-	Route::post('/forgot-password','RegisterLoginPasswordResetController@forgotPassword');
-
-	Route::get('/reset-password/{email}/{activationCode}','RegisterLoginPasswordResetController@resetPassword');
-	Route::post('/reset-password/{email}/{activationCode}','RegisterLoginPasswordResetController@postResetPassword');
-
-	// Route::get('/user-role','RoleController@index');
-	// Route::post('/user-role','RoleController@store');
-	// Route::put('/user-role','RoleController@update');
-	// Route::delete('/user-role/{id}','RoleController@destroy');
-
-	Route::get('/assign-role','RoleController@getAssignRole');
-	Route::put('/assign-role','RoleController@updateAssignRole');
-
-	Route::get('/role-test','RoleController@testRole');
-
-	Route::get('/role-permission/{id}','RoleController@getPermission');
-	Route::post('/role-permission','RoleController@updatePermission');
-
-	Route::middleware('auth:api')->get('test','RegistrationController@testUser');
-
-	Route::get('/current-leadger','LeadgerController@currentLeadger');
-	Route::post('/search-leadger','LeadgerController@index');
-	Route::post('/search-workers','LeadgerController@workers');
-
-	Route::get('/statistics','StatisticsController@index');
-	Route::get('reports','StatisticsController@report');
-
-	Route::get('/dashboard-leadger','LeadgerController@dashboardLeadger');
-    
-});
 
 
 
