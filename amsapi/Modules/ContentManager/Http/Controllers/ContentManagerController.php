@@ -22,8 +22,10 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
+
         $Content = Content::all();
-        return ContentBankResource::collection($Content);
+        return $Content ;
+        // return ContentBankResource::collection($Content);
     }
 
     /**

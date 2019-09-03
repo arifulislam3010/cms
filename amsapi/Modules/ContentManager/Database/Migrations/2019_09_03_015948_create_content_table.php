@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateContentsTable extends Migration
+class CreateContentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('Contents', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
+            $table->increments('id');
             $table->integer('content_category_id')->unsigned()->nullable();
+            $table->string('title');
+            $table->integer('cat_id')->nullable();
             $table->string('type')->comments('image,video,audio,documents')->nullable();
             $table->string('file_name')->nullable();
             $table->string('file_encode_path')->nullable();
@@ -33,15 +34,16 @@ class CreateContentsTable extends Migration
             $table->integer('use_count')->default('0');
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('owner_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
-        Schema::table('Contents', function(Blueprint $table){
-            $table->foreign('content_category_id')->references('id')->on('ContentCategories')->onDelete('set null')->onUpdate('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
-        });
+            // Schema::table('Contents', function (Blueprint $table) {
+            //     $table->foreign('content_category_id')->references('id')->on('ContentCategories')->onDelete('set null')->onUpdate('cascade');
+            //     $table->foreign('created_by')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
+            //     $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
+            // });
     }
 
     /**

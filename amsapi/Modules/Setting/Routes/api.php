@@ -11,7 +11,7 @@ Route::prefix('setting')->group(function() {
 });
 
 //Area
-Route::prefix('api')->middleware(['auth:api'])->group(function() {
+Route::prefix('api')->group(function() {
 
 	Route::post('/areas','AreaController@index');
 

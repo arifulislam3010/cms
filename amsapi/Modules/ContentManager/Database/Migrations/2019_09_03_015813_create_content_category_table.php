@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateContentCategoriesTable extends Migration
+class CreateContentCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -24,11 +24,11 @@ class CreateContentCategoriesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('ContentCategories', function (Blueprint $table) {
-            $table->foreign('parent_id')->references('id')->on('ContentCategories')->onDelete('cascade')->onUpdate('cascade');            
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-        });
+        // Schema::table('ContentCategories', function (Blueprint $table) {
+        //     $table->foreign('parent_id')->references('id')->on('ContentCategories')->onDelete('cascade')->onUpdate('cascade');
+        //     $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        //     $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        // });
     }
 
     /**

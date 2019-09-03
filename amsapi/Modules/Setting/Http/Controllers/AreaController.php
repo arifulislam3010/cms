@@ -26,8 +26,10 @@ class AreaController extends Controller
         // }
         // if ($role->hasAccess(['department.viewall'])){
              $area = Area::whereNull('parent_id')->paginate(10);
+              return "ok";
         // }
-    	return AreaResource::collection($area);
+        return $area ;     
+    	// return AreaResource::collection($area);
     }
 
 
@@ -47,7 +49,8 @@ class AreaController extends Controller
 
 
         if($area->save()){
-            return new AreaResource($area);
+            return $area ;
+            // return new AreaResource($area);
         }
     }
 
@@ -56,7 +59,8 @@ class AreaController extends Controller
         $area = Area::findOrFail($id);
 
         if($area->delete()){
-        	return new AreaResource($area);
+            return $area ;
+        	// return new AreaResource($area);
         }
     }
 }

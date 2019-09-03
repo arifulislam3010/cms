@@ -26,9 +26,9 @@ class CreateAccountsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('accounts', function(Blueprint $table){
+/*        Schema::table('accounts', function(Blueprint $table){
             $table->foreign('account_type_id')->references('id')->on('account_types')->onDelete('cascade')->onUpdate('cascade');
-        });
+        });*/
     }
 
     /**

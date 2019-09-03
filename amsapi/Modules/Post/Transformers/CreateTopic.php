@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Modules\Post\Transformers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\Resource;
 
-class DistrictUpazila extends JsonResource
+class CreateTopic extends Resource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request
      * @return array
      */
     public function toArray($request)
