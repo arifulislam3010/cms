@@ -21,3 +21,9 @@ export default {
 }
 </script>
 
+<style scoped>
+a:hover{
+  color: #ee002d;
+}
+</style>
+
