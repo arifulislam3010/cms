@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDivisionTable extends Migration
+class CreatePostScrollsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDivisionTable extends Migration
      */
     public function up()
     {
-        Schema::create('Division', function (Blueprint $table) {
+        Schema::create('post_scrolls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name_bng');
-            $table->string('name_eng');
+            $table->integer('post_id')->unsigned()->nullable();
+            $table->integer('scroll_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDivisionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Division');
+        Schema::dropIfExists('post_scrolls');
     }
 }

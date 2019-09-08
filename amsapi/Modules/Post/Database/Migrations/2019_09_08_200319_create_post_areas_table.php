@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MediaGallery extends Migration
+class CreatePostAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class MediaGallery extends Migration
      */
     public function up()
     {
-        Schema::create('mediagallery',function(Blueprint $table){
-            $table->bigIncrements('id')->unsigned();
-            $table->bigInteger('category_id')->unsigned()->nullable();
+        Schema::create('post_areas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('post_id')->unsigned()->nullable();
+            $table->integer('area_id')->unsigned()->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class MediaGallery extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('post_areas');
     }
 }

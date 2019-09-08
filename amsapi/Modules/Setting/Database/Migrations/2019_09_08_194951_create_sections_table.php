@@ -17,6 +17,9 @@ class CreateSectionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->bigInteger('parent_id')->unsigned()->nullable();
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

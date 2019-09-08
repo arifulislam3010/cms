@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlbumTablle extends Migration
+class CreatePostContentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAlbumTablle extends Migration
      */
     public function up()
     {
-        Schema::create('Album', function (Blueprint $table) {
+        Schema::create('post_contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->bigInteger('media_gallery_id')->unsigned()->nullable();
-            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->integer('post_id')->unsigned()->nullable();
+            $table->integer('content_id')->unsigned()->nullable();
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAlbumTablle extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('');
+        Schema::dropIfExists('post_contents');
     }
 }

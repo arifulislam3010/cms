@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCreateTopicTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateCreateTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('CreateTopic', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->nullable();
-            $table->integer('cover')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('content_id')->nullable();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateCreateTopicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CreateTopic');
+        Schema::dropIfExists('albums');
     }
 }
