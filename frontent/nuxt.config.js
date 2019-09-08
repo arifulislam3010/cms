@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 
 export default {
   mode: 'universal',
@@ -14,6 +15,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
+    ],
+    script: [
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
     ]
   },
   /*
@@ -41,6 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-jquery'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -72,6 +77,15 @@ export default {
   ** Build configuration
   */
   build: {
+     /**
+     * add external plugins
+     */
+    vendor: ["jquery"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery"
+      })
+    ],
     /*
     ** You can extend webpack config here
     */
