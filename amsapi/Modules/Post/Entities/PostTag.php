@@ -4,8 +4,7 @@ namespace Modules\Post\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NewsPostTag extends Model
+class PostTag extends Model
 {
-    protected $table = 'news_post_tag';
     protected $fillable = [];
 }

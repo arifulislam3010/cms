@@ -4,7 +4,7 @@ namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class NewsPost extends Resource
+class PostTag extends Resource
 {
     /**
      * Transform the resource into an array.

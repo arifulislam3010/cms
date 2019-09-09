@@ -4,7 +4,7 @@ namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class CreateTopic extends Resource
+class PostCategory extends Resource
 {
     /**
      * Transform the resource into an array.

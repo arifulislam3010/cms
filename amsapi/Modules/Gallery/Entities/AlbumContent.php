@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\Post\Entities;
+namespace Modules\Gallery\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CreateTopic extends Model
+class AlbumContent extends Model
 {
     protected $fillable = [];
+
 }

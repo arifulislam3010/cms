@@ -14,7 +14,7 @@ class CreateForeignKeyGalleryTable extends Migration
     public function up()
     {
         Schema::table('albums', function (Blueprint $table) {
-            $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('cover_id')->references('id')->on('contents')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
