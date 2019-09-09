@@ -15,7 +15,7 @@ class CreateAlbumContentsTable extends Migration
     {
         Schema::create('album_contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('caption')
+            $table->string('caption');
             $table->integer('album_id')->unsigned()->nullable();
             $table->integer('content_id')->unsigned()->nullable();
             $table->softDeletes();
