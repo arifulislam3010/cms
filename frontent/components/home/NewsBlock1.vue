@@ -103,7 +103,7 @@
                                 অনলাইন জরিপ
                             </div>
                             <div class="card-body">
-                                 <form-group>
+                                 
                                      <h6>"এরশাদ শেখ হাসিনার গৃহপালিত নেতা ছিলেন- বিএনপি মহাসচিব মির্জা ফখরুল ইসলাম আলমগীরের এ মন্তব্যের সঙ্গে আপনি কি একমত?"</h6>
                                      <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
@@ -117,7 +117,7 @@
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                                     <label class="form-check-label" for="inlineRadio2">মন্তব্য নেই </label>
                                     </div>
-                                </form-group>
+                              
                                
                             </div>
                             <div class="card-body">
@@ -133,14 +133,20 @@
                     </div>
 
                     <!-- Newsletter Widget -->
-                    <div class="newsletter-widget">
-                        <h4>Newsletter</h4>
-                        <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                        <form action="#" method="post">
-                            <input type="text" name="text" placeholder="Name">
-                            <input type="email" name="email" placeholder="Email">
-                            <button type="submit" class="btn w-100">Subscribe</button>
-                        </form>
+                    <div class="card">
+                        <div class="card ">
+                            <div class="card-header text-center">
+                                পুরনো সংবাদ
+                            </div>
+                            <form action="#" method="post">
+                                <OldNews />
+                                <br>
+                                <div class="text-center">
+                                    <nuxt-link to="" class="btn btn-outline-primary">Search</nuxt-link>
+                                </div>
+                            </form>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -150,15 +156,14 @@
 </template>
 
 <script>
+import OldNews from '../OldNews'
   export default {
+      components: {
+          OldNews
+      },
     data() {
       return {
-        selected: 'first',
-        options: [
-          { text: 'First radio', value: 'first' },
-          { text: 'Second radio', value: 'second' },
-          { text: 'Third radio', value: 'third' }
-        ]
+        
       }
     }
   }
