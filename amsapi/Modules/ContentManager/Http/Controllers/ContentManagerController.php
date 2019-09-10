@@ -22,15 +22,9 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
 
-        $Content = Content::all();
-        return $Content ;
-        // return ContentBankResource::collection($Content);
-=======
         $Content = Content::paginate(15);
         return ContentResource::collection($Content);
->>>>>>> 6dbdec998fbfec9130221648964b81dbcf896918
     }
 
     /**
