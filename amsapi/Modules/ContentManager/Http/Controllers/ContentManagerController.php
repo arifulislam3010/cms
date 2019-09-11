@@ -22,6 +22,7 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
+
         $Content = Content::paginate(15);
         return ContentResource::collection($Content);
     }

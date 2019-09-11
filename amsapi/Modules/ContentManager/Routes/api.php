@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Modules\ContentManager\Entities\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('user')->middleware('auth:api')->group(function(){
+	Route::get('/list',function(){
+		return User::all();
+	});
+});
 
 Route::middleware('auth:api')->get('/contentmanager', function (Request $request) {
     return "jj";
