@@ -6,9 +6,9 @@
     <hero/>
     <Featured/>
 
-    <div>
-      <button id="myDiv">Click</button>
-    </div>
+    <NewsBlock1 />
+    <NewsBlock2 />
+    <Footer />
   </div>
 </template>
 
@@ -17,10 +17,13 @@ import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
 import Featured from '@/components/FeaturedPost/Featured.vue'
 import Carousel1 from '@/components/carousels/Carousel1'
+import NewsBlock1 from '@/components/home/NewsBlock1'
+import NewsBlock2 from '@/components/home/NewsBlock2'
+import Footer from '@/components/Footer'
 
 export default {
   components: {
-    Logo,Hero,Featured,Carousel1
+    Logo,Hero,Featured,Carousel1,NewsBlock1,NewsBlock2,Footer
   },
   data() {
     return {
@@ -49,6 +52,10 @@ export default {
 <style scoped>
   .single-blog-post.featured-post .post-data .post-title h6 {
     font-size: 15px;
+  }
+
+  .pt-20 {
+    padding-top: 20px;
   }
   
 </style>
