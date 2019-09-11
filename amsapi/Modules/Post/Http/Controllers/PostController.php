@@ -5,6 +5,7 @@ namespace Modules\Post\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Post\Entities\Post;
 
 class PostController extends Controller
 {
@@ -14,16 +15,47 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post::index');
+        return Post::all();
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('post::create');
+        // return array($request->tag_ids) ;
+        $post = new Post;
+        $post->shoulder = $request->shoulder;
+        $post->headline = $request->headline;
+        $post->reporter = $request->reporter;
+        $post->author = $request->author['id'];
+        // $post->content_id      = $request->content_id ['id']    ;
+        $post->video_url = $request->video_url;
+        $post->video_position = $request->video_position;
+        $post->video_url = $request->video_url;
+        $post->share_at = $request->share_at;
+        $post->publish_at = $request->publish_at;
+        $post->status = $request->status;
+        $post->instant_article = $request->instant_article;
+        $post->topic = $request->selected_topics['id'];
+        // $post->division = $request->selected_divisions;
+        $post->position = $request->selected_position['id'];
+        $post->scroll = $request->selected_scroll['id'];
+        // $post->category = $request->selected_category['id'];
+
+        // many to many
+        // tag
+        // media
+        // division
+        // category
+        // $post->save();
+        // $post->tags()->attach(array($request->tag_ids));
+        // $post->division()->attach(array($request->division_ids));
+        // media
+        if ($post->save()) {
+            return $post;
+        }
     }
 
     /**
