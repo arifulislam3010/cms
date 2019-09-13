@@ -151,19 +151,21 @@
                 </div>
             </div>
         </div>
+        <Loader v-if="loading"></Loader>
     </div>
     <!-- ##### Popular News Area End ##### -->
 </template>
 
 <script>
+import Loader from '~/components/loader/Loader'
 import OldNews from '../OldNews'
   export default {
       components: {
-          OldNews
+          OldNews,Loader
       },
     data() {
       return {
-        
+        loading: false
       }
     }
   }

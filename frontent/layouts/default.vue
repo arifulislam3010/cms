@@ -2,19 +2,21 @@
   <div>
     <Header />
     <nuxt />
+    
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue'
-
+// import Loader from '~/components/loader/Loader'
 export default {
   components: {
     Header
   },
   data() {
     return {
-      title : 'Home'
+      title : 'Home',
+      loading: false
     }
   },
   

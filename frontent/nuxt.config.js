@@ -45,7 +45,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/vue-jquery'
+    '~/plugins/vue-jquery',
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -71,7 +72,8 @@ export default {
           }
         ]
         }
-    ]
+    ],
+    // '@nuxtjs/axios'
   ],
   /*
   ** Build configuration
@@ -86,6 +88,12 @@ export default {
         $: "jquery"
       })
     ],
+    /*
+    **
+    */
+  //  env: {
+  //   apiBaseUrl: 'http://localhost:8000'  
+  // },
     /*
     ** You can extend webpack config here
     */
