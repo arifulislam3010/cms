@@ -12,6 +12,13 @@ use Modules\Post\Entities\PostTag;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('api')->group(function() {
+
+	Route::post('/posts','BranchController@index');
+
+});
+
 Route::prefix('post')->middleware('auth:api')->group(function(){
     Route::get('/list','PostController@index');
     Route::post('/','PostController@create');

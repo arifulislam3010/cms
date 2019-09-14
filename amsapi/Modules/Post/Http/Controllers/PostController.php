@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Post\Entities\Post;
 
+use Modules\Post\Transformers\Post as PostResource;
+
 class PostController extends Controller
 {
     /**
