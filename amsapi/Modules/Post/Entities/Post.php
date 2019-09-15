@@ -23,37 +23,34 @@ class Post extends Model
         'updated_by'
     ];
 
-    protected $table = 'posts';
+    // tag *
+    // topic *
+    // category *
+    // area *
+    // content *
+    // scroll
+    public function tags(){
 
-    // public function parent(){
-    //     return $this->belongsTo('Modules\Setting\Entities\Area','parent_id');
-    // }
-    public function postAreas(){
-        return $this->hasMany('Modules\Post\Entities\PostArea','post_id');
+        return $this->belongsToMany('Modules\Setting\Entities\Tag','post_tags');
+    }
+    public function topics(){
+
+        return $this->belongsToMany('Modules\Setting\Entities\Topic','post_topics');
     }
 
-    public function postCategories(){
-        return $this->hasMany('Modules\Post\Entities\PostCategory','post_id');
+    public function areas(){
+
+        return $this->belongsToMany('Modules\Setting\Entities\Area','post_areas');
     }
-    public function postContents(){
-        return $this->hasMany('Modules\Post\Entities\PostContent','post_id');
+
+    public function categories(){
+
+        return $this->belongsToMany('Modules\Setting\Entities\Category','post_categories');
     }
-    public function postScrolls(){
-        return $this->hasMany('Modules\Post\Entities\PostScroll','post_id');
+
+    public function contents(){
+        return $this->belongsToMany('Modules\ContentManager\Entities\Content','post_contents');
     }
-    public function postSections(){
-        return $this->hasMany('Modules\Post\Entities\PostSection','post_id');
-    }
-    public function postTags(){
-        return $this->hasMany('Modules\Post\Entities\PostTag','post_id');
-    }
-    public function postTopics(){
-        return $this->hasMany('Modules\Post\Entities\PostTopic','post_id');
-    }
-    public function createdBy(){
-        return $this->belongsTo('App\User','created_by');
-    }
-    public function updatedBy(){
-        return $this->belongsTo('App\User','updated_by');
-    }
+
+
 }

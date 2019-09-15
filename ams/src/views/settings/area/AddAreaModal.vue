@@ -23,14 +23,17 @@
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Parent">Parent</label>
-                        <div class="input-group">
+                        <!-- <div class="input-group">
                             <select name="Parent" v-model="newArea.parent_id"  id="parent" class="form-control" >
                                 <option value="" >Select Parent</option>
                                 <option v-for="(area,index) in areas" :key="index" :value="area.id">{{area.title}}</option>
                             </select>
 
-                        </div>
-
+                        </div> -->
+                        <Treeselect
+                        v-model="newArea.parent_id"
+                        :options="area_parents"
+                        ></Treeselect>  
                       </b-form-group>
 
 
@@ -61,12 +64,18 @@ Vue.use(VeeValidate)
 import { ADD_AREA,All_AREA} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
-
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
+    components:{Treeselect},
     data(){
+        
         return{
             largeModal:false,
             addLoader:false,
+            update: false ,
+            item_id:'',
+            selected_parent:null,
             newArea: {
                 title: '',
                 parent_id: ''
@@ -77,31 +86,47 @@ export default {
     methods:{
 
       addArea () {
-            this.$validator.validateAll().then( result =>{
-                if(result){
-                    var data = this.newArea
-                    this.addLoader = true
-                    this.$store.dispatch('ADD_AREA',data)
-                    .then(response=>{
-                        this.addLoader = false;
-                        this.largeModal = false
-                        this.$iziToast.success({position:'topRight',title:'Ok',message:"Area Added Successsfully"})
-
-                    })
-                    .catch(error=>{
-                        this.addLoader = false;
-                        this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-                    });
+            
+            if(this.update){
+                let payload = {
+                  data : this.newArea ,
+                  id   : this.item_id, 
                 }
+                this.$store.dispatch('UPDATE_AREA',payload).then(response=>{
+                  this.$parent.getAreas()
+                }) 
+            }else{
+                this.$store.dispatch('ADD_AREA',this.newArea).then(response=>{
+                  this.$parent.getAreas()
+                })  
+            }
+            // this.$validator.validateAll().then( result =>{
+            //     if(result){
+            //         var data = this.newArea
+            //         this.addLoader = true
+            //         this.$store.dispatch('ADD_AREA',data)
+            //         .then(response=>{
+            //             this.addLoader = false;
+            //             this.largeModal = false
+            //             this.$iziToast.success({position:'topRight',title:'Ok',message:"Area Added Successsfully"})
 
-            })
+            //         })
+            //         .catch(error=>{
+            //             this.addLoader = false;
+            //             this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
+            //         });
+            //     }
+
+            // })
 
         },
 
         openModal(){
             this.largeModal = true
-            this.newArea.title =''
-            this.newArea.parent_id =''
+            if(!this.update){              
+                this.newArea.title =''
+                this.newArea.parent_id =''
+            }
         },
         close(){
             this.largeModal = false
@@ -121,7 +146,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["areas","areaP2"]),
+      ...mapGetters(["area_list","area_parents"]),
     },
 
 }

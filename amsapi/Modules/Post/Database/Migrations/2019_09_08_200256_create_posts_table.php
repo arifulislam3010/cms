@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('shoulder')->nullable();
             $table->string('headline')->nullable();
             $table->string('hanger')->nullable();
-            $table->integer('athor_id')->unsigned()->nullable();
+            $table->integer('author_id')->unsigned()->nullable();
             $table->integer('reporter_id')->unsigned()->nullable();
             $table->integer('featured_image_id')->unsigned()->nullable();
             $table->integer('featured_video_id')->unsigned()->nullable();
@@ -26,7 +26,7 @@ class CreatePostsTable extends Migration
             $table->timestamp('share_at')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->string('status')->nullable();
-            $table->tinyInteger('Instant_article')->nullable();
+            $table->string('Instant_article')->nullable();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();

@@ -21,4 +21,8 @@ class Category extends Model
     public function updatedBy(){
         return $this->belongsTo('App\User','updated_by');
     }
+
+    public function posts(){
+        return $this->belongsToMany('Modules\Post\Entities\Post','post_categories');
+    }
 }

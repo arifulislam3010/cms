@@ -107,6 +107,8 @@ const NewsCategory = () => import('@/views/settings/category/index');
 const NewsTopic = () => import('@/views/settings/topic/index');
 
 const ManageNews = () => import('@/views/newsPortal/ManageNews/index');
+const AddNews = () => import('@/views/newsPortal/ManageNews/AddNews')
+const UpdateNews = () => import('@/views/newsPortal/ManageNews/AddNews')
 const Gallery = () => import('@/views/newsPortal/Gallery/index');
 
 
@@ -167,7 +169,23 @@ export default new Router({
           component: ManageNews,
           meta:{
             forAuth:true
-          }
+          },
+        },
+        {
+          path: '/news/add',
+          name: 'AddNews',
+          component: AddNews,
+          meta:{
+            forAuth:true
+          },
+        },
+        {
+          path: '/news/update',
+          name: 'UpdateNews',
+          component: UpdateNews,
+          meta:{
+            forAuth:true
+          },
         },
         {
           path: '/gallery/list',

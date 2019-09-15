@@ -1,8 +1,8 @@
+
 <template>
   <div class="card">
-
         <div class="container-fluid">
-            <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Topic</button>
+            <!-- <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Topic</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -11,37 +11,36 @@
                 <a href="#"  class="list-icons-item text-danger-600" data-toggle="modal" data-target="#content_manager"  v-b-tooltip.hover title="manage images" style="margin-left:1px;margin-right:1px;"><i class="fas fa-file-image"></i>Content Manager</a>
                 <button type="button" class="btn btn-primary" @click="ContentManagerModal">
                 Launch demo modal
-                </button>
-
+                </button> -->
             <table class="table table-sm">
                 <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Reporter</th>
+                      <th scope="col">Shoulder</th>
+                      <th scope="col">Athor ID</th>
                       <th scope="col">Created By</th>
                       <th scope="col">Updated By</th>
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(area,index) in areas" :key="index">
+                    <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
-                      <td>{{area.title}}</td>
-                      <td>Ragib shahriar</td>
-                      <td>{{area.created_by}}</td>
-                      <td>{{area.updated_by}}</td>
+                      <td>{{item.shoulder}}</td>
+                      <td>{{item.autor_id}}</td>
+                      <td>{{item.created_by}}</td>
+                      <td>{{item.updated_by}}</td>
                       <td>
-                            <i  @click="editAreaModal(area,index)" class="icon-note icons actn"> </i>
-                            <i @click="viewAreaModal(area)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteArea(index,area.id)" class="icon-trash icons   actn"> </i>
+                            <i  @click="editAreaModal(item)" class="icon-note icons actn"> </i>
+                            <i @click="viewAreaModal(item)" class="icon-eye icons   actn"> </i>
+                            <i  @click="deleteArea(index,item.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
 
             </table>
             <nav aria-label="Page navigation example">
-                <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination>
+                <!-- <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination> -->
             </nav>
 
         </div>
@@ -49,12 +48,13 @@
         <EditAreaModal ref="edit_area_modal"></EditAreaModal>
         <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
         <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
-        
+        <!-- {{news_data}} -->
 
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
@@ -66,11 +66,13 @@ import ContentManager from '../../content/index'
 
 import { mapState,mapGetters,mapActions } from "vuex"
 import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.type';
+
 export default {
   data(){
         return {
             content:{},
             loading:false,
+            // news_list:[],
             // showSection: false,
             showSection(index){
                 isOpen: false
@@ -84,6 +86,17 @@ export default {
         }
     },
     methods:{
+    getNews(){
+        this.$store.dispatch('FETCH_NEWS')
+        // axios.get('/api/news/list')
+        // .then(response=>{
+        //     console.log('/api/news/list')
+        //     console.log(response)
+        //     this.news_list = response.data 
+        // }).catch(error=>{
+        //     console.log(error)
+        // })
+    }, 
     parentChilds(index){
       alert(index);
       this.parnt_index = index;
@@ -106,8 +119,18 @@ export default {
             this.$refs.add_area_modal.openModal()
         },
 
-        editAreaModal(area,index){
-            this.$refs.edit_area_modal.openModal(area,index)
+        editAreaModal(item){
+         
+            this.$store.dispatch('NEWS_DETAIL',item.id).then(response=>{
+                this.goToUpdateNews()
+            }).catch(error=>{
+                console.log(error)
+                this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})       
+            })  
+            // this.$refs.edit_area_modal.openModal(area,index)
+        },
+        goToUpdateNews: function(){
+            this.$router.push({name:'UpdateNews'})
         },
         viewAreaModal(area){
             this.$refs.view_area_modal.openModal(area)
@@ -163,10 +186,10 @@ export default {
                 position: 'center',
                 buttons: [
                     ['<button><b>YES</b></button>', function (instance, toast) {
-                        self.$store.dispatch('DELETE_AREA',{index,id})
+                        self.$store.dispatch('DELETE_NEWS',id)
                         .then(response=>{
                             self.$iziToast.success({position:'topRight',title:'Ok',message:"Area Delated Successsfully"})
-
+                            self.getNews()
                         })
                         .catch(error=>{
                             self.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
@@ -196,13 +219,15 @@ export default {
     },
 
      mounted(){
-        this.getResults()
+       
+       this.getNews()
+       // this.getResults()
 
         // this.getPermission()
 
     },
     computed: {
-      ...mapGetters(["areas","areaP2"]),
+      ...mapGetters(["news_list","news_data"]),
     },
 
     components: {

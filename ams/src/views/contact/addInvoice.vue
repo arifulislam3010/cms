@@ -89,7 +89,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(invoice,index) in newInvoice.invoice_items">
+                        <tr v-for="(invoice,index) in newInvoice.invoice_items" :key="index">
                             <td>
                                 <select @change="proRate(index)" v-validate="'required'"   v-model="invoice.project_id" class="form-control" >
                                     <option value="" >Select Project</option>

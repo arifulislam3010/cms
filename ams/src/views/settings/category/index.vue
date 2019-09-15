@@ -1,6 +1,9 @@
 <template>
-  <div class="card">
-
+  <div >
+        
+        <!-- {{category_list}} -->
+        <!-- <ShowList :list="category_list"></ShowList> -->
+        <!-- {{category_list}} -->
         <div class="container-fluid">
             <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
 
@@ -23,24 +26,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(ncategory,index) in ncategorys" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{ncategory.title}}</td>
-                      <td>{{ncategory.parent_id}}</td>
-                      <td>{{ncategory.created_by}}</td>
-                      <td>{{ncategory.updated_by}}</td>
+                    <tr v-for="(item,index) in category_list" :key="index">
+                      <td>{{item.id}}</td>
+                      <td>{{item.label}}</td>
+                      <td>{{item.parent_id}}</td>
+                      <td>{{item.created_by}}</td>
+                      <td>{{item.updated_by}}</td>
                       <td>
-                            <i  @click="editNcategoryModal(ncategory,index)" class="icon-note icons actn"> </i>
-                            <i @click="viewNcategoryModal(ncategory)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteNcategory(index,ncategory.id)" class="icon-trash icons   actn"> </i>
+                            <i  @click="editCategoryModal(item)" class="icon-note icons actn"> </i>
+                            <i @click="viewNcategoryModal(item)" class="icon-eye icons   actn"> </i>
+                            <i  @click="deleteCategory(item.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
 
             </table>
-            <nav aria-label="Page navigation example">
+            <!-- <nav aria-label="Page navigation example">
                 <pagination :data="Object.assign({},ncategoryP2)" @pagination-change-page="getResults"></pagination>
-            </nav>
+            </nav> -->
 
         </div>
         <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import ShowList from '../list/ShowList'
 import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
@@ -75,110 +79,36 @@ export default {
             search:{
                 search_item:''
             },
-             isActive: true
+             isActive: true,
+
         }
     },
     methods:{
-    parentChilds(index){
-      alert(index);
-      this.parnt_index = index;
+    editCategoryModal(item){
+        this.$refs.add_ncategory_modal.openModal()
+        this.$refs.add_ncategory_modal.update = true
+        this.$refs.add_ncategory_modal.item_id = item.id
+        this.$refs.add_ncategory_modal.newCategory.title = item.label
+        this.$refs.add_ncategory_modal.selected_parent = item.parent_id// this.category_list.find( v => v.id == item.parent_id).id 
+
+    },    
+    getCategories(){
+        this.$store.dispatch('FETCH_CATEGORIES').then(response=>{
+
+        }).catch(error=>{
+        
+        })
+    },    
+    deleteCategory(id){
+        this.$store.dispatch('DELETE_CATEGORY',id).then(response=>{
+            this.getCategories()
+        })
     },
-
-     activate:function(el){
-        this.active_el = el;
-    },
-      listGroup(index){
-        this.showSection.isOpen = !this.showSection.isOpen
-      },
-
-      listGroup2(){
-        this.showSection2 = !this.showSection2
-      },
-
-      addNcategoryModal(){
-            this.$refs.add_ncategory_modal.openModal()
-        },
-
-        editNcategoryModal(ncategory,index){
-            this.$refs.edit_ncategory_modal.openModal(ncategory,index)
-        },
-        viewNcategoryModal(ncategory){
-            this.$refs.view_ncategory_modal.openModal(ncategory)
-        },
-
-      searchNcategory(){
-            this.loading = true
-            var data = this.search
-            var page = 1
-            this.$store.dispatch('SEARCH_NCATEGORY',{page,data})
-                .then(response=>{
-                    this.loading=false;
-                })
-                .catch(error=>{
-                    this.loading=true;
-                });
-        },
-      getResults(page =1){
-            this.loading = true;
-            var data = this.search
-            if(data != ''){
-                this.$store.dispatch('SEARCH_NCATEGORY',{page,data})
-                .then(response=>{
-                    this.loading=false;
-                })
-                .catch(error=>{
-                    this.loading=true;
-                });
-            }
-            else{
-                alert('sss');
-                this.$store.dispatch('All_NCATEGORY',page)
-                .then(response=>{
-                    this.loading=false;
-                })
-                .catch(error=>{
-                    this.loading=true;
-                });
-            }
-        },
-
-        deleteNcategory(index,id){
-            var self = this
-            this.$iziToast.question({
-                timeout: 10000,
-                close: false,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
-                title: 'Hey',
-                message: 'Are you sure To Delete?',
-                position: 'center',
-                buttons: [
-                    ['<button><b>YES</b></button>', function (instance, toast) {
-                        self.$store.dispatch('DELETE_NCATEGORY',{index,id})
-                        .then(response=>{
-                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Category Delated Successsfully"})
-
-                        })
-                        .catch(error=>{
-                            self.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-                        });
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-
-                    }, true],
-                    ['<button>NO</button>', function (instance, toast) {
-
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-
-                    }],
-                ]
-            });
-
-        },
 
       openModal(){
-            this.$refs.add_ncategory_modal.openModal()
+           this.$refs.add_ncategory_modal.update = false
+           this.$refs.add_ncategory_modal.selected_parent = null
+           this.$refs.add_ncategory_modal.openModal()
         },
         // getPermission(){
         //     this.$store.dispatch('ALL_USER_ROLE2')
@@ -189,20 +119,21 @@ export default {
     },
 
      mounted(){
-        this.getResults()
-
+        // this.getResults()
+        this.getCategories()
         // this.getPermission()
 
     },
     computed: {
-      ...mapGetters(["ncategorys","ncategoryP2"]),
+      ...mapGetters(["category_list","category_parents"]),
     },
 
     components: {
         EditNcategoryModal,
         ViewNcategoryModal,
         pagination,
-        AddNcategoryModal
+        AddNcategoryModal,
+        ShowList
     }
 }
 </script>

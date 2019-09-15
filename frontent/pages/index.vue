@@ -5,7 +5,9 @@
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
     <hero/>
     <Featured/>
-
+    <div v-for="post in posts">
+        <p>{{post.headline}}</p>
+    </div>
     <NewsBlock1 />
     <NewsBlock2 />
     <Footer />
@@ -13,6 +15,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState,mapGetters,mapActions } from "vuex"
+import { All_POST} from '@/store/action.type';
+
 import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
 import Featured from '@/components/FeaturedPost/Featured.vue'
@@ -40,12 +46,66 @@ export default {
     }
   },
 
-  mounted() {
-    this.$nextTick(function () {
+  methods:{
+
+      // searchBranch(){
+      //       this.loading = true
+      //       var data = this.search
+      //       var page = 1
+      //       this.$store.dispatch('SEARCH_BRANCH',{page,data})
+      //           .then(response=>{
+      //               this.loading=false;
+      //           })
+      //           .catch(error=>{
+      //               this.loading=true;
+      //           });
+      //   },
+      // getResults(page =1){
+      //       this.loading = true;
+      //       var data = this.search
+      //       if(data != ''){
+      //           this.$store.dispatch('SEARCH_BRANCH',{page,data})
+      //           .then(response=>{
+      //               this.loading=false;
+      //           })
+      //           .catch(error=>{
+      //               this.loading=true;
+      //           });
+      //       }
+      //       else{
+      //           alert('sss');
+      //           this.$store.dispatch('All_BRANCH',page)
+      //           .then(response=>{
+      //               this.loading=false;
+      //           })
+      //           .catch(error=>{
+      //               this.loading=true;
+      //           });
+      //       }
+      //   },
+
+     
+    },
+    mounted(){
+        this.getResults()
+        // this.fetchBranches();
+        // this.getPermission()
+
+    },
+    computed: {
+      ...mapGetters(["posts"]),
+    },
+    // created(){
+    //   this.fetchBranches();
+    // },
+    
+
+  // mounted() {
+  //   this.$nextTick(function () {
       
      
-  })
-  }
+  // })
+  // }
 }
 </script>
 

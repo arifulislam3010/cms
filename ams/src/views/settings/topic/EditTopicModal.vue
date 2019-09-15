@@ -23,16 +23,18 @@
                   <b-row>
                     <b-col sm="6">
                       <b-form-group>
-                        <label for="Cover">Cover</label>
-                        <b-form-input type="text" name="Cover" id="cover" v-model="editTopic.cover" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                        <div v-show="errors.has('Cover')" class="help-block alert alert-danger">
+                        <label for="parent">Parent</label>
+                         <Treeselect 
+                         v-model="editTopic.parent_id" 
+                         :options="topic_parents"
+                         ></Treeselect>
                         {{ errors.first('Cover') }}
-                        </div>
+                       
                       </b-form-group>
                     </b-col>
 
                   </b-row>
-                  <b-row>
+                  <!-- <b-row>
                     <b-col sm="6">
                       <b-form-group>
                         <label for="Status">Status</label>
@@ -43,7 +45,7 @@
                       </b-form-group>
                     </b-col>
 
-                  </b-row>
+                  </b-row> -->
                 </b-card>
               </b-col>
             </b-row>
@@ -69,17 +71,18 @@ Vue.use(VeeValidate)
 import { UPDATE_TOPIC,ADD_TOPIC} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
-
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default {
+  components:{Treeselect},
     data(){
         return{
             largeModal:false,
             addLoader:false,
+            item_id :'',
             editTopic: {
                 title: '',
-                cover: '',
-                status: '',
-                topic_id:''
+                parent_id:'',
             }
 
         }
@@ -90,12 +93,16 @@ export default {
             this.addLoader = true;
             var data = this.editTopic
             var index = this.index
-            this.$store.dispatch('UPDATE_TOPIC',{data,index})
+            let payload = {
+              data:this.editTopic,
+              id:this.item_id,
+            }
+            this.$store.dispatch('UPDATE_TOPIC',payload)
             .then(response=>{
                 this.addLoader = false;
                 this.largeModal = false
                 this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Updated Successsfully"})
-
+                this.$parent.getTopics()
             })
             .catch(error=>{
                 this.addLoader = false;
@@ -117,7 +124,9 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["topics","topicP2"]),
+
+      ...mapGetters(["topic_list", "topic_parents"]),
+
     },
 
 }
