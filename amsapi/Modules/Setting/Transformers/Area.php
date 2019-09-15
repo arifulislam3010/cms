@@ -17,9 +17,9 @@ class Area extends Resource
     {
         return [
             'id'=> $this->id,
-            'title'=> $this->title,
-            //'parent'=> $this->parent->title,
-            'childs'   => AreaResource::collection($this->child),
+            'label'=> $this->title,
+            'parent_id'=> $this->parent_id,
+            'children'   => AreaResource::collection($this->child),
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,

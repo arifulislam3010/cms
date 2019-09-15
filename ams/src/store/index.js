@@ -22,10 +22,17 @@ import area from "./area.module"
 import ncategory from "./ncategory.module"
 import topic from "./topic.module"
 import ContentManagement from "./ContentManagement"
+import User from  "./user.module"
+import Tag from "./tag.module"
+import News from "./news.module"
+import Category from './category.module'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    News,
+    Tag,
+    User,
     contact,
     districtSubdistrict,
     projectCategory,
@@ -47,6 +54,7 @@ export default new Vuex.Store({
     area,
     ncategory,
     topic,
-    ContentManagement
+    ContentManagement,
+    Category,
   }
 })

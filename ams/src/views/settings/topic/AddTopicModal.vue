@@ -1,37 +1,44 @@
 <template>
-    <b-modal title="Topic" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-        <form @submit.prevent="addTopic" >
+  <b-modal title="Topic" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
+    <form @submit.prevent="addTopic">
+      <b-row>
+        <b-col sm="12">
+          <b-card>
+            <div slot="header">
+              <strong>Topic</strong>
+              <small>Form</small>
+            </div>
+            <b-row>
+              <b-col sm="12">
+                <b-form-group>
+                  <label for="Title">Title</label>
+                  <b-form-input
+                    type="text"
+                    name="Title"
+                    id="Title"
+                    v-model="newTopic.title"
+                    v-validate="'required'"
+                    placeholder="Enter title..."
+                  ></b-form-input>
+                  <div
+                    v-show="errors.has('Title')"
+                    class="help-block alert alert-danger"
+                  >{{ errors.first('Title') }}</div>
+                </b-form-group>
+              </b-col>
+            </b-row>
 
             <b-row>
               <b-col sm="12">
-                <b-card>
-                  <div slot="header">
-                    <strong>Topic </strong> <small>Form</small>
-                  </div>
-                  <b-row>
-                    <b-col sm="12">
-                      <b-form-group>
-                        <label for="Title">Title</label>
-                        <b-form-input type="text" name="Title" id="Title" v-model="newTopic.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                        <div v-show="errors.has('Title')" class="help-block alert alert-danger">
-                        {{ errors.first('Title') }}
-                        </div>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                <b-form-group>
+                  <label for="parent">Parent</label>
+                  <Treeselect v-model="newTopic.parent_id" :options="topic_parents"></Treeselect>
 
-                  <b-row>
-                    <b-col sm="12">
-                      <b-form-group>
-                        <label for="Cover">Cover</label>
-                        <b-form-input type="text" name="Cover" id="cover" v-model="newTopic.cover" v-validate="'required'" placeholder="..."></b-form-input>
-                        <div v-show="errors.has('Cover')" class="help-block alert alert-danger">
-                        {{ errors.first('Cover') }}
-                        </div>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
-
+                  {{ errors.first('Cover') }}
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <!-- 
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
@@ -42,101 +49,92 @@
                         </div>
                       </b-form-group>
                     </b-col>
-                  </b-row>
-
-                </b-card>
-              </b-col>
-            </b-row>
-            <div class="form-group row">
-                <div class="col-sm-12">
-                <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right"/>
-                <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Submitting...
-                </button>
-                <button v-if="!addLoader"  @click.prevent="close" class="btn btn-success pull-right" style="margin-right:5px;">Close</button>
-                </div>
-            </div>
-        </form>
-    </b-modal>
+            </b-row>-->
+          </b-card>
+        </b-col>
+      </b-row>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right" />
+          <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Submitting...
+          </button>
+          <button
+            v-if="!addLoader"
+            @click.prevent="close"
+            class="btn btn-success pull-right"
+            style="margin-right:5px;"
+          >Close</button>
+        </div>
+      </div>
+    </form>
+  </b-modal>
 </template>
 
 <script>
-import Vue from 'vue'
-import VeeValidate from 'vee-validate';
-Vue.use(VeeValidate)
+import Vue from "vue";
+import VeeValidate from "vee-validate";
+Vue.use(VeeValidate);
 
-import { ADD_TOPIC,All_TOPIC} from "@/store/action.type"
+import { ADD_TOPIC, All_TOPIC } from "@/store/action.type";
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
-import { mapState,mapGetters } from "vuex"
+import { mapState, mapGetters } from "vuex";
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-    data(){
-        return{
-            largeModal:false,
-            addLoader:false,
-            newTopic: {
-                title: '',
-                cover: '',
-                status: ''
-            },
+  components: { Treeselect },
+  data() {
+    return {
+      selected_parent: "",
+      largeModal: false,
+      addLoader: false,
+      newTopic: {
+        title: "",
+        parent_id: ""
+      }
+    };
+  },
+  mounted() {
+    //this.getTopics()
+  },
+  methods: {
+    addTopic() {
+      // this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
+      this.$store.dispatch('ADD_TOPIC',this.newTopic).then(response=>{
+        this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
+        this.$parent.getTopics()
+      }).catch(error=>{
+        this.$iziToast.error({position:'topRight',title:'error',message:error.data})
+      })
+   },
 
-        }
+    openModal() {
+      this.largeModal = true;
+      this.newTopic.title = "";
+      this.newTopic.parent_id = null;
     },
-    methods:{
-
-      addTopic () {
-            this.$validator.validateAll().then( result =>{
-                if(result){
-                    var data = this.newTopic
-                    this.addLoader = true
-                    this.$store.dispatch('ADD_TOPIC',data)
-                    .then(response=>{
-                        this.addLoader = false;
-                        this.largeModal = false
-                        this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
-
-                    })
-                    .catch(error=>{
-                        this.addLoader = false;
-                        this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-                    });
-                }
-
-            })
-
-        },
-
-        openModal(){
-            this.largeModal = true
-            this.newTopic.title =''
-            this.newTopic.cover =''
-            this.newTopic.status =''
-        },
-        close(){
-            this.largeModal = false
-        },
-
-        addButton () {
-        this.line.buttons.push({
-          name: '',
-          state: false,
-          is_reported: ''
-        })
-      },
-      deleteButton (index) {
-        this.line.buttons.splice(index, 1)
-      },
-
-
-    },
-    computed: {
-      ...mapGetters(["topics","topicP2"]),
+    close() {
+      this.largeModal = false;
     },
 
-}
+    addButton() {
+      this.line.buttons.push({
+        name: "",
+        state: false,
+        is_reported: ""
+      });
+    },
+    deleteButton(index) {
+      this.line.buttons.splice(index, 1);
+    }
+  },
+  computed: {
+    ...mapGetters(["topic_list", "topic_parents"])
+  }
+};
 </script>
 
 <style>
-
 </style>

@@ -1,6 +1,6 @@
 <template>
     <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-        <form @submit.prevent="addNcategory" >
+        <form @submit.prevent="addCategory" >
 
             <b-row>
               <b-col sm="12">
@@ -12,7 +12,7 @@
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Title">Name</label>
-                        <b-form-input type="text" name="Title" id="Title" v-model="newNcategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
+                        <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
                         <div v-show="errors.has('Title')" class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div>
@@ -23,14 +23,14 @@
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Parent">Parent</label>
-                        <div class="input-group">
+                        <!-- <div class="input-group">
                             <select name="Parent" v-model="newNcategory.parent_id"  id="parent" class="form-control" >
                                 <option value="" >Select Parent</option>
-                                <option v-for="(ncategory,index) in ncategorys" :key="index" :value="ncategory.id">{{ncategory.title}}</option>
+                                <option v-for="(ncategory,index) in category_list" :key="index" :value="ncategory.id">{{ncategory.title}}</option>
                             </select>
 
-                        </div>
-
+                        </div> -->
+                        <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
                       </b-form-group>
 
 
@@ -61,13 +61,18 @@ Vue.use(VeeValidate)
 import { ADD_NCATEGORY,All_NCATEGORY} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
-
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
+    components:{Treeselect},
     data(){
         return{
+            update:false ,
+            item_id : '',
+            selected_parent:null,
             largeModal:false,
             addLoader:false,
-            newNcategory: {
+            newCategory: {
                 title: '',
                 parent_id: ''
             },
@@ -97,11 +102,30 @@ export default {
             })
 
         },
+        addCategory(){ 
+          if(this.update){
+            this.newCategory.parent_id = this.selected_parent 
+            let payload = {
+              data : this.newCategory,
+              id   : this.item_id ,
+            }
+            this.$store.dispatch('UPDATE_CATEGORY',payload).then(response=>{
+              this.$parent.getCategories()
+            })
+          }else{
+            this.newCategory.parent_id = this.selected_parent 
+            this.$store.dispatch('ADD_CATEGORY',this.newCategory).then(response=>{
+              this.$parent.getCategories()
+            })
 
+          }
+        },
         openModal(){
             this.largeModal = true
-            this.newNcategory.title =''
-            this.newNcategory.parent_id =''
+            if(!this.update){
+              this.newCategory.title =''
+              this.newCategory.parent_id =''
+            }
         },
         close(){
             this.largeModal = false
@@ -121,7 +145,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["ncategorys","ncategoryP2"]),
+      ...mapGetters(["category_list","category_parents","ncategoryP2"]),
     },
 
 }

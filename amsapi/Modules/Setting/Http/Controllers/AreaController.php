@@ -13,45 +13,40 @@ class AreaController extends Controller
     public function index(Request $request){
 
 
-        // $role_id = RoleUser::where('user_id',$user_id)->first()->role_id;
-        // $role = Sentinel::findRoleById($role_id);
-        // $search_item = ($request->has('search_item'))?$request['search_item']:null;
-        $search_item = ($request->has('search_item'))?$request['search_item']:null;
-        $area = '';
-
-        // if ($role->hasAccess(['department.view'])){
-        //     $department = Department::when($search_item , function($q) use($search_item,$user_id){return $q->where('created_by',$user_id)->where('name','like',"%$search_item%");})
-        //         ->when($user_id , function($q) use($user_id){return $q->where('created_by',$user_id);})
-        //        ->paginate(10);
-        // }
-        // if ($role->hasAccess(['department.viewall'])){
-             $area = Area::whereNull('parent_id')->paginate(10);
-              return "ok";
-        // }
-        return $area ;     
-    	// return AreaResource::collection($area);
+        $areas = Area::all();
+        return AreaResource::collection($areas);
     }
 
 
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
+            $validator = $request->validate([
+                'title' => 'required',
+            ]);
+            $area = new Area ;
+            $area->title = $request->title ;
+            $area->parent_id = $request->parent_id? $request->parent_id:null;
+            if($area->save()){
+                return new AreaResource($area) ;
+            }
 
-        $area = $request->isMethod('put') ? Area::findOrFail($request->area_id) : new Area;
-        $area -> title = $request->input('title');
-        $area -> parent_id = $request->input('parent_id');
+    }
 
-        //vat_reg_no
-        $log_user = Auth()->user();
-        $request->isMethod('put') ?  $area ->updated_by = $log_user->id : '' ;
-        $request->isMethod('post') ? $area ->created_by = $log_user->id : '' ;
-        $request->isMethod('post') ? $area ->updated_by = $log_user->id : '' ;
+    public function update(Request $request,$id){
+           $validator = $request->validate([
+               'title' => 'required', 
+           ]);
+           if($request->parent_id == $id){
+                return response()->json(['error'=>'can not be own parent'],422);
+           }
+           $area = Area::findOrfail($id);
+           $area->title = $request->title ;
+           $area->parent_id = $request->parent_id? $request->parent_id:null;
 
-
-        if($area->save()){
-            return $area ;
-            // return new AreaResource($area);
-        }
+           if($area->save()){
+               return new AreaResource($area);
+           }
     }
 
     public function destroy($id)
