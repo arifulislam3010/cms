@@ -1,12 +1,12 @@
-import Vue from "vue"
-import Vuex from "vuex"
+import vuex from 'vuex'
 
-import Post from './post.module'
-Vue.use(Vuex);
+var config = {
+    state: {},
+    getters: {},
+    mutations: {},
+    actions: {}
+}
 
-export default new Vuex.Store({
-    modules: {
-     
-      Post,
-    }
-  })
+export default function() {
+    return new vuex.Store(config)
+}

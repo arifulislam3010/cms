@@ -73,8 +73,12 @@ export default {
         ]
         }
     ],
-    // '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
+
+  axios: {
+    // proxyHeaders: false
+  },
   /*
   ** Build configuration
   */
@@ -86,18 +90,28 @@ export default {
     plugins: [
       new webpack.ProvidePlugin({
         $: "jquery"
-      })
+      }),
     ],
-    /*
-    **
-    */
-  //  env: {
-  //   apiBaseUrl: 'http://localhost:8000'  
-  // },
+
+   
+
     /*
     ** You can extend webpack config here
     */
     extend (config, ctx) {
     }
-  }
+  },
+
+   /*
+    ** Base Use
+    */
+
+   env: {
+    apiBaseUrl: 'http://127.0.0.1:8000'  
+  },
+
+  server: {
+    port: 3000, // default: 3000
+    // host: '0.0.0.0', // default: localhost
+  },
 }

@@ -5,19 +5,31 @@
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
     <hero/>
     <Featured/>
-    <div v-for="post in posts">
-        <p>{{post.headline}}</p>
-    </div>
+    
     <NewsBlock1 />
     <NewsBlock2 />
     <Footer />
+
+    <!-- <div>
+      <section>
+      <h1>GET API Result Index</h1>
+      <div>
+        <ul>
+          <li v-for="article in articles" class="item">
+            <nuxt-link :to="'/article/' + article.id">{{ article.title }}</nuxt-link>
+          </li>
+        </ul>
+      </div>
+    </section>
+    </div> -->
+
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/plugins/axios'
 import { mapState,mapGetters,mapActions } from "vuex"
-import { All_POST} from '@/store/action.type';
+// import { All_POST} from '@/store/action.type';
 
 import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
@@ -46,7 +58,17 @@ export default {
     }
   },
 
+  // async asyncData () {
+  //   const {data} = await axios.get('')
+  //   return {articles:data}
+  // },
+
   methods:{
+      //   async fetchSomething() {
+      //   const ip = await this.$axios.$get('http://icanhazip.com')
+      //   this.ip = ip
+        
+      // }
 
       // searchBranch(){
       //       this.loading = true
@@ -87,16 +109,16 @@ export default {
      
     },
     mounted(){
-        this.getResults()
+        // this.getResults()
         // this.fetchBranches();
         // this.getPermission()
 
     },
     computed: {
-      ...mapGetters(["posts"]),
+      // ...mapGetters(["posts"]),
     },
     // created(){
-    //   this.fetchBranches();
+    //   this.$axios.get('http://dummy.restapiexample.com/api/v1/employees').then(res => console.log(res))
     // },
     
 
