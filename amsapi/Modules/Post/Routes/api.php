@@ -13,11 +13,13 @@ use Modules\Post\Entities\PostTag;
 |
 */
 
-Route::prefix('api')->group(function() {
+//Route::prefix('api')->group(function() {
+//
+//	Route::get('/posts','PostController@index');
+//
+//});
 
-	Route::post('/posts','PostController@index');
-
-});
+Route::get('/posts','PostController@index');
 
 Route::prefix('post')->middleware('auth:api')->group(function(){
     Route::get('/list','PostController@index');

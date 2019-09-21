@@ -9,6 +9,12 @@
     <NewsBlock1 />
     <NewsBlock2 />
     <Footer />
+    <br>
+    <br>
+    <p>yyy</p>
+    <div v-for="post in posts">
+      <p> id = gfffffffffffgfggffgfg {{post.id}} </p>
+    </div>
 
     <!-- <div>
       <section>
@@ -29,7 +35,7 @@
 <script>
 import axios from '@/plugins/axios'
 import { mapState,mapGetters,mapActions } from "vuex"
-// import { All_POST} from '@/store/action.type';
+import { All_POST} from '@/store/action.type'
 
 import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
@@ -59,7 +65,7 @@ export default {
   },
 
   // async asyncData () {
-  //   const {data} = await axios.get('')
+  //   const {data} = await axios.get('/api/posts')
   //   return {articles:data}
   // },
 
@@ -115,11 +121,12 @@ export default {
 
     },
     computed: {
-      // ...mapGetters(["posts"]),
+      ...mapGetters(["posts"]),
     },
-    // created(){
-    //   this.$axios.get('http://dummy.restapiexample.com/api/v1/employees').then(res => console.log(res))
-    // },
+
+  //  created() {
+  //    this.$store.dispatch('setPosts', this.loadedPosts)
+  //  },
     
 
   // mounted() {

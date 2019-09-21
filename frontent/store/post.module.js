@@ -1,13 +1,13 @@
-import axios from "axios"
+import axios from "@/plugins/axios"
 import { All_POST} from "./action.type"
 import { SET_POST } from "./mutation.type"
 
-export const state = {
+const state = {
     post: [],
     // branch_p2:[]
   };
   
-  export const getters = {
+const getters = {
     posts(state){
       return state.post
     },
@@ -16,12 +16,13 @@ export const state = {
     // }
   };
   
-  export const actions = {
-  
-    [All_POST]({commit},page) {
+const actions = {
+    
+    [All_POST]({commit}) {
       return new Promise((resolve, reject) => {
+        console.log("ok")
           axios
-          .post('/api/posts?page=' + page)
+          .get('/api/posts')
           .then(response => {
               // console.log(response)
               commit(SET_POST,response.data)
@@ -35,7 +36,7 @@ export const state = {
   
   };
   
-  export const mutations = {
+const mutations = {
     [SET_POST](state, data)
       {
           state.post = data.data;
@@ -52,3 +53,27 @@ export const state = {
     getters,
   };
   
+
+// state= {
+//   loadesPosts: []
+// };
+
+
+
+// actions= {
+//   setPosts(context, posts) {
+//     context.commit('setPosts', posts)
+//   }
+// }
+
+// mutations= {
+//   setPosts(state, posts){
+//     state.loadesPosts = posts
+//   }
+// }
+
+// getters= {
+//   loadesPosts(state) {
+//     return state.loadesPosts
+//   }
+// }
