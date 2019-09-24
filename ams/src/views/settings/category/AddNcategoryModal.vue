@@ -102,7 +102,8 @@ export default {
             })
 
         },
-        addCategory(){ 
+        addCategory(){
+          this.addLoader = true  
           if(this.update){
             this.newCategory.parent_id = this.selected_parent 
             let payload = {
@@ -111,11 +112,17 @@ export default {
             }
             this.$store.dispatch('UPDATE_CATEGORY',payload).then(response=>{
               this.$parent.getCategories()
+              this.addLoader = false
+            }).catch(error=>{
+              this.addLoader = false
             })
           }else{
             this.newCategory.parent_id = this.selected_parent 
             this.$store.dispatch('ADD_CATEGORY',this.newCategory).then(response=>{
               this.$parent.getCategories()
+              this.addLoader = false
+            }).catch(error=>{
+              this.addLoader = false 
             })
 
           }

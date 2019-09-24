@@ -2,6 +2,7 @@ import axios from "axios"
 
 const state = {
     news:[],
+    reporter_news:[],
     news_data:{
         id: null,
         shoulder:'',
@@ -100,6 +101,7 @@ const state = {
 
 }
 const getters = {
+    reporter_news(state){return state.reporter_news},
     news_list(state){
         return state.news
     },
@@ -160,10 +162,27 @@ const actions = {
     },
     ['REST_NEWS']({commit}){
         commit('EMPTY_NEWS_DATA')
-    }
+    },
+
+    ['FETCH_REPORTER_NEWS']({commit}){
+        return new Promise((resolve,reject)=>{
+            axios.get('api/post/reporter/list').then(response=>{
+                commit('SET_REPORTER_NEWS',response.data)
+                resolve(response)
+            }).catch(error=>{
+                reject(error)
+            })
+        })
+    },
 }
 
 const mutations = {
+    ['SET_UPDATE'](state){
+        state.news_data.is_update = true 
+    },
+    ['SET_REPORTER_NEWS'](state,payload){
+        state.reporter_news = payload
+    },
     ['EMPTY_NEWS_DATA'](state){
         state.news_data = {...state.initial_news_data}
     },
@@ -179,6 +198,9 @@ const mutations = {
         // state.news_data.news_tags = payload.news_tags.map( v=> v.id)
         state.news_data.selected_categories = payload.selected_categories.map( v=> v.id)
         state.news_data.selected_areas = payload.selected_areas.map( v=> v.id)    
+        state.news_data.is_update = true 
+        state.news_data.featured_vid = state.news_data.featured_vid ? state.news_data.featured_vid : state.initial_news_data.featured_vid  
+        state.news_data.featured_img = state.news_data.featured_img ? state.news_data.featured_img : state.initial_news_data.featured_img  
     },
 }
 

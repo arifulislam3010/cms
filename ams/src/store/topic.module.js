@@ -21,7 +21,7 @@ const getters = {
 const actions = {
     ['FETCH_TOPICS']({commit}){
         return new Promise((resolve,reject)=>{
-            axios.get('api/topic/list').then(response=>{
+            axios.get('topic/list').then(response=>{
                 resolve(response)
                 commit('SET_TOPICS',response.data)
             }).catch(error=>{
@@ -31,7 +31,7 @@ const actions = {
     },
     ['ADD_TOPIC']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('api/topic/',payload).then(response=>{
+            axios.post('topic/',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -40,7 +40,7 @@ const actions = {
     },
     ['UPDATE_TOPIC']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.put(`api/topic/${payload.id}`,payload.data).then(response=>{
+            axios.put(`topic/${payload.id}`,payload.data).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -49,7 +49,7 @@ const actions = {
     },
     ['DELETE_TOPIC']({commit},id){
         return new Promise((resolve,reject)=>{
-            axios.delete(`api/topic/${id}`).then(response=>{
+            axios.delete(`topic/${id}`).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

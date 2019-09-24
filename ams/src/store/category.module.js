@@ -21,7 +21,7 @@ const getters = {
 const actions = {
     ['FETCH_CATEGORIES']({commit}){
         return new Promise((resolve,reject)=>{
-            axios.get('api/category/list').then(response=>{
+            axios.get('category/list').then(response=>{
                 resolve(response)
                 commit('SET_CATEGORIES',response.data)
             }).catch(error=>{
@@ -31,7 +31,7 @@ const actions = {
     },
     ['ADD_CATEGORY']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('api/category/',payload).then(response=>{
+            axios.post('category/',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -40,7 +40,7 @@ const actions = {
     },
     ['UPDATE_CATEGORY']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.put(`api/category/${payload.id}`,payload.data).then(response=>{
+            axios.put(`category/${payload.id}`,payload.data).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -49,7 +49,7 @@ const actions = {
     },
     ['DELETE_CATEGORY']({commit},id){
         return new Promise((resolve,reject)=>{
-            axios.delete(`api/category/${id}`).then(response=>{
+            axios.delete(`category/${id}`).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

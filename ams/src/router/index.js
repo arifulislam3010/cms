@@ -62,6 +62,7 @@ const RolePermission = () => import('@/views/pages/UserRolePermission')
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
+const UserList = () => import('@/views/user/index')
 
 Vue.use(Router)
 
@@ -105,12 +106,18 @@ const ContentIndex = () => import ('@/views/content/index');
 const Area = () => import('@/views/settings/area/index');
 const NewsCategory = () => import('@/views/settings/category/index');
 const NewsTopic = () => import('@/views/settings/topic/index');
-
-const ManageNews = () => import('@/views/newsPortal/ManageNews/index');
+const NewsScroll = () => import('@/views/settings/scroll/index');
+// news 
+const ManageNews = () => import('@/views/newsPortal/ManageNews/index')
 const AddNews = () => import('@/views/newsPortal/ManageNews/AddNews')
+const ReportersNews = () => import('@/views/newsPortal/ManageNews/ReportersNews')
+const ScheduledNews = () => import('@/views/newsPortal/ManageNews/ScheduledNews')
 const UpdateNews = () => import('@/views/newsPortal/ManageNews/AddNews')
+// gallery 
 const Gallery = () => import('@/views/newsPortal/Gallery/index');
+const AddAlbum = () => import('@/views/newsPortal/Gallery/AddAlbum');
 
+const Role = () => import('@/views/role/index')
 
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
@@ -164,6 +171,14 @@ export default new Router({
           }
         },
         {
+          path: '/settings/scroll',
+          name: 'NewsScroll',
+          component: NewsScroll,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
           path: '/news/list',
           name: 'ManageNews',
           component: ManageNews,
@@ -175,6 +190,22 @@ export default new Router({
           path: '/news/add',
           name: 'AddNews',
           component: AddNews,
+          meta:{
+            forAuth:true
+          },
+        },
+        {
+          path: '/news/scheduled-news',
+          name: 'ScheduledNews',
+          component: ScheduledNews,
+          meta:{
+            forAuth:true
+          },
+        },
+        {
+          path: '/news/reporters-news',
+          name: 'ReportersNews',
+          component: ReportersNews,
           meta:{
             forAuth:true
           },
@@ -196,9 +227,25 @@ export default new Router({
           }
         },
         {
+          path: '/gallery/add-album',
+          name: 'AddAlbum',
+          component: AddAlbum,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
           path: '/user-role',
           name: 'User Role',
-          component: UserRole,
+          component: Role,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/user-list',
+          name: 'User Role',
+          component: UserList,
           meta:{
             forAuth:true
           }

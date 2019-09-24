@@ -1,18 +1,17 @@
 <template>
     <b-modal title="Area" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-        <form @submit.prevent="addArea" >
-
+        <form @submit.prevent="addScroll" >
             <b-row>
               <b-col sm="12">
                 <b-card>
                   <div slot="header">
-                    <strong>Area </strong> <small>Form</small>
+                    <strong>Scroll </strong> <small>Form</small>
                   </div>
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Title">Name</label>
-                        <b-form-input type="text" name="Title" id="Title" v-model="newArea.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
+                        <b-form-input type="text" name="Title" id="Title" v-model="newScroll.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
                         <div v-show="errors.has('Title')" class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div>
@@ -24,15 +23,15 @@
                       <b-form-group>
                         <label for="Parent">Parent</label>
                         <!-- <div class="input-group">
-                            <select name="Parent" v-model="newArea.parent_id"  id="parent" class="form-control" >
+                            <select name="Parent" v-model="newScroll.parent_id"  id="parent" class="form-control" >
                                 <option value="" >Select Parent</option>
                                 <option v-for="(area,index) in areas" :key="index" :value="area.id">{{area.title}}</option>
                             </select>
 
                         </div> -->
                         <Treeselect
-                        v-model="newArea.parent_id"
-                        :options="area_parents"
+                        v-model="newScroll.parent_id"
+                        :options="scroll_parents"
                         ></Treeselect>  
                       </b-form-group>
 
@@ -60,9 +59,6 @@
 import Vue from 'vue'
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate)
-
-import { ADD_AREA,All_AREA} from "@/store/action.type"
-// import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
@@ -76,7 +72,7 @@ export default {
             update: false ,
             item_id:'',
             selected_parent:null,
-            newArea: {
+            newScroll: {
                 title: '',
                 parent_id: ''
             },
@@ -85,47 +81,29 @@ export default {
     },
     methods:{
 
-      addArea () {
+      addScroll () {
             
             if(this.update){
                 let payload = {
-                  data : this.newArea ,
+                  data : this.newScroll ,
                   id   : this.item_id, 
                 }
-                this.$store.dispatch('UPDATE_AREA',payload).then(response=>{
-                  this.$parent.getAreas()
+                this.$store.dispatch('UPDATE_SCROLL',payload).then(response=>{
+                  this.$parent.getScrolls()
                 }) 
             }else{
-                this.$store.dispatch('ADD_AREA',this.newArea).then(response=>{
-                  this.$parent.getAreas()
+                this.$store.dispatch('ADD_SCROLL',this.newScroll).then(response=>{
+                  this.$parent.getScrolls()
                 })  
             }
-            // this.$validator.validateAll().then( result =>{
-            //     if(result){
-            //         var data = this.newArea
-            //         this.addLoader = true
-            //         this.$store.dispatch('ADD_AREA',data)
-            //         .then(response=>{
-            //             this.addLoader = false;
-            //             this.largeModal = false
-            //             this.$iziToast.success({position:'topRight',title:'Ok',message:"Area Added Successsfully"})
-
-            //         })
-            //         .catch(error=>{
-            //             this.addLoader = false;
-            //             this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-            //         });
-            //     }
-
-            // })
 
         },
 
         openModal(){
             this.largeModal = true
             if(!this.update){              
-                this.newArea.title = null
-                this.newArea.parent_id = null 
+                this.newScroll.title =null
+                this.newScroll.parent_id = null 
             }
         },
         close(){
@@ -146,7 +124,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["area_list","area_parents"]),
+      ...mapGetters(["scroll_list","scroll_parents"]),
     },
 
 }

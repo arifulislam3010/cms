@@ -23,7 +23,7 @@
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="auth_permission.news_view || auth_permission.news_viewall">
                     <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{item.shoulder}}</td>
@@ -31,9 +31,9 @@
                       <td>{{item.created_by}}</td>
                       <td>{{item.updated_by}}</td>
                       <td>
-                            <i  @click="editAreaModal(item)" class="icon-note icons actn"> </i>
-                            <i @click="viewAreaModal(item)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteArea(index,item.id)" class="icon-trash icons   actn"> </i>
+                            <i  v-if="auth_permission.news_update" @click="editAreaModal(item)" class="icon-note icons actn"> </i>
+                            <!-- <i @click="viewAreaModal(item)" class="icon-eye icons   actn"> </i> -->
+                            <i v-if="auth_permission.news_delete || auth_permission.news_deleteall" @click="deleteArea(index,item.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
@@ -48,6 +48,7 @@
         <EditAreaModal ref="edit_area_modal"></EditAreaModal>
         <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
         <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
+        <Loader v-if="loading"></Loader>
         <!-- {{news_data}} -->
 
   </div>
@@ -86,8 +87,17 @@ export default {
         }
     },
     methods:{
+    loadPermission(){
+    //auth_permission
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } ,        
     getNews(){
-        this.$store.dispatch('FETCH_NEWS')
+        this.loading = true
+        this.$store.dispatch('FETCH_NEWS').then(response=>{
+            this.loading = false
+        }).catch(error=>{
+            this.loading = false
+        })
         // axios.get('/api/news/list')
         // .then(response=>{
         //     console.log('/api/news/list')
@@ -219,7 +229,7 @@ export default {
     },
 
      mounted(){
-       
+       this.loadPermission()
        this.getNews()
        // this.getResults()
 
@@ -227,7 +237,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["news_list","news_data"]),
+      ...mapGetters(["auth_permission","news_list","news_data"]),
     },
 
     components: {
@@ -235,7 +245,8 @@ export default {
         ViewAreaModal,
         pagination,
         AddAreaModal,
-        ContentManager
+        ContentManager,
+        Loader ,
     }
 }
 </script>

@@ -13,8 +13,8 @@
                       <b-form-group>
                         <label for="ncategory">Category</label>
                         <b-form-input type="text" name="ncategory" id="ncategory" v-model="editNcategory.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                        <div v-show="errors.has('ncategory')" class="help-block alert alert-danger">
-                        {{ errors.first('ncategory') }}
+                        <!-- <div v-show="errors.has('ncategory')" class="help-block alert alert-danger">
+                        {{ errors.first('ncategory') }} -->
                         </div>
                       </b-form-group>
                     </b-col>

@@ -10,7 +10,7 @@
     <br />
     <div class="container-fluid">
       <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i class="fa fa-life-bouy"></i> Add Area
+        <i v-if="auth_permission.area_create" class="fa fa-life-bouy"></i> Add Area
       </button>
 
       <form class="form-inline contct my-2 my-lg-0 pull-right">
@@ -29,7 +29,7 @@
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="auth_permission.area_view || auth_permission.area_viewall">
           <tr v-for="(area,index) in area_list" :key="index">
             <td>{{index+1}}</td>
             <td>{{area.label}}</td>
@@ -37,9 +37,9 @@
             <td>{{area.created_by}}</td>
             <td>{{area.updated_by}}</td>
             <td>
-              <i @click="editAreaModal(area)" class="icon-note icons actn"></i>
-              <i @click="viewAreaModal(area)" class="icon-eye icons actn"></i>
-              <i @click="deleteArea(area.id)" class="icon-trash icons actn"></i>
+              <i v-if="auth_permission.area_update" @click="editAreaModal(area)" class="icon-note icons actn"></i>
+              <!-- <i @click="viewAreaModal(area)" class="icon-eye icons actn"></i> -->
+              <i v-if="auth_permission.area_delete || auth_permission.area_deleteall" @click="deleteArea(area.id)" class="icon-trash icons actn"></i>
             </td>
           </tr>
         </tbody>
@@ -51,17 +51,18 @@
     <AddAreaModal ref="add_area_modal"></AddAreaModal>
     <EditAreaModal ref="edit_area_modal"></EditAreaModal>
     <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
+    <Loader v-if="loading"></Loader>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
-import Loader from "@/views/common/Loader";
 
 import AddAreaModal from "./AddAreaModal";
 import EditAreaModal from "./EditAreaModal";
 import ViewAreaModal from "./ViewAreaModal";
+import Loader from '@/views/common/Loader'
 
 import { mapState, mapGetters, mapActions } from "vuex";
 import {
@@ -87,8 +88,17 @@ export default {
     };
   },
   methods: {
+    loadPermission(){
+      //auth_permission
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } , 
     getAreas() {
-      this.$store.dispatch("FETCH_AREAS");
+      this.loading = true
+      this.$store.dispatch("FETCH_AREAS").then(response=>{
+        this.loading = false
+      }).catch(error=>{  
+        this.loading = false
+      });
     },
 
 
@@ -219,14 +229,15 @@ export default {
     // this.getPermission()
   },
   computed: {
-    ...mapGetters(["area_list", "area_parents"])
+    ...mapGetters(["auth_permission","area_list", "area_parents"])
   },
 
   components: {
     EditAreaModal,
     ViewAreaModal,
     pagination,
-    AddAreaModal
+    AddAreaModal,
+    Loader ,
   }
 };
 </script>
