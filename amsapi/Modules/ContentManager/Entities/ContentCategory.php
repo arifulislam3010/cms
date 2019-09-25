@@ -16,4 +16,9 @@ class ContentCategory extends Model
     public function children(){
         return $this->hasMany('Modules\ContentManager\Entities\ContentCategory','parent_id');
     }
+
+    public function contents(){
+        return $this->hasMany('Modules\ContentManager\Entities\Content','content_category_id');
+    }
+
 }

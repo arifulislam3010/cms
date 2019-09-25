@@ -9,8 +9,8 @@
             <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
-                <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+                <!-- <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button> -->
             </form>
 
 

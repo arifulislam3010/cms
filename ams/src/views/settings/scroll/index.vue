@@ -55,6 +55,7 @@ export default {
     },
     mounted(){
         this.getScrolls()
+        this.loadPermission()
     },
     methods:{
         loadPermission(){

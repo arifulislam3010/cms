@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Post\Entities\Post;
+use Modules\Post\Transformers\Post as PostResource;
 use Modules\Post\Transformers\PostDetail ;
 use Modules\Post\Transformers\ReporterPost ;
 class PostController extends Controller
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        return PostResource::collection(Post::all());
     }
 
     /**
@@ -61,7 +62,7 @@ class PostController extends Controller
         $post->featured_image_id = $request->featured_image_id ;
         $post->featured_video_id = $request->featured_video_id ;
 
-        // $post->created_by = $auth_user_id ;
+        $post->created_by = $auth_user_id ;
         $post->save();
         // tag
         $post->tags()->attach($request->tag_ids);    

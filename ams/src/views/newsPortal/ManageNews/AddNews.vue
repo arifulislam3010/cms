@@ -327,7 +327,7 @@ export default {
     },
     submit: function(){
       // todo1
-      console.log(this.news_data.tag_ids);
+      console.log(this.news_data);
 
      if(this.news_data.tag_ids.length) this.news_data.tag_ids = this.news_data.news_tags.map((v)=>v.id)
      if(this.news_data.area_ids.length)this.news_data.area_ids = this.news_data.selected_areas.map((v)=>v.id)
