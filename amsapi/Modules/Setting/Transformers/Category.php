@@ -14,13 +14,16 @@ class Category extends Resource
      */
     public function toArray($request)
     {
-        'id'=> $this->id,
-            'title'=> $this->title,
+        return [
+             'id'=> $this->id,
+            'label'=> $this->title,
             //'parent'=> $this->parent->title,
-            'childs'   => CategoryResource::collection($this->child),
+            'parent_id' => $this->parent_id ,
+            'children'   => CategoryResource::collection($this->child),
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+        ];
     }
 }

@@ -1,172 +1,227 @@
 import axios from "axios"
-import { ALL_USER_ROLE,ALL_USER_ROLE2,ADD_USER_ROLE,UPDATE_USER_ROLE,DELETE_USER_ROLE,ALL_USER_ROLE_INFO,UPDATE_ASSIGN_USER_ROLE} from "./action.type"
-import { AFTER_ADD_USER_ROLE,SET_USER_ROLE,SET_USER_ROLE2,AFTER_UPDATE_USER_ROLE,AFTER_DELETE_USER_ROLE,SET_USER_ROLE_INFO,AFTER_UPDATE_ASSIGN_USER_ROLE } from "./mutation.type"
-const state = {
-    user_role:[],
-    user_role2:[],
-    user_role_info:[],
-    permission:[],
-    user:{},
 
+const state = {
+    roles:[],
+    permission:{
+         id:null,
+         role_name : null ,
+        'category_view' : false ,   
+        'category_viewall' :false,   
+        'category_create':false,
+        'category_update':false,
+        'category_updateall':false,
+        'category_delete':false,
+        'category_deleteall':false,
+  
+        'topic_view' : false ,   
+        'topic_viewall' :false,   
+        'topic_create':false,
+        'topic_update':false,
+        'topic_updateall':false,
+        'topic_delete':false,
+        'topic_deleteall':false,
+
+        'area_view' : false ,   
+        'area_viewall' :false,   
+        'area_create':false,
+        'area_update':false,
+        'area_updateall':false,
+        'area_delete':false,
+        'area_deleteall':false,
+
+        'scroll_view' : false ,   
+        'scroll_viewall' :false,   
+        'scroll_create':false,
+        'scroll_update':false,
+        'scroll_updateall':false,
+        'scroll_delete':false,
+        'scroll_deleteall':false,
+
+        'news_view' : false ,   
+        'news_viewall' :false,   
+        'news_create':false,
+        'news_update':false,
+        'news_updateall':false,
+        'news_delete':false,
+        'news_deleteall':false,
+
+        'album_view' : false ,   
+        'album_viewall' :false,   
+        'album_create':false,
+        'album_update':false,
+        'album_updateall':false,
+        'album_delete':false,
+        'album_deleteall':false,
+  
+        'role_view' : false ,   
+        'role_viewall' :false,   
+        'role_create':false,
+        'role_update':false,
+        'role_updateall':false,
+        'role_delete':false,
+        'role_deleteall':false,
+
+        'user_view' : false ,   
+        'user_viewall' :false,   
+        'user_create':false,
+        'user_update':false,
+        'user_updateall':false,
+        'user_delete':false,
+        'user_deleteall':false,
+  
+    },
+
+    initial_permission:{
+         id:null ,
+         role_name : null ,
+        'category_view' : false ,   
+        'category_viewall' :false,   
+        'category_create':false,
+        'category_update':false,
+        'category_updateall':false,
+        'category_delete':false,
+        'category_deleteall':false,
+  
+        'topic_view' : false ,   
+        'topic_viewall' :false,   
+        'topic_create':false,
+        'topic_update':false,
+        'topic_updateall':false,
+        'topic_delete':false,
+        'topic_deleteall':false,
+
+        'area_view' : false ,   
+        'area_viewall' :false,   
+        'area_create':false,
+        'area_update':false,
+        'area_updateall':false,
+        'area_delete':false,
+        'area_deleteall':false,
+
+        'scroll_view' : false ,   
+        'scroll_viewall' :false,   
+        'scroll_create':false,
+        'scroll_update':false,
+        'scroll_updateall':false,
+        'scroll_delete':false,
+        'scroll_deleteall':false,
+
+        'news_view' : false ,   
+        'news_viewall' :false,   
+        'news_create':false,
+        'news_update':false,
+        'news_updateall':false,
+        'news_delete':false,
+        'news_deleteall':false,
+
+
+        'album_view' : false ,   
+        'album_viewall' :false,   
+        'album_create':false,
+        'album_update':false,
+        'album_updateall':false,
+        'album_delete':false,
+        'album_deleteall':false,
+  
+        'role_view' : false ,   
+        'role_viewall' :false,   
+        'role_create':false,
+        'role_update':false,
+        'role_updateall':false,
+        'role_delete':false,
+        'role_deleteall':false,
+
+        'user_view' : false ,   
+        'user_viewall' :false,   
+        'user_create':false,
+        'user_update':false,
+        'user_updateall':false,
+        'user_delete':false,
+        'user_deleteall':false,
+          
+    },
 }
 
 const getters = {
-    user_roles(state){
-        return state.user_role
+    get_permission(state){
+        return state.permission 
     },
-    user_roles2(state){
-        return state.user_role2
+    role_list(state){
+        return state.roles
     },
-    user_role_infos(state){
-        return state.user_role_info
-    },
-    user(state){
-        return state.user;
-    }
 }
 
 const actions = {
-    [ADD_USER_ROLE]({commit},data) {
-        return new Promise((resolve, reject) => {
-            axios
-            .post("/role",data)
-            .then(response => {
-                commit(AFTER_ADD_USER_ROLE,response.data)
-                resolve(response);
-            })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
-    },
-    [ALL_USER_ROLE]({commit}) {
-        return new Promise((resolve, reject) => {
-            axios
-            .get("api/user-role")
-            .then(response => {
-                commit(SET_USER_ROLE,response.data);
-                
-                resolve(response);
-            })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
-    },
-    [ALL_USER_ROLE2]({commit}) {
-        return new Promise((resolve, reject) => {
-            axios
-            .get("api/user-role2")
-            .then(response => {
-                commit(SET_USER_ROLE2,response.data);
-                
-                resolve(response);
-            })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
-    },
-    [ALL_USER_ROLE_INFO]({commit}) {
-        return new Promise((resolve, reject) => {
-            axios
-            .get("api/assign-role")
-            .then(response => {
-                commit(SET_USER_ROLE_INFO,response.data);
-                
-                resolve(response);
-            })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
+    ['FETCH_ROLE_DETAIL']({commit},id){
+        commit('SET_ROLE_DETAIL',id)
     },
 
-    [UPDATE_USER_ROLE]({commit},data) {
-        return new Promise((resolve, reject) => {
-            axios
-            .put("/role",data.data)
-            .then(response => {
-                console.log(response)
-                var update_data = response.data
-                var index = data.index
-                commit("AFTER_UPDATE_USER_ROLE",{update_data,index});
-                resolve(response);
+    ['FETCH_ROLES']({commit}){
+        return new Promise((resolve,reject)=>{
+            axios.get('api/role').then(response=>{
+                resolve(response)
+                commit('SET_ROLES',response.data)
+            }).catch(error=>{
+                reject(error)
             })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
+        })
     },
-    [UPDATE_ASSIGN_USER_ROLE]({commit},data) {
-        return new Promise((resolve, reject) => {
-            axios
-            .put("/api/assign-role",data.data)
-            .then(response => {
-                var update_data = response.data[0]
-                var index = data.index
-                commit("AFTER_UPDATE_ASSIGN_USER_ROLE",{update_data,index});
-                
-                resolve(response);
+    ['ADD_ROLE']({commit},payload){
+        return new Promise((resolve,reject)=>{
+            axios.post('api/role/',payload).then(response=>{
+                resolve(response)
+            }).catch(error=>{
+                reject(error)
             })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
+        })
     },
-    [DELETE_USER_ROLE]({commit},data) {
-        return new Promise((resolve, reject) => {
-            axios
-            .delete("/role/"+data.id)
-            .then(response => {
-                commit("AFTER_DELETE_USER_ROLE",data.index);
-                
-                resolve(response);
+    ['DELETE_ROLE']({commit},id){
+        return new Promise((resolve,reject)=>{
+            axios.delete(`api/role/${id}`).then(response=>{
+                resolve(response)
+            }).catch(error=>{
+                reject(error)
             })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
+        })
     },
-    
+    ['EMPTY_ROLE']({commit}){
+        commit('SET_EMPTY_ROLE')
+    },
+    ['UPDATE_ROLE']({commit},payload){
+        return new Promise((resolve,reject)=>{
+            axios.put(`api/role/`,payload).then(response=>{
+                resolve(response)
+            }).catch(error=>{
+                reject(error)
+            })
+        })
+    }
 }
-
 const mutations = {
-    [SET_USER_ROLE](state, data) 
-    {
-        state.user_role = data;
+    ['SET_ROLES'](state,payload){
+        state.roles = payload
     },
-    [SET_USER_ROLE2](state,data) 
-    {
-        state.user_role2 = data;
-        state.user = data;
+    ['SET_EMPTY_ROLE'](state){
+        state.permission = { ...state.initial_permission}
     },
-    [SET_USER_ROLE_INFO](state, data) 
-    {
-        state.user_role_info = data;
+    ['SET_ROLE_DETAIL'](state,id){
+        if(state.roles.length){
+            let temp =  state.roles.find(v => v.id == id)
+            state.permission = { ...temp.permission} 
+            state.permission.role_name = temp.name 
+            state.permission.id = temp.id 
+        }
     },
-    [AFTER_ADD_USER_ROLE](state, data) 
-    {
-        state.user_role.unshift(data);
-    },
-    [AFTER_UPDATE_USER_ROLE](state,payload){
-        state.user_role.splice(payload.index,0,payload.update_data)
-        state.user_role.splice(payload.index+1,1)
-    },
-    [AFTER_DELETE_USER_ROLE](state,index){
-        state.user_role.splice(index,1)
-    },
-    [AFTER_UPDATE_ASSIGN_USER_ROLE](state,payload){
-        
-        state.user_role_info.splice(payload.index,0,payload.update_data)
-        state.user_role_info.splice(payload.index+1,1)
-    },
-    
-    
+    ['SET_UPDATE_ROLE'](state,payload){
+
+    }
 }
+
+
+
 export default {
     state,
-    actions,
+    getters ,
     mutations,
-    getters
-};
+    actions,
+}
