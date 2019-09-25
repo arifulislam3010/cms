@@ -128,7 +128,8 @@ export default {
             this.item.id = item.id
             this.item.label = item.label
             let t_parent =  this.content_category_list.find( v => v.id == item.parent_id)
-            this.item.parent = t_parent ? t_parent : null  
+            this.item.parent = t_parent ? t_parent.id : null  
+            console.log(this.item)
         },
         delete_content_category(item){
             if( confirm(`Delete ${item.label} `)){
