@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Post\Entities\Post;
 use Modules\Post\Transformers\PostDetail ;
+use Modules\Post\Transformers\ReporterPost ;
 class PostController extends Controller
 {
     /**
@@ -72,7 +73,7 @@ class PostController extends Controller
         $post->areas()->attach($request->selected_areas);
         // content -> more photo 
         $post->contents()->attach($request->content_ids);
-
+        $post->scrolls()->attach($request->selected_scrolls);    
         if ($post->save()) {
             return $post;
         }
@@ -120,54 +121,21 @@ class PostController extends Controller
         $post->contents()->sync($request->content_ids);       
         // categories
         $post->categories()->sync($request->selected_categories);       
+        // scroll 
+        $post->scrolls()->sync($request->selected_scrolls);       
         if ($post->save()) {
             return $post;
         }       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+    public function reporterNews(Request $request){
+        
+        $posts = Post::all();
+        return ReporterPost::collection($posts);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('post::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('post::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
     public function destroy($id)
     {
         $post = Post::findOrfail($id);

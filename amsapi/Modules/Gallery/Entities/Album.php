@@ -18,4 +18,8 @@ class Album extends Model
     public function updatedBy(){
         return $this->belongsTo('App\User','updated_by');
     }
+
+    public function contents(){
+        return $this->belongsToMany('Modules\ContentManager\Entities\Content','album_contents');
+    }
 }

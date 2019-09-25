@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Gallery\Transformers;
+namespace Modules\Setting\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
-use Modules\ContentManager\Transformers\Image  as ImageResource ;
-use Modules\ContentManager\Entities\Content ;
-class Album extends Resource
+use Modules\Setting\Transformers\Scroll as ScrollResource;
+
+class Scroll extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,13 @@ class Album extends Resource
     {
         return [
             'id'=> $this->id,
-            'title'=> $this->title,
-            'cover'=> new ImageResource(Content::where('id',$this->cover_id)->first()),
+            'label'=> $this->title,
+            'parent_id'=> $this->parent_id,
+            'children'   => ScrollResource::collection($this->child),
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            // 'created_at' => $this->created_at,
+            // 'updated_at' => $this->updated_at,
         ];
     }
 }

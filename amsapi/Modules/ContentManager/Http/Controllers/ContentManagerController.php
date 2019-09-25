@@ -85,9 +85,9 @@ class ContentManagerController extends Controller
 	}
 
 	public function delFile($id){
-		$doc = plot_info_file::findOrFail($id);
-        $path           = 'uploads/PLOT_INFO_DOCUMENT/';
-        $file = $doc->name;
+		$doc = Content::findOrFail($id);
+        $path           = 'uploads/';
+        $file = $doc->file_name;
         $file_upload = new FileUpload;
         $upload = $file_upload->remove($file,$path);
 		if($doc->delete()){

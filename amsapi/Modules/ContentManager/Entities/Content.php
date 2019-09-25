@@ -18,4 +18,8 @@ class Content extends Model
     public function posts(){
         return $this->belongsToMany('Modules\Post\Entities\Post','post_contents');
     }
+
+    public function albums(){
+        return $this->belongsToMany('Modules\Gallery\Entities\Album','album_contents');
+    }
 }

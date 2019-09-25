@@ -14,6 +14,11 @@ class ContentCategory extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id ,
+            'label' => $this->title ,
+            'parent_id' => $this->parent_id ,
+            'children' => ContentCategory::collection($this->children),
+        ];
     }
 }

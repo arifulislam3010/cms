@@ -5,7 +5,12 @@ namespace Modules\UserManagement\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\Hash;
+use Modules\UserManagement\Entities\Activation ;
+use App\User ; 
+use App\Role ; 
+use App\RoleUser ;
+use Modules\ContentManager\Transformers\User as UserResource ;
 class UserManagementController extends Controller
 {
     /**
@@ -14,66 +19,67 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        return view('usermanagement::index');
+        return UserResource::collection(User::all());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function user_permission(Request $request){
+        $user = Auth()->user();
+        $role_id = RoleUser::where('user_id',$user->id)->first()->role_id ; 
+        return Role::where('id',$role_id)->first()->permissions2; 
+    }
+    public function create(Request $request)
     {
-        return view('usermanagement::create');
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'password2' => 'required|same:password',
+        ]);
+        $user = new User ;
+        $user->name = $request->name ;
+        $user->email = $request->email ;
+        $user->password = Hash::make($request->password);
+        if($user->save()){
+
+            $role_user = new RoleUser ;
+            $role_user->user_id = $user->id ;
+            $role_user->role_id = $request->role['id'] ;
+            $role_user->save() ;
+
+            $activation = new Activation ;
+            $activation->user_id = $user->id ;
+            $activation->code = '1234' ;
+            $activation->completed = 1 ;
+            if($activation->save()){
+                return $user ;
+            }
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function update(Request $request,$id){
+        $validator = $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'password2' => 'required|same:password',
+        ]);
+        
+        $user = User::findOrfail($id);
+        $user->name = $request->name ;
+        $user->email = $request->email ;
+        $user->password = Hash::make($request->password);
+        if($user->save()){
+            $role_user = RoleUser::where('user_id',$user->id)->first();
+            $role_user->role_id = $request->role['id'];
+            $role_user->save();
+            return $user ;
+        }
+    } 
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('usermanagement::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('usermanagement::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
     public function destroy($id)
     {
-        //
+        $user = User::findOrfail($id);
+        if($user->delete()){
+            return $user ;
+        }
     }
 }

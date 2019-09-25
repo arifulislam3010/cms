@@ -28,6 +28,7 @@ import News from "./news.module"
 import Category from './category.module'
 import Scroll from "./scroll.module"
 import Gallery from "./gallery.module"
+import ContentCategory from "./content_category.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -60,5 +61,6 @@ export default new Vuex.Store({
     Category,
     Scroll,
     Gallery,
+    ContentCategory ,
   }
 })
