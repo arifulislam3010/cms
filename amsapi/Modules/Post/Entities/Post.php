@@ -33,6 +33,11 @@ class Post extends Model
         return $this->belongsToMany('Modules\Setting\Entities\Category','post_categories');
     }
      
+    public function scrolls(){
+
+        return $this->belongsToMany('Modules\Setting\Entities\Scroll','post_scrolls');
+    }
+     
     public function contents(){
         return $this->belongsToMany('Modules\ContentManager\Entities\Content','post_contents');
     }

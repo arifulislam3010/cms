@@ -47,6 +47,15 @@ const actions = {
           });
       });
     },
+    ['DELETE_CONTENT']({commit},id){
+       return new Promise((resolve,reject)=>{
+         axios.delete(`/api/contentmanager/delete/${id}`).then(response=>{
+            resolve(response)
+         }).catch(error=>{
+            reject(error)
+         })
+       })
+    },
 
     
 };

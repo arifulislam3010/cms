@@ -42,6 +42,7 @@ Vue.component('multiselect', Multiselect)
 Vue.use( CKEditor );
 Vue.use(BootstrapVue,iziToast,Auth)
 Vue.component('ToggleButton', ToggleButton)
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.prototype.$iziToast = iziToast
 
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'

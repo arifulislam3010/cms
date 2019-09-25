@@ -19,7 +19,18 @@
                   <span :class="{ content_active : content_type == 'youtube' }" @click="ContentTypeChange('youtube')" data-toggle="tooltip" data-placement="top" title="Youtube">
                     <i class="fa fa-youtube-play" aria-hidden="true"></i>
                   </span>
+                  <span :class="{ content_active : content_type == 'setting' }" @click="OpenSettingModal" data-toggle="tooltip" data-placement="top" title="setting">
+                    <i id="dropdown-1" class="fa fa-cog" aria-hidden="true"></i>
+                  </span>
+                  <Setting ref="setting_modal"></Setting>
+                </div >
+              <div class="col-md-12 row">
+                <div class="col-md-3 pull-right">
+                  <!-- <b-button>category</b-button> -->
+                  <!-- <br> -->
                 </div>
+              </div>
+              <hr>
               <div class="col-md-12 row">
                   <div class="col-md-9">
                      <div class="row">
@@ -77,6 +88,7 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate)
 import ContentCard from './ContentCard'
+import Setting from "./Setting"
 import { GET_CONTENT,All_AREA,ADD_CONTENT} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
@@ -85,7 +97,8 @@ export default {
   name:'ContentManager',
   props:['content'],
   components: {
-        ContentCard
+        ContentCard,
+        Setting ,
     },
     data(){
         return{
@@ -119,6 +132,10 @@ export default {
       ContentSelect(item){
         alert('ss');
         //this.$parent.content = item;
+      },
+      OpenSettingModal(){
+        this.ContentTypeChange('setting')
+        this.$refs.setting_modal.OpenModal()
       },
       ContentTypeChange: function(val){
                 this.content_type = val;
