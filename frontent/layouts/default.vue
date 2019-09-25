@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from '~/components/Header.vue'
+import Header from "~/components/Header.vue";
 
 export default {
   components: {
@@ -14,16 +14,14 @@ export default {
   },
   data() {
     return {
-      title : 'Home'
-    }
-  },
-  
-}
+      title: "Home"
+    };
+  }
+};
 </script>
 
 <style scoped>
-a:hover{
+a:hover {
   color: #ee002d;
 }
 </style>
-
