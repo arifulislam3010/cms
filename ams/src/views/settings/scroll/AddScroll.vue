@@ -1,0 +1,135 @@
+<template>
+    <b-modal title="Area" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
+        <form @submit.prevent="addScroll" >
+            <b-row>
+              <b-col sm="12">
+                <b-card>
+                  <div slot="header">
+                    <strong>Scroll </strong> <small>Form</small>
+                  </div>
+                  <b-row>
+                    <b-col sm="12">
+                      <b-form-group>
+                        <label for="Title">Name</label>
+                        <b-form-input type="text" name="Title" id="Title" v-model="newScroll.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
+                        <div v-show="errors.has('Title')" class="help-block alert alert-danger">
+                        {{ errors.first('Title') }}
+                        </div>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col sm="12">
+                      <b-form-group>
+                        <label for="Parent">Parent</label>
+                        <!-- <div class="input-group">
+                            <select name="Parent" v-model="newScroll.parent_id"  id="parent" class="form-control" >
+                                <option value="" >Select Parent</option>
+                                <option v-for="(area,index) in areas" :key="index" :value="area.id">{{area.title}}</option>
+                            </select>
+
+                        </div> -->
+                        <Treeselect
+                        v-model="newScroll.parent_id"
+                        :options="scroll_parents"
+                        ></Treeselect>  
+                      </b-form-group>
+
+
+                    </b-col>
+                  </b-row>
+                </b-card>
+              </b-col>
+            </b-row>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right"/>
+                <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Submitting...
+                </button>
+                <button v-if="!addLoader"  @click.prevent="close" class="btn btn-success pull-right" style="margin-right:5px;">Close</button>
+                </div>
+            </div>
+        </form>
+    </b-modal>
+</template>
+
+<script>
+import Vue from 'vue'
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate)
+import { mapState,mapGetters } from "vuex"
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+export default {
+    components:{Treeselect},
+    data(){
+        
+        return{
+            largeModal:false,
+            addLoader:false,
+            update: false ,
+            item_id:'',
+            selected_parent:null,
+            newScroll: {
+                title: '',
+                parent_id: ''
+            },
+
+        }
+    },
+    methods:{
+
+      addScroll () {
+            
+            if(this.update){
+                let payload = {
+                  data : this.newScroll ,
+                  id   : this.item_id, 
+                }
+                this.$store.dispatch('UPDATE_SCROLL',payload).then(response=>{
+                  this.$parent.getScrolls()
+                }) 
+            }else{
+                this.$store.dispatch('ADD_SCROLL',this.newScroll).then(response=>{
+                  this.$parent.getScrolls()
+                })  
+            }
+
+        },
+
+        openModal(){
+            this.largeModal = true
+            if(!this.update){              
+                this.newScroll.title =null
+                this.newScroll.parent_id = null 
+            }
+        },
+        close(){
+            this.largeModal = false
+        },
+
+        addButton () {
+        this.line.buttons.push({
+          name: '',
+          state: false,
+          is_reported: ''
+        })
+      },
+      deleteButton (index) {
+        this.line.buttons.splice(index, 1)
+      },
+
+
+    },
+    computed: {
+      ...mapGetters(["scroll_list","scroll_parents"]),
+    },
+
+}
+</script>
+
+<style>
+
+</style>

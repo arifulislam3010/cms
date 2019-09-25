@@ -13,35 +13,24 @@ class TopicController extends Controller
 {
     public function index(Request $request){
 
-
-        // $role_id = RoleUser::where('user_id',$user_id)->first()->role_id;
-        // $role = Sentinel::findRoleById($role_id);
-        // $search_item = ($request->has('search_item'))?$request['search_item']:null;
-        $search_item = ($request->has('search_item'))?$request['search_item']:null;
-        $topic = '';
-
-        // if ($role->hasAccess(['department.view'])){
-        //     $department = Department::when($search_item , function($q) use($search_item,$user_id){return $q->where('created_by',$user_id)->where('name','like',"%$search_item%");})
-        //         ->when($user_id , function($q) use($user_id){return $q->where('created_by',$user_id);})
-        //        ->paginate(10);
-        // }
-        // if ($role->hasAccess(['department.viewall'])){
-          return $topic = Topic::when($search_item , function($q) use($search_item){return $q->where('name','like',"%$search_item%");})
-           ->paginate(10);
-        // }
+        $topic = Topic::all();
     	return TopicResource::collection($topic);
     }
 
 
 
-    public function store(Request $request)
+    public function store(Request $request,$id=0)
     {
 
-        $topic = $request->isMethod('put') ? Topic::findOrFail($request->topic_id) : new Topic;
+        $topic = $request->isMethod('put') ? Topic::findOrFail($id) : new Topic;
         $topic -> title = $request->input('title');
-        $topic -> cover = $request->input('cover');
-        $topic -> status = $request->input('status');
+        $topic -> parent_id = $request->input('parent_id');
 
+        if($request->isMethod('put')){
+            if($request->parent_id == $id){
+                return response()->json(['error'=>'can not be own parent'],422);
+            }
+        }
         //vat_reg_no
         $log_user = Auth()->user();
         $request->isMethod('put') ?  $topic ->updated_by = $log_user->id : '' ;

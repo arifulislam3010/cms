@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\AdminMiddleware;
 
 
+Route::post('login','RegisterLoginPasswordResetController@login');
+
 Route::middleware('auth:api')->post('/user', function () {
     $user = Auth()->user();
     return $user;

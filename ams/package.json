@@ -20,6 +20,7 @@
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
     "@coreui/icons": "0.3.0",
     "@coreui/vue": "^2.1.2",
+    "@riophae/vue-treeselect": "^0.3.0",
     "@voerro/vue-tagsinput": "^1.11.2",
     "@vue/component-compiler-utils": "^1.3.1",
     "ajv": "^6.10.2",
@@ -48,12 +49,15 @@
     "vue-content-loading": "^1.6.0",
     "vue-ctk-date-time-picker": "^2.1.1",
     "vue-excel-export": "^0.1.3",
+    "vue-functional-calendar": "^2.5.9",
+    "vue-js-toggle-button": "^1.3.2",
     "vue-json-excel": "^0.2.98",
     "vue-moment": "^4.0.0",
     "vue-multiselect": "^2.1.6",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.1.2",
     "vue2-editor": "^2.10.0",
+    "vuejs-datetimepicker": "^1.1.12",
     "vuex": "^3.1.1"
   },
   "devDependencies": {

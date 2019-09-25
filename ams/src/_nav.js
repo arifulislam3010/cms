@@ -28,6 +28,11 @@ export default {
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },
+        {
+          name: 'scroll',
+          url: '/settings/scroll',
+          icon: 'fa fa-life-bouy'
+        },
 
 
       ]
@@ -37,18 +42,23 @@ export default {
       icon: 'fa fa-money',
       children: [
         {
+          name: 'Add News',
+          url: '/news/add',
+          icon: 'fa fa-life-bouy'
+        },
+        {
           name: 'List News',
           url: '/news/list',
           icon: 'fa fa-life-bouy'
         },
         {
           name: 'Scheduled News',
-          url: '/news/scheduled',
+          url: '/news/scheduled-news',
           icon: 'fa fa-life-bouy'
         },
         {
           name: "reporter's news",
-          url: '/news/reporter',
+          url: '/news/reporters-news',
           icon: 'fa fa-life-bouy'
         },
 
@@ -57,27 +67,38 @@ export default {
     },
     {
       name: 'Gallery',
-      url: '/gallery/list',
-      icon: 'fa fa-life-bouy'
-    },
-    
-    {
-      name: 'Items',
-      url: '/category',
-      icon: 'fa fa-money',
-      children: [
+      icon: 'fa fa-life-bouy',
+      children:[
         {
-          name: 'Category',
-          url: '/category',
+          name:'list',
+          url:'/gallery/list',
           icon: 'fa fa-life-bouy'
         },
         {
-          name: 'item',
-          url: '/item',
+          name:'add album',
+          url:'/gallery/add-album',
           icon: 'fa fa-life-bouy'
         },
       ]
     },
+    
+    // {
+    //   name: 'Items',
+    //   url: '/category',
+    //   icon: 'fa fa-money',
+    //   children: [
+    //     {
+    //       name: 'Category',
+    //       url: '/category',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //     {
+    //       name: 'item',
+    //       url: '/item',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
     {
       name: 'System Users',
       url: '/user-role',
@@ -89,10 +110,15 @@ export default {
           icon: 'icon-star'
         },
         {
-          name: 'Assign Role',
-          url: '/assign-role',
+          name: 'User List',
+          url: '/user-list',
           icon: 'icon-star'
         },
+        // {
+        //   name: 'Assign Role',
+        //   url: '/assign-role',
+        //   icon: 'icon-star'
+        // },
       ]
     },
 
