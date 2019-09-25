@@ -24,14 +24,14 @@ Route::prefix('api')->group(function() {
 
 });
 // category
-Route::prefix('api/category')->middleware('auth:api')->group(function(){
+Route::prefix('category')->middleware('auth:api')->group(function(){
 	Route::get('/list','CategoryController@index');
 	Route::post('/','CategoryController@create');
 	Route::put('/{id}','CategoryController@update');
 	Route::delete('/{id}','CategoryController@destroy');
 });
 //area
-Route::prefix('api/area')->middleware(['auth:api'])->group(function() {
+Route::prefix('area')->middleware(['auth:api'])->group(function() {
 	Route::get('/list','AreaController@index');
 	Route::post('/','AreaController@create');
 	Route::put('/{id}','AreaController@update');
@@ -40,7 +40,7 @@ Route::prefix('api/area')->middleware(['auth:api'])->group(function() {
 });
 
 //Topic
-Route::prefix('api/topic')->middleware(['auth:api'])->group(function() {
+Route::prefix('topic')->middleware(['auth:api'])->group(function() {
 
 	Route::get('/list','TopicController@index');
 	Route::post('/','TopicController@store');
@@ -48,7 +48,13 @@ Route::prefix('api/topic')->middleware(['auth:api'])->group(function() {
 	Route::delete('/{id}','TopicController@destroy');
 
 });
-
+// scroll 
+Route::prefix('scroll')->middleware(['auth:api'])->group(function(){
+	Route::get('/list','ScrollController@index');
+	Route::post('/','ScrollController@create');
+	Route::put('/{id}','ScrollController@update');
+	Route::delete('/{id}','ScrollController@destroy');
+});
 // Route::prefix('topic')->middleware(['auth:api'])->group(function() {
 
 // 	Route::post('/','TopicController@store');

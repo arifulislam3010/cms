@@ -35,13 +35,17 @@ import iziToast from 'izitoast'
 import Multiselect from 'vue-multiselect'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ToggleButton from 'vue-js-toggle-button'
-
+//search 
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+import '@trevoreyre/autocomplete-vue/dist/style.css'
 // import JsonExcel from 'vue-json-excel'
 // import jsPDF from 'jspdf';
 Vue.component('multiselect', Multiselect)
 Vue.use( CKEditor );
 Vue.use(BootstrapVue,iziToast,Auth)
 Vue.component('ToggleButton', ToggleButton)
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.use(Autocomplete)
 Vue.prototype.$iziToast = iziToast
 
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'

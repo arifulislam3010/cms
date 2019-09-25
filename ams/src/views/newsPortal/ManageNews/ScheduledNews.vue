@@ -14,7 +14,7 @@
                 <tr v-for="(item,key) in news_list" :key="key">
                     <td>{{item.headline}}</td>
                     <td>{{item.shoulder}}</td>
-                    <td>{{item.created_at}}</td>
+                    <td>{{item.created_at.Date}}</td>
                     <td>{{item.published_at}}</td>
                     <td>
                         <i v-if="auth_permission.news_update || auth_permission.news_updateall" @click="update_news(item.id)" class="icon-note icons actn"> </i>

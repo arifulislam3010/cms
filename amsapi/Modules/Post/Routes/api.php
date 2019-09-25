@@ -18,6 +18,8 @@ Route::prefix('post')->middleware('auth:api')->group(function(){
     Route::post('/','PostController@create');
     Route::put('/{id}','PostController@update');
     Route::delete('/{id}','PostController@destroy');
+
+    Route::get('/reporter/list','PostController@reporterNews');
 });
 // Route::prefix('tag')->middleware('auth:api')->group(function(){
 //     Route::get('/list',function(){

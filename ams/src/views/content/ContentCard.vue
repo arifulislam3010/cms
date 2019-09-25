@@ -10,7 +10,7 @@
     <div class="card-desc">
         <h3>{{item.title}}</h3>
         <!-- <a href="#" class="btn-card">Read</a>    -->
-        <a href="#" @click="delete_image">delete</a>
+        <a href="#" @click="delete_image(item.id)">delete</a>
         <!-- <link></link> -->
     </div>
 </div>
@@ -33,8 +33,19 @@ export default {
             this.$parent.$parent.$parent.$parent.content = item;
             //this.$parent.ContentSelect(item);
         },
-        delete_image(){
+        delete_image(id){
+            // alert( `content id -> ${id} will be deleted`)
+            if(confirm(`content id -> ${id} will be deleted`)){
 
+                // call to delete api 
+                this.$store.dispatch('DELETE_CONTENT',id).then(response=>{
+                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Content Deleted"})
+                    this.$parent.$parent.$parent.getData()
+                }).catch(error=>{
+                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Error Occured"})
+                })
+                // afte delete refresh the image list 
+            }
         },
     }
 }

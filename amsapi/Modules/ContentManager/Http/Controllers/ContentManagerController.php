@@ -22,7 +22,11 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
-
+        // search object use korte hobe  
+        if($request->content_category){
+            $Content = Content::where('content_category_id',$request->content_category)->paginate(15);
+            return ContentResource::collection($Content);
+        }
         $Content = Content::paginate(15);
         return ContentResource::collection($Content);
     }
@@ -69,7 +73,9 @@ class ContentManagerController extends Controller
 
         $Content->file_name = $file;
     	$Content->title = $request['title'];
-    	$Content->type  = $type; 
+        $Content->type  = $type; 
+        $Content->content_category_id  = $request->content_category; 
+        
 
         $log_user = Auth()->user();
 
@@ -85,9 +91,9 @@ class ContentManagerController extends Controller
 	}
 
 	public function delFile($id){
-		$doc = plot_info_file::findOrFail($id);
-        $path           = 'uploads/PLOT_INFO_DOCUMENT/';
-        $file = $doc->name;
+		$doc = Content::findOrFail($id);
+        $path           = 'uploads/';
+        $file = $doc->file_name;
         $file_upload = new FileUpload;
         $upload = $file_upload->remove($file,$path);
 		if($doc->delete()){

@@ -14,17 +14,19 @@ use Illuminate\Http\Request;
 */
 
 //Gallery
-Route::prefix('api')->middleware(['auth:api'])->group(function() {
+// Route::prefix('api')->middleware(['auth:api'])->group(function() {
 
-	Route::post('/gallerys','GalleryController@index');
+// 	Route::post('/gallerys','GalleryController@index');
 
-});
+// });
 
 Route::prefix('gallery')->middleware(['auth:api'])->group(function() {
 
+	Route::get('/list','GalleryController@index');
 	Route::post('/','GalleryController@store');
-	Route::put('/','GalleryController@store');
+	Route::put('/{id}','GalleryController@store');
 	Route::delete('/{id}','GalleryController@destroy');
+	Route::get('detail/{id}','GalleryController@detail');
 
 });
 

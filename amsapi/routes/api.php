@@ -80,13 +80,13 @@ Route::prefix('expense')->middleware(['auth:api','admin'])->group(function() {
     
 });
 
-Route::prefix('role')->middleware(['auth:api'])->group(function() {
+// Route::prefix('role')->middleware(['auth:api'])->group(function() {
 	
-	Route::post('/','RoleController@store');
-	Route::put('/','RoleController@update');
-	Route::delete('/{id}','RoleController@destroy');
+// 	Route::post('/','RoleController@store');
+// 	Route::put('/','RoleController@update');
+// 	Route::delete('/{id}','RoleController@destroy');
     
-});
+// });
 
 Route::prefix('invoice')->middleware(['auth:api','admin'])->group(function() {
 	

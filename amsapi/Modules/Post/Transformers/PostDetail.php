@@ -10,6 +10,7 @@ use Modules\Setting\Transformers\Tag as TagResource ;
 use Modules\Setting\Transformers\Topic as TopicResource ;
 use Modules\Setting\Transformers\Category as CategoryResource ;
 use Modules\Setting\Transformers\Area as AreaResource ;
+use Modules\ContentManager\Entities\Content ;
 
 class PostDetail extends Resource
 {
@@ -29,7 +30,8 @@ class PostDetail extends Resource
             'reporter' => User::where('id',$this->reporter_id)->first(),
             'author' => User::where('id',$this->author_id)->first(),
             'content' => $this->content,
-            // featured img , video 
+            'featured_img' => new ImageResource (Content::where('id',$this->featured_image_id)->first()), 
+            'featured_vid' => new ImageResource(Content::where('id',$this->featured_video_id)->first()), 
             'more_photo_arr' => ImageResource::collection($this->contents),
 
             'share_at' => $this->share_at,
