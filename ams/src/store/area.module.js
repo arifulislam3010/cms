@@ -21,7 +21,7 @@ const getters = {
 const actions = {
     ['FETCH_AREAS']({commit}){
         return new Promise((resolve,reject)=>{
-            axios.get('area/list').then(response=>{
+            axios.get('api/area/list').then(response=>{
                 resolve(response)
                 commit('SET_AREAS',response.data)
             }).catch(error=>{
@@ -31,7 +31,7 @@ const actions = {
     },
     ['ADD_AREA']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('area/',payload).then(response=>{
+            axios.post('api/area/',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -40,7 +40,7 @@ const actions = {
     },
     ['UPDATE_AREA']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.put(`area/${payload.id}`,payload.data).then(response=>{
+            axios.put(`api/area/${payload.id}`,payload.data).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -49,7 +49,7 @@ const actions = {
     },
     ['DELETE_AREA']({commit},id){
         return new Promise((resolve,reject)=>{
-            axios.delete(`area/${id}`).then(response=>{
+            axios.delete(`api/area/${id}`).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

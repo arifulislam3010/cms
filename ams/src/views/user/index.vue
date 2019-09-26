@@ -44,14 +44,10 @@ export default {
         ...mapGetters(['auth_permission','user_list'])
     },
     mounted(){
-        this.loadPermission()
         this.getUserList()
     },
     methods:{
-        loadPermission(){
-        //auth_permission
-            this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-        } ,       
+        
         update_user(id){
             console.log('update')
             this.$refs.add_user.OpenModal()

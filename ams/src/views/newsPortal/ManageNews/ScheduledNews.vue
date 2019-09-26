@@ -41,14 +41,10 @@ export default {
         ...mapGetters(['auth_permission','news_list'])
     },
     mounted(){
-        this.loadPermission()
         this.getNewsList()
     },
     methods:{
-         loadPermission(){
-        //auth_permission
-            this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-        } ,          
+          
          goToUpdateNews: function(){
             this.$router.push({name:'UpdateNews'})
         },

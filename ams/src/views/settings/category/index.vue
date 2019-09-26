@@ -85,9 +85,7 @@ export default {
         }
     },
     methods:{
-    loadPermission(){
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } ,   
+  
     editCategoryModal(item){
         this.$refs.add_ncategory_modal.openModal()
         this.$refs.add_ncategory_modal.update = true
@@ -128,7 +126,6 @@ export default {
 
      mounted(){
         // this.getResults()
-        this.loadPermission()
         this.getCategories()
         // this.getPermission()
 

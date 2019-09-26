@@ -8,9 +8,13 @@ import { ALL_VISA,DELETE_VISA,GETLASTID,ALL_USER_ROLE2,ADD_VISA } from '@/store/
 export default {
   name: 'app',
   mounted(){
+    this.loadPermission()
   },
   methods:{
-    
+      loadPermission(){
+      //auth_permission
+          this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+      } ,
   }
 }
 </script>

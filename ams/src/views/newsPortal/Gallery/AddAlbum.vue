@@ -89,7 +89,6 @@ export default {
 
   mounted() {
     this.getAlbums()
-    this.loadPermission()
   },
   watch: {
     content: function(val) {
@@ -101,10 +100,7 @@ export default {
     ...mapGetters(["auth_permission","album_detail","album_list"])
   },
   methods: {
-    loadPermission(){
-    //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } ,     
+   
     getAlbums: function(){
       this.loading = true
       this.$store.dispatch('FETCH_ALBUMS').then(response=>{

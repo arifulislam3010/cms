@@ -75,16 +75,12 @@ export default {
   },
   mounted() {
     this.getAlbums();
-    this.loadPermission()
   },
   computed: {
     ...mapGetters(["auth_permission","album_list","album_detail"])
   },
   methods: {
-    loadPermission(){
-    //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } ,     
+      
     goToAddAlbum: function(arg) {
       this.$router.push({ name: "AddAlbum" });
     },
