@@ -7,9 +7,15 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Post\Entities\Post;
 
+use Modules\Post\Entities\PostCategory;
 use Modules\Post\Transformers\Post as PostResource;
+use Modules\Post\Transformers\PostCategory as PostCategoryResource;
 
 use Modules\Post\Transformers\PostDetail ;
+
+use Modules\Setting\Entities\Ncategory;
+
+use Modules\Setting\Transformers\Ncategory as NcategoryResource;
 
 class PostController extends Controller
 {
@@ -20,11 +26,16 @@ class PostController extends Controller
     public function index()
     {
 
-       $post = Post::all();
-//        return 'ok';
-       // return $post = Post::all();
+       $post = Post::orderBy('id', 'DESC')->get();
        return PostResource::collection($post);
 
+    }
+
+    public function postCategory()
+    {
+        return "ok";
+        $category = Ncategory::all();
+         return NcategoryResource::collection($category);
     }
 
     /**

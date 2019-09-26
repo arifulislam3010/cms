@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Modules\Post\Entities\PostTag;
 /*
 |--------------------------------------------------------------------------
@@ -19,21 +20,27 @@ use Modules\Post\Entities\PostTag;
 //
 //});
 
-Route::get('/posts','PostController@index');
+//Route::get('/frontend/posts','PostController@index');
+//Route::get('/frontend/categories','PostController@postCategory');
 
-Route::prefix('post')->middleware('auth:api')->group(function(){
-    Route::get('/list','PostController@index');
-    Route::get('/{id}','PostController@detail');
-    Route::post('/','PostController@create');
-    Route::put('/{id}','PostController@update');
-    Route::delete('/{id}','PostController@destroy');
+Route::prefix('frontend')->group(function (){
+    Route::get('/posts','PostController@index');
+    Route::get('/categories','PostController@postCategory');
 });
+
+//Route::prefix('post')->middleware('auth:api')->group(function(){
+//    Route::get('/list','PostController@index');
+//    Route::get('/{id}','PostController@detail');
+//    Route::post('/','PostController@create');
+//    Route::put('/{id}','PostController@update');
+//    Route::delete('/{id}','PostController@destroy');
+//});
 // Route::prefix('tag')->middleware('auth:api')->group(function(){
 //     Route::get('/list',function(){
 //         return PostTag::all();
 //     });
 
 // });
-Route::middleware('auth:api')->get('/post', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/post', function (Request $request) {
+//    return $request->user();
+//});

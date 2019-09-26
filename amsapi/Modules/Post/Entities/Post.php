@@ -23,6 +23,8 @@ class Post extends Model
         'updated_by'
     ];
 
+    protected $table = 'posts';
+
     // tag *
     // topic *
     // category *

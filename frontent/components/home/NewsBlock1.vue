@@ -11,82 +11,7 @@
                     <div class="row">
 
                         <!-- Single Post -->
-                        <div class="col-12 col-md-4">
-                            <div class="single-blog-post style-3">
-                                <div class="post-thumb card">
-                                    <div class="card-body">
-                                        <a href="#"><img src="@/assets/images/16.jpg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-catagory">Finance</a>
-                                    <a href="#" class="post-title">
-                                        <h6>Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...</h6>
-                                    </a>
-                                    <div class="post-meta d-flex align-items-center">
-                                        <a href="#" class="post-like"><img src="img/core-img/like.png" alt=""> <span>392</span></a>
-                                        <a href="#" class="post-comment"><img src="img/core-img/chat.png" alt=""> <span>10</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-md-4">
-                            <div class="single-blog-post style-3">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="img/bg-img/13.jpg" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-catagory">Finance</a>
-                                    <a href="#" class="post-title">
-                                        <h6>Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...</h6>
-                                    </a>
-                                    <div class="post-meta d-flex align-items-center">
-                                        <a href="#" class="post-like"><img src="img/core-img/like.png" alt=""> <span>392</span></a>
-                                        <a href="#" class="post-comment"><img src="img/core-img/chat.png" alt=""> <span>10</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-md-4">
-                            <div class="single-blog-post style-3">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="img/bg-img/14.jpg" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-catagory">Finance</a>
-                                    <a href="#" class="post-title">
-                                        <h6>Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...</h6>
-                                    </a>
-                                    <div class="post-meta d-flex align-items-center">
-                                        <a href="#" class="post-like"><img src="img/core-img/like.png" alt=""> <span>392</span></a>
-                                        <a href="#" class="post-comment"><img src="img/core-img/chat.png" alt=""> <span>10</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-md-4">
-                            <div class="single-blog-post style-3">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="img/bg-img/15.jpg" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-catagory">Finance</a>
-                                    <a href="#" class="post-title">
-                                        <h6>Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...</h6>
-                                    </a>
-                                    <div class="post-meta d-flex align-items-center">
-                                        <a href="#" class="post-like"><img src="img/core-img/like.png" alt=""> <span>392</span></a>
-                                        <a href="#" class="post-comment"><img src="img/core-img/chat.png" alt=""> <span>10</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <News/>
                         
                     </div>
                     <a href="" class="pull-right">More News...</a>
@@ -158,10 +83,11 @@
 
 <script>
 import Loader from '~/components/loader/Loader'
+import News from './News'
 import OldNews from '../OldNews'
   export default {
       components: {
-          OldNews,Loader
+          OldNews,Loader,News
       },
     data() {
       return {
