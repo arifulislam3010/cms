@@ -89,6 +89,7 @@ export default {
 
   mounted() {
     this.getAlbums()
+    this.loadPermission()
   },
   watch: {
     content: function(val) {

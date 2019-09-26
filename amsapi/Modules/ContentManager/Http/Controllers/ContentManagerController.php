@@ -22,7 +22,11 @@ class ContentManagerController extends Controller
      */
     public function index(Request $request)
     {
-
+        // search object use korte hobe  
+        if($request->content_category){
+            $Content = Content::where('content_category_id',$request->content_category)->paginate(15);
+            return ContentResource::collection($Content);
+        }
         $Content = Content::paginate(15);
         return ContentResource::collection($Content);
     }
@@ -69,7 +73,9 @@ class ContentManagerController extends Controller
 
         $Content->file_name = $file;
     	$Content->title = $request['title'];
-    	$Content->type  = $type; 
+        $Content->type  = $type; 
+        $Content->content_category_id  = $request->content_category; 
+        
 
         $log_user = Auth()->user();
 

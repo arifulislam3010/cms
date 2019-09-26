@@ -22,4 +22,8 @@ class Content extends Model
     public function albums(){
         return $this->belongsToMany('Modules\Gallery\Entities\Album','album_contents');
     }
+
+    public function content_category(){
+        return $this->belongsTo('Modules\ContentManager\Entities\ContentCategory','content_category_id');
+    }
 }

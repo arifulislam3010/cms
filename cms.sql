@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 25, 2019 at 12:30 AM
+-- Generation Time: Sep 25, 2019 at 06:59 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `activations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `activations`
@@ -50,7 +50,10 @@ INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`,
 (3, 5, '1234', 1, NULL, '2019-09-21 16:51:02', '2019-09-21 16:51:02'),
 (4, 6, '1234', 1, NULL, '2019-09-22 01:21:31', '2019-09-22 01:21:31'),
 (5, 7, '1234', 1, NULL, '2019-09-22 06:18:36', '2019-09-22 06:18:36'),
-(6, 9, '1234', 1, NULL, '2019-09-22 06:52:32', '2019-09-22 06:52:32');
+(6, 9, '1234', 1, NULL, '2019-09-22 06:52:32', '2019-09-22 06:52:32'),
+(7, 10, '1234', 1, NULL, '2019-09-25 18:50:58', '2019-09-25 18:50:58'),
+(8, 11, '1234', 1, NULL, '2019-09-25 18:51:52', '2019-09-25 18:51:52'),
+(9, 12, '1234', 1, NULL, '2019-09-25 18:53:43', '2019-09-25 18:53:43');
 
 -- --------------------------------------------------------
 
@@ -72,14 +75,15 @@ CREATE TABLE IF NOT EXISTS `albums` (
   KEY `albums_cover_id_foreign` (`cover_id`),
   KEY `albums_created_by_foreign` (`created_by`),
   KEY `albums_updated_by_foreign` (`updated_by`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `albums`
 --
 
 INSERT INTO `albums` (`id`, `title`, `cover_id`, `created_by`, `updated_by`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(13, 'test 567 updated', 6, 1, 1, NULL, '2019-09-17 06:55:33', '2019-09-17 09:49:38');
+(13, 'test 567 updated', 6, 9, 9, NULL, '2019-09-17 06:55:33', '2019-09-17 09:49:38'),
+(15, 'politics', 4, 9, 9, NULL, '2019-09-25 18:47:16', '2019-09-25 18:47:16');
 
 -- --------------------------------------------------------
 
@@ -99,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `album_contents` (
   PRIMARY KEY (`id`),
   KEY `album_contents_album_id_foreign` (`album_id`),
   KEY `album_contents_content_id_foreign` (`content_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `album_contents`
@@ -109,7 +113,13 @@ INSERT INTO `album_contents` (`id`, `caption`, `album_id`, `content_id`, `delete
 (1, NULL, 4, 3, NULL, NULL, NULL),
 (2, NULL, 4, 5, NULL, NULL, NULL),
 (4, NULL, 13, 4, NULL, NULL, NULL),
-(5, NULL, 13, 3, NULL, NULL, NULL);
+(5, NULL, 13, 3, NULL, NULL, NULL),
+(6, NULL, 14, 13, NULL, NULL, NULL),
+(7, NULL, 14, 3, NULL, NULL, NULL),
+(8, NULL, 14, 6, NULL, NULL, NULL),
+(9, NULL, 15, 13, NULL, NULL, NULL),
+(10, NULL, 15, 3, NULL, NULL, NULL),
+(11, NULL, 15, 6, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -169,9 +179,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `parent_id`, `created_by`, `updated_by`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'aftab', NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'amin', 1, NULL, NULL, NULL, NULL, NULL),
-(4, 'arif', 2, NULL, NULL, NULL, NULL, NULL),
+(1, 'breaking news', NULL, NULL, NULL, NULL, NULL, '2019-09-25 17:17:06'),
+(2, 'national', 1, NULL, NULL, NULL, NULL, '2019-09-25 17:17:45'),
+(4, 'Dhaka', 2, NULL, NULL, NULL, NULL, '2019-09-25 17:17:58'),
 (18, 'category-2-2', 16, NULL, NULL, NULL, '2019-09-25 00:18:06', '2019-09-25 00:18:21'),
 (16, 'category-2', NULL, NULL, NULL, NULL, '2019-09-25 00:17:48', '2019-09-25 00:17:48'),
 (17, 'category-3', NULL, NULL, NULL, NULL, '2019-09-25 00:17:59', '2019-09-25 00:17:59');
@@ -237,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `contents` (
   KEY `contents_content_category_id_foreign` (`content_category_id`),
   KEY `contents_created_by_foreign` (`created_by`),
   KEY `contents_updated_by_foreign` (`updated_by`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `contents`
@@ -247,7 +257,8 @@ INSERT INTO `contents` (`id`, `content_category_id`, `title`, `type`, `file_name
 (3, NULL, 'demo img', 'image', 'file_82079a38807bc78bc53fafc5b9872c8d11d62c29.png', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:01', '1970-01-01 00:00:01'),
 (4, NULL, 'lion', 'image', 'file_9fdc118f1ba8c362cbd0cacede06b90418ebb406.jpg', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:01', '1970-01-01 00:00:01'),
 (13, NULL, 'together', 'image', 'file_29ab9303d6516a2cb997e31ca601776eb50c6ad5.jpg', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:09', '1970-01-01 00:00:09'),
-(6, NULL, 'kali', 'image', 'file_109fe905c39c1d1b67e8c41e0dd292c3b38e12a6.gif', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:01', '1970-01-01 00:00:01');
+(6, NULL, 'kali', 'image', 'file_109fe905c39c1d1b67e8c41e0dd292c3b38e12a6.gif', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:01', '1970-01-01 00:00:01'),
+(16, 13, 'sukla', 'image', 'file_e3742263ee711f6817f90d013e96ce64a53083d8.jpg', NULL, NULL, 0, NULL, NULL, NULL, '1970-01-01 00:00:09', '1970-01-01 00:00:09');
 
 -- --------------------------------------------------------
 
@@ -368,7 +379,9 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('a35cfb856a6ae58164ff6918df4d71f1c5c9f8fd3e15b562e3da865f9f81377312958d69a89cc3fb', 6, 1, 'Password Access Token', '[]', 0, '2019-09-22 01:22:06', '2019-09-22 01:22:06', '2020-09-22 07:22:06'),
 ('2f460caa9722fd59719131b2672a56cec31b53a217b54409245d7b08b771c205752a503d8d9a3d3d', 9, 1, 'Password Access Token', '[]', 0, '2019-09-22 06:56:41', '2019-09-22 06:56:41', '2020-09-22 12:56:41'),
 ('f40a84f70e9b8bc77d861c2836495bf75a8fef2083a8b353c8ffa8f979d46903131206d4ce80a734', 7, 1, 'Password Access Token', '[]', 0, '2019-09-22 10:08:01', '2019-09-22 10:08:01', '2020-09-22 16:08:01'),
-('8ee3b09ce87a471b3ed98638ec768e8788a3a52ce80283b6426fdbf40df1e96988891d662867c808', 9, 1, 'Password Access Token', '[]', 0, '2019-09-22 10:12:02', '2019-09-22 10:12:02', '2020-09-22 16:12:02');
+('8ee3b09ce87a471b3ed98638ec768e8788a3a52ce80283b6426fdbf40df1e96988891d662867c808', 9, 1, 'Password Access Token', '[]', 0, '2019-09-22 10:12:02', '2019-09-22 10:12:02', '2020-09-22 16:12:02'),
+('5439d249549fd4e2a0296884b95b0adfb74826416339ba9645e74b2243214c6e8dccf1cfca081fca', 12, 1, 'Password Access Token', '[]', 0, '2019-09-25 18:54:45', '2019-09-25 18:54:45', '2020-09-26 00:54:45'),
+('c23e785345d5f7adbdacce3e140a07a871d5cdbb7a6a4d5d0c27db33441001fb680215f88689d678', 9, 1, 'Password Access Token', '[]', 0, '2019-09-25 18:56:30', '2019-09-25 18:56:30', '2020-09-26 00:56:30');
 
 -- --------------------------------------------------------
 
@@ -471,7 +484,7 @@ CREATE TABLE IF NOT EXISTS `persistences` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `persistences_code_unique` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `persistences`
@@ -487,7 +500,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (7, 6, 'JjYBWcnNfIjSaR1T2q1ep1Y9ZW5ijzxl', '2019-09-22 01:22:06', '2019-09-22 01:22:06'),
 (8, 9, 'fOEAY6DRZiSKE0E6ubvy3ud33SfaGvG4', '2019-09-22 06:56:39', '2019-09-22 06:56:39'),
 (9, 7, 'dPFtFA8cxzAwtFeEDBkfXHSmeb3W8fEE', '2019-09-22 10:08:01', '2019-09-22 10:08:01'),
-(10, 9, 'qoeChXAUQY8VQREWb0V5vjvrtuX8gYya', '2019-09-22 10:12:02', '2019-09-22 10:12:02');
+(10, 9, 'qoeChXAUQY8VQREWb0V5vjvrtuX8gYya', '2019-09-22 10:12:02', '2019-09-22 10:12:02'),
+(11, 12, 'hVS30QzVBwn1VKUJvdXSYacBozuRjtDB', '2019-09-25 18:54:44', '2019-09-25 18:54:44'),
+(12, 9, 'DXJyog50ecXrJYTBQaU1dlM7gMICLBaQ', '2019-09-25 18:56:29', '2019-09-25 18:56:29');
 
 -- --------------------------------------------------------
 
@@ -510,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `share_at` timestamp NULL DEFAULT NULL,
   `published_at` timestamp NULL DEFAULT NULL,
   `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Instant_article` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instant_article` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_by` int(10) UNSIGNED DEFAULT NULL,
   `updated_by` int(10) UNSIGNED DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -523,15 +538,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `posts_athor_id_foreign` (`author_id`),
   KEY `posts_created_by_foreign` (`created_by`),
   KEY `posts_updated_by_foreign` (`updated_by`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `shoulder`, `headline`, `hanger`, `author_id`, `reporter_id`, `content`, `featured_image_id`, `featured_video_id`, `video_position`, `share_at`, `published_at`, `status`, `Instant_article`, `created_by`, `updated_by`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(14, 'stock market unstable', 'stock market unstable', 'stock', 7, 7, '<p>this is content</p>', 4, 13, NULL, '2019-09-02 00:18:00', '2019-09-04 00:18:00', '1', '1', NULL, NULL, NULL, '2019-09-25 00:21:11', '2019-09-25 00:21:11'),
-(10, 'new2', 'new', 'hanger', 1, 1, '<p>new content</p>', 4, 6, NULL, '2019-09-13 01:27:00', '2019-09-14 01:27:00', '1', NULL, NULL, 1, NULL, '2019-09-13 01:29:59', '2019-09-18 18:17:56'),
+INSERT INTO `posts` (`id`, `shoulder`, `headline`, `hanger`, `author_id`, `reporter_id`, `content`, `featured_image_id`, `featured_video_id`, `video_position`, `share_at`, `published_at`, `status`, `instant_article`, `created_by`, `updated_by`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(16, 'DU A UNIT RESULT PULISHED', 'DU A UNIT RESULT PULISHED', 'DU A UNIT RESULT PULISHED', 7, 7, '<p>this is content of</p><blockquote><p><strong>DU A UNIT RESULT PULISHED</strong></p></blockquote>', 13, NULL, NULL, '2019-09-26 18:02:00', '2019-09-27 18:02:00', '1', '1', NULL, NULL, NULL, '2019-09-25 18:04:44', '2019-09-25 18:04:44'),
+(14, 'stock market unstable', 'stock market unstable', 'stock', 7, 7, '<p>this is content</p>', 4, 13, NULL, '2019-09-02 00:18:00', '2019-09-04 00:18:00', '1', '1', NULL, 9, NULL, '2019-09-25 00:21:11', '2019-09-25 17:42:35'),
+(10, '20 KM JAM IN DHAKA TANGAIL HIGHWAY', 'new', 'hanger', 9, 9, '<p>new content</p>', 4, 6, NULL, '2019-09-13 01:27:00', '2019-09-14 01:27:00', '1', NULL, NULL, 9, NULL, '2019-09-13 01:29:59', '2019-09-25 17:38:58'),
 (15, 'JSC result publihed', '20 % fail in JSC', 'jsc result publish', 7, 9, '<p>test jsc&nbsp;</p>', 3, NULL, NULL, '2019-09-05 00:23:00', '2019-09-07 00:23:00', '1', NULL, NULL, 9, NULL, '2019-09-25 00:23:04', '2019-09-25 00:23:40');
 
 -- --------------------------------------------------------
@@ -550,7 +566,7 @@ CREATE TABLE IF NOT EXISTS `post_areas` (
   PRIMARY KEY (`id`),
   KEY `post_areas_post_id_foreign` (`post_id`),
   KEY `post_areas_area_id_foreign` (`area_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_areas`
@@ -581,7 +597,15 @@ INSERT INTO `post_areas` (`id`, `post_id`, `area_id`, `created_at`, `updated_at`
 (22, 12, 12, NULL, NULL),
 (23, 12, 7, NULL, NULL),
 (29, 15, 12, NULL, NULL),
-(30, 15, 7, NULL, NULL);
+(30, 15, 7, NULL, NULL),
+(31, 16, 7, NULL, NULL),
+(32, 16, 12, NULL, NULL),
+(33, 17, 7, NULL, NULL),
+(34, 17, 12, NULL, NULL),
+(35, 18, 7, NULL, NULL),
+(36, 18, 12, NULL, NULL),
+(37, 19, 7, NULL, NULL),
+(38, 19, 12, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -599,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `post_categories` (
   PRIMARY KEY (`id`),
   KEY `post_categories_post_id_foreign` (`post_id`),
   KEY `post_categories_category_id_foreign` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_categories`
@@ -616,7 +640,19 @@ INSERT INTO `post_categories` (`id`, `post_id`, `category_id`, `created_at`, `up
 (8, 12, 2, NULL, NULL),
 (13, 14, 17, NULL, NULL),
 (14, 15, 1, NULL, NULL),
-(15, 15, 16, NULL, NULL);
+(15, 15, 16, NULL, NULL),
+(16, 16, 1, NULL, NULL),
+(17, 16, 16, NULL, NULL),
+(18, 16, 17, NULL, NULL),
+(19, 17, 1, NULL, NULL),
+(20, 17, 16, NULL, NULL),
+(21, 17, 17, NULL, NULL),
+(22, 18, 1, NULL, NULL),
+(23, 18, 16, NULL, NULL),
+(24, 18, 17, NULL, NULL),
+(25, 19, 1, NULL, NULL),
+(26, 19, 16, NULL, NULL),
+(27, 19, 17, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -664,7 +700,7 @@ CREATE TABLE IF NOT EXISTS `post_scrolls` (
   PRIMARY KEY (`id`),
   KEY `post_scrolls_post_id_foreign` (`post_id`),
   KEY `post_scrolls_scroll_id_foreign` (`scroll_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_scrolls`
@@ -676,10 +712,12 @@ INSERT INTO `post_scrolls` (`id`, `post_id`, `scroll_id`, `created_at`, `updated
 (4, 12, 2, NULL, NULL),
 (5, 12, 1, NULL, NULL),
 (6, 12, 3, NULL, NULL),
-(8, 10, 1, NULL, NULL),
+(12, 16, 1, NULL, NULL),
 (9, 13, 1, NULL, NULL),
-(10, 14, 3, NULL, NULL),
-(11, 15, 1, NULL, NULL);
+(13, 17, 1, NULL, NULL),
+(11, 15, 1, NULL, NULL),
+(14, 18, 1, NULL, NULL),
+(15, 19, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -715,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `post_tags` (
   PRIMARY KEY (`id`),
   KEY `post_tags_post_id_foreign` (`post_id`),
   KEY `post_tags_tag_id_foreign` (`tag_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_tags`
@@ -726,7 +764,23 @@ INSERT INTO `post_tags` (`id`, `post_id`, `tag_id`, `created_at`, `updated_at`) 
 (3, 8, 2, NULL, NULL),
 (4, 13, 2, NULL, NULL),
 (5, 14, 2, NULL, NULL),
-(6, 15, 2, NULL, NULL);
+(6, 15, 2, NULL, NULL),
+(7, 16, 5, NULL, NULL),
+(8, 16, 4, NULL, NULL),
+(9, 16, 3, NULL, NULL),
+(10, 16, 2, NULL, NULL),
+(11, 17, 5, NULL, NULL),
+(12, 17, 4, NULL, NULL),
+(13, 17, 3, NULL, NULL),
+(14, 17, 2, NULL, NULL),
+(15, 18, 5, NULL, NULL),
+(16, 18, 4, NULL, NULL),
+(17, 18, 3, NULL, NULL),
+(18, 18, 2, NULL, NULL),
+(19, 19, 5, NULL, NULL),
+(20, 19, 4, NULL, NULL),
+(21, 19, 3, NULL, NULL),
+(22, 19, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -744,7 +798,7 @@ CREATE TABLE IF NOT EXISTS `post_topics` (
   PRIMARY KEY (`id`),
   KEY `post_topics_post_id_foreign` (`post_id`),
   KEY `post_topics_topic_id_foreign` (`topic_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_topics`
@@ -761,7 +815,15 @@ INSERT INTO `post_topics` (`id`, `post_id`, `topic_id`, `created_at`, `updated_a
 (8, 12, 2, NULL, NULL),
 (9, 12, 4, NULL, NULL),
 (10, 12, 3, NULL, NULL),
-(16, 15, 3, NULL, NULL);
+(16, 15, 3, NULL, NULL),
+(17, 16, 2, NULL, NULL),
+(18, 16, 3, NULL, NULL),
+(19, 17, 2, NULL, NULL),
+(20, 17, 3, NULL, NULL),
+(21, 18, 2, NULL, NULL),
+(22, 18, 3, NULL, NULL),
+(23, 19, 2, NULL, NULL),
+(24, 19, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -800,7 +862,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -809,7 +871,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 INSERT INTO `roles` (`id`, `slug`, `name`, `permissions`, `permissions2`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (14, 'admin', 'admin', '{\"category.view\":true,\"category.viewall\":true,\"category.create\":true,\"category.update\":true,\"category.updateall\":true,\"category.delete\":true,\"category.deleteall\":true,\"topic.view\":true,\"topic.viewall\":false,\"topic.create\":false,\"topic.update\":false,\"topic.updateall\":false,\"topic.delete\":false,\"topic.deleteall\":false,\"area.view\":true,\"area.viewall\":false,\"area.create\":false,\"area.update\":false,\"area.updateall\":false,\"area.delete\":false,\"area.deleteall\":false,\"scroll.view\":true,\"scroll.viewall\":false,\"scroll.create\":false,\"scroll.update\":false,\"scroll.updateall\":false,\"scroll.delete\":false,\"scroll.deleteall\":false,\"news.view\":true,\"news.viewall\":true,\"news.create\":true,\"news.update\":true,\"news.updateall\":true,\"news.delete\":true,\"news.deleteall\":true,\"album.view\":true,\"album.viewall\":true,\"album.create\":true,\"album.update\":true,\"album.updateall\":true,\"album.delete\":true,\"album.deleteall\":true,\"role.view\":false,\"role.viewall\":false,\"role.create\":false,\"role.update\":false,\"role.updateall\":false,\"role.delete\":false,\"role.deleteall\":false,\"user.view\":false,\"user.viewall\":false,\"user.create\":false,\"user.update\":false,\"user.updateall\":false,\"user.delete\":false,\"user.deleteall\":false}', '{\"category_view\":true,\"category_viewall\":true,\"category_create\":true,\"category_update\":true,\"category_updateall\":true,\"category_delete\":true,\"category_deleteall\":true,\"topic_view\":true,\"topicviewall\":false,\"topic_create\":false,\"topic_update\":false,\"topic_updateall\":false,\"topic_delete\":false,\"topic_deleteall\":false,\"area_view\":true,\"area_viewall\":false,\"area_create\":false,\"area_update\":false,\"area_updateall\":false,\"area_delete\":false,\"area_deleteall\":false,\"scroll_view\":true,\"scroll_viewall\":false,\"scroll_create\":false,\"scroll_update\":false,\"scroll_updateall\":false,\"scroll_delete\":false,\"scroll_deleteall\":false,\"news_view\":true,\"news_viewall\":true,\"news_create\":true,\"news_update\":true,\"news_updateall\":true,\"news_delete\":true,\"news_deleteall\":true,\"album_view\":true,\"album_viewall\":true,\"album_create\":true,\"album_update\":true,\"album_updateall\":true,\"album_delete\":true,\"album_deleteall\":true,\"role_view\":false,\"role_viewall\":false,\"role_create\":false,\"role_update\":false,\"role_updateall\":false,\"role_delete\":false,\"role_deleteall\":false,\"user_view\":false,\"user_viewall\":false,\"user_create\":false,\"user_update\":false,\"user_updateall\":false,\"user_delete\":false,\"user_deleteall\":false}', NULL, NULL, '2019-09-19 17:14:31', '2019-09-24 00:44:53'),
 (15, 'super_admin', 'super_admin', '{\"category.view\":true,\"category.viewall\":true,\"category.create\":true,\"category.update\":true,\"category.updateall\":true,\"category.delete\":true,\"category.deleteall\":true,\"topic.view\":true,\"topic.viewall\":false,\"topic.create\":true,\"topic.update\":true,\"topic.updateall\":true,\"topic.delete\":true,\"topic.deleteall\":true,\"area.view\":true,\"area.viewall\":true,\"area.create\":true,\"area.update\":true,\"area.updateall\":true,\"area.delete\":true,\"area.deleteall\":true,\"scroll.view\":true,\"scroll.viewall\":true,\"scroll.create\":true,\"scroll.update\":true,\"scroll.updateall\":true,\"scroll.delete\":true,\"scroll.deleteall\":true,\"news.view\":true,\"news.viewall\":true,\"news.create\":true,\"news.update\":true,\"news.updateall\":true,\"news.delete\":true,\"news.deleteall\":true,\"album.view\":true,\"album.viewall\":true,\"album.create\":true,\"album.update\":true,\"album.updateall\":true,\"album.delete\":true,\"album.deleteall\":true,\"role.view\":true,\"role.viewall\":true,\"role.create\":true,\"role.update\":true,\"role.updateall\":true,\"role.delete\":true,\"role.deleteall\":true,\"user.view\":true,\"user.viewall\":true,\"user.create\":true,\"user.update\":true,\"user.updateall\":true,\"user.delete\":true,\"user.deleteall\":true}', '{\"category_view\":true,\"category_viewall\":true,\"category_create\":true,\"category_update\":true,\"category_updateall\":true,\"category_delete\":true,\"category_deleteall\":true,\"topic_view\":true,\"topicviewall\":false,\"topic_create\":true,\"topic_update\":true,\"topic_updateall\":true,\"topic_delete\":true,\"topic_deleteall\":true,\"area_view\":true,\"area_viewall\":true,\"area_create\":true,\"area_update\":true,\"area_updateall\":true,\"area_delete\":true,\"area_deleteall\":true,\"scroll_view\":true,\"scroll_viewall\":true,\"scroll_create\":true,\"scroll_update\":true,\"scroll_updateall\":true,\"scroll_delete\":true,\"scroll_deleteall\":true,\"news_view\":true,\"news_viewall\":true,\"news_create\":true,\"news_update\":true,\"news_updateall\":true,\"news_delete\":true,\"news_deleteall\":true,\"album_view\":true,\"album_viewall\":true,\"album_create\":true,\"album_update\":true,\"album_updateall\":true,\"album_delete\":true,\"album_deleteall\":true,\"role_view\":true,\"role_viewall\":true,\"role_create\":true,\"role_update\":true,\"role_updateall\":true,\"role_delete\":true,\"role_deleteall\":true,\"user_view\":true,\"user_viewall\":true,\"user_create\":true,\"user_update\":true,\"user_updateall\":true,\"user_delete\":true,\"user_deleteall\":true}', NULL, NULL, '2019-09-19 17:18:47', '2019-09-22 09:56:44'),
-(17, 'ajjhg', 'ajjhg', '{\"category.view\":true,\"category.viewall\":false,\"category.create\":false,\"category.update\":false,\"category.updateall\":false,\"category.delete\":false,\"category.deleteall\":false,\"topic.view\":false,\"topic.viewall\":true,\"topic.create\":false,\"topic.update\":false,\"topic.updateall\":false,\"topic.delete\":false,\"topic.deleteall\":false,\"area.view\":false,\"area.viewall\":true,\"area.create\":false,\"area.update\":false,\"area.updateall\":false,\"area.delete\":false,\"area.deleteall\":false,\"scroll.view\":false,\"scroll.viewall\":true,\"scroll.create\":false,\"scroll.update\":false,\"scroll.updateall\":false,\"scroll.delete\":false,\"scroll.deleteall\":false,\"news.view\":false,\"news.viewall\":true,\"news.create\":false,\"news.update\":false,\"news.updateall\":false,\"news.delete\":false,\"news.deleteall\":false}', '{\"category_view\":true,\"category_viewall\":false,\"category_create\":false,\"category_update\":false,\"category_updateall\":false,\"category_delete\":false,\"category_deleteall\":false,\"topic_view\":false,\"topic_viewall\":true,\"topic_create\":false,\"topic_update\":false,\"topic_updateall\":false,\"topic_delete\":false,\"topic_deleteall\":false,\"area_view\":false,\"area_viewall\":true,\"area_create\":false,\"area_update\":false,\"area_updateall\":false,\"area_delete\":false,\"area_deleteall\":false,\"scroll_view\":false,\"scroll_viewall\":true,\"scroll_create\":false,\"scroll_update\":false,\"scroll_updateall\":false,\"scroll_delete\":false,\"scroll_deleteall\":false,\"news_view\":false,\"news_viewall\":true,\"news_create\":false,\"news_update\":false,\"news_updateall\":false,\"news_delete\":false,\"news_deleteall\":false}', NULL, NULL, '2019-09-21 11:21:50', '2019-09-21 11:21:51');
+(17, 'ajjhg', 'ajjhg', '{\"category.view\":true,\"category.viewall\":false,\"category.create\":false,\"category.update\":false,\"category.updateall\":false,\"category.delete\":false,\"category.deleteall\":false,\"topic.view\":false,\"topic.viewall\":true,\"topic.create\":false,\"topic.update\":false,\"topic.updateall\":false,\"topic.delete\":false,\"topic.deleteall\":false,\"area.view\":false,\"area.viewall\":true,\"area.create\":false,\"area.update\":false,\"area.updateall\":false,\"area.delete\":false,\"area.deleteall\":false,\"scroll.view\":false,\"scroll.viewall\":true,\"scroll.create\":false,\"scroll.update\":false,\"scroll.updateall\":false,\"scroll.delete\":false,\"scroll.deleteall\":false,\"news.view\":false,\"news.viewall\":true,\"news.create\":false,\"news.update\":false,\"news.updateall\":false,\"news.delete\":false,\"news.deleteall\":false}', '{\"category_view\":true,\"category_viewall\":false,\"category_create\":false,\"category_update\":false,\"category_updateall\":false,\"category_delete\":false,\"category_deleteall\":false,\"topic_view\":false,\"topic_viewall\":true,\"topic_create\":false,\"topic_update\":false,\"topic_updateall\":false,\"topic_delete\":false,\"topic_deleteall\":false,\"area_view\":false,\"area_viewall\":true,\"area_create\":false,\"area_update\":false,\"area_updateall\":false,\"area_delete\":false,\"area_deleteall\":false,\"scroll_view\":false,\"scroll_viewall\":true,\"scroll_create\":false,\"scroll_update\":false,\"scroll_updateall\":false,\"scroll_delete\":false,\"scroll_deleteall\":false,\"news_view\":false,\"news_viewall\":true,\"news_create\":false,\"news_update\":false,\"news_updateall\":false,\"news_delete\":false,\"news_deleteall\":false}', NULL, NULL, '2019-09-21 11:21:50', '2019-09-21 11:21:51'),
+(18, 'regular_user', 'regular_user', '{\"category.view\":true,\"category.viewall\":false,\"category.create\":false,\"category.update\":false,\"category.updateall\":false,\"category.delete\":false,\"category.deleteall\":false,\"topic.view\":true,\"topic.viewall\":false,\"topic.create\":false,\"topic.update\":false,\"topic.updateall\":false,\"topic.delete\":false,\"topic.deleteall\":false,\"area.view\":true,\"area.viewall\":false,\"area.create\":false,\"area.update\":false,\"area.updateall\":false,\"area.delete\":false,\"area.deleteall\":false,\"scroll.view\":true,\"scroll.viewall\":false,\"scroll.create\":false,\"scroll.update\":false,\"scroll.updateall\":false,\"scroll.delete\":false,\"scroll.deleteall\":false,\"news.view\":true,\"news.viewall\":false,\"news.create\":false,\"news.update\":false,\"news.updateall\":false,\"news.delete\":false,\"news.deleteall\":false,\"album.view\":true,\"album.viewall\":false,\"album.create\":false,\"album.update\":false,\"album.updateall\":false,\"album.delete\":false,\"album.deleteall\":false,\"role.view\":true,\"role.viewall\":false,\"role.create\":false,\"role.update\":false,\"role.updateall\":false,\"role.delete\":false,\"role.deleteall\":false,\"user.view\":true,\"user.viewall\":false,\"user.create\":false,\"user.update\":false,\"user.updateall\":false,\"user.delete\":false,\"user.deleteall\":false}', '{\"category_view\":true,\"category_viewall\":false,\"category_create\":false,\"category_update\":false,\"category_updateall\":false,\"category_delete\":false,\"category_deleteall\":false,\"topic_view\":true,\"topic_viewall\":false,\"topic_create\":false,\"topic_update\":false,\"topic_updateall\":false,\"topic_delete\":false,\"topic_deleteall\":false,\"area_view\":true,\"area_viewall\":false,\"area_create\":false,\"area_update\":false,\"area_updateall\":false,\"area_delete\":false,\"area_deleteall\":false,\"scroll_view\":true,\"scroll_viewall\":false,\"scroll_create\":false,\"scroll_update\":false,\"scroll_updateall\":false,\"scroll_delete\":false,\"scroll_deleteall\":false,\"news_view\":true,\"news_viewall\":false,\"news_create\":false,\"news_update\":false,\"news_updateall\":false,\"news_delete\":false,\"news_deleteall\":false,\"album_view\":true,\"album_viewall\":false,\"album_create\":false,\"album_update\":false,\"album_updateall\":false,\"album_delete\":false,\"album_deleteall\":false,\"role_view\":true,\"role_viewall\":false,\"role_create\":false,\"role_update\":false,\"role_updateall\":false,\"role_delete\":false,\"role_deleteall\":false,\"user_view\":true,\"user_viewall\":false,\"user_create\":false,\"user_update\":false,\"user_updateall\":false,\"user_delete\":false,\"user_deleteall\":false}', NULL, NULL, '2019-09-25 18:50:07', '2019-09-25 18:50:07'),
+(19, 'reporter', 'Reporter', '{\"category.view\":false,\"category.viewall\":false,\"category.create\":false,\"category.update\":false,\"category.updateall\":false,\"category.delete\":false,\"category.deleteall\":false,\"topic.view\":false,\"topic.viewall\":false,\"topic.create\":false,\"topic.update\":false,\"topic.updateall\":false,\"topic.delete\":false,\"topic.deleteall\":false,\"area.view\":false,\"area.viewall\":false,\"area.create\":false,\"area.update\":false,\"area.updateall\":false,\"area.delete\":false,\"area.deleteall\":false,\"scroll.view\":false,\"scroll.viewall\":false,\"scroll.create\":false,\"scroll.update\":false,\"scroll.updateall\":false,\"scroll.delete\":false,\"scroll.deleteall\":false,\"news.view\":true,\"news.viewall\":false,\"news.create\":true,\"news.update\":true,\"news.updateall\":false,\"news.delete\":true,\"news.deleteall\":false,\"album.view\":false,\"album.viewall\":false,\"album.create\":false,\"album.update\":false,\"album.updateall\":false,\"album.delete\":false,\"album.deleteall\":false,\"role.view\":false,\"role.viewall\":false,\"role.create\":false,\"role.update\":false,\"role.updateall\":false,\"role.delete\":false,\"role.deleteall\":false,\"user.view\":false,\"user.viewall\":false,\"user.create\":false,\"user.update\":false,\"user.updateall\":false,\"user.delete\":false,\"user.deleteall\":false}', '{\"category_view\":false,\"category_viewall\":false,\"category_create\":false,\"category_update\":false,\"category_updateall\":false,\"category_delete\":false,\"category_deleteall\":false,\"topic_view\":false,\"topic_viewall\":false,\"topic_create\":false,\"topic_update\":false,\"topic_updateall\":false,\"topic_delete\":false,\"topic_deleteall\":false,\"area_view\":false,\"area_viewall\":false,\"area_create\":false,\"area_update\":false,\"area_updateall\":false,\"area_delete\":false,\"area_deleteall\":false,\"scroll_view\":false,\"scroll_viewall\":false,\"scroll_create\":false,\"scroll_update\":false,\"scroll_updateall\":false,\"scroll_delete\":false,\"scroll_deleteall\":false,\"news_view\":true,\"news_viewall\":false,\"news_create\":true,\"news_update\":true,\"news_updateall\":false,\"news_delete\":true,\"news_deleteall\":false,\"album_view\":false,\"album_viewall\":false,\"album_create\":false,\"album_update\":false,\"album_updateall\":false,\"album_delete\":false,\"album_deleteall\":false,\"role_view\":false,\"role_viewall\":false,\"role_create\":false,\"role_update\":false,\"role_updateall\":false,\"role_delete\":false,\"role_deleteall\":false,\"user_view\":false,\"user_viewall\":false,\"user_create\":false,\"user_update\":false,\"user_updateall\":false,\"user_delete\":false,\"user_deleteall\":false}', NULL, NULL, '2019-09-25 18:52:33', '2019-09-25 18:52:33');
 
 -- --------------------------------------------------------
 
@@ -832,7 +896,10 @@ CREATE TABLE IF NOT EXISTS `role_users` (
 
 INSERT INTO `role_users` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES
 (7, 14, '2019-09-22 06:18:36', '2019-09-22 10:07:15'),
-(9, 15, '2019-09-22 06:52:32', '2019-09-22 06:52:32');
+(9, 15, '2019-09-22 06:52:32', '2019-09-22 06:52:32'),
+(10, 18, '2019-09-25 18:50:58', '2019-09-25 18:50:58'),
+(11, 19, '2019-09-25 18:51:52', '2019-09-25 18:53:01'),
+(12, 19, '2019-09-25 18:53:43', '2019-09-25 18:53:43');
 
 -- --------------------------------------------------------
 
@@ -1019,7 +1086,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1027,7 +1094,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `email`, `role_id`, `password`, `permissions`, `last_login`, `email_verified_at`, `name`, `remember_token`, `type`, `created_at`, `updated_at`) VALUES
 (7, 'demo@gmail.com', NULL, '$2y$10$hkHabYCjO3wB8Pw8jOQrmuliK8..uwg9jm6r6t9ink/LRRks74Uca', NULL, '2019-09-22 10:08:01', NULL, 'su_user', NULL, NULL, '2019-09-22 06:18:36', '2019-09-22 10:08:01'),
-(9, 'admin@gmail.com', NULL, '$2y$10$JCF4P04ZCG62yjYISwoSCe22lXcWtgJLNkrlul0dt1X/uJQW25f7C', NULL, '2019-09-22 10:12:02', NULL, 'admin', NULL, NULL, '2019-09-22 06:52:32', '2019-09-22 10:12:02');
+(9, 'admin@gmail.com', NULL, '$2y$10$JCF4P04ZCG62yjYISwoSCe22lXcWtgJLNkrlul0dt1X/uJQW25f7C', NULL, '2019-09-25 18:56:30', NULL, 'admin', NULL, NULL, '2019-09-22 06:52:32', '2019-09-25 18:56:30'),
+(10, 'arif@gmail.com', NULL, '$2y$10$rGIwUgk/DOlRqDsojV3WreaXcRzJ9lK7Pj8.Y13bJOK8WiwdDMr5q', NULL, NULL, NULL, 'arif', NULL, NULL, '2019-09-25 18:50:58', '2019-09-25 18:50:58'),
+(11, 'sarif@gmail.com', NULL, '$2y$10$gQMO7qvNxVAhHTlEsiZ7fuMBxWumYLxTu5crJ/4.Fud7eVQWacNra', NULL, NULL, NULL, 'sarif', NULL, NULL, '2019-09-25 18:51:52', '2019-09-25 18:53:01'),
+(12, 'kader@gmail.com', NULL, '$2y$10$yaWG9T7g7oMWYrzMdZCzGOlpKmaWVTQVNQCGBzThbLKX8124lV5L.', NULL, '2019-09-25 18:54:44', NULL, 'kader', NULL, NULL, '2019-09-25 18:53:43', '2019-09-25 18:54:44');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,7 +27,7 @@
                     <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{item.shoulder}}</td>
-                      <td>{{item.autor_id}}</td>
+                      <td>{{item.author}}</td>
                       <td>{{item.created_by}}</td>
                       <td>{{item.updated_by}}</td>
                       <td>

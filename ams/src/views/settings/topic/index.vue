@@ -7,8 +7,8 @@
       </button>
 
       <form class="form-inline contct my-2 my-lg-0 pull-right">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
       </form>
 
       <table class="table table-sm">
@@ -81,6 +81,9 @@ export default {
     };
   },
   methods: {
+    loadPermission(){
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } ,    
     getTopics() {
       this.loading = true 
       this.$store.dispatch("FETCH_TOPICS").then(response=>{
@@ -214,6 +217,7 @@ export default {
 
   mounted() {
     this.getTopics();
+    this.loadPermission()
   },
   computed: {
     ...mapGetters(["auth_permission","topic_list", "topic_parents"])

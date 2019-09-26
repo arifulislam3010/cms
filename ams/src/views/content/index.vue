@@ -1,6 +1,19 @@
 <template>
     <b-modal title="Content Manager" hide-footer size="xl" v-model="largeModal" @ok="largeModal = false">
-         
+        <div class="row">
+          <div class="col-sm-5">
+              <autocomplete  :search="search_content"
+              style="height:50px"  
+              ></autocomplete>
+          </div>
+          <div class="col-sm-5">
+            <Treeselect
+            v-model="search.content_category"
+            :options="content_category_parents"
+            >
+            </Treeselect>
+          </div>
+        </div>
         <form @submit.prevent="addArea" >
             <b-row>
               <div class="col-md-12 content_type">
@@ -28,6 +41,7 @@
                 <div class="col-md-3 pull-right">
                   <!-- <b-button>category</b-button> -->
                   <!-- <br> -->
+
                 </div>
               </div>
               <hr>
@@ -60,6 +74,16 @@
                                 <b-form-textarea  v-model="list.title" placeholder="enter title"></b-form-textarea>
                                 <p style="color:red;" v-for="(servererror,k) in servererrors.title" v-bind:key="'u'+k">{{servererror}}</p>
                             </div>
+                            <div class="col-sm-12">
+                                <label>Category  : </label>
+                                <Treeselect
+                                  v-model="list.content_category"
+                                  :options="content_category_parents"
+                                >
+                                </Treeselect>
+                                <!-- <b-form-textarea  v-model="list.title" placeholder="enter title"></b-form-textarea> -->
+                                <p style="color:red;" v-for="(servererror,k) in servererrors.title" v-bind:key="'u'+k">{{servererror}}</p>
+                            </div>
                             <div class="col-md-12" style="margin-top:5px;">
                               <button type="button" class="btn btn-primary" v-if="loading"> <i class="fa fa-cog fa-spin"></i> uploading..</button>
                                   <button type="button" class="btn btn-primary" v-else @click="upload()">upload</button>
@@ -68,7 +92,7 @@
                   </div>
               </div>
             </b-row>
-            <div class="form-group row">
+            <div class="form-group row" style="margin-top:50px">
                 <div class="col-sm-12">
                 <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right"/>
                 <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
@@ -91,6 +115,8 @@ import ContentCard from './ContentCard'
 import Setting from "./Setting"
 import { GET_CONTENT,All_AREA,ADD_CONTENT} from "@/store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { mapState,mapGetters } from "vuex"
 
 export default {
@@ -99,16 +125,18 @@ export default {
   components: {
         ContentCard,
         Setting ,
+        Treeselect
     },
     data(){
         return{
+            content_category : null,
             content_type:'',
             largeModal:false,
             loading:false,
-            search:{title:'',type:''},
+            search:{title:'',type:'',content_category:null},
             addLoader:false,
             loadingdata:false,
-            list:{title:'',title:'',file:'', status:''},
+            list:{title:'',title:'',file:'', status:'',content_category:null},
             newArea: {
                 title: '',
                 parent_id: ''
@@ -127,8 +155,31 @@ export default {
     mounted(){
       this.base_url = axios.defaults.baseURL;
       this.getData();
+      this.getContentCategoryList()
+    },
+    watch:{
+      'search.content_category' : function(val){
+        // adjust the search paramenters 
+        //  this.search.content_category = this.list.content_category  
+        // get data
+        this.getData()
+      },
     },
     methods:{
+      search_content: function(input){
+          if(input.length<1){ return [] }
+          let res = this.contents.data
+          .map(    v => v.title)
+          .filter( v => {
+            return v.toLowerCase()
+                    .startsWith(input.toLowerCase())
+          })
+          console.log(res)
+          return res
+      },
+      getContentCategoryList(){
+          this.$store.dispatch('FETCH_CONTENT_CATEGORIES')
+      },
       ContentSelect(item){
         alert('ss');
         //this.$parent.content = item;
@@ -210,6 +261,7 @@ export default {
           },
 
         upload(){
+          // todo
           console.log(this.list);
                 this.$store.dispatch(ADD_CONTENT,this.list)
                 .then(response => {
@@ -220,6 +272,7 @@ export default {
                     this.list.title = ''
                     this.list.file = '';
                     this.list.status = '';
+                    this.list.content_category = null 
                     this.loading = false   
 
 
@@ -317,7 +370,7 @@ export default {
 
     },
     computed: {
-      ...mapGetters(["contents"]),
+      ...mapGetters(["contents","content_category_parents"]),
     },
 
 }
