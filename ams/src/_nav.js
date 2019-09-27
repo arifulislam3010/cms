@@ -11,6 +11,7 @@ export default {
     },
     {
       name: 'Settings',
+      url: '/settings/category',
       icon: 'fa fa-money',
       children: [
         {
@@ -40,6 +41,7 @@ export default {
     {
       name: 'Manage News',
       icon: 'fa fa-money',
+      url: '/news/add',
       children: [
         {
           name: 'Add News',
@@ -68,6 +70,7 @@ export default {
     {
       name: 'Gallery',
       icon: 'fa fa-life-bouy',
+      url:'/gallery/list',
       children:[
         {
           name:'list',
