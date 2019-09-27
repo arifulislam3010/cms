@@ -6,15 +6,6 @@
         <div class="col-12 col-lg-8">
           <div class="section-heading"></div>
 
-<<<<<<< HEAD
-                    <div class="row">
-
-                        <!-- Single Post -->
-                        <News/>
-                        
-                    </div>
-                    <a href="" class="pull-right">More News...</a>
-=======
           <div class="row">
             <!-- Single Post -->
             <div class="col-12 col-md-4">
@@ -107,7 +98,6 @@
               <div class="single-blog-post style-3">
                 <div class="post-thumb">
                   <a href="#"><img src="img/bg-img/15.jpg" alt=""/></a>
->>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43
                 </div>
                 <div class="post-data">
                   <a href="#" class="post-catagory">Finance</a>
@@ -210,31 +200,13 @@
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <Loader v-if="loading"></Loader>
-=======
       </div>
->>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43
     </div>
   </div>
   <!-- ##### Popular News Area End ##### -->
 </template>
 
 <script>
-<<<<<<< HEAD
-import Loader from '~/components/loader/Loader'
-import News from './News'
-import OldNews from '../OldNews'
-  export default {
-      components: {
-          OldNews,Loader,News
-      },
-    data() {
-      return {
-        loading: false
-      }
-    }
-=======
 import OldNews from "../OldNews";
 export default {
   components: {
@@ -242,7 +214,6 @@ export default {
   },
   data() {
     return {};
->>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43
   }
 };
 </script>

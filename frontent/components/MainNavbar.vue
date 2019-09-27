@@ -1,192 +1,42 @@
 <template>
-<<<<<<< HEAD
-        
-         <b-navbar toggleable="lg" type="dark" variant="info">
-            <div class="container">
-                        <b-navbar-brand href="#">NavBar</b-navbar-brand>
+  <div>
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <div class="container">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
-              <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-              <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-nav>
-                  <b-nav-item-dropdown text="আন্তর্জাতিক ">
-                    <b-dropdown-item href="#">EN</b-dropdown-item>
-                    <b-dropdown-item href="#">ES</b-dropdown-item>
-                    <b-dropdown-item href="#">RU</b-dropdown-item>
-                    <b-dropdown-item href="#">FA</b-dropdown-item>
-                  </b-nav-item-dropdown>
-                </b-navbar-nav>
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item href="#">Link</b-nav-item>
+        <b-nav-item href="#" disabled>Disabled</b-nav-item>
+      </b-navbar-nav>
 
-                
-              </b-collapse>
-            </div>
-        </b-navbar>
-</template>
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-nav-form>
 
-<script>
-import axios from '@/plugins/axios'
+        <b-nav-item-dropdown text="Lang" right>
+          <b-dropdown-item href="#">EN</b-dropdown-item>
+          <b-dropdown-item href="#">ES</b-dropdown-item>
+          <b-dropdown-item href="#">RU</b-dropdown-item>
+          <b-dropdown-item href="#">FA</b-dropdown-item>
+        </b-nav-item-dropdown>
 
-export default {
-    data() {
-    return {
-      show: false,
-      dropdownMenu: false,
-      loading: false
-    }
-  },
-
-  methods: {
-    toggleNavbar() {
-      this.show = !this.show;
-    },
-    navDropdown(){
-      this.dropdownMenu = !this.dropdownMenu;
-    }
-  },
-    async asyncData () {
-    const {data} = await axios.get('/api/categories')
-    return {categories:data}
-  },
-}
-</script>
-=======
-  <div class="newspaper-main-menu" id="stickyMenu">
-    <div class="classy-nav-container breakpoint-off">
-      <div class="container">
-        <!-- Menu -->
-        <nav class="classy-navbar justify-content-between" id="newspaperNav">
-          <!-- Logo -->
-          <div class="logo">
-            <a href="index.html"><img src="img/core-img/logo.png" alt=""/></a>
-          </div>
-
-          <!-- Navbar Toggler -->
-          <div class="classy-navbar-toggler">
-            <span class="navbarToggler"
-              ><span></span><span></span><span></span
-            ></span>
-          </div>
-
-          <!-- Menu -->
-          <div class="classy-menu">
-            <!-- close btn -->
-            <div class="classycloseIcon">
-              <div class="cross-wrap">
-                <span class="top"></span><span class="bottom"></span>
-              </div>
-            </div>
-
-            <!-- Nav Start -->
-            <div class="classynav">
-              <ul>
-                <li class="active"><a href="index.html">Home</a></li>
-                <li>
-                  <a href="#">Pages</a>
-                  <ul class="dropdown">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="catagories-post.html">Catagories</a></li>
-                    <li><a href="single-post.html">Single Articles</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li>
-                      <a href="#">Dropdown</a>
-                      <ul class="dropdown">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="catagories-post.html">Catagories</a></li>
-                        <li><a href="single-post.html">Single Articles</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Mega Menu</a>
-                  <div class="megamenu">
-                    <ul class="single-mega cn-col-4">
-                      <li class="title">Catagories</li>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="catagories-post.html">Catagories</a></li>
-                      <li><a href="single-post.html">Single Articles</a></li>
-                      <li><a href="about.html">About Us</a></li>
-                      <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                    <ul class="single-mega cn-col-4">
-                      <li class="title">Catagories</li>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="catagories-post.html">Catagories</a></li>
-                      <li><a href="single-post.html">Single Articles</a></li>
-                      <li><a href="about.html">About Us</a></li>
-                      <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                    <ul class="single-mega cn-col-4">
-                      <li class="title">Catagories</li>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="catagories-post.html">Catagories</a></li>
-                      <li><a href="single-post.html">Single Articles</a></li>
-                      <li><a href="about.html">About Us</a></li>
-                      <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                    <div class="single-mega cn-col-4">
-                      <!-- Single Featured Post -->
-                      <div class="single-blog-post small-featured-post d-flex">
-                        <div class="post-thumb">
-                          <a href="#"><img src="img/bg-img/23.jpg" alt=""/></a>
-                        </div>
-                        <div class="post-data">
-                          <a href="#" class="post-catagory">Travel</a>
-                          <div class="post-meta">
-                            <a href="#" class="post-title">
-                              <h6>
-                                Pellentesque mattis arcu massa, nec fringilla
-                                turpis eleifend id.
-                              </h6>
-                            </a>
-                            <p class="post-date">
-                              <span>7:00 AM</span> | <span>April 14</span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Single Featured Post -->
-                      <div class="single-blog-post small-featured-post d-flex">
-                        <div class="post-thumb">
-                          <a href="#"><img src="img/bg-img/24.jpg" alt=""/></a>
-                        </div>
-                        <div class="post-data">
-                          <a href="#" class="post-catagory">Politics</a>
-                          <div class="post-meta">
-                            <a href="#" class="post-title">
-                              <h6>
-                                Augue semper congue sit amet ac sapien. Fusce
-                                consequat.
-                              </h6>
-                            </a>
-                            <p class="post-date">
-                              <span>7:00 AM</span> | <span>April 14</span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li><a href="#">Politics</a></li>
-                <li><a href="#">Breaking News</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Technology</a></li>
-                <li><a href="#">Health</a></li>
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-            <!-- Nav End -->
-          </div>
-        </nav>
-      </div>
+        <b-nav-item-dropdown right>
+          <!-- Using 'button-content' slot -->
+          <template v-slot:button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
     </div>
-  </div>
+  </b-navbar>
+</div>
 </template>
->>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43

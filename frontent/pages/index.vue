@@ -226,7 +226,6 @@
 import axios from '@/plugins/axios'
 import { mapState,mapGetters,mapActions } from "vuex"
 import { All_POST} from '@/store/action.type'
-
 import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
 import Featured from '@/components/FeaturedPost/Featured.vue'
@@ -240,7 +239,6 @@ import News from '@/components/home/News'
 import OldNews from '@/components/OldNews'
 // import Tab1 from '../tabs/Tab1'
 // import Carousel1 from '../carousels/Carousel1'
-
 export default {
   components: {
     Logo,Hero,Featured,Carousel1,NewsBlock1,NewsBlock2,Footer,FeaturedSmall,News,OldNews
@@ -279,19 +277,16 @@ export default {
       ]
     };
   },
-
   async asyncData () {
     const {data} = await axios.get('/api/frontend/posts')
     return {articles:data}
   },
-
   methods:{
       //   async fetchSomething() {
       //   const ip = await this.$axios.$get('http://icanhazip.com')
       //   this.ip = ip
         
       // }
-
       // searchBranch(){
       //       this.loading = true
       //       var data = this.search
@@ -327,24 +322,20 @@ export default {
       //           });
       //       }
       //   },
-
      
     },
     mounted(){
         // this.getResults()
         // this.fetchBranches();
         // this.getPermission()
-
     },
     computed: {
       ...mapGetters(["posts"]),
     },
-
   //  created() {
   //    this.$store.dispatch('setPosts', this.loadedPosts)
   //  },
     
-
   // mounted() {
   //   this.$nextTick(function () {
       
@@ -358,7 +349,6 @@ export default {
 .single-blog-post.featured-post .post-data .post-title h6 {
   font-size: 15px;
 }
-
 .pt-20 {
   padding-top: 20px;
 }

@@ -28,8 +28,7 @@ class PostController extends Controller
     public function index()
     {
 
-       $post = Post::orderBy('id', 'DESC')->get();
-       return PostResource::collection($post);
+
 
     }
 

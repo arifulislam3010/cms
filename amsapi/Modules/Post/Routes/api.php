@@ -24,10 +24,6 @@ use Modules\Post\Entities\PostTag;
 //Route::get('/frontend/posts','PostController@index');
 //Route::get('/frontend/categories','PostController@postCategory');
 
-Route::prefix('frontend')->group(function () {
-    Route::get('/posts', 'PostController@index');
-    Route::get('/categories', 'PostController@postCategory');
-});
 Route::prefix('post')->middleware('auth:api')->group(function(){
     Route::get('/list','PostController@index');
     Route::get('/{id}','PostController@detail');
