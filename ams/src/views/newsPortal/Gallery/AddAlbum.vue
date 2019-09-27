@@ -5,6 +5,7 @@
         <div class="col-sm-6">
           <label for="title">Title</label>
           <b-input v-model="album_detail.title" name="title" placeholder="Enter Title" />
+          <p v-if="!album_detail.title" style="color:red">*required</p>                   
           <br />
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -22,6 +23,8 @@
               aria-describedby="basic-addon1"
             />
           </div>
+          <p>*required</p>                   
+          <!-- {{Object.keys(content).length}} -->
           <img
             v-if="Object.keys(content).length"
             :src="content.file"

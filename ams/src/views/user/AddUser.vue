@@ -6,28 +6,34 @@
             <div class="col-sm-4">
                 <label for="name">Name</label>
                 <input v-model="get_user.name" name="name" type="text" class="form-control" placeholder="enter user name "/>
+                <p v-if="!get_user.name" style="color:red">*required</p>   
+            
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="email">Email</label>
                 <b-input v-model="get_user.email" name="email" type="text" placeholder="enter email"/>
+                <p v-if="!get_user.email" style="color:red">*required</p>   
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="email">User Role</label>
                 <multiselect v-model="get_user.role" :options='role_list' track-by="id" label="name" ></multiselect>
+                <!-- <p v-if="!get_user.name" style="color:red">*required</p>    -->
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="email">Password</label>
                 <b-input v-model="get_user.password" name="email" type="password" placeholder="enter password"/>
+                <p v-if="!get_user.password" style="color:red">*required</p>   
             </div>
             <div class="col-sm-4">
                 <label for="email">type again</label>
                 <b-input v-model="get_user.password2" name="email" type="password" placeholder=""/>
+                <p v-if="!get_user.password2" style="color:red">*required</p>   
             </div>
         </div>
             <div class="form-group row">

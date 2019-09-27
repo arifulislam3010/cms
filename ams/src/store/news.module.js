@@ -18,7 +18,7 @@ const state = {
         share_at:null,
         publish_at:null,
         status:true,
-        instant_article:true,
+        instant_article:false,
 
         news_tags: [],
         selected_topics:[],

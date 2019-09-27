@@ -21,7 +21,6 @@
                     placeholder="Enter title..."
                   ></b-form-input>
                   <div
-                    v-show="errors.has('Title')"
                     class="help-block alert alert-danger"
                   >{{ errors.first('Title') }}</div>
                 </b-form-group>

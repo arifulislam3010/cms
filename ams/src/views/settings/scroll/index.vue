@@ -55,13 +55,9 @@ export default {
     },
     mounted(){
         this.getScrolls()
-        this.loadPermission()
     },
     methods:{
-        loadPermission(){
-        //auth_permission
-            this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-        } ,        
+       
         update_scroll: function(item){
             this.$refs.add_scroll_modal.openModal();
             this.$refs.add_scroll_modal.update = true;

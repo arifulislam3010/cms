@@ -88,10 +88,7 @@ export default {
     };
   },
   methods: {
-    loadPermission(){
-      //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } , 
+ 
     getAreas() {
       this.loading = true
       this.$store.dispatch("FETCH_AREAS").then(response=>{
@@ -225,8 +222,6 @@ export default {
   mounted() {
     // this.getResults()
     this.getAreas();
-    this.loadPermission()
-
     // this.getPermission()
   },
   computed: {

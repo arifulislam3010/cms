@@ -5,16 +5,22 @@
         <div class="col-sm-6 form-group">
           <label>Shoulder</label>
           <input v-model="news_data.shoulder" class="form-control" />
+          <p v-if="news_data.shoulder.length<1" style="color:red">*required</p>
           <label>Headline</label>
           <input v-model="news_data.headline" class="form-control" />
+          <p v-if="news_data.headline.length<1" style="color:red">*required</p>
           <label>Hanger</label>
           <input v-model="news_data.hanger" class="form-control" />
+          <p v-if="news_data.hanger.length<1" style="color:red">*required</p>
           <label>Reporter</label>
           <Multiselect v-model="news_data.reporter" :options="user_list" track-by="id" label="name"></Multiselect>
+          <p v-if="news_data.reporter.length<1" style="color:red">*required</p>         
           <!-- <input v-model="news_data.reporter" class="form-control" /> -->
           <hr />
           <label>Author</label>
           <Multiselect v-model="news_data.author" :options="user_list" track-by="id" label="name"></Multiselect>
+          <p v-if="news_data.author.length<1" style="color:red">*required</p>         
+        
           <!-- <label>User</label>
           <Multiselect v-model="news_data.user" :options="user_list" track-by="id" label="name"></Multiselect>
           <hr /> -->
@@ -30,6 +36,7 @@
           ></Multiselect>
           <label>Content</label>
           <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor>
+          <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>         
           <hr />
           <label>Featured Photo</label>
           <div class="input-group mb-3">
@@ -122,6 +129,8 @@
           <Treeselect
             v-model="news_data.selected_scrolls"
             :options="scroll_parents"
+            :multiple="true"
+            :flat="true"
           ></Treeselect>
           <!-- <Multiselect
             v-model="news_data.selected_scrolls"
@@ -135,9 +144,9 @@
       <div class="row">
          <div class="col-sm-7">
            <!-- <b-form-checkbox-group> -->
-          <b-form-checkbox :inline=true v-model="test1">view</b-form-checkbox>  
-          <b-form-checkbox :inline=true v-model="test2">cotinue creating </b-form-checkbox>  
-          <b-form-checkbox :inline=true v-model="test3">continue editing</b-form-checkbox>  
+          <b-form-checkbox :inline=true v-model="view_news">view </b-form-checkbox>  
+          <b-form-checkbox :inline=true v-model="continue_creating" >cotinue creating </b-form-checkbox>  
+          <b-form-checkbox :inline=true v-model="continue_editing" >continue editing</b-form-checkbox>  
           <!-- </b-form-checkbox-group> -->
           <!-- <input style="margin-right:5px" type="radio" v-model="test1" value="0">view
           <input style="margin-left:10px;margin-right:5px" type="radio" v-model="test2" value="0">cotinue creating 
@@ -151,7 +160,7 @@
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 wait
             </button>
-            <b-button v-else variant="success" style="margin-left:10px" @click="submit">Submit</b-button>
+            <b-button v-else variant="success" style="margin-left:10px" @click="submit">{{submit_btn_txt}}</b-button>
          </div>
       </div>
     </b-card>
@@ -194,9 +203,13 @@ export default {
   },
   data() {
     return {
-      test1:[],
-      test2:'',
-      test3:'',
+      // test1:[],
+      // test2:'',
+      // test3:'',
+      view_news:true ,
+      continue_editing: false ,
+      continue_creating: false ,
+      submit_btn_txt : "Submit",
       loading:false ,
       addLoader:false,
       is_update:'',
@@ -292,6 +305,7 @@ export default {
     this.getTopic();
     this.getCategories()
     this.getScrolls()
+    this.handel_update()
   },
   watch:{
     content: function(val){
@@ -308,9 +322,34 @@ export default {
       this.news_data.featured_vid.id    = val.id
     },
 
+    // view_news: function(){
+    //   this.continue_editing = false 
+    //   this.continue_creating = false
+    //   console.log(this.continue_editing)
+    // },
+
+    continue_creating: function(){
+      // this.view_news = false
+      console.log(this.continue_creating)
+      if( this.continue_editing )this.continue_editing = false 
+    },
+    continue_editing : function(){
+      // this.view_news = false 
+       
+      if(this.continue_creating)this.continue_creating = false   
+    },
+
+
   },
   methods: {
-    
+    handel_update: function (){
+      if(this.news_data.is_update){
+        this.submit_btn_txt = "Update"
+      }else{
+        this.submit_btn_txt = "Submit"
+        // this.reset_news()
+      }
+    },
     get_file: function(arg){
       if(this.news_data.is_update){
         return `${axios.defaults.baseURL}/uploads/${arg}`
@@ -320,10 +359,11 @@ export default {
     },
     reset_news: function(){
       this.$store.dispatch('REST_NEWS')
+      this.news_data.is_update = false 
+      this.handel_update()
     },
     submit: function(){
       // todo1
-      console.log(this.news_data);
 
      if(this.news_data.tag_ids.length) this.news_data.tag_ids = this.news_data.news_tags.map((v)=>v.id)
      if(this.news_data.area_ids.length)this.news_data.area_ids = this.news_data.selected_areas.map((v)=>v.id)
@@ -341,6 +381,7 @@ export default {
         this.$store.dispatch('ADD_NEWS',this.news_data).then(response=>{
             this.$iziToast.success({position:'topRight',title:'Ok',message:"News Added Successsfully"})
             this.addLoader =  false
+            this.after_submit()
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
             this.addLoader = false 
@@ -351,14 +392,27 @@ export default {
           id:this.news_data.id ,
         }
         this.$store.dispatch('UPDATE_NEWS',payload).then(response=>{
-            this.$iziToast.success({position:'topRight',title:'Ok',message:"News Added Successsfully"})
+            this.$iziToast.success({position:'topRight',title:'Ok',message:"News Updated Successsfully"})
             this.addLoader = false
+            this.after_submit()
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
             this.addLoader = false 
         })        
       }
     }, 
+    after_submit: function(){
+      if(this.view_news){
+        this.$router.push({name:'ManageNews'})
+      }else if(this.continue_creating){
+        this.reset_news()
+      }else if(this.continue_editing){
+
+      }
+    },  
+    goToAddNews(){
+
+    },
     add_more_photo: function(){
       let item = {}
       item.title = ''

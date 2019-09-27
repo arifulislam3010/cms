@@ -21,7 +21,7 @@ Route::prefix('api/topic')->middleware('auth:api')->group(function(){
 Route::prefix('api/')->group(function() {
 
 	// category
-	Route::prefix('category')->middleware('auth:api')->group(function(){
+	Route::prefix('category')->middleware(['auth:api'])->group(function(){
 		Route::get('/list','CategoryController@index');
 		Route::post('/','CategoryController@create');
 		Route::put('/{id}','CategoryController@update');
@@ -52,6 +52,11 @@ Route::prefix('api/')->group(function() {
 		Route::post('/','ScrollController@create');
 		Route::put('/{id}','ScrollController@update');
 		Route::delete('/{id}','ScrollController@destroy');
+	});
+	Route::prefix('tag')->middleware(['auth:api'])->group(function(){
+		Route::get('/',function(){
+			return "ok" ;
+		});
 	});
 });
 

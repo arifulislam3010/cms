@@ -12,8 +12,8 @@
                       <b-form-group>
                         <label for="Title">Name</label>
                         <b-form-input type="text" name="Title" id="Title" v-model="newScroll.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
-                        <div v-show="errors.has('Title')" class="help-block alert alert-danger">
-                        {{ errors.first('Title') }}
+                        <div  class="help-block alert alert-danger">
+                        *{{ errors.first('Title') }}
                         </div>
                       </b-form-group>
                     </b-col>

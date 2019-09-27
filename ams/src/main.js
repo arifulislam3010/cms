@@ -38,6 +38,7 @@ import ToggleButton from 'vue-js-toggle-button'
 //search 
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
+import VeeValidate from 'vee-validate';
 // import JsonExcel from 'vue-json-excel'
 // import jsPDF from 'jspdf';
 Vue.component('multiselect', Multiselect)
@@ -46,10 +47,12 @@ Vue.use(BootstrapVue,iziToast,Auth)
 Vue.component('ToggleButton', ToggleButton)
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(Autocomplete)
+Vue.use(VeeValidate);
 Vue.prototype.$iziToast = iziToast
 
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'
 // axios.defaults.baseURL = 'http://api.banglapress.org'
+// axios.defaults.baseURL = 'http://bpress.api.istiak.net'
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.headers.common["Authorization"] = 'Bearer '+ Vue.auth.getToken()
 
