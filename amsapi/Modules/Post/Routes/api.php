@@ -14,6 +14,7 @@ use Modules\Post\Entities\PostTag;
 |
 */
 
+
 //Route::prefix('api')->group(function() {
 //
 //	Route::get('/posts','PostController@index');
@@ -23,9 +24,18 @@ use Modules\Post\Entities\PostTag;
 //Route::get('/frontend/posts','PostController@index');
 //Route::get('/frontend/categories','PostController@postCategory');
 
-Route::prefix('frontend')->group(function (){
-    Route::get('/posts','PostController@index');
-    Route::get('/categories','PostController@postCategory');
+Route::prefix('frontend')->group(function () {
+    Route::get('/posts', 'PostController@index');
+    Route::get('/categories', 'PostController@postCategory');
+});
+Route::prefix('post')->middleware('auth:api')->group(function(){
+    Route::get('/list','PostController@index');
+    Route::get('/{id}','PostController@detail');
+    Route::post('/','PostController@create');
+    Route::put('/{id}','PostController@update');
+    Route::delete('/{id}','PostController@destroy');
+
+    Route::get('/reporter/list','PostController@reporterNews');
 });
 
 //Route::prefix('post')->middleware('auth:api')->group(function(){

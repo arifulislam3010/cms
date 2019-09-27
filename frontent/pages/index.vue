@@ -266,14 +266,18 @@ export default {
       }
     }
   },
-  head () {
+  head() {
     return {
       title: this.title,
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        { hid: 'description', name: 'description', content: 'My custom description' }
+        {
+          hid: "description",
+          name: "description",
+          content: "My custom description"
+        }
       ]
-    }
+    };
   },
 
   async asyncData () {
@@ -351,12 +355,11 @@ export default {
 </script>
 
 <style scoped>
-  .single-blog-post.featured-post .post-data .post-title h6 {
-    font-size: 15px;
-  }
+.single-blog-post.featured-post .post-data .post-title h6 {
+  font-size: 15px;
+}
 
-  .pt-20 {
-    padding-top: 20px;
-  }
-  
+.pt-20 {
+  padding-top: 20px;
+}
 </style>

@@ -1,14 +1,17 @@
 <template>
 <div class="row">
 <div class="col-md-3" v-for="(item,key) in items" v-bind:key="key">
-<div class="card-content">
+<div class="card-content" style="margin-bottom:15px;">
     <div class="card-img">
-        <img :src="item.file" alt="">
+        <img :src="item.file" alt="" style="height:150px;">
         <span :class="{ select_content : item.id == content.id }"  @click="ContentSelectC(item)"></span>
+        
     </div>
     <div class="card-desc">
         <h3>{{item.title}}</h3>
         <!-- <a href="#" class="btn-card">Read</a>    -->
+        <a href="#" @click="delete_image(item.id)">delete</a>
+        <!-- <link></link> -->
     </div>
 </div>
 </div>
@@ -29,7 +32,21 @@ export default {
             console.log(item);
             this.$parent.$parent.$parent.$parent.content = item;
             //this.$parent.ContentSelect(item);
-        }
+        },
+        delete_image(id){
+            // alert( `content id -> ${id} will be deleted`)
+            if(confirm(`content id -> ${id} will be deleted`)){
+
+                // call to delete api 
+                this.$store.dispatch('DELETE_CONTENT',id).then(response=>{
+                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Content Deleted"})
+                    this.$parent.$parent.$parent.getData()
+                }).catch(error=>{
+                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Error Occured"})
+                })
+                // afte delete refresh the image list 
+            }
+        },
     }
 }
 </script>

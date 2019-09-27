@@ -270,7 +270,6 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate)
 
-import { ADD_USER_ROLE} from "../../store/action.type"
 // import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
 

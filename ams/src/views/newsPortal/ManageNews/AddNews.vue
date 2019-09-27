@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <b-card v-if="auth_permission.news_create">
       <div class="row">
         <div class="col-sm-6 form-group">
           <label>Shoulder</label>
@@ -45,8 +45,7 @@
               v-model="news_data.featured_img.title"
             />
           </div>
-            <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="100px" width="100px"/>
-            
+            <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/>
           <hr />
           <label>More Photos</label>       
           <br>
@@ -61,22 +60,7 @@
           <hr />
           <!-- todo2 -->
           <label>Featured Video </label>
-          <FeatVideo :item="news_data.featured_vid"></FeatVideo>
-          <!-- <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <button @click="VideoManagerModal" class="btn btn-outline-primary" type="button">Select</button>
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder
-              aria-label
-              aria-describedby="basic-addon1"
-              v-model="news_data.featured_vid.title"
-            />
-          </div>
-            <img v-if="news_data.featured_vid.file" :src="news_data.featured_vid.file" height="100px" width="100px"/> -->
-            
+          <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
           <hr />
           <label>Video Position</label>
           <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
@@ -135,12 +119,16 @@
             label="name_eng"
           ></Multiselect> -->
           <label>Scroll</label>
-          <Multiselect
+          <Treeselect
+            v-model="news_data.selected_scrolls"
+            :options="scroll_parents"
+          ></Treeselect>
+          <!-- <Multiselect
             v-model="news_data.selected_scrolls"
             :options="positions"
             track-by="id"
             label="name_eng"
-          ></Multiselect>
+          ></Multiselect> -->
         </div>
       </div>
       <hr>
@@ -158,13 +146,21 @@
          </div> 
          <div class="col-sm-3"></div>
          <div class="col-sm-2">
-            <b-button variant="danger" @click="reset_news">Reset</b-button>
-            <b-button variant="success" style="margin-left:10px" @click="submit">Submit</b-button>
+            <b-button variant="danger" @click="reset_news" >Reset</b-button>
+            <button v-if="addLoader" style="margin-left:10px" class="btn btn-primary pull-right" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                wait
+            </button>
+            <b-button v-else variant="success" style="margin-left:10px" @click="submit">Submit</b-button>
          </div>
       </div>
     </b-card>
+    <div v-else class="card"> 
+      <h2>you don`t have permission to add news </h2>
+    </div>
     <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
     <ContentManager ref="video_manager_modal" :content="vid_content"></ContentManager>
+    <Loader v-if="loading"></Loader>
   </div>
 </template>
 <script>
@@ -181,6 +177,8 @@ import MorePhoto from "./MorePhoto"
 import FeatVideo from "./FeatVideo"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import Loader from "@/views/common/Loader";
+
 Vue.component("ToggleButton", ToggleButton);
 export default {
   components: { 
@@ -192,12 +190,15 @@ export default {
     MorePhoto,
     Treeselect,
     FeatVideo,
+    Loader,
   },
   data() {
     return {
       test1:[],
       test2:'',
       test3:'',
+      loading:false ,
+      addLoader:false,
       is_update:'',
       TreeSelectMultipleOption:true,
       valueConsistsOf:'BRANCH_PRIORITY',
@@ -266,6 +267,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      "auth_permission",
       "user_list",
       "tag_list", 
       "topic_list",
@@ -277,16 +279,20 @@ export default {
       "topic_parents",
       "area_list",
       "area_parents",
+      "scroll_list",
+      "scroll_parents",
       ]),
     // ...mapState(['news_data'])
   },
   mounted: function() {
+    this.loadPermission()
     this.getReporters();
     this.getUserList();
     this.getTagList();
     this.getAreas();
     this.getTopic();
     this.getCategories()
+    this.getScrolls()
   },
   watch:{
     content: function(val){
@@ -305,16 +311,28 @@ export default {
 
   },
   methods: {
+    loadPermission(){
+    //auth_permission
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } ,     
+    get_file: function(arg){
+      if(this.news_data.is_update){
+        return `${axios.defaults.baseURL}/uploads/${arg}`
+      }else{
+        return arg 
+      }
+    },
     reset_news: function(){
       this.$store.dispatch('REST_NEWS')
     },
     submit: function(){
       // todo1
-      console.log(this.news_data.tag_ids);
+      console.log(this.news_data);
 
      if(this.news_data.tag_ids.length) this.news_data.tag_ids = this.news_data.news_tags.map((v)=>v.id)
      if(this.news_data.area_ids.length)this.news_data.area_ids = this.news_data.selected_areas.map((v)=>v.id)
      this.news_data.featured_image_id = this.news_data.featured_img.id
+     this.news_data.featured_video_id = this.news_data.featured_vid.id
      this.news_data.content_ids = this.news_data.more_photo_arr.map( v => v.id)
      this.news_data.tag_ids = this.news_data.news_tags.map(v => v.id)
       // console.log(this.news_data)
@@ -322,11 +340,14 @@ export default {
       // axios.post('/api/post/',this.news_data).then(response=>{
       //   console.log(response.data)
       // })
+      this.addLoader = true 
       if(this.news_data.id == null){
         this.$store.dispatch('ADD_NEWS',this.news_data).then(response=>{
             this.$iziToast.success({position:'topRight',title:'Ok',message:"News Added Successsfully"})
+            this.addLoader =  false
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
+            this.addLoader = false 
         })
       }else{
         let payload = {
@@ -335,8 +356,10 @@ export default {
         }
         this.$store.dispatch('UPDATE_NEWS',payload).then(response=>{
             this.$iziToast.success({position:'topRight',title:'Ok',message:"News Added Successsfully"})
+            this.addLoader = false
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
+            this.addLoader = false 
         })        
       }
     }, 
@@ -358,25 +381,54 @@ export default {
 
     },
     getTopic() {
-      this.$store.dispatch("FETCH_TOPICS");
+      this.loading = true
+      this.$store.dispatch("FETCH_TOPICS").then(response=>{
+        this.loading = false
+      }).catch(error=>{
+        this.loading = false
+      });
     },
 
     getUserList: function() {
-      this.$store.dispatch("FETCH_USER_LIST");
+      this.loading = true 
+      this.$store.dispatch("FETCH_USER_LIST").then(response=>{
+        this.loading = false 
+      }).catch(error=>{
+        this.loading = false
+      });
     },
     getTagList: function() {
-      this.$store.dispatch("FETCH_TAGS");
+      this.loading = true
+      this.$store.dispatch("FETCH_TAGS").then(response=>{
+        this.loading = false
+      }).catch(error=>{
+        this.loading = false
+      });
     },
     getAreas: function() {
-      this.$store.dispatch("FETCH_AREAS")
+      this.loading = true
+      this.$store.dispatch("FETCH_AREAS").then(response=>{
+        this.loading = false
+      }).catch(error=>{
+        this.loading = false
+      })
     },
     getCategories(){
+        this.loading = true
         this.$store.dispatch('FETCH_CATEGORIES').then(response=>{
-
-        }).catch(error=>{
-        
+          this.loading = false
+        }).catch(error=>{ 
+          this.loading = false
         })
     }, 
+    getScrolls(){
+      this.loading = true
+      this.$store.dispatch('FETCH_SCROLLS').then(response=>{
+        this.loading = false
+      }).catch(error=>{
+        this.loading = false   
+      })
+    }
   }
 };
 </script>

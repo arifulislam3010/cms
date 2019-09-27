@@ -124,8 +124,8 @@ export default {
         openModal(){
             this.largeModal = true
             if(!this.update){              
-                this.newArea.title =''
-                this.newArea.parent_id =''
+                this.newArea.title = null
+                this.newArea.parent_id = null 
             }
         },
         close(){

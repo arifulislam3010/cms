@@ -7,14 +7,20 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import Header from '~/components/Header.vue'
 // import Loader from '~/components/loader/Loader'
+=======
+import Header from "~/components/Header.vue";
+
+>>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43
 export default {
   components: {
     Header
   },
   data() {
     return {
+<<<<<<< HEAD
       show: false,
       title : 'Home',
       loading: false
@@ -28,11 +34,16 @@ export default {
   }
   
 }
+=======
+      title: "Home"
+    };
+  }
+};
+>>>>>>> 071ffa70d91c02c8dfdf05330b6c0114f95a9b43
 </script>
 
 <style scoped>
-a:hover{
+a:hover {
   color: #ee002d;
 }
 </style>
-

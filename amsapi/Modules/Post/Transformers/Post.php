@@ -3,7 +3,7 @@
 namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
-
+use App\User ;
 class Post extends Resource
 {
     /**
@@ -31,7 +31,8 @@ class Post extends Resource
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->updated_at
         ];
+
     }
 }

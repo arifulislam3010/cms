@@ -3,12 +3,12 @@
       <!-- {{topic_parents}} -->
     <div class="container-fluid">
       <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i class="fa fa-life-bouy"></i> Add Topic
+        <i v-if="auth_permission.topic_create"  class="fa fa-life-bouy"></i> Add Topic
       </button>
 
       <form class="form-inline contct my-2 my-lg-0 pull-right">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
       </form>
 
       <table class="table table-sm">
@@ -22,7 +22,7 @@
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="auth_permission.topic_view || auth_permission.topic_viewall">
           <tr v-for="(topic,index) in topic_list" :key="index">
             <td>{{index+1}}</td>
             <td>{{topic.label}}</td>
@@ -30,9 +30,9 @@
             <td>{{topic.created_by}}</td>
             <td>{{topic.updated_by}}</td>
             <td>
-              <i @click="editTopicModal(topic)" class="icon-note icons actn"></i>
-              <i @click="viewTopicModal(topic)" class="icon-eye icons actn"></i>
-              <i @click="deleteTopic(topic.id)" class="icon-trash icons actn"></i>
+              <i v-if="auth_permission.topic_update" @click="editTopicModal(topic)" class="icon-note icons actn"></i>
+              <!-- <i @click="viewTopicModal(topic)" class="icon-eye icons actn"></i> -->
+              <i v-if="auth_permission.topic_delete || auth_permission.topic_deleteall" @click="deleteTopic(topic.id)" class="icon-trash icons actn"></i>
             </td>
           </tr>
         </tbody>
@@ -44,6 +44,7 @@
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
     <ViewTopicModal ref="view_topic_modal"></ViewTopicModal>
+    <Loader v-if="loading"></Loader>
   </div>
 </template>
 
@@ -80,8 +81,16 @@ export default {
     };
   },
   methods: {
+    loadPermission(){
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } ,    
     getTopics() {
-      this.$store.dispatch("FETCH_TOPICS");
+      this.loading = true 
+      this.$store.dispatch("FETCH_TOPICS").then(response=>{
+        this.loading = false 
+      }).catch(error=>{
+        this.loading = false 
+      });
     },
     parentChilds(index) {
       alert(index);
@@ -199,27 +208,27 @@ export default {
 
     openModal() {
       this.$refs.add_topic_modal.openModal();
-    }
-    // getPermission(){
-    //     this.$store.dispatch('ALL_USER_ROLE2')
-    //     .then(response=>{
-    //         this.permission = response.data.permission
-    //     })
-    // }
+    },
+    loadPermission(){
+      //auth_permission
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } , 
   },
 
   mounted() {
     this.getTopics();
+    this.loadPermission()
   },
   computed: {
-    ...mapGetters(["topic_list", "topic_parents"])
+    ...mapGetters(["auth_permission","topic_list", "topic_parents"])
   },
 
   components: {
     EditTopicModal,
     ViewTopicModal,
     pagination,
-    AddTopicModal
+    AddTopicModal,
+    Loader
   }
 };
 </script>

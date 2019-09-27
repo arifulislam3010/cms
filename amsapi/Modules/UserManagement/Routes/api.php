@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Modules\ContentManager\Entities\User ;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/usermanagement', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/usermanagement', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('role')->middleware('auth:api')->group(function(){
+    Route::get('/','RoleController@index');
+    Route::post('/','RoleController@store');
+    Route::put('/','RoleController@update');
+    Route::delete('/{id}','RoleController@destroy');
+});
+
+Route::prefix('user')->middleware('auth:api')->group(function(){
+	Route::get('/list','UserManagementController@index');
+    Route::post('/','UserManagementController@create');
+    Route::put('/{id}','UserManagementController@update');
+    Route::delete('/{id}','UserManagementController@destroy');
+
+    Route::get('/permission','UserManagementController@user_permission');
 });

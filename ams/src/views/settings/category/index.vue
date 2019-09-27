@@ -1,15 +1,16 @@
 <template>
-  <div >
+  <div class="card">
         
         <!-- {{category_list}} -->
         <!-- <ShowList :list="category_list"></ShowList> -->
         <!-- {{category_list}} -->
+        <!-- {{auth_permission}} -->
         <div class="container-fluid">
-            <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
+            <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
-                <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+                <!-- <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button> -->
             </form>
 
 
@@ -25,7 +26,7 @@
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="auth_permission.category_view || auth_permission.category_viewall">
                     <tr v-for="(item,index) in category_list" :key="index">
                       <td>{{item.id}}</td>
                       <td>{{item.label}}</td>
@@ -33,9 +34,9 @@
                       <td>{{item.created_by}}</td>
                       <td>{{item.updated_by}}</td>
                       <td>
-                            <i  @click="editCategoryModal(item)" class="icon-note icons actn"> </i>
-                            <i @click="viewNcategoryModal(item)" class="icon-eye icons   actn"> </i>
-                            <i  @click="deleteCategory(item.id)" class="icon-trash icons   actn"> </i>
+                            <i v-if="auth_permission.category_update"  @click="editCategoryModal(item)" class="icon-note icons actn"> </i>
+                            <!-- <i @click="viewNcategoryModal(item)" class="icon-eye icons   actn"> </i> -->
+                            <i v-if="auth_permission.category_delete"  @click="deleteCategory(item.id)" class="icon-trash icons   actn"> </i>
                       </td>
                     </tr>
                 </tbody>
@@ -49,7 +50,7 @@
         <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
         <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
         <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
-
+        <Loader v-if="loading"></Loader>    
   </div>
 </template>
 
@@ -84,6 +85,9 @@ export default {
         }
     },
     methods:{
+    loadPermission(){
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
+    } ,   
     editCategoryModal(item){
         this.$refs.add_ncategory_modal.openModal()
         this.$refs.add_ncategory_modal.update = true
@@ -93,15 +97,19 @@ export default {
 
     },    
     getCategories(){
+        this.loading = true
         this.$store.dispatch('FETCH_CATEGORIES').then(response=>{
-
+            this.loading = false
         }).catch(error=>{
+            this.loading = false
         
         })
     },    
     deleteCategory(id){
+        this.loading = true
         this.$store.dispatch('DELETE_CATEGORY',id).then(response=>{
             this.getCategories()
+            this.loading = false    
         })
     },
 
@@ -120,12 +128,13 @@ export default {
 
      mounted(){
         // this.getResults()
+        this.loadPermission()
         this.getCategories()
         // this.getPermission()
 
     },
     computed: {
-      ...mapGetters(["category_list","category_parents"]),
+      ...mapGetters(["auth_permission","category_list","category_parents"]),
     },
 
     components: {
@@ -133,7 +142,8 @@ export default {
         ViewNcategoryModal,
         pagination,
         AddNcategoryModal,
-        ShowList
+        ShowList,
+        Loader
     }
 }
 </script>

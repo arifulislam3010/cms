@@ -13,11 +13,7 @@ use Modules\ContentManager\Entities\User;
 |
 */
 
-Route::prefix('user')->middleware('auth:api')->group(function(){
-	Route::get('/list',function(){
-		return User::all();
-	});
-});
+
 
 Route::middleware('auth:api')->get('/contentmanager', function (Request $request) {
     return "jj";
@@ -29,7 +25,16 @@ Route::middleware('auth:api')->get('/contentmanager', function (Request $request
 Route::prefix('contentmanager')->middleware('auth:api')->group(function() {
 	Route::post('/','ContentManagerController@index');
 	Route::post('/store','ContentManagerController@store');
-	Route::delete('/delete/{id}','ContentManagerController@delete');
+	Route::delete('/delete/{id}','ContentManagerController@delFile');
 
+});
+
+
+Route::prefix('content_category')->middleware('auth:api')->group(function(){
+	Route::get('/list','ContentCategoryController@index');
+	Route::get('/list/paginate','ContentCategoryController@index2');
+	Route::post('/','ContentCategoryController@create');
+	Route::put('/{id}','ContentCategoryController@update');
+	Route::delete('/{id}','ContentCategoryController@destroy');
 });
 
