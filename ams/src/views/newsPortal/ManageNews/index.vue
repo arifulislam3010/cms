@@ -87,10 +87,7 @@ export default {
         }
     },
     methods:{
-    loadPermission(){
-    //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } ,        
+       
     getNews(){
         this.loading = true
         this.$store.dispatch('FETCH_NEWS').then(response=>{
@@ -229,7 +226,6 @@ export default {
     },
 
      mounted(){
-       this.loadPermission()
        this.getNews()
        // this.getResults()
 

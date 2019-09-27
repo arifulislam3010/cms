@@ -209,15 +209,11 @@ export default {
     openModal() {
       this.$refs.add_topic_modal.openModal();
     },
-    loadPermission(){
-      //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } , 
+ 
   },
 
   mounted() {
     this.getTopics();
-    this.loadPermission()
   },
   computed: {
     ...mapGetters(["auth_permission","topic_list", "topic_parents"])

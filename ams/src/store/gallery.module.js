@@ -31,7 +31,7 @@ const getters = {
 const actions = {
     ['FETCH_ALBUMS']({commit}){
         return new Promise((resolve,reject)=>{
-          axios.get('gallery/list').then(response=>{
+          axios.get('api/gallery/list').then(response=>{
             resolve(response)
             commit('SET_ALBUMS',response.data)
           }).catch(error=>{
@@ -41,7 +41,7 @@ const actions = {
     },
     ['ADD_ALBUM']({commit},payload){
       return new Promise((resolve,reject)=>{
-        axios.post('gallery/',payload).then(response=>{
+        axios.post('api/gallery/',payload).then(response=>{
           resolve(response)
         }).catch(error=>{
           reject(error)
@@ -50,7 +50,7 @@ const actions = {
     },
     ['UPDATE_ALBUM']({commit},payload){
       return new Promise((resolve,reject)=>{
-        axios.put(`gallery/${payload.id}`,payload.data).then(response=>{
+        axios.put(`api/gallery/${payload.id}`,payload.data).then(response=>{
           // commit('SET_ALBUM_DETAIL',response.data)
           resolve(response)
         }).catch(error=>{
@@ -60,7 +60,7 @@ const actions = {
     },
     ['DELETE_ALBUM']({commit},id){
       return new Promise((resolve,reject)=>{
-        axios.delete(`gallery/${id}`).then(response=>{
+        axios.delete(`api/gallery/${id}`).then(response=>{
           resolve(response)
         }).catch(error=>{
           reject(error)
@@ -69,7 +69,7 @@ const actions = {
     },
     ['ALBUM_DETAIL']({commit},id){
       return new Promise((resolve,reject)=>{
-        axios.get(`gallery/detail/${id}`).then(response=>{
+        axios.get(`api/gallery/detail/${id}`).then(response=>{
           commit('SET_ALBUM_DETAIL',response.data)
           resolve(response)
         }).catch(error=>{

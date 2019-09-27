@@ -18,7 +18,7 @@ const getters = {
 const actions = {
     ['FETCH_SCROLLS']({commit}){
         return new Promise((resolve,reject)=>{
-            axios.get('scroll/list').then(response=>{
+            axios.get('api/scroll/list').then(response=>{
                 resolve(response)
                 commit('SET_SCROLLS',response.data)
             }).catch(error=>{
@@ -28,7 +28,7 @@ const actions = {
     },
     ['ADD_SCROLL']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('scroll/',payload).then(response=>{
+            axios.post('api/scroll/',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -37,7 +37,7 @@ const actions = {
     },
     ['UPDATE_SCROLL']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.put(`scroll/${payload.id}`,payload.data).then(response=>{
+            axios.put(`api/scroll/${payload.id}`,payload.data).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -46,7 +46,7 @@ const actions = {
     },    
     ['DELETE_SCROLL']({commit},id){
         return new Promise((resolve,reject)=>{
-            axios.delete(`scroll/${id}`).then(response=>{
+            axios.delete(`api/scroll/${id}`).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

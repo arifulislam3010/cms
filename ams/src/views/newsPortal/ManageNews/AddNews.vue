@@ -285,7 +285,6 @@ export default {
     // ...mapState(['news_data'])
   },
   mounted: function() {
-    this.loadPermission()
     this.getReporters();
     this.getUserList();
     this.getTagList();
@@ -311,10 +310,7 @@ export default {
 
   },
   methods: {
-    loadPermission(){
-    //auth_permission
-        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-    } ,     
+    
     get_file: function(arg){
       if(this.news_data.is_update){
         return `${axios.defaults.baseURL}/uploads/${arg}`
