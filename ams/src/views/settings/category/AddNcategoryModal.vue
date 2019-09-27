@@ -13,9 +13,12 @@
                       <b-form-group>
                         <label for="Title">Name</label>
                         <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
-                        <div v-show="errors.has('Title')" class="help-block alert alert-danger">
+                        <div  class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div>
+                        <!-- <div v-show="errors.has('Title')" class="help-block alert alert-danger">
+                        {{ errors.first('Title') }}
+                        </div> -->
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -33,7 +36,7 @@
                         <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
                       </b-form-group>
 
-
+                      
                     </b-col>
                   </b-row>
                 </b-card>
@@ -76,32 +79,12 @@ export default {
                 title: '',
                 parent_id: ''
             },
+            
 
         }
     },
     methods:{
 
-      addNcategory () {
-            this.$validator.validateAll().then( result =>{
-                if(result){
-                    var data = this.newNcategory
-                    this.addLoader = true
-                    this.$store.dispatch('ADD_NCATEGORY',data)
-                    .then(response=>{
-                        this.addLoader = false;
-                        this.largeModal = false
-                        this.$iziToast.success({position:'topRight',title:'Ok',message:"CAtegory Added Successsfully"})
-
-                    })
-                    .catch(error=>{
-                        this.addLoader = false;
-                        this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-                    });
-                }
-
-            })
-
-        },
         addCategory(){
           this.addLoader = true  
           if(this.update){
@@ -115,6 +98,7 @@ export default {
               this.addLoader = false
             }).catch(error=>{
               this.addLoader = false
+              this.error_list = error.data
             })
           }else{
             this.newCategory.parent_id = this.selected_parent 
@@ -123,6 +107,8 @@ export default {
               this.addLoader = false
             }).catch(error=>{
               this.addLoader = false 
+              this.error_list = error
+      
             })
 
           }

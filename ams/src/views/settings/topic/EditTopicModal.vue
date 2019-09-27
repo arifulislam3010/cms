@@ -13,7 +13,7 @@
                       <b-form-group>
                         <label for="Title">Topic</label>
                         <b-form-input type="text" name="Title" id="title" v-model="editTopic.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                        <div v-show="errors.has('Title')" class="help-block alert alert-danger">
+                        <div  class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div>
                       </b-form-group>

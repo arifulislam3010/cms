@@ -7,9 +7,10 @@
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Role Name</label>
                     <div class="col-sm-10">
                     <input name="Name" v-validate="'required'" v-model="get_permission.role_name" type="text" class="form-control" id="inputPassword3" placeholder="Roll Name">
-                    <div v-show="errors.has('Name')" class="help-block alert alert-danger">
+                     <p v-if="!get_permission.role_name" style="color:red">*required</p>   
+                    <!-- <div v-show="errors.has('Name')" class="help-block alert alert-danger">
                         {{ errors.first('Name') }}
-                    </div>
+                    </div> -->
                     </div>
                 </div>
             </div>

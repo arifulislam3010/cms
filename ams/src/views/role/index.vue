@@ -38,17 +38,13 @@ export default {
         }
     } ,
     mounted(){
-        this.loadPermission()
         this.getRoles()
     },
     computed:{
         ...mapGetters(['auth_permission','role_list'])
     },
     methods:{
-        loadPermission(){
-        //auth_permission
-            this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
-        } ,        
+       
         update_role(id){
             this.$store.dispatch('FETCH_ROLE_DETAIL',id)
             this.$refs.role_add_modal.is_update = true 
