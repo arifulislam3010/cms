@@ -67,7 +67,7 @@
     <div v-else class="card">
       <h2>you don`t have permission to add album </h2>
     </div>
-    <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
+    <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="selected_content_type"></ContentManager>
     <Loader v-if="loading"></Loader>
   </div>
 </template>
@@ -85,6 +85,7 @@ export default {
   data() {
     return {
       loading:false ,
+      selected_content_type:'',
       content:{},
       more_photo_arr: []
     };
@@ -176,6 +177,7 @@ export default {
       }
     },
     ContentManagerModal() {
+      this.selected_content_type = 'image'
       this.$refs.content_manager_modal.openModal();
     }
   }
