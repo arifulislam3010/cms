@@ -46,16 +46,17 @@ export default {
     },
     methods:{
          
-        goToUpdateNews: function(){
-            this.$router.push({name:'UpdateNews'})
+        goToUpdateNews: function(arg){
+            this.$router.push({name:'UpdateNews',params:{id:arg}})
         },
         update_news: function(id){
-            this.$store.dispatch('NEWS_DETAIL',id).then(response=>{
-                this.goToUpdateNews()
-            }).catch(error=>{
-                this.$iziToast.error({position:'topRight',title:'Error',message:"Something went Wrong !!"})       
+            this.goToUpdateNews(id)
+            // this.$store.dispatch('NEWS_DETAIL',id).then(response=>{
+            //     this.goToUpdateNews()
+            // }).catch(error=>{
+            //     this.$iziToast.error({position:'topRight',title:'Error',message:"Something went Wrong !!"})       
 
-            })
+            // })
         },
         delete_news: function(id){
            

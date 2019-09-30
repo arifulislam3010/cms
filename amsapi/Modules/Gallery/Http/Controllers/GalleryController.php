@@ -14,8 +14,8 @@ use Modules\Gallery\Transformers\AlbumDetail ;
 class GalleryController extends Controller
 {
     public function index(Request $request){
-
-        return AlbumResource::collection(Album::all());
+        $album_list = Album::all(); 
+        return AlbumResource::collection();
     }
 
 

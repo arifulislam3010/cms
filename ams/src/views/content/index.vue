@@ -9,7 +9,8 @@
     <!-- {{content_list}} -->
     <div class="row">
       <div class="col-sm-5">
-        <autocomplete :search="search_content" style="height:50px"></autocomplete>
+        <!-- <autocomplete v-model="search.title" :search="search_content" style="height:50px"></autocomplete> -->
+        <input v-model="search.title" placeholder="search by title" type="text" style="width:300px;height:35px;">
       </div>
       <div class="col-sm-5">
         <Treeselect v-model="search.content_category" :options="content_category_parents"></Treeselect>
@@ -250,6 +251,10 @@ export default {
       //  this.search.content_category = this.list.content_category
       // get data
       this.getData();
+    },
+    "search.title": function(val){
+      this.getData()
+      console.log(this.search)
     },
     largeModal: function() {
       this.setContentType();

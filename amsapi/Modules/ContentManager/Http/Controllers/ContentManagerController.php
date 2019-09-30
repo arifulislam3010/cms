@@ -23,10 +23,30 @@ class ContentManagerController extends Controller
     public function index(Request $request)
     {
         // search object use korte hobe  
-        if($request->content_category){
-            $Content = Content::where('content_category_id',$request->content_category)->paginate(15);
-            return ContentResource::collection($Content);
+        // if($request->content_category){
+        //     $Content = Content::where('content_category_id',$request->content_category)->paginate(15);
+        //     return ContentResource::collection($Content);
+        // }
+        $content_list = [] ;
+        if($request->content_category && $request->title){
+            // return "ok1";
+            $content_list = Content::where('content_category_id',$request->content_category)
+                                    ->where('title','like','%'.$request->title.'%')
+                                    ->paginate(15);
+            return ContentResource::collection($content_list);
+        }    
+        else if($request->content_category){
+            // return "ok2";
+            $content_list = Content::where('content_category_id',$request->content_category)->paginate(15);
+            return ContentResource::collection($content_list);
         }
+        else if($request->title){
+            // return "ok3";
+            $content_list = Content::where('title','like','%'.$request->title.'%')->paginate(15);
+            return ContentResource::collection($content_list);
+
+        }
+        // return "ok4";
         $Content = Content::paginate(15);
         return ContentResource::collection($Content);
     }
