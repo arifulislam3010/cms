@@ -31,7 +31,7 @@ Route::get('/forgot-password','RegistrationController@forgotPassword');
 
 Route::post('/forgot-password','RegistrationController@postForgotPassword');
 
-Route::get('/reset-password/{email}/{activationCode}','RegistrationController@resetPassword');
+Route::get('/reset-password/{email}/{activationCode}','RegisterLoginPasswordResetController@resetPassword');
 
-Route::post('/reset-password/{email}/{activationCode}','RegistrationController@postResetPassword');
+Route::post('/reset-password/{email}/{activationCode}','RegisterLoginPasswordResetController@postResetPassword');
 

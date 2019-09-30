@@ -14,6 +14,7 @@ class SettingController extends Controller
      */
     public function index()
     {
+        return "ss";
         return view('setting::index');
     }
 

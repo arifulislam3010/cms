@@ -42,6 +42,7 @@ export default {
       name: 'Manage News',
       url: '/news/list',
       icon: 'fa fa-money',
+      url: '/news/add',
       children: [
         {
           name: 'Add News',
@@ -71,6 +72,7 @@ export default {
       name: 'Gallery',
       url:'/gallery/list',
       icon: 'fa fa-life-bouy',
+      url:'/gallery/list',
       children:[
         {
           name:'list',

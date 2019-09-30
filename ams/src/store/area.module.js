@@ -31,7 +31,7 @@ const actions = {
     },
     ['ADD_AREA']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('api/area/',payload).then(response=>{
+            axios.post('api/area',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
