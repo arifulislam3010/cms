@@ -68,25 +68,80 @@ export default {
 
       ]
     },
+
     {
-      name: 'Gallery',
-      url:'/gallery/list',
+      name: 'Scheduled',
+      url: '/news/scheduled-news',
       icon: 'fa fa-life-bouy',
-      url:'/gallery/list',
-      children:[
+      children: [
         {
-          name:'list',
-          url:'/gallery/list',
-          icon: 'fa fa-life-bouy'
+          name: 'List News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy',
+    
         },
         {
-          name:'add album',
-          url:'/gallery/add-album',
+          name: 'Add News',
+          url: '/news/add',
           icon: 'fa fa-life-bouy'
         },
       ]
     },
+    {
+      name: "reporter's",
+      url: '/news/reporters-news',
+      icon: 'fa fa-life-bouy',
+      children: [
+        {
+          name: 'List News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy',
     
+        },
+        {
+          name: 'Add News',
+          url: '/news/add',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
+    {
+      name: 'Photo Gallery',
+      url: '/gallery/list',
+      icon: 'fa fa-life-bouy',
+      url: '/gallery/list',
+      children: [
+        {
+          name: 'list',
+          url: '/gallery/list',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'add album',
+          url: '/gallery/add-album',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
+    {
+      name: 'Video Gallery',
+      url: '/gallery/list',
+      icon: 'fa fa-life-bouy',
+      url: '/gallery/list',
+      children: [
+        {
+          name: 'list',
+          url: '/gallery/list',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'add album',
+          url: '/gallery/add-album',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
+
     // {
     //   name: 'Items',
     //   url: '/category',
