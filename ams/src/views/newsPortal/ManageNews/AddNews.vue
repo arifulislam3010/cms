@@ -52,7 +52,8 @@
               v-model="news_data.featured_img.title"
             />
           </div>
-            <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/>
+            <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="100px" width="100px"/>
+            <!-- <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/> -->
           <hr />
           <label>More Photos</label>       
           <br>
@@ -298,6 +299,8 @@ export default {
     // ...mapState(['news_data'])
   },
   mounted: function() {
+    
+    this.handel_update()
     this.getReporters();
     this.getUserList();
     this.getTagList();
@@ -305,7 +308,6 @@ export default {
     this.getTopic();
     this.getCategories()
     this.getScrolls()
-    this.handel_update()
   },
   watch:{
     content: function(val){
@@ -343,6 +345,16 @@ export default {
   },
   methods: {
     handel_update: function (){
+      this.loading = true 
+      let ob = this.$route.params 
+      if(ob.id){
+          this.$store.dispatch('NEWS_DETAIL',ob.id).then(response=>{
+            this.loading = false 
+          }).catch(error=>{
+            this.loading = false 
+          })
+      } 
+
       if(this.news_data.is_update){
         this.submit_btn_txt = "Update"
       }else{
@@ -360,7 +372,11 @@ export default {
     reset_news: function(){
       this.$store.dispatch('REST_NEWS')
       this.news_data.is_update = false 
-      this.handel_update()
+      if(this.news_data.is_update){
+        this.submit_btn_txt = "Update"
+      }else{
+        this.submit_btn_txt = "Submit"
+      }
     },
     submit: function(){
       // todo1

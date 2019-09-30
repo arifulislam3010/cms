@@ -25,7 +25,8 @@
             <td>{{index+1}}</td>
             <td>{{album.title}}</td>
             <td>
-              <img :src="get_file(album.cover.file)" style="height:100px;width:100px;" alt />
+              <img :src="album.cover.file" style="height:100px;width:100px;" alt />
+              <!-- <img :src="get_file(album.cover.file)" style="height:100px;width:100px;" alt /> -->
               <!-- {{get_file(album.cover.file)}} -->
             </td>
             <td>{{album.created_by}}</td>
@@ -81,9 +82,6 @@ export default {
   },
   methods: {
       
-    goToAddAlbum: function(arg) {
-      this.$router.push({ name: "AddAlbum" });
-    },
     get_file: function(arg) {
       return `${axios.defaults.baseURL}/uploads/${arg}`;
     },
@@ -95,12 +93,15 @@ export default {
         .catch(error => { this.loading = false});
     },
     update_album: function(id) {
-        
-        this.$store.dispatch('ALBUM_DETAIL',id).then(response=>{
-          this.goToAddAlbum()
-        }).catch(error=>{
-
-        })
+      this.goToAddAlbum(id)
+      // this.$store.dispatch('ALBUM_DETAIL',id).then(response=>{
+      //     this.goToAddAlbum()
+      //   }).catch(error=>{
+          
+      //   })
+    },
+    goToAddAlbum: function(arg) {
+      this.$router.push({ name: "UpdateAlbum",params:{id:arg} });
     },
     delete_album: function(id) {
       this.$store

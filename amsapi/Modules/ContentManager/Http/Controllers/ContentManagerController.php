@@ -75,7 +75,7 @@ class ContentManagerController extends Controller
     	$Content->title = $request['title'];
         $Content->type  = $type; 
         $Content->content_category_id  = $request->content_category; 
-        
+        // $Content->file_url =  config fiel to get bae url + file path 
 
         $log_user = Auth()->user();
 

@@ -127,17 +127,18 @@ export default {
         },
 
         editAreaModal(item){
+            this.goToUpdateNews(item.id)
          
-            this.$store.dispatch('NEWS_DETAIL',item.id).then(response=>{
-                this.goToUpdateNews()
-            }).catch(error=>{
-                console.log(error)
-                this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})       
-            })  
+            // this.$store.dispatch('NEWS_DETAIL',item.id).then(response=>{
+            //     this.goToUpdateNews(item.id)
+            // }).catch(error=>{
+            //     console.log(error)
+            //     this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})       
+            // })  
             // this.$refs.edit_area_modal.openModal(area,index)
         },
-        goToUpdateNews: function(){
-            this.$router.push({name:'UpdateNews'})
+        goToUpdateNews: function(arg){
+            this.$router.push({name:'UpdateNews',params:{id:arg}})
         },
         viewAreaModal(area){
             this.$refs.view_area_modal.openModal(area)

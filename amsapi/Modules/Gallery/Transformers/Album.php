@@ -4,6 +4,7 @@ namespace Modules\Gallery\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 use Modules\ContentManager\Transformers\Image  as ImageResource ;
+use Modules\ContentManager\Transformers\Content  as ContentResource ;
 use Modules\ContentManager\Entities\Content ;
 use App\User ;
 class Album extends Resource
@@ -29,7 +30,7 @@ class Album extends Resource
         return [
             'id'=> $this->id,
             'title'=> $this->title,
-            'cover'=> new ImageResource(Content::where('id',$this->cover_id)->first()),
+            'cover'=> new ContentResource(Content::where('id',$this->cover_id)->first()),
             'updated_by' => $updated_by ,//$this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $created_by , //$this->createdBy ? $this->createdBy->name : "" ,
             'created_at' => $this->created_at,

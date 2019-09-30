@@ -211,7 +211,7 @@ export default new Router({
           },
         },
         {
-          path: '/news/update',
+          path: '/news/update/:id',
           name: 'UpdateNews',
           component: UpdateNews,
           meta:{
@@ -229,6 +229,14 @@ export default new Router({
         {
           path: '/gallery/add-album',
           name: 'AddAlbum',
+          component: AddAlbum,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/gallery/update-album/:id',
+          name: 'UpdateAlbum',
           component: AddAlbum,
           meta:{
             forAuth:true

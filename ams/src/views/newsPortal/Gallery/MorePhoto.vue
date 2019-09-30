@@ -14,7 +14,8 @@
       />
     </div>
     <img v-if="Object.keys(content).length" :src="content.file" height="100px" width="100px" />
-    <img v-else :src="get_src(item)" height="100px" width="100px" />
+    <img v-else :src="item.file" height="100px" width="100px" />
+    <!-- <img v-else :src="get_src(item)" height="100px" width="100px" /> -->
     <br>
     <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button>
     <ContentManager ref="content_manager_modal" :content="content"></ContentManager>

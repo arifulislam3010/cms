@@ -32,9 +32,14 @@
           />
           <img
             v-else
-            :src="get_file(album_detail.cover.file)"
+            :src="album_detail.cover.file"
             style="width:100px;height:100px;"
           />
+          <!-- <img
+            v-else
+            :src="get_file(album_detail.cover.file)"
+            style="width:100px;height:100px;"
+          /> -->
         </div>
       </div>
       <hr />
@@ -93,6 +98,7 @@ export default {
 
   mounted() {
     this.getAlbums()
+    this.handel_update()
   },
   watch: {
     content: function(val) {
@@ -104,7 +110,17 @@ export default {
     ...mapGetters(["auth_permission","album_detail","album_list"])
   },
   methods: {
-   
+    handel_update: function(){
+      this.loading = true 
+      let ob = this.$route.params
+      if(ob.id){
+        this.$store.dispatch('ALBUM_DETAIL',ob.id).thne(response=>{
+          this.loading  = false
+        }).catch(error=>{
+          this.loading = false
+        })
+      }
+    },
     getAlbums: function(){
       this.loading = true
       this.$store.dispatch('FETCH_ALBUMS').then(response=>{
