@@ -9,6 +9,125 @@ export default {
         // text: 'NEW'
       }
     },
+   
+    {
+      name: 'Manage News',
+      url: '/news/list',
+      icon: 'fa fa-money',
+      url: '/news/add',
+      children: [
+        {
+          name: 'Add News',
+          url: '/news/add',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'List News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'S News',
+          url: '/news/scheduled-news',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: "R news",
+          url: '/news/reporters-news',
+          icon: 'fa fa-life-bouy'
+        },
+
+
+      ]
+    },
+
+    // {
+    //   name: 'Scheduled',
+    //   url: '/news/scheduled-news',
+    //   icon: 'fa fa-life-bouy',
+    //   children: [
+    //     {
+    //       name: 'List News',
+    //       url: '/news/list',
+    //       icon: 'fa fa-life-bouy',
+    
+    //     },
+    //     {
+    //       name: 'Add News',
+    //       url: '/news/add',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
+    // {
+    //   name: "reporter's",
+    //   url: '/news/reporters-news',
+    //   icon: 'fa fa-life-bouy',
+    //   children: [
+    //     {
+    //       name: 'List News',
+    //       url: '/news/list',
+    //       icon: 'fa fa-life-bouy',
+    
+    //     },
+    //     {
+    //       name: 'Add News',
+    //       url: '/news/add',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
+    {
+      name: 'Category',
+      url: '/settings/category',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'category',
+          url: '/settings/category',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Category News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
+    {
+      name: 'Topic',
+      url: '/settings/topic',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'Topic',
+          url: '/settings/topic',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Topic News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
+    {
+      name: 'Area',
+      url: '/settings/area',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'Area',
+          url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Area News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy'
+        },
+      ]
+    },
     {
       name: 'Settings',
       url: '/settings/category',
@@ -36,73 +155,6 @@ export default {
         },
 
 
-      ]
-    },
-    {
-      name: 'Manage News',
-      url: '/news/list',
-      icon: 'fa fa-money',
-      url: '/news/add',
-      children: [
-        {
-          name: 'Add News',
-          url: '/news/add',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'List News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'Scheduled News',
-          url: '/news/scheduled-news',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: "reporter's news",
-          url: '/news/reporters-news',
-          icon: 'fa fa-life-bouy'
-        },
-
-
-      ]
-    },
-
-    {
-      name: 'Scheduled',
-      url: '/news/scheduled-news',
-      icon: 'fa fa-life-bouy',
-      children: [
-        {
-          name: 'List News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy',
-    
-        },
-        {
-          name: 'Add News',
-          url: '/news/add',
-          icon: 'fa fa-life-bouy'
-        },
-      ]
-    },
-    {
-      name: "reporter's",
-      url: '/news/reporters-news',
-      icon: 'fa fa-life-bouy',
-      children: [
-        {
-          name: 'List News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy',
-    
-        },
-        {
-          name: 'Add News',
-          url: '/news/add',
-          icon: 'fa fa-life-bouy'
-        },
       ]
     },
     {

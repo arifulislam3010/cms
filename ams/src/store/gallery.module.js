@@ -41,7 +41,7 @@ const actions = {
     },
     ['ADD_ALBUM']({commit},payload){
       return new Promise((resolve,reject)=>{
-        axios.post('api/gallery/',payload).then(response=>{
+        axios.post('api/gallery',payload).then(response=>{
           resolve(response)
         }).catch(error=>{
           reject(error)
