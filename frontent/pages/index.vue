@@ -3,10 +3,21 @@
     <!-- <nuxt-link to="/about">Abouts</nuxt-link> -->
 
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
+
+      <div>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+          <b-collapse id="nav-collapse" is-nav>
+            
+              <MainNavbar :categories = "categories"/>
+          </b-collapse>
+      </b-navbar>
+      </div>
     <hero/>
-    <!-- <div v-for="post in posts">
-      <Featured :post= "post" />
-    </div> -->
+  
     <!-- ##### Featured Post Area Start ##### -->
     <div class="featured-post-area">
         <div class="container">
@@ -15,15 +26,17 @@
                     <div class="row">
 
                         <!-- Single Featured Post -->
-                        <div class="col-12 col-lg-7">
-                            <div class="single-blog-post featured-post">
+                        <div class="col-12 col-lg-7" v-for="section in sections">
+                            <div v-if="section.section_id == 1">
+                              <div v-for="post in articles.slice(0,1)">
+                                  <div class="single-blog-post featured-post" >
                                 <div class="card" >
                                     <a href="#"><img src="@/assets/images/16.jpg" alt="" style="height: 250px; width: 400px;" class="card-body"></a>
                                 </div>
                                 <div class="post-data">
                                     
                                     <a href="#" class="post-title">
-                                        <h4>Financial news: A new company is born today at the stock market</h4>
+                                        <h4>{{post.headline}}</h4>
                                     </a>
                                     <div class="post-meta">
                                         <p class="post-excerp">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. <span style="color: red">details</span>.. </p>
@@ -31,10 +44,13 @@
                                     </div>
                                 </div>
                             </div>
+                              </div>
+                              
+                            </div>
                         </div>
 
                         <div class="col-12 col-lg-5">
-                            <div class="single-blog-post small-featured-post d-flex" v-for="post in articles.slice(0,3)">
+                            <div class="single-blog-post small-featured-post d-flex" v-for="post in articles.slice(0,4)">
                                 <div class="post-thumb">
                                   <a href="#"><img src="@/assets/images/16.jpg" alt=""></a>
                                 </div>
@@ -79,7 +95,7 @@
                        <b-card no-body>
                         <b-tabs pills card>
                         <b-tab title="সর্বশেষ" active>
-                            <div class="single-blog-post small-featured-post d-flex" v-for="post in articles.slice(0, 4)">
+                            <div class="single-blog-post small-featured-post d-flex" v-for="post in articles.slice(0,3)">
                                     
                                     <div class="post-data">
                                         <div class="post-meta" >
@@ -91,7 +107,7 @@
                                     </div>
                                 </div>
                         </b-tab>
-                        <b-tab title="পঠিত">hsjhsjhsjhsjh</b-tab>
+                        
                         <b-tab title="আলোচিত"><b-card-text>Tab Contents 2</b-card-text></b-tab>
                         </b-tabs>
                     </b-card>
@@ -113,7 +129,7 @@
                     <div class="row">
 
                         <!-- Single Post -->
-                       <div class="col-12 col-md-4" v-for="post in articles.slice(0, 12)">
+                       <div class="col-12 col-md-4" v-for="post in articles">
                           <div class="single-blog-post style-3">
                               <div class="post-thumb">
                                   <a href="#"><img src="img/bg-img/12.jpg" alt=""></a>
@@ -199,12 +215,14 @@
     <!-- ##### Popular News Area End ##### -->
     <NewsBlock2 />
     <Footer />
-    <br>
-    <br>
-    <!-- <div v-for="post in posts">
-      <p> id = gfffffffffffgfggffgfg {{post.id}} </p>
-    </div> -->
-
+    
+<br>
+<br>
+<div v-for="post in categories">
+  <h3>dgdg</h3>
+<h2>{{post.id}}</h2>
+</div>
+<br>
     <!-- <div>
       <section>
       <h1>GET API Result Index</h1>
@@ -228,6 +246,7 @@ import { mapState,mapGetters,mapActions } from "vuex"
 import { All_POST} from '@/store/action.type'
 import Logo from '@/components/Logo.vue'
 import Hero from '@/components/Hero.vue'
+import MainNavbar from "~/components/MainNavbar"
 import Featured from '@/components/FeaturedPost/Featured.vue'
 import Carousel1 from '@/components/carousels/Carousel1'
 import NewsBlock1 from '@/components/home/NewsBlock1'
@@ -241,8 +260,9 @@ import OldNews from '@/components/OldNews'
 // import Carousel1 from '../carousels/Carousel1'
 export default {
   components: {
-    Logo,Hero,Featured,Carousel1,NewsBlock1,NewsBlock2,Footer,FeaturedSmall,News,OldNews
+    Logo,Hero,Featured,Carousel1,NewsBlock1,NewsBlock2,Footer,FeaturedSmall,News,OldNews,MainNavbar
   },
+
   data() {
     return {
       title : 'Home',
@@ -261,7 +281,10 @@ export default {
         status: '',
         Instant_article: '',
         created_by: ''
-      }
+      },
+
+      
+      
     }
   },
   head() {
@@ -277,51 +300,44 @@ export default {
       ]
     };
   },
-  async asyncData () {
-    const {data} = await axios.get('/api/frontend/posts')
-    return {articles:data}
+  async asyncData ({ params }) {
+    const ar = await axios.get('/api/frontend/posts');
+    const cat = await axios.get('/api/frontend/categories');
+    const se = await axios.get('/api/frontend/postSections');
+    return {articles:ar.data, sections: se.data, categories: cat.data}
   },
+
+  // async asyncSection () {
+   
+  //   const {section} = await axios.get('/api/frontend/postSections')
+  //   return {sections:section}
+  // },
+
+//  async created(){
+//       const config = {
+//         headers: {
+//           'Accept' : 'application/json'
+//         }
+//       }
+
+//       try{
+//         const res = await axios.get('/api/frontend/categories', config)
+
+//         this.categories = res.data.results;
+//       } catch(err){
+//         console.log(err)
+//       }
+
+      
+//   },
+
+  
   methods:{
       //   async fetchSomething() {
       //   const ip = await this.$axios.$get('http://icanhazip.com')
       //   this.ip = ip
         
-      // }
-      // searchBranch(){
-      //       this.loading = true
-      //       var data = this.search
-      //       var page = 1
-      //       this.$store.dispatch('SEARCH_BRANCH',{page,data})
-      //           .then(response=>{
-      //               this.loading=false;
-      //           })
-      //           .catch(error=>{
-      //               this.loading=true;
-      //           });
-      //   },
-      // getResults(page =1){
-      //       this.loading = true;
-      //       var data = this.search
-      //       if(data != ''){
-      //           this.$store.dispatch('SEARCH_BRANCH',{page,data})
-      //           .then(response=>{
-      //               this.loading=false;
-      //           })
-      //           .catch(error=>{
-      //               this.loading=true;
-      //           });
-      //       }
-      //       else{
-      //           alert('sss');
-      //           this.$store.dispatch('All_BRANCH',page)
-      //           .then(response=>{
-      //               this.loading=false;
-      //           })
-      //           .catch(error=>{
-      //               this.loading=true;
-      //           });
-      //       }
-      //   },
+      
      
     },
     mounted(){
@@ -330,7 +346,7 @@ export default {
         // this.getPermission()
     },
     computed: {
-      ...mapGetters(["posts"]),
+      ...mapGetters(['posts']),
     },
   //  created() {
   //    this.$store.dispatch('setPosts', this.loadedPosts)

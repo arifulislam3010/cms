@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/frontend', function (Request $request) {
-//    return $request->user();
-//});
-
-Route::prefix('frontend')->group(function () {
-    Route::get('/posts', 'PostsController@index');
-    Route::get('/categories', 'PostsController@category');
-    Route::get('/postSections', 'PostsController@postSection');
+Route::middleware('auth:api')->get('/category', function (Request $request) {
+    return $request->user();
 });

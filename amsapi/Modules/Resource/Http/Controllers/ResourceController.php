@@ -1,24 +1,12 @@
 <?php
 
-namespace Modules\FrontEnd\Http\Controllers;
+namespace Modules\Resource\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\FrontEnd\Entities\Category;
-use Modules\FrontEnd\Entities\Post;
-use Modules\FrontEnd\Entities\PostSection;
 
-
-use Modules\Post\Entities\PostCategory;
-use Modules\Post\Transformers\Post as PostResource;
-use Modules\FrontEnd\Transformers\Category as CategoryResource;
-use Modules\FrontEnd\Transformers\PostSection as PostSectionResource;
-
-use Modules\Post\Transformers\PostDetail ;
-use Modules\Setting\Entities\Section;
-
-class PostsController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,21 +14,16 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $post = Post::orderBy('id', 'DESC')->get();
-        return PostResource::collection($post);
+        return view('resource::index');
     }
 
-   public function category()
-   {
-       $category = Category::all();
-       return CategoryResource::collection($category);
-   }
-
-
-    public function postSection ()
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function create()
     {
-        $section = PostSection::orderBy('id', 'DESC')->get();
-        return PostSectionResource::collection($section);
+        return view('resource::create');
     }
 
     /**
@@ -60,7 +43,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return view('frontend::show');
+        return view('resource::show');
     }
 
     /**
@@ -70,7 +53,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend::edit');
+        return view('resource::edit');
     }
 
     /**

@@ -17,10 +17,7 @@ class FrontEndController extends Controller
         return view('frontend::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
+
     public function create()
     {
         return view('frontend::create');

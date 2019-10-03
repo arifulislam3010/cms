@@ -1,5 +1,5 @@
-import Vue from "vue"
-import Vuex from "vuex"
+// import Vue from "vue"
+
 import axios from "axios"
 
 import { All_POST} from "./action.type"
@@ -8,59 +8,42 @@ import { SET_POST } from "./mutation.type"
 
 import post from './post.module'
 
-Vue.use(Vuex);
+import Vuex from 'vuex'
 
-export const state = () => ({
-  post: [],
-  
-})
-export const getters = {
-  posts(state){
-    return state.post
-  }
-}
+const createStore = () => {
+  return new Vuex.Store({
+    state: () => ({
+      post: []
+    }),
+    getters: {
+      posts(state){
+        return state.post
+      }
+    },
 
-export const actions = {
-  [All_POST]({commit}) {
-    return new Promise((resolve, reject) => {
-        axios
-        .get('/api/frontend/posts')
-        .then(response => {
-            // console.log(response)
-            commit(SET_AREA,response.data)
-            resolve(response);
-        })
-        .catch(function(error) {
-            reject(error);
-        });
-    });
-},
-}
+    actions: {
+      async get({commit}) {
+        await this.$axios.get('api/frontend/posts')
+          .then((res) => {
+            if (res.status === 200) {
+              commit('SET_POST', res.data)
+            }
+          })
+      },
 
-export const mutations = {
-  [SET_POST](state, data)
-    {
-        state.post = data.data;
+    },
+
+    mutations: {
+      [SET_POST](state, data)
+      {
+          state.post = data.data;
+        //   state.branch_p2 = data;
+      },
     }
+  })
+}
 
-};
-// const createStore = () => {
-//     return new Vuex.Store({
-//       // namespaced: true,
-//       // modules: {
-//       //   post
-//       // }
-
-//       state: {
-//         posts: []
-//       }
-
-//      getters: {}
-
-//     })
-//   };
-  
-  // export default createStore
+export default createStore
 
 // import Vue from "vue"
 // import Vuex from "vuex"
