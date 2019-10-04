@@ -24,15 +24,27 @@ class PostsController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $post = Post::orderBy('id', 'DESC')->get();
+        //return $request->all();
+
+        $section     = ($request->has('section'))?$request['section']:null;
+        $category     = ($request->has('category'))?$request['category']:null;
+        $limit     = ($request->has('limit'))?$request['limit']:10;
+        $search     = ($request->has('search'))?$request['search']:null;
+        $post = Post::leftjoin('post_sections','post_sections.post_id','=','posts.id')
+            ->leftjoin('post_categories','post_categories.post_id','=','posts.id')
+            ->when($section, function($q) use($section){return $q->where('post_sections.section_id', $section);})
+            ->when($category, function($q) use($category){return $q->where('post_categories.category_id', $category);})
+            ->orderBy('posts.id', 'DESC')
+            ->paginate($limit);
+        //$post = Post::orderBy('id', 'DESC')->get();
         return PostResource::collection($post);
     }
 
    public function category()
    {
-       $category = Category::all();
+       $category = Category::whereNull('parent_id')->get();
        return CategoryResource::collection($category);
    }
 

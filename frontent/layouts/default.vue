@@ -6,12 +6,23 @@
 
     <!-- Navbar Area -->
     
-   
+   <div>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+          <b-collapse id="nav-collapse" is-nav>
+            
+              <MainNavbar :categories = "categories"/>
+          </b-collapse>
+      </b-navbar>
+      </div>
   </header>
     <div>
       <nuxt />
     </div>
-    
+    <Footer />
     
   </div>
 </template>
@@ -21,13 +32,15 @@ import axios from '@/plugins/axios'
 import Header from "~/components/Header"
 import TopHeader from "~/components/TopHeader"
 import MainNavbar from "~/components/MainNavbar"
+import Footer from '@/components/Footer'
 // import Loader from '~/components/loader/Loader'
 export default {
   components: {
     TopHeader,
     Header,
     TopHeader,
-    MainNavbar
+    MainNavbar,
+    Footer
   },
  
   data() {
@@ -42,10 +55,10 @@ export default {
     }
   },
 
-  // async asyncData () {
-  //   const {data} = await axios.get('/api/frontend/categories')
-  //   return {categories:data}
-  // },
+  async asyncData () {
+    const {data} = await axios.get('/api/frontend/categories')
+    return {categories:data}
+  },
 
   methods: {
     toggleNavbar() {

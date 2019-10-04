@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix('frontend')->group(function () {
-    Route::get('/posts', 'PostsController@index');
+    Route::post('/posts', 'PostsController@index');
     Route::get('/categories', 'PostsController@category');
     Route::get('/postSections', 'PostsController@postSection');
 });

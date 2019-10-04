@@ -2,14 +2,27 @@
  <div>
       
     <b-navbar-nav >
-        <div v-for="category in categories">
-          <b-nav-item href="#">{{category.label}}</b-nav-item>
-        <!-- <b-nav-item-dropdown :text="category.label">
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
-        </b-nav-item-dropdown> -->
+        <div v-for="(category,key ) in categories" v-bind:key="key">
+          
+          
+          <b-nav-item-dropdown v-if="category.children.length>0"  :text="category.label" right >
+              <b-dropdown-item href="#" v-for="(item,keyi) in category.children" v-bind:key="keyi">{{item.label}}</b-dropdown-item>
+         </b-nav-item-dropdown>
+          
+          <div v-else >
+              <b-nav-item href="#">{{category.label}}</b-nav-item>
+          </div>
+
+          <!-- <div v-else-if="category.children != null"> 
+              <b-nav-item-dropdown :text="category.label">
+                
+                  <b-dropdown-item href="#" >{{category.label}}</b-dropdown-item>
+                
+              </b-nav-item-dropdown>
+          </div> -->
+          
+          
+        
         </div>
 
     </b-navbar-nav>
@@ -19,6 +32,7 @@
 <script>
 import axios from '@/plugins/axios'
 export default {
+  name: 'MainNavnar',
   props: ['categories', 'id'],
   data() {
     return{
@@ -33,6 +47,15 @@ export default {
       
     }
   },
+
+  computed: {
+    categoryChild () {
+      
+      array.forEach(element => {
+        
+      });
+    }
+  }
 
 }
 </script>
