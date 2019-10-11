@@ -28,7 +28,7 @@
                                                   <h4>{{post.headline}}</h4>
                                               </div>
                                               <div class="post-meta">
-                                                  <p class="post-excerp">{{post.content}}<span style="color: red">details</span>.. </p>
+                                                  <div class="post-excerp">{{post.content}}<span style="color: red">details</span>.. </div>
                                                   
                                               </div>
                                           </nuxt-link>
@@ -266,6 +266,7 @@ export default {
         Instant_article: '',
         created_by: ''
       },
+      sectionsfirst: []
 
     
       
@@ -285,14 +286,12 @@ export default {
     };
   },
   async asyncData () {
-  
-    let secParam1 = {section:1,limit:1};
+
     let secParam2 = {section:2,limit:3};
     let secParam3 = {section:3,limit:4};
     let secParam4 = {section:4,limit:4};
-    const cat = await axios.get('/api/frontend/categories');
+    
     const postall = await axios.post('/api/frontend/posts');
-    const secone = await axios.post('/api/frontend/posts',secParam1);
     const sec2 = await axios.post('/api/frontend/posts',secParam2);
     const sec3 = await axios.post('/api/frontend/posts',secParam3);
     const sec4 = await axios.post('/api/frontend/posts',secParam4);
@@ -302,9 +301,8 @@ export default {
     
     
     return {
-        categories:cat.data, 
-        sectionsfirst:secone.data,
-        latestPost:secone.data,
+        
+        // latestPost:secone.data,
         section2:sec2.data,
         section3:sec3.data,
         section4:sec4.data,
@@ -357,12 +355,19 @@ export default {
   
   methods:{
       
-        
+        getSection1(){
+          let secParam1 = {section:1,limit:1};
+           axios.post('/api/frontend/posts',secParam1).then((response) => {      
+                  this.sectionsfirst = response.data;
+
+                }).catch(function (error) {                    
+                });
+        },
       
      
     },
     mounted(){
-        // this.getResults()
+        this.getSection1();
         // this.fetchBranches();
         // this.getPermission()
     },
