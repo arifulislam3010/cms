@@ -4,16 +4,16 @@ namespace Modules\FrontEnd\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategory extends Model
+class PostTopic extends Model
 {
     protected $fillable = [
         'post_id',
-        'category_id',
+        'topic_id',
         'created_by',
         'updated_by'
     ];
 
-    protected $table = 'post_categories';
+    protected $table = 'post_topics';
 
     public function post(){
         return $this->belongsTo('Modules\Post\Entities\Post','post_id');

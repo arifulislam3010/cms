@@ -16,6 +16,13 @@ class PostSection extends Model
     protected $table = 'post_sections';
 
     public function post(){
-        return $this->belongsTo('Modules\FrontEnd\Entities\Post','post_id');
+        return $this->belongsTo('Modules\Post\Entities\Post','post_id');
+    }
+
+    public function createdBy(){
+        return $this->belongsTo('App\User','created_by');
+    }
+    public function updatedBy(){
+        return $this->belongsTo('App\User','updated_by');
     }
 }

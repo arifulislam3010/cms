@@ -75,11 +75,12 @@ export default {
   // },
 
   methods: {
-     getCategories(){
+       getCategories(){
            axios.get('/api/frontend/categories').then((response) => {      
                   this.categories = response.data;
 
-                }).catch(function (error) {                    
+                }).catch(function (error) {
+
                 });
         },
     toggleNavbar() {

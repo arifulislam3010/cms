@@ -4,7 +4,8 @@ namespace Modules\FrontEnd\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 use App\User ;
-
+use Modules\FrontEnd\Transformers\Content as ContentResource;
+use Modules\FrontEnd\Entities\PostContent;
 class Post extends Resource
 {
     /**
@@ -15,6 +16,7 @@ class Post extends Resource
      */
     public function toArray($request)
     {
+        $PostContent = PostContent::where('post_id',$this->id)->get();
         return [
             'id'=>$this->id,
             'shoulder'=>$this->shoulder,
@@ -24,6 +26,12 @@ class Post extends Resource
             'reporter_id'=>$this->reporter_id,
             'content'=>$this->content,
             'featured_image_id'=>$this->featured_image_id,
+            'FeaturedImage'=>new ContentResource($this->FeaturedImage),
+            'FeaturedVideo'=>new ContentResource($this->FeaturedVideo),
+            'PostContents'=> ContentResource::collection($this->PostContent),
+            'PostTag' =>$this->PostTag,
+            'PostArea' =>$this->PostArea,
+            'PostCategory'=>$this->PostCategory,
             'featured_video_id'=>$this->featured_video_id,
             'video_position'=>$this->video_position,
             'share_at'=>$this->share_at,

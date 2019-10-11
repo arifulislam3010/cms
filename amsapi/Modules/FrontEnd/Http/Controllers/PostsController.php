@@ -10,8 +10,8 @@ use Modules\FrontEnd\Entities\Post;
 use Modules\FrontEnd\Entities\PostSection;
 
 
-use Modules\Post\Entities\PostCategory;
-use Modules\Post\Transformers\Post as PostResource;
+use Modules\FrontEnd\Entities\PostCategory;
+use Modules\FrontEnd\Transformers\Post as PostResource;
 use Modules\FrontEnd\Transformers\Category as CategoryResource;
 use Modules\FrontEnd\Transformers\PostSection as PostSectionResource;
 
@@ -33,14 +33,16 @@ class PostsController extends Controller
         $category     = ($request->has('category'))?$request['category']:null;
         $limit     = ($request->has('limit'))?$request['limit']:10;
         $search     = ($request->has('search'))?$request['search']:null;
-        $post = Post::leftjoin('post_sections','post_sections.post_id','=','posts.id')
-            ->leftjoin('post_categories','post_categories.post_id','=','posts.id')
-            ->when($section, function($q) use($section){return $q->where('post_sections.section_id', $section);})
-            ->when($category, function($q) use($category){return $q->where('post_categories.category_id', $category);})
+        $post = Post::select('posts.*')
+        ->when($section,function($q) use($section){return $q->join('post_sections','post_sections.post_id','=','posts.id')->where('post_sections.section_id', $section);})
+        ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id', $category);})
             ->orderBy('posts.id', 'DESC')
             ->paginate($limit);
-        //$post = Post::orderBy('id', 'DESC')->get();
         return PostResource::collection($post);
+    }
+    public function details($id){
+        $post = Post::where('id',$id)->first();
+        return new PostResource($post);
     }
 
    public function category()

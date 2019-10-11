@@ -4,16 +4,16 @@ namespace Modules\FrontEnd\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategory extends Model
+class PostScroll extends Model
 {
     protected $fillable = [
         'post_id',
-        'category_id',
+        'scroll_id',
         'created_by',
         'updated_by'
     ];
 
-    protected $table = 'post_categories';
+    protected $table = 'post_scrolls';
 
     public function post(){
         return $this->belongsTo('Modules\Post\Entities\Post','post_id');

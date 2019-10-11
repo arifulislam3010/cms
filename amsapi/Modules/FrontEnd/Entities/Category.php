@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $fillable = [];
 
-    public function parent(){
+     public function parent(){
         return $this->belongsTo('Modules\Setting\Entities\Category','parent_id');
     }
     public function child(){
