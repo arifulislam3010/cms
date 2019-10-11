@@ -1,0 +1,1 @@
+export const All_POST = "All_POST"
