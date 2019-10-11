@@ -22,7 +22,8 @@ class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)
     {

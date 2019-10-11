@@ -33,34 +33,55 @@ import Header from "~/components/Header"
 import TopHeader from "~/components/TopHeader"
 import MainNavbar from "~/components/MainNavbar"
 import Footer from '@/components/Footer'
-// import Loader from '~/components/loader/Loader'
+import Loader from '~/components/loader/Loader'
 export default {
   components: {
     TopHeader,
     Header,
     TopHeader,
     MainNavbar,
-    Footer
+    Footer,
+    Loader
   },
  
   data() {
     return {
       show: false,
       title : 'Home',
-      
-      // loading: false,
+      categories:[],
+      loading: false,
       
       
       
     }
   },
-
-  async asyncData () {
-    const {data} = await axios.get('/api/frontend/categories')
-    return {categories:data}
+  asyncData () {
+    alert('aa');
+    return axios.get(`/api/frontend/categories`)
+    .then((res) => {
+      return { categories: res.data }
+    })
+    .catch((e) => {
+     alert('ss');
+    })
   },
+  mounted() {            
+      this.getCategories();
+  },
+ 
+  // async asyncData () {
+  //   const {data} = await axios.get('/api/frontend/categories')
+  //   return {categories:data}
+  // },
 
   methods: {
+     getCategories(){
+           axios.get('/api/frontend/categories').then((response) => {      
+                  this.categories = response.data;
+
+                }).catch(function (error) {                    
+                });
+        },
     toggleNavbar() {
       this.show = !this.show;
     }

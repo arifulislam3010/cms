@@ -4,12 +4,16 @@
 
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
     <hero />
-
+    <div>
+      {{$route.params.id}}
+    </div>
     <!-- ##### Blog Area Start ##### -->
-    <div class="blog-area section-padding-0-80">
-      <div class="container">
+    <div class="blog-area section-padding-0-80" >
+      <div class="container" >
         <div class="row">
-          <div class="col-12 col-lg-8">
+          <div v-for="(post,index) in sposts.data" :key="index">
+            <div v-if="post.id === 16">
+              <div class="col-12 col-lg-8">
             <div class="blog-posts-area">
               <!-- Single Featured Post -->
               <div class="single-blog-post featured-post single-post">
@@ -22,7 +26,7 @@
                     </nav>
                     <div class="bm"></div>
                   <div class="post-title">
-                      <h3>hjdhjdhdjhdjh ddhdh</h3>
+                      <h3>{{post.headline}}</h3>
                   </div>
                   
                   
@@ -33,13 +37,12 @@
                   <a href="#" class="post-catagory">Finance</a>
                   <a href="#" class="post-title">
                     <h6>
-                      Financial news: A new company is born today at the stock
-                      market
+                      {{post.hanger}}
                     </h6>
                   </a>
                   <div class="post-meta">
                     <p class="post-author">
-                      By <a href="#">Christinne Williams</a>
+                      By <a href="#">{{post.created_by}}</a>
                     </p>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -344,9 +347,11 @@
               </div>
             </div>
           </div>
+            </div>
+          </div>
 
-          <div class="col-12 col-lg-4">
-            <div class="blog-sidebar-area">
+          <div class="col-12 col-lg-4" >
+            <div class="blog-sidebar-area" >
               <!-- Latest Posts Widget -->
               <div class="latest-posts-widget mb-50">
                 <!-- Single Featured Post -->
@@ -359,8 +364,7 @@
                     <div class="post-meta">
                       <a href="#" class="post-title">
                         <h6>
-                          Pellentesque mattis arcu massa, nec fringilla turpis
-                          eleifend id.
+                          djdhsj sjhsjsh
                         </h6>
                       </a>
                       <p class="post-date">
@@ -562,6 +566,8 @@
 </template>
 
 <script>
+import axios from '@/plugins/axios'
+import { mapState } from "vuex";
 import Logo from "@/components/Logo.vue";
 import Hero from "@/components/Hero.vue";
 import Featured from "@/components/FeaturedPost/Featured.vue";
@@ -587,6 +593,7 @@ export default {
   },
   head() {
     return {
+      id: this.$route.params.id,
       title: this.title,
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
@@ -599,9 +606,13 @@ export default {
     };
   },
 
-  mounted() {
-    this.$nextTick(function() {});
-  }
+ async asyncData () {
+   const postall = await axios.post('/api/frontend/posts');
+
+   return {sposts: postall.data}
+ } 
+
+ 
 };
 </script>
 
