@@ -22,6 +22,7 @@ class Post extends Resource
             'hanger'=>$this->hanger,
             'athor_id'=>$this->athor_id,
             'reporter_id'=>$this->reporter_id,
+            'content'=>$this->content,
             'featured_image_id'=>$this->featured_image_id,
             'featured_video_id'=>$this->featured_video_id,
             'video_position'=>$this->video_position,

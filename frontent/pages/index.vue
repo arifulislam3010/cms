@@ -3,8 +3,7 @@
     <!-- <nuxt-link to="/about">Abouts</nuxt-link> -->
 
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
-
-      
+   
     <hero/>
   
           <!-- ##### Featured Post Area Start ##### -->
@@ -15,31 +14,31 @@
                           <div class="row">
 
                               <!-- Single Featured Post -->
-                              <!-- <div class="col-12 col-lg-7" v-for="section in sections">
-                                  <div v-if="section.section_id == 1">
-                                    <div v-for="post in articles.slice(0,1)">
+                              <div class="col-12 col-lg-7" v-for="(post,index) in sectionsfirst.data" :key="index">
+                                  
+                                    
                                         <div class="single-blog-post featured-post" >
                                           <div class="card" >
                                               <a href="#"><img src="@/assets/images/16.jpg" alt="" style="height: 250px; width: 400px;" class="card-body"></a>
                                           </div>
+                                          <br>
                                           <nuxt-link :to=" '/article/' +post.id" class="post-data">
                                               
                                               <div class="post-title">
                                                   <h4>{{post.headline}}</h4>
                                               </div>
                                               <div class="post-meta">
-                                                  <p class="post-excerp">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. <span style="color: red">details</span>.. </p>
+                                                  <p class="post-excerp">{{post.content}}<span style="color: red">details</span>.. </p>
                                                   
                                               </div>
                                           </nuxt-link>
                                         </div>
-                                    </div>
                                     
-                                  </div>
-                              </div> -->
+                                
+                              </div>
 
-                              <!-- <div class="col-12 col-lg-5">
-                                  <div class="single-blog-post small-featured-post d-flex" v-for="post in articles.slice(0,4)">
+                              <div class="col-12 col-lg-5">
+                                  <div class="single-blog-post small-featured-post d-flex" v-for="(post,index) in section2.data" :key="index">
                                       <div class="post-thumb">
                                         <a href="#"><img src="@/assets/images/16.jpg" alt=""></a>
                                       </div>
@@ -52,7 +51,7 @@
                                           </div>
                                       </div>
                                 </div>
-                              </div> -->
+                              </div>
                           </div>
                       </div>
 
@@ -118,7 +117,7 @@
                           <div class="row">
 
                               <!-- Single Post -->
-                            <div class="col-12 col-md-4" v-for="post in articles">
+                            <!-- <div class="col-12 col-md-4" v-for="post in articles">
                                 <div class="single-blog-post style-3">
                                     <div class="post-thumb">
                                         <a href="#"><img src="img/bg-img/12.jpg" alt=""></a>
@@ -134,7 +133,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                           </div>
                           <a href="" class="pull-right">More News...</a>
@@ -210,8 +209,9 @@
       <h1>GET API Result Index</h1>
       <div>
         <ul>
-          <li v-for="article in articles" class="item">
-            <nuxt-link :to="'/article/' + article.id">{{ article.title }}</nuxt-link>
+          <li v-for="(article,index) in posts" :key="index" class="item">
+            console.log("ok")
+            <nuxt-link :to="'/article/' + article.id">{{ article.id }}</nuxt-link>
           </li>
         </ul>
       </div>
@@ -246,7 +246,7 @@ export default {
   components: {
     Logo,Hero,Featured,Carousel1,NewsBlock1,NewsBlock2,FeaturedSmall,News,OldNews,MainNavbar
   },
-
+ 
   data() {
     return {
       title : 'Home',
@@ -267,7 +267,7 @@ export default {
         created_by: ''
       },
 
-      
+    
       
     }
   },
@@ -284,14 +284,50 @@ export default {
       ]
     };
   },
-  async asyncData ({ params }) {
-    let search = {section:1,limit:1};
-    const ar = await axios.post('/api/frontend/posts',search);
+  async asyncData () {
+  
+    let secParam1 = {section:1,limit:1};
+    let secParam2 = {section:2,limit:3};
+    let secParam3 = {section:3,limit:4};
+    let secParam4 = {section:4,limit:4};
     const cat = await axios.get('/api/frontend/categories');
-    const se = await axios.get('/api/frontend/postSections');
-    console.log(ar)
-    return {articles:ar.data, sections: se.data, categories: cat.data}
+    const postall = await axios.post('/api/frontend/posts');
+    const secone = await axios.post('/api/frontend/posts',secParam1);
+    const sec2 = await axios.post('/api/frontend/posts',secParam2);
+    const sec3 = await axios.post('/api/frontend/posts',secParam3);
+    const sec4 = await axios.post('/api/frontend/posts',secParam4);
+
+    // let searchCategory = {section:'',category:1,limit:1};
+    // const ar = await axios.post('/api/frontend/posts',searchCategory);
+    
+    
+    return {
+        categories:cat.data, 
+        sectionsfirst:secone.data,
+        latestPost:secone.data,
+        section2:sec2.data,
+        section3:sec3.data,
+        section4:sec4.data,
+    
+    }
+
+    // const config = {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept' : 'application/json'
+    //     }
+    //   }
+
+    //   try{
+    //     const res = await axios.post('/api/frontend/posts', config)
+
+    //     this.allPos = res.data.results;
+    //   } catch(err){
+    //     console.log(err)
+    //   }
   },
+
+
 
   // async asyncSection () {
    
@@ -301,15 +337,16 @@ export default {
 
 //  async created(){
 //       const config = {
+//         method: 'POST',
 //         headers: {
 //           'Accept' : 'application/json'
 //         }
 //       }
 
 //       try{
-//         const res = await axios.get('/api/frontend/categories', config)
+//         const res = await axios.post('/api/frontend/posts', config)
 
-//         this.categories = res.data.results;
+//         this.allPos = res.data.results;
 //       } catch(err){
 //         console.log(err)
 //       }
@@ -319,9 +356,7 @@ export default {
 
   
   methods:{
-      //   async fetchSomething() {
-      //   const ip = await this.$axios.$get('http://icanhazip.com')
-      //   this.ip = ip
+      
         
       
      
@@ -331,9 +366,11 @@ export default {
         // this.fetchBranches();
         // this.getPermission()
     },
+
     computed: {
-      ...mapGetters(['posts']),
+      ...mapGetters(["posts"]),
     },
+    
   //  created() {
   //    this.$store.dispatch('setPosts', this.loadedPosts)
   //  },
