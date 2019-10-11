@@ -6,15 +6,16 @@
           
           
           <b-nav-item-dropdown v-if="category.children.length>0"  :text="category.label" right >
+            <nuxt-link :to="'/category/'+category.id+'/'+category.label">{{category.label}}</nuxt-link>
             <b-dropdown-item v-for="(item,keyi) in category.children" v-bind:key="keyi">
-              <nuxt-link :to="'/' + item.label">{{item.label}}</nuxt-link>
+              <nuxt-link :to="'/category/'+item.id+'/' + item.label">{{item.label}}</nuxt-link>
               </b-dropdown-item>
               
          </b-nav-item-dropdown>
           
           <div v-else >
               <b-nav-item >
-                <nuxt-link :to=" '/' + category.label">{{category.label}} </nuxt-link>
+                 <nuxt-link :to="'/category/'+'/'+category.id+category.label">{{category.label}}</nuxt-link>
                 </b-nav-item>
           </div>
 
