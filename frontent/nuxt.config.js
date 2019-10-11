@@ -107,7 +107,7 @@ export default {
     */
 
    env: {
-    apiBaseUrl: 'http://api.banglapress.org/'  
+    apiBaseUrl: 'http://api.banglapress.org'  
   },
 
   server: {
