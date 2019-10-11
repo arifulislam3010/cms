@@ -20,7 +20,9 @@ import Carousel1 from "@/components/carousels/Carousel1";
 import NewsBlock1 from "@/components/home/NewsBlock1";
 import NewsBlock2 from "@/components/home/NewsBlock2";
 import Footer from "@/components/Footer";
-
+import { mapState,mapGetters } from "vuex";
+import store from "@/store";
+import {GET_POST} from "@/store/action.type";
 export default {
   components: {
     Logo,
@@ -52,6 +54,18 @@ export default {
 
   mounted() {
     this.$nextTick(function() {});
+    // this.getPost();
+  },
+  methods:{
+    getPost(){
+      this.$store.dispatch(GET_POST)
+        .then(response=>{
+           alert('ss');
+        })
+        .catch(error=>{
+            alert('ssaaaaa');
+        });
+    }
   }
 };
 </script>

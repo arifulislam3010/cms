@@ -2,9 +2,9 @@
 <template>
   <div class="card">
         <div class="container-fluid">
-            <!-- <button class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Topic</button>
-
-            <form class="form-inline contct my-2 my-lg-0 pull-right">
+            <!-- <button  @click="openModal"><i class="fa fa-life-bouy"></i> New News</button> -->
+            <a href="/news/add" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New News</a>
+            <!-- <form class="form-inline contct my-2 my-lg-0 pull-right">
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
             </form>
