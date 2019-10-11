@@ -11,8 +11,8 @@
     <div class="blog-area section-padding-0-80" >
       <div class="container" >
         <div class="row">
-          <div v-for="(post,index) in sposts.data" :key="index">
-            <div v-if="post.id === 16">
+          <div >
+            <div >
               <div class="col-12 col-lg-8">
             <div class="blog-posts-area">
               <!-- Single Featured Post -->
@@ -44,40 +44,9 @@
                     <p class="post-author">
                       By <a href="#">{{post.created_by}}</a>
                     </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nam eu metus sit amet odio sodales placerat. Sed varius
-                      leo ac leo fermentum, eu cursus nunc maximus. Integer
-                      convallis nisi nibh, et ornare neque ullamcorper ac. Nam
-                      id congue lectus, a venenatis massa. Maecenas justo
-                      libero, vulputate vel nunc id, blandit feugiat sem.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Pellentesque consectetur, purus imperdiet volutpat
-                      tincidunt, eros sem mollis quam, ut placerat urna neque at
-                      massa. Proin vitae pulvinar justo. Donec vel placerat
-                      enim, at ultricies risus. In posuere luctus sem, ac
-                      dapibus felis semper quis. Integer ex ante, semper at
-                      velit nec, ultrices aliquet diam. Donec gravida non metus
-                      blandit facilisis. Cras tincidunt, lorem aliquam molestie
-                      eleifend, libero dui volutpat dui, nec sodales massa
-                      libero ut metus. Mauris pretium elit ut dapibus consequat.
-                      Nam ut lorem nec sem dignissim gravida. Duis fringilla,
-                      augue eget lacinia tincidunt, neque leo maximus sem, sed
-                      tristique enim orci id quam.
-                    </p>
-                    <p>
-                      Donec turpis erat, scelerisque id euismod sit amet,
-                      fermentum vel dolor. Nulla facilisi. Sed pellentesque
-                      lectus et accumsan aliquam. Fusce lobortis cursus quam, id
-                      mattis sapien. Aliquam erat volutpat. Aliquam placerat,
-                      est quis sagittis tincidunt, ipsum eros posuere mi, ut
-                      finibus quam sem eget ex. Interdum et malesuada fames ac
-                      ante ipsum primis in faucibus. Donec commodo quis enim ac
-                      auctor. Ut et mollis felis, sit amet ultricies est.
-                      Suspendisse sed faucibus tortor.
-                    </p>
+                    <div>
+                      {{post.content}}
+                    </div>
                     <a href="#" class="related--post"
                       >Related: Facebook announces changes to combat election
                       meddling</a
@@ -595,6 +564,9 @@ export default {
     return {
       id: this.$route.params.id,
       title: this.title,
+      sposts: [
+          this.$route.params.id
+      ],
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
@@ -610,10 +582,19 @@ export default {
    const postall = await axios.post('/api/frontend/posts');
 
    return {sposts: postall.data}
- } 
+ } ,
+
+ computed: {
+    
+    post() {
+      return this.sposts.find(el => el.id === this.id);
+    }
+  },
 
  
 };
+
+
 </script>
 
 <style scoped>

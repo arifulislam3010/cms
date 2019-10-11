@@ -6,11 +6,16 @@
           
           
           <b-nav-item-dropdown v-if="category.children.length>0"  :text="category.label" right >
-              <b-dropdown-item href="#" v-for="(item,keyi) in category.children" v-bind:key="keyi">{{item.label}}</b-dropdown-item>
+            <b-dropdown-item v-for="(item,keyi) in category.children" v-bind:key="keyi">
+              <nuxt-link :to="'/' + item.label">{{item.label}}</nuxt-link>
+              </b-dropdown-item>
+              
          </b-nav-item-dropdown>
           
           <div v-else >
-              <b-nav-item href="#">{{category.label}}</b-nav-item>
+              <b-nav-item >
+                <nuxt-link :to=" '/' + category.label">{{category.label}} </nuxt-link>
+                </b-nav-item>
           </div>
 
           <!-- <div v-else-if="category.children != null"> 
@@ -33,7 +38,7 @@
 import axios from '@/plugins/axios'
 export default {
   name: 'MainNavnar',
-  props: ['categories', 'id'],
+  props: ['categories', 'id','category'],
   data() {
     return{
       // category: {
