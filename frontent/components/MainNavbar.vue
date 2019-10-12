@@ -12,7 +12,8 @@
 
             <div v-if="category.children.length>0">
               <button :id="` popover-target-${category.id} `" style=" margin-left: 6px;" type="button" class="btn btn-outline-light">
-              {{category.label}} <span><font-awesome-icon :icon="['fas', 'chevron-down']"/> </span>
+                <nuxt-link :to="'/category/'+category.id+'/'+category.label">{{category.label}} <span><font-awesome-icon :icon="['fas', 'chevron-down']"/> </span></nuxt-link>
+              
             </button>
             <b-popover :target="` popover-target-${category.id} `" triggers="hover" placement="bottom" v-for="(item,keyi) in category.children" v-bind:key="keyi">
               
