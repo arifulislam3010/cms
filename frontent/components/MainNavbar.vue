@@ -5,26 +5,27 @@
         <div v-for="(category,key ) in categories" v-bind:key="key">
           
           
-          <b-nav-item-dropdown v-if="category.children.length>0"  :text="category.label" right >
-            <b-dropdown-item v-for="(item,keyi) in category.children" v-bind:key="keyi">
-              <nuxt-link :to="'/' + item.label">{{item.label}}</nuxt-link>
-              </b-dropdown-item>
-              
-         </b-nav-item-dropdown>
-          
-          <div v-else >
-              <b-nav-item >
-                <nuxt-link :to=" '/' + category.label">{{category.label}} </nuxt-link>
-                </b-nav-item>
-          </div>
+         
 
-          <!-- <div v-else-if="category.children != null"> 
-              <b-nav-item-dropdown :text="category.label">
-                
-                  <b-dropdown-item href="#" >{{category.label}}</b-dropdown-item>
-                
-              </b-nav-item-dropdown>
-          </div> -->
+          <div class="text-center my-3" >
+  
+
+            <div v-if="category.children.length>0">
+              <button :id="` popover-target-${category.id} `" style=" margin-left: 6px;" type="button" class="btn btn-outline-light">
+              {{category.label}} <span><font-awesome-icon :icon="['fas', 'chevron-down']"/> </span>
+            </button>
+            <b-popover :target="` popover-target-${category.id} `" triggers="hover" placement="bottom" v-for="(item,keyi) in category.children" v-bind:key="keyi">
+              
+              <nuxt-link :to="'/' + item.label">{{item.label}}</nuxt-link>
+            </b-popover>
+            </div>
+
+            <button v-else style= " margin-left: 6px; color: #fff;" type="button" class="btn btn-outline-light">
+              
+                <nuxt-link :to=" '/' + category.label">{{category.label}} </nuxt-link>
+               
+          </button>
+          </div>
           
           
         
