@@ -8,13 +8,23 @@
     
    <div>
         <b-navbar toggleable="lg" type="dark" variant="danger">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+      <b-navbar-brand href="/">Home</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <b-collapse id="nav-collapse" is-nav>
             
               <MainNavbar :categories = "categories"/>
+              <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <button class="btn-danger" style="">
+            <font-awesome-icon :icon="['fas', 'search']"/>
+          </button>
+        </b-nav-form>
+
+        
+      </b-navbar-nav>
           </b-collapse>
       </b-navbar>
       </div>
