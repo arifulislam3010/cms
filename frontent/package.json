@@ -6,9 +6,11 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev2": "nuxt –hostname banglapress.org –port 49000",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "deploy":"pm2 start npm –name frontent — start"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -21,6 +23,8 @@
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "tb-skeleton": "^0.3.6",
+    "vue-content-loader": "^0.2.2",
+    "vue-content-loading": "^1.6.0",
     "vue-jquery": "^1.0.6"
   },
   "devDependencies": {

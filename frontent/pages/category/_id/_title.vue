@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="margin-top:10px">
       <div class="col-md-12">
           <div class="row">
               <div class="col-md-8">
@@ -9,9 +9,7 @@
                   <div v-else class="row mb-30">
                     <div v-for="(item,key) in posts.data" v-bind:key="key" class="col-md-4">
                         <nuxt-link :to="'/article/'+item.id+'/'+item.shoulder">
-                        <div class="card-deck">
                             <card :item="item"></card>
-                        </div>
                         </nuxt-link>
                     </div>
                   </div>
@@ -30,7 +28,7 @@ import Logo from "@/components/Logo.vue";
 import Hero from "@/components/Hero.vue";
 import Featured from "@/components/FeaturedPost/Featured.vue";
 import Carousel1 from "@/components/carousels/Carousel1";
-import card from "@/components/share/card";
+import card from "@/components/share/post/Card";
 
 export default {
   name:"CategoryPage",
