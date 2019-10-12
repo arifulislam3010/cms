@@ -16,118 +16,62 @@ export default {
       icon: 'fa fa-money',
       url: '/news/add',
       children: [
-        // {
-        //   name: 'Add News',
-        //   url: '/news/add',
-        //   icon: 'fa fa-life-bouy'
-        // },
         {
           name: 'General News',
           url: '/news/list',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Create News',
+              url: '/news/add',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'List News',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Schedule News',
+              url: '/news/scheduled-news',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: "Reporter's News",
+              url: '/news/reporters-news',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
           name: 'Topic News',
           url: '/news/scheduled-news',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Create Topic',
+              url: '/news/add',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Topic News',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'List Topic',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
           name: "Arcrive",
           url: '/news/reporters-news',
           icon: 'fa fa-life-bouy'
         },
-
-
       ]
     },
-
-    // {
-    //   name: 'Scheduled',
-    //   url: '/news/scheduled-news',
-    //   icon: 'fa fa-life-bouy',
-    //   children: [
-    //     {
-    //       name: 'List News',
-    //       url: '/news/list',
-    //       icon: 'fa fa-life-bouy',
-    
-    //     },
-    //     {
-    //       name: 'Add News',
-    //       url: '/news/add',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name: "reporter's",
-    //   url: '/news/reporters-news',
-    //   icon: 'fa fa-life-bouy',
-    //   children: [
-    //     {
-    //       name: 'List News',
-    //       url: '/news/list',
-    //       icon: 'fa fa-life-bouy',
-    
-    //     },
-    //     {
-    //       name: 'Add News',
-    //       url: '/news/add',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
-    {
-      name: 'Category',
-      url: '/settings/category',
-      icon: 'fa fa-money',
-      children: [
-        {
-          name: 'category',
-          url: '/settings/category',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'Category News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy'
-        },
-      ]
-    },
-    // {
-    //   name: 'Topic',
-    //   url: '/settings/topic',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Topic',
-    //       url: '/settings/topic',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'Topic News',
-    //       url: '/news/list',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name: 'Area',
-    //   url: '/settings/area',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Area',
-    //       url: '/settings/area',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'Area News',
-    //       url: '/news/list',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
     {
       name: 'Media Manager',
       url: '/gallery/list',
@@ -137,18 +81,37 @@ export default {
         {
           name: 'Photo Gallery',
           url: '/gallery/list',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Add Photo',
+              url: '/gallery/add-album',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Photo List',
+              url: '/gallery/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
           name: 'Video Gallery',
           url: '/gallery/list',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Add Video',
+              url: '/gallery/add-album',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Video List',
+              url: '/gallery/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
-        // {
-        //   name: 'add album',
-        //   url: '/gallery/add-album',
-        //   icon: 'fa fa-life-bouy'
-        // },
       ]
     },
     {
@@ -183,42 +146,6 @@ export default {
         },
       ]
     },
-    // {
-    //   name: 'Video Gallery',
-    //   url: '/gallery/list',
-    //   icon: 'fa fa-life-bouy',
-    //   url: '/gallery/list',
-    //   children: [
-    //     {
-    //       name: 'list',
-    //       url: '/gallery/list',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'add album',
-    //       url: '/gallery/add-album',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
-
-    // {
-    //   name: 'Items',
-    //   url: '/category',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Category',
-    //       url: '/category',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'item',
-    //       url: '/item',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
     {
       name: 'Admin Controls',
       url: '/user-role',
@@ -248,12 +175,12 @@ export default {
     },
     
     {
-      name: 'Geo Graphical Management',
+      name: 'Geo Graphical',
       url: '/GGM',
       icon: 'fa fa-money',
     },
     {
-      name: 'Language Management',
+      name: 'Language',
       url: '/lm',
       icon: 'fa fa-money',
     },
@@ -264,7 +191,7 @@ export default {
     },
     
     {
-      name: 'Theme Management',
+      name: 'Theme',
       url: '/tm',
       icon: 'fa fa-money',
       children: [

@@ -1,5 +1,5 @@
 <template>
-  <div class="app" style="text-transform: uppercase;font-family:Sans-Serif; font-size: 15px;">
+  <div class="app">
     <AppHeader fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile/>
       <b-link class="navbar-brand" to="#">
