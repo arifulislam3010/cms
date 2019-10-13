@@ -18,7 +18,7 @@
             <b-popover :target="` popover-target-${category.id} `" triggers="hover" placement="bottom" v-for="(item,keyi) in category.children" v-bind:key="keyi" >
               
               <div class="popbtn">
-                <nuxt-link :to="'/category/' + item.label" class="nbtn">{{item.label}}</nuxt-link>
+                <nuxt-link :to="'/category/' + item.label" class="nbtn ">{{item.label}}</nuxt-link>
               </div>
             </b-popover>
             </div>
@@ -26,7 +26,7 @@
             <div v-else>
               <button  style= " margin-left: 6px; "   type="button" class="btn btn-danger">
               
-                <nuxt-link :to=" '/category/' + category.label" class="text-light">{{category.label}} </nuxt-link>
+                <nuxt-link :to=" '/category/' + category.label"  style="font-size: 17px; color: #fff;">{{category.label}} </nuxt-link>
                
               </button>
             </div>
@@ -84,6 +84,7 @@ export default {
 .nbtn:hover{
   background-color:brown;
   color: aliceblue;
+  font-size: 20px;
   
   /* border-bottom: 1px solid red; */
 }

@@ -19,20 +19,7 @@
                 <a href="#">Login</a>
                 <a href="#">Register</a>
               </div>
-              <!-- Search Form -->
-              <div class="search-form">
-                <form action="#" method="post">
-                  <input
-                    type="search"
-                    name="search"
-                    class="form-control"
-                    placeholder="Search"
-                  />
-                  <button type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </form>
-              </div>
+              
             </div>
           </div>
         </div>
