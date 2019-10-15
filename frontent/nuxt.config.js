@@ -40,6 +40,7 @@ export default {
     '~/assets/css/classy-nav.min.css',
     '~/assets/css/nice-select.min.css',
     '~/assets/css/owl.carousel.min.css',
+    '~/assets/css/w3.css',
   ],
   /*
   ** Plugins to load before mounting the App

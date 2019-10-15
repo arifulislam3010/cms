@@ -10,13 +10,14 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy":"pm2 start npm –name frontent — start"
+    "deploy": "pm2 start npm –name frontent — start"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
+    "@jeremyhamm/vue-slider": "^0.1.16",
     "@nuxtjs/axios": "^5.6.0",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
@@ -25,7 +26,8 @@
     "tb-skeleton": "^0.3.6",
     "vue-content-loader": "^0.2.2",
     "vue-content-loading": "^1.6.0",
-    "vue-jquery": "^1.0.6"
+    "vue-jquery": "^1.0.6",
+    "vue-sidebar-menu": "^4.3.0"
   },
   "devDependencies": {
     "bootstrap-vue": "^2.0.2"

@@ -12,9 +12,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_bootstrapvue_11b02925 from 'nuxt_plugin_bootstrapvue_11b02925' // Source: .\\bootstrap-vue.js (mode: 'all')
-import nuxt_plugin_axios_4216be14 from 'nuxt_plugin_axios_4216be14' // Source: .\\axios.js (mode: 'all')
-import nuxt_plugin_templatespluginbe434a40_dac48f0a from 'nuxt_plugin_templatespluginbe434a40_dac48f0a' // Source: .\\templates.plugin.be434a40.js (mode: 'all')
+import nuxt_plugin_bootstrapvue_19dc4860 from 'nuxt_plugin_bootstrapvue_19dc4860' // Source: .\\bootstrap-vue.js (mode: 'all')
+import nuxt_plugin_axios_67852b31 from 'nuxt_plugin_axios_67852b31' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_templatesplugin63e5d776_15a731c2 from 'nuxt_plugin_templatesplugin63e5d776_15a731c2' // Source: .\\templates.plugin.63e5d776.js (mode: 'all')
 import nuxt_plugin_vuejquery_29c6ee8a from 'nuxt_plugin_vuejquery_29c6ee8a' // Source: ..\\plugins\\vue-jquery (mode: 'all')
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'all')
 
@@ -167,16 +167,16 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_bootstrapvue_11b02925 === 'function') {
-    await nuxt_plugin_bootstrapvue_11b02925(app.context, inject)
+  if (typeof nuxt_plugin_bootstrapvue_19dc4860 === 'function') {
+    await nuxt_plugin_bootstrapvue_19dc4860(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_4216be14 === 'function') {
-    await nuxt_plugin_axios_4216be14(app.context, inject)
+  if (typeof nuxt_plugin_axios_67852b31 === 'function') {
+    await nuxt_plugin_axios_67852b31(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_templatespluginbe434a40_dac48f0a === 'function') {
-    await nuxt_plugin_templatespluginbe434a40_dac48f0a(app.context, inject)
+  if (typeof nuxt_plugin_templatesplugin63e5d776_15a731c2 === 'function') {
+    await nuxt_plugin_templatesplugin63e5d776_15a731c2(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuejquery_29c6ee8a === 'function') {
