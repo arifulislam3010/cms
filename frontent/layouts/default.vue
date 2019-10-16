@@ -11,7 +11,7 @@
   </div> -->
   
   <div>
-      <MobileNavbar />
+      <MobileNavbar :categories = "categories" />
   </div>
   </header>
     <div>
