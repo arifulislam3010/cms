@@ -112,6 +112,7 @@ const ManageNews = () => import('@/views/newsPortal/ManageNews/index')
 const AddNews = () => import('@/views/newsPortal/ManageNews/AddNews')
 const ReportersNews = () => import('@/views/newsPortal/ManageNews/ReportersNews')
 const ScheduledNews = () => import('@/views/newsPortal/ManageNews/ScheduledNews')
+const EditNewsList = () => import('@/views/newsPortal/ManageNews/EditNewsList')
 const UpdateNews = () => import('@/views/newsPortal/ManageNews/AddNews')
 // gallery 
 const Gallery = () => import('@/views/newsPortal/Gallery/index');
@@ -198,6 +199,14 @@ export default new Router({
           path: '/news/scheduled-news',
           name: 'ScheduledNews',
           component: ScheduledNews,
+          meta:{
+            forAuth:true
+          },
+        },
+        {
+          path: '/news/edit-news-list',
+          name: 'EditNewsList',
+          component: EditNewsList,
           meta:{
             forAuth:true
           },

@@ -27,6 +27,11 @@ export default {
               icon: 'fa fa-life-bouy'
             },
             {
+              name: 'Edit News',
+              url: '/news/edit-news-list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
               name: 'List News',
               url: '/news/list',
               icon: 'fa fa-life-bouy'
