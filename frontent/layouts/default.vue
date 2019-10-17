@@ -6,8 +6,12 @@
 
     <!-- Navbar Area -->
     
-   <div>
+   <!-- <div>
      <MainNavbar :categories = "categories"/>  
+  </div> -->
+  
+  <div>
+      <MobileNavbar :categories = "categories" />
   </div>
   </header>
     <div>
@@ -24,8 +28,10 @@ import axios from '@/plugins/axios'
 import Header from "~/components/Header"
 import TopHeader from "~/components/TopHeader"
 import MainNavbar from "~/components/MainNavbar"
+import MobileNavbar from "~/components/MobileNavbar"
 import Footer from '@/components/Footer'
 import Loader from '~/components/loader/Loader'
+
 export default {
   components: {
     TopHeader,
@@ -33,7 +39,8 @@ export default {
     TopHeader,
     MainNavbar,
     Footer,
-    Loader
+    Loader,
+    MobileNavbar
   },
  
   data() {
@@ -43,7 +50,7 @@ export default {
       categories:[],
       loading: false,
       
-      isHidden: false,
+      
       crossHide: true
       
     }
