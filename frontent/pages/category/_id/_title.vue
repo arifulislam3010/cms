@@ -15,7 +15,8 @@
                   </div>
               </div>
               <div class="col-md-4">
-                  
+                   <Featured></Featured>
+                   <PopularLatest></PopularLatest>
               </div>
           </div>
       </div>
@@ -26,10 +27,10 @@
 import axios from '@/plugins/axios'
 import Logo from "@/components/Logo.vue";
 import Hero from "@/components/Hero.vue";
-import Featured from "@/components/FeaturedPost/Featured.vue";
 import Carousel1 from "@/components/carousels/Carousel1";
 import card from "@/components/share/post/Card";
-
+import Featured from "@/components/share/post/featured";
+import PopularLatest from "@/components/share/post/PopularLatest";
 export default {
   name:"CategoryPage",
   components: {
@@ -38,6 +39,7 @@ export default {
     Featured,
     Carousel1,
     card,
+    PopularLatest,
   },
   data() {
     return {

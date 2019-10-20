@@ -28,7 +28,7 @@ const actions = {
     },
     ['ADD_SCROLL']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('api/scroll/',payload).then(response=>{
+            axios.post('api/scroll',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

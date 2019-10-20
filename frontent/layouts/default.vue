@@ -5,14 +5,14 @@
     <top-header />
 
     <!-- Navbar Area -->
-    
-   <!-- <div>
-     <MainNavbar :categories = "categories"/>  
-  </div> -->
   
-  <div>
+  <div v-if="isMobile">
       <MobileNavbar :categories = "categories" />
   </div>
+   <div v-else>
+     <MainNavbar :categories = "categories"/>  
+  </div>
+
   </header>
     <div>
       <nuxt />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-
+import { isMobile } from 'mobile-device-detect';
 import axios from '@/plugins/axios'
 import Header from "~/components/Header"
 import TopHeader from "~/components/TopHeader"
@@ -49,8 +49,8 @@ export default {
       title : 'Home',
       categories:[],
       loading: false,
-      
-      
+      isMobile: isMobile,
+      sidebarShow: isMobile?false:true,
       crossHide: true
       
     }

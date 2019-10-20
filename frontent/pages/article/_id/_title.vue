@@ -201,7 +201,8 @@
                   </div>
               </div>
               <div class="col-md-4">
-                  
+                  <Featured></Featured>
+                  <PopularLatest></PopularLatest>
               </div>
           </div>
       </div>
@@ -211,11 +212,14 @@
 <script>
 import axios from '@/plugins/axios'
 import SmallLoader from "@/components/share/loader/SmallLoader";
-
+import Featured from "@/components/share/post/featured";
+import PopularLatest from "@/components/share/post/PopularLatest";
 export default {
   name:"PostDetails",
   components: {
     SmallLoader,
+    PopularLatest,
+    Featured
   },
   data() {
     return {

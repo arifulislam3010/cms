@@ -124,7 +124,7 @@ const actions = {
     ['ADD_NEWS']({commit},payload){
 
         return new Promise((resolve,reject)=>{
-            axios.post('/api/post/',payload).then(response=>{
+            axios.post('/api/post',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

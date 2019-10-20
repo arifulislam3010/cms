@@ -38,10 +38,10 @@
                                     <span>
                                         <nuxt-link :to="'/category/'+category.id+'/'+category.label" >{{category.label}}</nuxt-link>
                                     </span>
-                                    <span style="float: right" @click=" chevronDown = !chevronDown">
+                                    <span style="float: right" @click="chevronDownf(key)">
                                             <font-awesome-icon :icon="['fas', 'chevron-down']"/>
                                     </span>
-                                    <div v-if=" chevronDown"  class="chevronDown">
+                                    <div class="chevronDown" :style="chevronDown==key?'display: block':'display: none'">
                                         <span>
                                             <font-awesome-icon :icon="['fas', 'hand-point-right']"/> 
                                         </span>
@@ -79,14 +79,18 @@ export default {
         return{
             mobileBurgerShow: true,
             toggle: false,
-            chevronDown:  false
+            chevronDown:  'a',
             
         }
     },
     methods: {
-        // chevronDown: function () {
-        //     chevronDown
-        // }
+        chevronDownf(key) {
+            if(key==this.chevronDown){
+                this.chevronDown='a';
+            }else{
+                this.chevronDown=key;
+            }
+        }
     }
 }
 </script>
