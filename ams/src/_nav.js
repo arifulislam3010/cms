@@ -15,6 +15,11 @@ export default {
       icon: 'fa fa-money',
       children: [
         {
+          name: 'language',
+          url: '/settings/language',
+          icon: 'fa fa-life-bouy'
+        },
+        {
           name: 'category',
           url: '/settings/category',
           icon: 'fa fa-life-bouy'
@@ -27,6 +32,11 @@ export default {
         {
           name: 'area',
           url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'tags',
+          url: '/settings/tags',
           icon: 'fa fa-life-bouy'
         },
         {
@@ -141,6 +151,7 @@ export default {
         },
       ]
     },
+
 
     // {
     //   name: 'Items',

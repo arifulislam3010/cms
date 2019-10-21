@@ -107,6 +107,7 @@ const Area = () => import('@/views/settings/area/index');
 const NewsCategory = () => import('@/views/settings/category/index');
 const NewsTopic = () => import('@/views/settings/topic/index');
 const NewsScroll = () => import('@/views/settings/scroll/index');
+const Tag = () => import('@/views/settings/tag/index');
 // news 
 const ManageNews = () => import('@/views/newsPortal/ManageNews/index')
 const AddNews = () => import('@/views/newsPortal/ManageNews/AddNews')
@@ -118,6 +119,10 @@ const Gallery = () => import('@/views/newsPortal/Gallery/index');
 const AddAlbum = () => import('@/views/newsPortal/Gallery/AddAlbum');
 
 const Role = () => import('@/views/role/index')
+
+// language 
+const Language = () => import(`@/views/settings/language/index`)
+const addLanguage = () => import(`@/views/settings/language/add`)
 
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
@@ -147,9 +152,33 @@ export default new Router({
           }
         },
         {
+          path: '/settings/language',
+          name: 'Language',
+          component: Language,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/settings/add-language',
+          name: 'addLanguage',
+          component: addLanguage,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
           path: '/settings/area',
           name: 'Area',
           component: Area,
+          meta:{
+            forAuth:true
+          }
+        },
+        {
+          path: '/settings/tags',
+          name: 'Tag',
+          component: Tag,
           meta:{
             forAuth:true
           }

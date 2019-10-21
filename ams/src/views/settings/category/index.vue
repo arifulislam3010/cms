@@ -1,11 +1,14 @@
 <template>
+<div>
+
+
   <div class="card">
         
         <!-- {{category_list}} -->
         <!-- <ShowList :list="category_list"></ShowList> -->
         <!-- {{category_list}} -->
         <!-- {{auth_permission}} -->
-        <div class="container-fluid">
+        <div class="container-fluid"  v-if="false">
             <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
@@ -52,9 +55,24 @@
         <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
         <Loader v-if="loading"></Loader>    
   </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div v-for="(i,k) in category_parents" :key="k">        
+                <RecCat :node="i"></RecCat>
+            </div>
+        </div>
+    </div>
+</div> 
 </template>
 
 <script>
+import RecCat from "./RecCom"
+
 import ShowList from '../list/ShowList'
 import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
@@ -140,7 +158,8 @@ export default {
         pagination,
         AddNcategoryModal,
         ShowList,
-        Loader
+        Loader,
+        RecCat ,
     }
 }
 </script>

@@ -13,9 +13,13 @@
                       <b-form-group>
                         <label for="Title">Topic</label>
                         <b-form-input type="text" name="Title" id="title" v-model="editTopic.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                        <div  class="help-block alert alert-danger">
-                        {{ errors.first('Title') }}
-                        </div>
+                          <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+                          <!-- {{  errors[`title`] }} -->
+                            <p v-for="(i,k) in errors[`title`]" :key="k">
+                              {{i}}
+                            </p>
+                          </div>
+
                       </b-form-group>
                     </b-col>
 
@@ -28,7 +32,6 @@
                          v-model="editTopic.parent_id" 
                          :options="topic_parents"
                          ></Treeselect>
-                        {{ errors.first('Cover') }}
                        
                       </b-form-group>
                     </b-col>
@@ -77,6 +80,7 @@ export default {
   components:{Treeselect},
     data(){
         return{
+            errors:{},
             largeModal:false,
             addLoader:false,
             item_id :'',
@@ -106,11 +110,13 @@ export default {
             })
             .catch(error=>{
                 this.addLoader = false;
-                this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
+                // this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
+                this.errors = error.response.data.errors 
             });
         },
 
         openModal(topic,index){
+            this.errors = {}
             this.largeModal = true
             this.index = index
             this.editTopic.title =topic.title

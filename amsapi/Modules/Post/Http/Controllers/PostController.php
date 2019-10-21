@@ -41,7 +41,9 @@ class PostController extends Controller
             'headline' => 'required',
             'reporter' => 'required',
             'author' => 'required',
+            'content' => 'required|min:10',    
             'status' => 'required',
+
             ]);
             // return $request->selected_areas ;
         $auth_user_id = Auth()->user()->id ;
