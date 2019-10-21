@@ -79,8 +79,7 @@ export default {
                 title: '',
                 parent_id: ''
             },
-            
-
+    
         }
     },
     methods:{

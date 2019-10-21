@@ -11,20 +11,22 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_bootstrapvue_11b02925 from 'nuxt_plugin_bootstrapvue_11b02925' // Source: .\\bootstrap-vue.js (mode: 'all')
-import nuxt_plugin_axios_4216be14 from 'nuxt_plugin_axios_4216be14' // Source: .\\axios.js (mode: 'all')
-import nuxt_plugin_templatespluginbe434a40_dac48f0a from 'nuxt_plugin_templatespluginbe434a40_dac48f0a' // Source: .\\templates.plugin.be434a40.js (mode: 'all')
+import nuxt_plugin_bootstrapvue_7b6e16e0 from 'nuxt_plugin_bootstrapvue_7b6e16e0' // Source: .\\bootstrap-vue.js (mode: 'all')
+import nuxt_plugin_axios_55e50c9e from 'nuxt_plugin_axios_55e50c9e' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_templatesplugin65e175c5_520ee926 from 'nuxt_plugin_templatesplugin65e175c5_520ee926' // Source: .\\templates.plugin.65e175c5.js (mode: 'all')
 import nuxt_plugin_vuejquery_29c6ee8a from 'nuxt_plugin_vuejquery_29c6ee8a' // Source: ..\\plugins\\vue-jquery (mode: 'all')
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
+
 // TODO: Remove in Nuxt 3: <NoSsr>
 Vue.component(NoSsr.name, {
   ...NoSsr,
-  render(h, ctx) {
+  render (h, ctx) {
     if (process.client && !NoSsr._warned) {
       NoSsr._warned = true
+
       console.warn(`<no-ssr> has been deprecated and will be removed in Nuxt 3, please use <client-only> instead`)
     }
     return NoSsr.render(h, ctx)
@@ -40,17 +42,11 @@ Vue.component('NChild', NuxtChild)
 // Component: <Nuxt>`
 Vue.component(Nuxt.name, Nuxt)
 
-// vue-meta configuration
-Vue.use(Meta, {
-  keyName: 'head', // the component option name that vue-meta looks for meta info on.
-  attribute: 'data-n-head', // the attribute name vue-meta adds to the tags it observes
-  ssrAttribute: 'data-n-head-ssr', // the attribute name that lets vue-meta know that meta info has already been server-rendered
-  tagIDKeyName: 'hid' // the property name that vue-meta uses to determine whether to overwrite or append a tag
-})
+Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
-async function createApp(ssrContext) {
+async function createApp (ssrContext) {
   const router = await createRouter(ssrContext)
 
   // Create Root instance
@@ -59,11 +55,10 @@ async function createApp(ssrContext) {
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
     router,
-
     nuxt: {
       defaultTransition,
       transitions: [ defaultTransition ],
-      setTransitions(transitions) {
+      setTransitions (transitions) {
         if (!Array.isArray(transitions)) {
           transitions = [ transitions ]
         }
@@ -80,9 +75,10 @@ async function createApp(ssrContext) {
         this.$options.nuxt.transitions = transitions
         return transitions
       },
+
       err: null,
       dateErr: null,
-      error(err) {
+      error (err) {
         err = err || null
         app.context._errored = Boolean(err)
         err = err ? normalizeError(err) : null
@@ -90,7 +86,9 @@ async function createApp(ssrContext) {
         nuxt.dateErr = Date.now()
         nuxt.err = err
         // Used in src/server.js
-        if (ssrContext) ssrContext.nuxt.error = err
+        if (ssrContext) {
+          ssrContext.nuxt.error = err
+        }
         return err
       }
     },
@@ -112,7 +110,6 @@ async function createApp(ssrContext) {
     route,
     next,
     error: app.nuxt.error.bind(app),
-
     payload: ssrContext ? ssrContext.payload : undefined,
     req: ssrContext ? ssrContext.req : undefined,
     res: ssrContext ? ssrContext.res : undefined,
@@ -121,21 +118,28 @@ async function createApp(ssrContext) {
   })
 
   const inject = function (key, value) {
-    if (!key) throw new Error('inject(key, value) has no key provided')
-    if (typeof value === 'undefined') throw new Error('inject(key, value) has no value provided')
+    if (!key) {
+      throw new Error('inject(key, value) has no key provided')
+    }
+    if (value === undefined) {
+      throw new Error('inject(key, value) has no value provided')
+    }
+
     key = '$' + key
     // Add into app
     app[key] = value
 
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
-    if (Vue[installKey]) return
+    if (Vue[installKey]) {
+      return
+    }
     Vue[installKey] = true
     // Call Vue.use() to install the plugin into vm
     Vue.use(() => {
       if (!Vue.prototype.hasOwnProperty(key)) {
         Object.defineProperty(Vue.prototype, key, {
-          get() {
+          get () {
             return this.$root.$options[key]
           }
         })
@@ -145,16 +149,16 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_bootstrapvue_11b02925 === 'function') {
-    await nuxt_plugin_bootstrapvue_11b02925(app.context, inject)
+  if (typeof nuxt_plugin_bootstrapvue_7b6e16e0 === 'function') {
+    await nuxt_plugin_bootstrapvue_7b6e16e0(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_4216be14 === 'function') {
-    await nuxt_plugin_axios_4216be14(app.context, inject)
+  if (typeof nuxt_plugin_axios_55e50c9e === 'function') {
+    await nuxt_plugin_axios_55e50c9e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_templatespluginbe434a40_dac48f0a === 'function') {
-    await nuxt_plugin_templatespluginbe434a40_dac48f0a(app.context, inject)
+  if (typeof nuxt_plugin_templatesplugin65e175c5_520ee926 === 'function') {
+    await nuxt_plugin_templatesplugin65e175c5_520ee926(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuejquery_29c6ee8a === 'function') {
@@ -184,7 +188,6 @@ async function createApp(ssrContext) {
 
   return {
     app,
-
     router
   }
 }
