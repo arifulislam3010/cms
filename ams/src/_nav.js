@@ -9,7 +9,45 @@ export default {
         // text: 'NEW'
       }
     },
-   
+    {
+      name: 'Settings',
+      url: '/settings/category',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'language',
+          url: '/settings/language',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'category',
+          url: '/settings/category',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'topic',
+          url: '/settings/topic',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'area',
+          url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'tags',
+          url: '/settings/tags',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'scroll',
+          url: '/settings/scroll',
+          icon: 'fa fa-life-bouy'
+        },
+
+
+      ]
+    },
     {
       name: 'Manage News',
       url: '/news/list',
@@ -151,6 +189,28 @@ export default {
         },
       ]
     },
+<<<<<<< HEAD
+=======
+
+
+    // {
+    //   name: 'Items',
+    //   url: '/category',
+    //   icon: 'fa fa-money',
+    //   children: [
+    //     {
+    //       name: 'Category',
+    //       url: '/category',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //     {
+    //       name: 'item',
+    //       url: '/item',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
+>>>>>>> e9d68a92c29dfeec6b605ffb4a2abacfc57ec2c2
     {
       name: 'Admin Controls',
       url: '/user-role',

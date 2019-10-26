@@ -14,70 +14,46 @@ class TagController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tags = Tag::all();
         return $tags ;
         // return  TagResources::collection(Tag::all());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('setting::create');
+    public function index2(Request $request){
+        $tag = Tag::paginate(6);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function create(Request $request){
+        $validator = $request->validate([
+            'title' => 'required',
+        ]);
+        $user = Auth()->user();    
+        $tag = new Tag ;
+        $tag->title = $request->title ;
+        $tag->created_by = $user->id ;
+        if($tag->save()){
+            return $tag ;
+        }
     }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('setting::show');
+    public function update(Request $request , $id = 0){
+        $validator = $request->validate([
+            'title' => 'required',
+        ]);
+        
+        $user = Auth()->user() ;
+        $tag = Tag::findOrfail($id);
+        $tag->title = $request->title ;
+        $tag->update_by = $user->id ;
+        if($tag->save()){
+            return $tag ;
+        }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('setting::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrfail($id);
+        if($tag->delete()){
+            return $tag ;
+        }
     }
 }

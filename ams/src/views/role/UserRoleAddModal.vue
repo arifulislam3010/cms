@@ -7,10 +7,13 @@
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Role Name</label>
                     <div class="col-sm-10">
                     <input name="Name" v-validate="'required'" v-model="get_permission.role_name" type="text" class="form-control" id="inputPassword3" placeholder="Roll Name">
-                     <p v-if="!get_permission.role_name" style="color:red">*required</p>   
-                    <!-- <div v-show="errors.has('Name')" class="help-block alert alert-danger">
-                        {{ errors.first('Name') }}
-                    </div> -->
+                  
+                    <div v-show="errors.hasOwnProperty('name')" class="help-block alert alert-danger">
+                        <p v-for="(i,k) in errors[`name`]" :key="k">
+                            {{i}}
+                        </p>
+                    </div> 
+
                     </div>
                 </div>
             </div>
@@ -152,6 +155,7 @@ import { mapState,mapGetters } from "vuex"
 export default {
     data(){
         return{
+            errors:{},
             is_update : false ,
             largeModal:false ,
             addLoader:false, 
@@ -169,6 +173,7 @@ export default {
                     this.$parent.emptyRole()
                     this.$iziToast.success({position:'topRight',title:'Success',message:"Role Added"})       
                 }).catch(error=>{
+                    this.errors = error.response.data.errors
                     this.$iziToast.error({position:'topRight',title:'Error',message:"Something Went Wrong !!"})       
                 })
             }else{
@@ -177,11 +182,13 @@ export default {
                     this.$parent.emptyRole()
                     this.$iziToast.success({position:'topRight',title:'Success',message:"Role Added"})       
                 }).catch(error=>{
+                    this.errors = error.response.data.errors
                     this.$iziToast.error({position:'topRight',title:'Error',message:"Something Went Wrong !!"})       
                 })
             }
         },
         OpenModal(){
+            this.errors = {}
             this.largeModal = true 
             console.log('large modal')
         },

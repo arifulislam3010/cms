@@ -21,6 +21,9 @@ class TopicController extends Controller
 
     public function store(Request $request,$id=0)
     {
+        $validate = $request->validate([
+            'title' => 'required'
+        ]);
 
         $topic = $request->isMethod('put') ? Topic::findOrFail($id) : new Topic;
         $topic -> title = $request->input('title');

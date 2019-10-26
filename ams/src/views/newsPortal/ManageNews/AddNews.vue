@@ -5,21 +5,42 @@
         <div class="col-sm-6 form-group">
           <label>Shoulder</label>
           <input v-model="news_data.shoulder" class="form-control" />
-          <p v-if="news_data.shoulder.length<1" style="color:red">*required</p>
+          <!-- <p v-if="news_data.shoulder.length<1" style="color:red">*required</p> -->
+          <div v-show="errors.hasOwnProperty('shoulder')" class="help-block alert alert-danger">
+            <p v-for="(i,k) in errors[`shoulder`]" :key="k">
+              {{i}}
+            </p>
+          </div>          
           <label>Headline</label>
           <input v-model="news_data.headline" class="form-control" />
-          <p v-if="news_data.headline.length<1" style="color:red">*required</p>
+          <!-- <p v-if="news_data.headline.length<1" style="color:red">*required</p> -->
+          <div v-show="errors.hasOwnProperty('headline')" class="help-block alert alert-danger">
+            <p v-for="(i,k) in errors[`headline`]" :key="k">
+              {{i}}
+            </p>
+          </div>           
           <label>Hanger</label>
           <input v-model="news_data.hanger" class="form-control" />
-          <p v-if="news_data.hanger.length<1" style="color:red">*required</p>
+          <!-- <p v-if="news_data.hanger.length<1" style="color:red">*required</p> -->
           <label>Reporter</label>
           <Multiselect v-model="news_data.reporter" :options="user_list" track-by="id" label="name"></Multiselect>
-          <p v-if="news_data.reporter.length<1" style="color:red">*required</p>         
+          <div v-show="errors.hasOwnProperty('reporter')" class="help-block alert alert-danger">
+            <p v-for="(i,k) in errors[`reporter`]" :key="k">
+              {{i}}
+            </p>
+          </div>          
+          <!-- <p v-if="news_data.reporter.length<1" style="color:red">*required</p>          -->
           <!-- <input v-model="news_data.reporter" class="form-control" /> -->
           <hr />
           <label>Author</label>
           <Multiselect v-model="news_data.author" :options="user_list" track-by="id" label="name"></Multiselect>
-          <p v-if="news_data.author.length<1" style="color:red">*required</p>         
+          <div v-show="errors.hasOwnProperty('author')" class="help-block alert alert-danger">
+            <p v-for="(i,k) in errors[`author`]" :key="k">
+              {{i}}
+            </p>
+          </div>         
+         
+          <!-- <p v-if="news_data.author.length<1" style="color:red">*required</p>          -->
         
           <!-- <label>User</label>
           <Multiselect v-model="news_data.user" :options="user_list" track-by="id" label="name"></Multiselect>
@@ -36,7 +57,12 @@
           ></Multiselect>
           <label>Content</label>
           <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor>
-          <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>         
+          <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
+            <div v-show="errors.hasOwnProperty('content')" class="help-block alert alert-danger">
+              <p v-for="(i,k) in errors[`content`]" :key="k">
+                {{i}}
+              </p>
+            </div>           
           <hr />
           <label>Featured Photo</label>
           <div class="input-group mb-3">
@@ -207,6 +233,7 @@ export default {
       // test1:[],
       // test2:'',
       // test3:'',
+      errors:{},
       view_news:true ,
       continue_editing: false ,
       continue_creating: false ,
@@ -401,6 +428,7 @@ export default {
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
             this.addLoader = false 
+            this.errors =  error.response.data.errors 
         })
       }else{
         let payload = {
@@ -414,6 +442,7 @@ export default {
         }).catch(error=>{
             this.$iziToast.error({position:'topRight',title:'error',message:"News not added"})
             this.addLoader = false 
+            this.errors =  error.response.data.errors 
         })        
       }
     }, 

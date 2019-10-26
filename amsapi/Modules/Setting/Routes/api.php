@@ -20,6 +20,14 @@ Route::prefix('api/topic')->middleware('auth:api')->group(function(){
 //Area
 Route::prefix('api/')->group(function() {
 
+	//tag
+	Route::prefix('tag')->middleware(['auth:api'])->group(function(){
+		Route::get('/list/all','TagController@index');
+		Route::get('/list','TagController@index2');
+		Route::post('/','TagController@create');
+		Route::put('/{id}','TagController@update');
+		Route::delete('/{id}','TagController@destroy');
+	});
 	// category
 	Route::prefix('category')->middleware(['auth:api'])->group(function(){
 		Route::get('/list','CategoryController@index');
@@ -53,11 +61,7 @@ Route::prefix('api/')->group(function() {
 		Route::put('/{id}','ScrollController@update');
 		Route::delete('/{id}','ScrollController@destroy');
 	});
-	Route::prefix('tag')->middleware(['auth:api'])->group(function(){
-		Route::get('/',function(){
-			return "ok" ;
-		});
-	});
+
 });
 
 // Route::prefix('topic')->middleware(['auth:api'])->group(function() {

@@ -12,9 +12,12 @@
                       <b-form-group>
                         <label for="Title">Name</label>
                         <b-form-input type="text" name="Title" id="Title" v-model="newScroll.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
-                        <div  class="help-block alert alert-danger">
-                        *{{ errors.first('Title') }}
-                        </div>
+                          <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+                          <!-- {{  errors[`title`] }} -->
+                            <p v-for="(i,k) in errors[`title`]" :key="k">
+                              {{i}}
+                            </p>
+                          </div>
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -67,6 +70,7 @@ export default {
     data(){
         
         return{
+            errors:{},
             largeModal:false,
             addLoader:false,
             update: false ,
@@ -90,16 +94,21 @@ export default {
                 }
                 this.$store.dispatch('UPDATE_SCROLL',payload).then(response=>{
                   this.$parent.getScrolls()
-                }) 
+                }).catch(error=>{
+                  this.errors = error.response.data.errors
+                })
             }else{
                 this.$store.dispatch('ADD_SCROLL',this.newScroll).then(response=>{
                   this.$parent.getScrolls()
+                }).catch(error=>{
+                   this.errors = error.response.data.errors
                 })  
             }
 
         },
 
         openModal(){
+            this.errors = {}
             this.largeModal = true
             if(!this.update){              
                 this.newScroll.title =null
