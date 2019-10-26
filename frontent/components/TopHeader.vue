@@ -10,14 +10,18 @@
             <!-- Logo -->
             <div class="logo">
               <a style="width:250px;" href="/"><img src="@/assets/images/logo.png" alt=""/></a>
+              <i class="fab fa-500px"></i>
             </div>
 
             <!-- Login Search Area -->
             <div class="login-search-area d-flex align-items-center">
               <!-- Login -->
               <div class="login d-flex">
-                <a href="#">Login</a>
+                <a href="#"><i class="fab fa-500px"></i></a>
                 <a href="#">Register</a>
+                <li target="_blank"><a href="asas" title="Facebook page"><i class="facebook fab fa-facebook-f"></i></a></li>
+                          <li target="_blank"><a href="ss" title="Twitter page"><i class="twitter fab fa-twitter"></i></a></li>
+                          <li  target="_blank"><a href="" title="youtube page"><i class="youtube fab fa-youtube"></i></a></li>
               </div>
               
             </div>

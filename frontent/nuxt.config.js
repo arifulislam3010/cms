@@ -34,6 +34,7 @@ export default {
     'jquery',
     // '~/assets/css/bootstrap.min.css',
     '~/assets/css/owl.carousel.min.css',
+    '~/assets/css/fontawsome.css',
     '~/assets/css/animate.css',
     '~/assets/css/magnific-popup.css',
     '~/assets/css/custom-icon.css',

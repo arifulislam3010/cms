@@ -33,6 +33,14 @@ class PostsController extends Controller
         $category     = ($request->has('category'))?$request['category']:null;
         $limit     = ($request->has('limit'))?$request['limit']:10;
         $search     = ($request->has('search'))?$request['search']:null;
+        $popular     = ($request->has('popular'))?$request['popular']:null;
+        $latest     = ($request->has('latest'))?$request['latest']:null;
+        
+        if($popular==1){
+             $post = Post::select('posts.*')->orderBy('posts.view', 'DESC')->paginate($limit);
+            return PostResource::collection($post);
+        }
+    
         $post = Post::select('posts.*')
         ->when($section,function($q) use($section){return $q->join('post_sections','post_sections.post_id','=','posts.id')->where('post_sections.section_id', $section);})
         ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id', $category);})
@@ -50,6 +58,30 @@ class PostsController extends Controller
        $category = Category::whereNull('parent_id')->get();
        return CategoryResource::collection($category);
    }
+   
+   public function homeCategory(Request $request)
+   {
+       $limit     = ($request->has('limit'))?$request['limit']:10;
+       $categories = Category::where('home',1)->get();
+       $posts = [];
+       $i = 0;
+       
+       foreach ($categories as $item) {
+           $post = Post::select('posts.*')
+           ->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id', $item->id)
+           ->orderBy('posts.id', 'DESC')
+            ->paginate($limit);
+           $posts[$i] = PostResource::collection($post);
+           $i=$i+1;
+       }
+       
+       return response()->json([
+            'categories'  => $categories,
+            'posts'        => $posts,
+        ],200);
+   }
+   
+   
 
 
     public function postSection ()
