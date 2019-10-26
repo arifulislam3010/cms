@@ -27,6 +27,13 @@ Route::prefix('post')->middleware('auth:api')->group(function(){
 //     });
 
 // });
+Route::prefix('poll')->middleware('auth:api')->group(function(){
+    Route::get('/list','PollController@index');
+    Route::post('/','PollController@store');
+    Route::put('/','PollController@store');
+    Route::delete('/{id}','PollController@destroy');
+});
+
 Route::middleware('auth:api')->get('/post', function (Request $request) {
     return $request->user();
 });
