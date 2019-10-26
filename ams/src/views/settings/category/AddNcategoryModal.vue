@@ -91,6 +91,7 @@ export default {
     methods:{
 
         addCategory(){
+
           this.addLoader = true  
           if(this.update){
             this.newCategory.parent_id = this.selected_parent 
@@ -102,7 +103,6 @@ export default {
               this.$parent.getCategories()
               this.addLoader = false
             }).catch(error=>{
-              // alert(error)
               this.errors = error.response.data.errors
               this.addLoader = false
               this.error_list = error.data
