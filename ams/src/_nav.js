@@ -9,16 +9,30 @@ export default {
         // text: 'NEW'
       }
     },
+      {
+        // todo 
+        name: 'language',
+        url: 'language/add',
+        icon: 'fa fa-life-bouy',
+        children: [
+          {
+            name: 'list',
+            url: '/language/list',
+            icon: 'fa fa-life-bouy',
+          },
+          {
+            name: 'add',
+            url: '/language/add',
+            icon: 'fa fa-life-bouy',
+          },
+
+        ]
+      },
     {
       name: 'Settings',
       url: '/settings/category',
       icon: 'fa fa-money',
       children: [
-        {
-          name: 'language',
-          url: '/settings/language',
-          icon: 'fa fa-life-bouy'
-        },
         {
           name: 'category',
           url: '/settings/category',
@@ -88,13 +102,32 @@ export default {
           name: 'List News',
           url: '/news/list',
           icon: 'fa fa-life-bouy',
-    
+
         },
         {
           name: 'Add News',
           url: '/news/add',
           icon: 'fa fa-life-bouy'
         },
+      ]
+    },
+
+    {
+      name: 'Manage Poll',
+      url: '/poll/list',
+      icon: 'fa fa-life-bouy',
+      children: [
+        {
+          name: 'PollList',
+          url: '/poll/list',
+          icon: 'fa fa-life-bouy',
+        },
+        // {
+        //   name: 'AddPoll',
+        //   url: '/poll/add',
+        //   icon: 'fa fa-life-bouy',
+        // },
+
       ]
     },
     {
@@ -106,7 +139,7 @@ export default {
           name: 'List News',
           url: '/news/list',
           icon: 'fa fa-life-bouy',
-    
+
         },
         {
           name: 'Add News',

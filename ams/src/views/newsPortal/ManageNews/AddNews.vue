@@ -203,10 +203,10 @@
 import Vue from "vue";
 import Multiselect from "vue-multiselect";
 import CKEditor from "@ckeditor/ckeditor5-vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { ToggleButton } from "vue-js-toggle-button";
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import datetime from "vuejs-datetimepicker";
 import ContentManager from '../../content/index'
 import MorePhoto from "./MorePhoto"
