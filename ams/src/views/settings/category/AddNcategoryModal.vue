@@ -1,7 +1,8 @@
 <template>
     <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
+       
         <form @submit.prevent="addCategory" >
-
+          
             <b-row>
               <b-col sm="12">
                 <b-card>
@@ -13,12 +14,15 @@
                       <b-form-group>
                         <label for="Title">Name</label>
                         <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
-                        <div  class="help-block alert alert-danger">
-                        {{ errors.first('Title') }}
-                        </div>
-                        <!-- <div v-show="errors.has('Title')" class="help-block alert alert-danger">
+                        <!-- <div  class="help-block alert alert-danger">
                         {{ errors.first('Title') }}
                         </div> -->
+                        <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+                        <!-- {{  errors[`title`] }} -->
+                          <p v-for="(i,k) in errors[`title`]" :key="k">
+                            {{i.replace(`title`,`name`)}}
+                          </p>
+                        </div>
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -70,6 +74,7 @@ export default {
     components:{Treeselect},
     data(){
         return{
+            errors:{},
             update:false ,
             item_id : '',
             selected_parent:null,
@@ -96,6 +101,8 @@ export default {
               this.$parent.getCategories()
               this.addLoader = false
             }).catch(error=>{
+              // alert(error)
+              this.errors = error.response.data.errors
               this.addLoader = false
               this.error_list = error.data
             })
@@ -105,6 +112,8 @@ export default {
               this.$parent.getCategories()
               this.addLoader = false
             }).catch(error=>{
+              console.log(error.response.data.errors)
+              this.errors = error.response.data.errors
               this.addLoader = false 
               this.error_list = error
       
@@ -114,6 +123,8 @@ export default {
         },
         openModal(){
             this.largeModal = true
+            // clear errors 
+            this.errors = {}
             if(!this.update){
               this.newCategory.title =''
               this.newCategory.parent_id =''

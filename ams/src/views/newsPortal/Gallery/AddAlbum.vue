@@ -5,7 +5,14 @@
         <div class="col-sm-6">
           <label for="title">Title</label>
           <b-input v-model="album_detail.title" name="title" placeholder="Enter Title" />
-          <p v-if="!album_detail.title" style="color:red">*required</p>                   
+          <!-- <p v-if="!album_detail.title" style="color:red">*required</p>                    -->
+          
+          <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+              <p v-for="(i,k) in errors[`title`]" :key="k">
+                  {{i}}
+              </p>
+          </div>         
+
           <br />
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -22,9 +29,11 @@
               aria-label
               aria-describedby="basic-addon1"
             />
+              
           </div>
-          <p>*required</p>                   
+          <!-- <p>*required</p>                    -->
           <!-- {{Object.keys(content).length}} -->
+
           <img
             v-if="Object.keys(content).length"
             :src="content.file"
@@ -35,6 +44,12 @@
             :src="album_detail.cover.file"
             style="width:100px;height:100px;"
           />
+
+            <div v-show="errors.hasOwnProperty('cover_id')" class="help-block alert alert-danger">
+                <p v-for="(i,k) in errors[`cover_id`]" :key="k">
+                    {{i}}
+                </p>
+            </div>           
           <!-- <img
             v-else
             :src="get_file(album_detail.cover.file)"
@@ -89,6 +104,7 @@ export default {
   components: { MorePhoto, ContentManager ,Loader},
   data() {
     return {
+      errors:{},
       loading:false ,
       selected_content_type:'',
       content:{},
@@ -162,10 +178,11 @@ export default {
               position: "topRight",
               title: "Ok",
               message: "Album Added Updated"
-            });
+            })
           })
           .catch(error => {
             console.log(error)
+            this.errors = error.response.data.errors
             iziToast.error({
               position: "topRight",
               title: "error",
@@ -184,6 +201,7 @@ export default {
             });
           })
           .catch(error => {
+            this.errors = error.response.data.errors
             iziToast.error({
               position: "topRight",
               title: "error",

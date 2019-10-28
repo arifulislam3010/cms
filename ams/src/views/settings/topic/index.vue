@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <!-- {{topic_list}} -->
       <!-- {{topic_parents}} -->
     <div class="container-fluid">
       <button class="btn btn-primary contct-b pull-left" @click="openModal">
@@ -37,9 +38,9 @@
           </tr>
         </tbody>
       </table>
-      <nav aria-label="Page navigation example">
+      <!-- <nav aria-label="Page navigation example">
         <pagination :data="Object.assign({},topicP2)" @pagination-change-page="getResults"></pagination>
-      </nav>
+      </nav> -->
     </div>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>

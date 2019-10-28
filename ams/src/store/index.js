@@ -29,6 +29,7 @@ import Category from './category.module'
 import Scroll from "./scroll.module"
 import Gallery from "./gallery.module"
 import ContentCategory from "./content_category.module"
+import Language from "./language.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -62,5 +63,6 @@ export default new Vuex.Store({
     Scroll,
     Gallery,
     ContentCategory ,
+    Language,
   }
 })

@@ -41,6 +41,10 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
+        // validator 
+        $validate = $request->validate([
+              'name' => 'required',  
+        ]);
         // return $request ;
         try{
             $name = $request->role_name;

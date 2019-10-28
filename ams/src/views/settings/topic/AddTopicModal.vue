@@ -20,9 +20,16 @@
                     v-validate="'required'"
                     placeholder="Enter title..."
                   ></b-form-input>
-                  <div
+                  <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+                  <!-- {{  errors[`title`] }} -->
+                    <p v-for="(i,k) in errors[`title`]" :key="k">
+                      {{i}}
+                    </p>
+                  </div>
+
+                  <!-- <div
                     class="help-block alert alert-danger"
-                  >{{ errors.first('Title') }}</div>
+                  >{{ errors.first('Title') }}</div> -->
                 </b-form-group>
               </b-col>
             </b-row>
@@ -33,7 +40,7 @@
                   <label for="parent">Parent</label>
                   <Treeselect v-model="newTopic.parent_id" :options="topic_parents"></Treeselect>
 
-                  {{ errors.first('Cover') }}
+                  <!-- {{ errors.first('Cover') }} -->
                 </b-form-group>
               </b-col>
             </b-row>
@@ -86,6 +93,7 @@ export default {
   components: { Treeselect },
   data() {
     return {
+      errors:{},
       selected_parent: "",
       largeModal: false,
       addLoader: false,
@@ -105,13 +113,15 @@ export default {
         this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
         this.$parent.getTopics()
       }).catch(error=>{
-        this.$iziToast.error({position:'topRight',title:'error',message:error.data})
+        // this.$iziToast.error({position:'topRight',title:'error',message:error.data})
+        this.errors = error.response.data.errors
       })
    },
 
     openModal() {
+      this.errors = {}
       this.largeModal = true;
-      this.newTopic.title = "";
+      this.newTopic.title = null;
       this.newTopic.parent_id = null;
     },
     close() {

@@ -172,7 +172,8 @@ export default {
   },
   methods: {
     getPermission(){
-        this.$store.dispatch('ALL_USER_ROLE2')
+        // this.$store.dispatch('ALL_USER_ROLE2')
+        this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
         .then(response=>{
             if(response.data.id!=2){
               this.getResults();

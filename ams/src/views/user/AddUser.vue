@@ -6,15 +6,26 @@
             <div class="col-sm-4">
                 <label for="name">Name</label>
                 <input v-model="get_user.name" name="name" type="text" class="form-control" placeholder="enter user name "/>
-                <p v-if="!get_user.name" style="color:red">*required</p>   
-            
+
+                <div v-show="errors.hasOwnProperty('name')" class="help-block alert alert-danger">
+                    <p v-for="(i,k) in errors[`name`]" :key="k">
+                        {{i}}
+                    </p>
+                </div>       
+
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="email">Email</label>
                 <b-input v-model="get_user.email" name="email" type="text" placeholder="enter email"/>
-                <p v-if="!get_user.email" style="color:red">*required</p>   
+
+                <div v-show="errors.hasOwnProperty('email')" class="help-block alert alert-danger">
+                    <p v-for="(i,k) in errors[`email`]" :key="k">
+                        {{i}}
+                    </p>
+                </div>            
+
             </div>
         </div>
         <div class="row">
@@ -28,12 +39,24 @@
             <div class="col-sm-4">
                 <label for="email">Password</label>
                 <b-input v-model="get_user.password" name="email" type="password" placeholder="enter password"/>
-                <p v-if="!get_user.password" style="color:red">*required</p>   
+              
+                <div v-show="errors.hasOwnProperty('password')" class="help-block alert alert-danger">
+                    <p v-for="(i,k) in errors[`password`]" :key="k">
+                        {{i}}
+                    </p>
+                </div>      
+
             </div>
             <div class="col-sm-4">
                 <label for="email">type again</label>
                 <b-input v-model="get_user.password2" name="email" type="password" placeholder=""/>
-                <p v-if="!get_user.password2" style="color:red">*required</p>   
+
+                 <div v-show="errors.hasOwnProperty('password2')" class="help-block alert alert-danger">
+                    <p v-for="(i,k) in errors[`password2`]" :key="k">
+                        {{i}}
+                    </p>
+                </div>     
+                           
             </div>
         </div>
             <div class="form-group row">
@@ -57,6 +80,7 @@ export default {
     components:{Multiselect},
     data(){
         return {
+            errors:{},
             largeModal: false ,
             addLoader: false ,
             is_update: false ,
@@ -83,6 +107,7 @@ export default {
     
                 }).catch(error=>{
                        this.addLoader = false
+                       this.errors = error.response.data.errors
                        this.$iziToast.error({position:'topRight',title:'Success',message:"User Not Updated"})       
                 })
             }else{
@@ -94,6 +119,7 @@ export default {
     
                 }).catch(error=>{
                        this.addLoader = false
+                       this.errors = error.response.data.errors
                        this.$iziToast.error({position:'topRight',title:'Success',message:"error occured"})       
                 })
             }
