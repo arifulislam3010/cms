@@ -62,6 +62,14 @@ Route::prefix('api/')->group(function() {
 		Route::delete('/{id}','ScrollController@destroy');
 	});
 
+	// language 
+	Route::prefix('lang')->middleware(['auth:api'])->group(function(){
+		Route::get('/','LangController@index');
+		Route::post('/','LangController@store');
+		Route::put('/','LangController@store');
+		Route::delete('/{id}','LangController@destroy');
+	});
+
 });
 
 // Route::prefix('topic')->middleware(['auth:api'])->group(function() {

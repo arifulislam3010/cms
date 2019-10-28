@@ -13,7 +13,6 @@
         </div>
         <div v-if="show_children">
             <div  v-for="(i,k) in node.children" :key="k" style="margin-left:30px">
-                <!-- {{node.children}} -->
                 <RecCat :node="i"></RecCat>
             </div>
         </div>
@@ -53,6 +52,7 @@ export default {
     },
     methods:{
             addChild(node){
+                this.$refs.add_ncategory_modal.newCategory.title = ``
                 this.$refs.add_ncategory_modal.openModal()
                 this.$refs.add_ncategory_modal.selected_parent = node.id 
             },

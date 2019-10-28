@@ -98,9 +98,9 @@ const OtherIncome = () => import('@/views/account/OtherIncome')
 const applicationStatus = () => import('@/views/recuiting/workersinfo/applicationStatus')
 // recuiting
 const workersinfo = () => import('@/views/recuiting/workersinfo/index')
-const RecruitingDetails = () => import ('@/views/recuiting/workersinfo/RecruitingDetails');
-const UserUpdate = () => import ('@/views/pages/user/update');
-const ContentIndex = () => import ('@/views/content/index');
+const RecruitingDetails = () => import('@/views/recuiting/workersinfo/RecruitingDetails');
+const UserUpdate = () => import('@/views/pages/user/update');
+const ContentIndex = () => import('@/views/content/index');
 
 //settings
 const Area = () => import('@/views/settings/area/index');
@@ -124,7 +124,9 @@ const Role = () => import('@/views/role/index')
 // language 
 const Language = () => import(`@/views/settings/language/index`)
 const addLanguage = () => import(`@/views/settings/language/add`)
-
+// poll 
+const PollList = () => import(`@/views/poll/index`)
+const AddPoll = () => import(`@/views/poll/Add`)
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
@@ -134,10 +136,11 @@ export default new Router({
       path: '/admin/content',
       name: 'ContentIndex',
       component: ContentIndex,
-      meta:{
-        forAuth:true
+      meta: {
+        forAuth: true
       }
     },
+
     {
       path: '/',
       redirect: '/dashboard',
@@ -148,88 +151,105 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
+          }
+        },
+
+        {
+          path: 'poll/list',
+          name: 'PollList',
+          component: PollList,
+          meta: {
+            forAuth: true
           }
         },
         {
-          path: '/settings/language',
-          name: 'Language',
-          component: Language,
-          meta:{
-            forAuth:true
-          }
-        },
-        {
-          path: '/settings/add-language',
-          name: 'addLanguage',
+          path: 'language/add',
+          name: 'Add-Language',
           component: addLanguage,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
+          }
+        },
+        {
+          path: 'language/list',
+          name: 'Language-List',
+          component: Language,
+          meta: {
+            forAuth: true
+          }
+        },
+        {
+          path: 'language/add',
+          name: 'AddPoll',
+          component: AddPoll,
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/settings/area',
           name: 'Area',
           component: Area,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/settings/tags',
           name: 'Tag',
           component: Tag,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/settings/category',
           name: 'NewsCategory',
           component: NewsCategory,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/settings/topic',
           name: 'NewsTopic',
           component: NewsTopic,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/settings/scroll',
           name: 'NewsScroll',
           component: NewsScroll,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/news/list',
           name: 'ManageNews',
           component: ManageNews,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
         },
         {
           path: '/news/add',
           name: 'AddNews',
           component: AddNews,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
         },
         {
           path: '/news/scheduled-news',
           name: 'ScheduledNews',
           component: ScheduledNews,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
         },
         {
@@ -244,100 +264,100 @@ export default new Router({
           path: '/news/reporters-news',
           name: 'ReportersNews',
           component: ReportersNews,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
         },
         {
           path: '/news/update/:id',
           name: 'UpdateNews',
           component: UpdateNews,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
         },
         {
           path: '/gallery/list',
           name: 'Gallery',
           component: Gallery,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/gallery/add-album',
           name: 'AddAlbum',
           component: AddAlbum,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/gallery/update-album/:id',
           name: 'UpdateAlbum',
           component: AddAlbum,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/user-role',
           name: 'User Role',
           component: Role,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/user-list',
           name: 'User Role',
           component: UserList,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/assign-role',
           name: 'Assign Role',
           component: AssignRole,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: '/role-permission/:id',
           name: 'Role Permission',
           component: RolePermission,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'contact/',
           name: 'Contact',
           component: Contact,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
-          {
-            path: 'list',
-            name: 'ContactList',
-            component: ContactList,
-          },
-          {
-            path: 'details/:id',
-            name: 'ContactDetails',
-            component: ContactDetails,
-          },
-        ]
+            {
+              path: 'list',
+              name: 'ContactList',
+              component: ContactList,
+            },
+            {
+              path: 'details/:id',
+              name: 'ContactDetails',
+              component: ContactDetails,
+            },
+          ]
         },
         {
           path: "/rubel/recruiting",
           name: "Rubel Recruiting Workers Infos",
           component: workersinfo,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
             {
@@ -351,8 +371,8 @@ export default new Router({
           path: "/rubel/processing",
           name: "Rubel Processing Workers Infos",
           component: workersinfo,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
             {
@@ -366,8 +386,8 @@ export default new Router({
           path: "/amir/recruiting",
           name: "Amir Recruiting Workers Infos",
           component: workersinfo,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
             {
@@ -381,8 +401,8 @@ export default new Router({
           path: "/amir/processing",
           name: "Amir Processing Workers Infos",
           component: workersinfo,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
             {
@@ -396,8 +416,8 @@ export default new Router({
           path: "/female/recuiting",
           name: "Female Recuiting Workers Infos",
           component: workersinfo,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           },
           children: [
             {
@@ -411,24 +431,24 @@ export default new Router({
           path: 'category',
           name: 'Category',
           component: Category,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'user-profile',
           name: 'UserProfile',
           component: UserUpdate,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'item',
           name: 'item',
           component: Project,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
@@ -445,24 +465,24 @@ export default new Router({
           path: 'purpose',
           name: 'PurPose',
           component: Purpose,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'income',
           name: 'Income',
           component: Income,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'invoice',
           name: 'Invoice',
           component: Invoice,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
 
@@ -470,56 +490,56 @@ export default new Router({
           path: 'installment',
           name: 'Installment',
           component: Installment,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'payment-received',
           name: 'Payment Received',
           component: PaymentReceived,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'installment/paid/:invid',
           name: 'Paid Installment',
-          component:InstallmentPaid,
-          meta:{
-            forAuth:true
+          component: InstallmentPaid,
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'expense',
           name: 'Expense',
           component: Expense,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'report',
           name: 'Report',
           component: Report,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'general-leadger',
           name: 'General Leadger',
           component: GeneralLeadger,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
           path: 'income-expense',
           name: 'Income Expense',
           component: IncomeExpense,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
 
@@ -527,8 +547,8 @@ export default new Router({
           path: 'workers-report',
           name: 'Workers Reports',
           component: WorkersReport,
-          meta:{
-            forAuth:true
+          meta: {
+            forAuth: true
           }
         },
         {
@@ -577,7 +597,7 @@ export default new Router({
           redirect: '/theme/colors',
           name: 'Theme',
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -604,9 +624,9 @@ export default new Router({
         },
         {
           path: 'users',
-          meta: { label: 'Users'},
+          meta: { label: 'Users' },
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -615,7 +635,7 @@ export default new Router({
             },
             {
               path: ':id',
-              meta: { label: 'User Details'},
+              meta: { label: 'User Details' },
               name: 'User',
               component: User,
             },
@@ -626,7 +646,7 @@ export default new Router({
           redirect: '/base/cards',
           name: 'Base',
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -716,7 +736,7 @@ export default new Router({
           redirect: '/buttons/standard-buttons',
           name: 'Buttons',
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -746,7 +766,7 @@ export default new Router({
           redirect: '/icons/font-awesome',
           name: 'Icons',
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -776,7 +796,7 @@ export default new Router({
           redirect: '/notifications/alerts',
           name: 'Notifications',
           component: {
-            render (c) { return c('router-view') }
+            render(c) { return c('router-view') }
           },
           children: [
             {
@@ -803,16 +823,16 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
-      meta:{
-        forVisitors:true
+      meta: {
+        forVisitors: true
       }
     },
     {
       path: '/register',
       name: 'Register',
       component: Register,
-      meta:{
-        forVisitors:true
+      meta: {
+        forVisitors: true
       }
     },
     {
@@ -838,7 +858,7 @@ export default new Router({
       redirect: '/pages/404',
       name: 'Pages',
       component: {
-        render (c) { return c('router-view') }
+        render(c) { return c('router-view') }
       },
       children: [
         {

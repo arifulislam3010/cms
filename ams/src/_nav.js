@@ -9,16 +9,30 @@ export default {
         // text: 'NEW'
       }
     },
+      {
+        // todo 
+        name: 'language',
+        url: 'language/add',
+        icon: 'fa fa-life-bouy',
+        children: [
+          {
+            name: 'list',
+            url: '/language/list',
+            icon: 'fa fa-life-bouy',
+          },
+          {
+            name: 'add',
+            url: '/language/add',
+            icon: 'fa fa-life-bouy',
+          },
+
+        ]
+      },
     {
       name: 'Settings',
       url: '/settings/category',
       icon: 'fa fa-money',
       children: [
-        {
-          name: 'language',
-          url: '/settings/language',
-          icon: 'fa fa-life-bouy'
-        },
         {
           name: 'category',
           url: '/settings/category',
@@ -125,6 +139,7 @@ export default {
           name: 'Photo Gallery',
           url: '/gallery/list',
           icon: 'fa fa-life-bouy',
+<<<<<<< HEAD
           children: [
             {
               name: 'Add Photo',
@@ -137,6 +152,9 @@ export default {
               icon: 'fa fa-life-bouy'
             },
           ]
+=======
+
+>>>>>>> 7edc8462d126844686223cb548d65f0f6023bf16
         },
         {
           name: 'Video Gallery',
@@ -157,14 +175,44 @@ export default {
         },
       ]
     },
+
+    {
+      name: 'Manage Poll',
+      url: '/poll/list',
+      icon: 'fa fa-life-bouy',
+      children: [
+        {
+          name: 'PollList',
+          url: '/poll/list',
+          icon: 'fa fa-life-bouy',
+        },
+        // {
+        //   name: 'AddPoll',
+        //   url: '/poll/add',
+        //   icon: 'fa fa-life-bouy',
+        // },
+
+      ]
+    },
     {
       name: 'News Controls',
       url: '/settings/category',
       icon: 'fa fa-money',
       children: [
         {
+<<<<<<< HEAD
           name: 'Tag',
           url: '/settings/scroll',
+=======
+          name: 'List News',
+          url: '/news/list',
+          icon: 'fa fa-life-bouy',
+
+        },
+        {
+          name: 'Add News',
+          url: '/news/add',
+>>>>>>> 7edc8462d126844686223cb548d65f0f6023bf16
           icon: 'fa fa-life-bouy'
         },
         {

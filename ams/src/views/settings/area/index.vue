@@ -12,13 +12,16 @@
       <button class="btn btn-primary contct-b pull-left" @click="openModal">
         <i v-if="auth_permission.area_create" class="fa fa-life-bouy"></i> Add Area
       </button>
-
-      <form class="form-inline contct my-2 my-lg-0 pull-right">
+      <br />
+       <br />
+      
+      <form class="form-inline contct my-2 my-lg-0 pull-right" >
         <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
       </form>
+      
 
-      <table class="table table-sm">
+      <table class="table table-sm"  v-if="false">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -44,6 +47,17 @@
           </tr>
         </tbody>
       </table>
+
+       <div class="row">
+         <div class="col-sm-8">
+          <div v-for="(i,k) in area_parents" :key="k"> 
+            <RecCom :node="i"></RecCom>
+          </div>
+         </div>      
+    </div>
+
+
+
       <nav aria-label="Page navigation example">
         <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination>
       </nav>
@@ -56,6 +70,7 @@
 </template>
 
 <script>
+import RecCom from "./RecCom"
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
 
@@ -162,6 +177,7 @@ export default {
     },
 
     deleteArea(id) {
+
       var self = this;
       this.$iziToast.question({
         timeout: 10000,
@@ -234,6 +250,7 @@ export default {
     pagination,
     AddAreaModal,
     Loader ,
+    RecCom
   }
 };
 </script>

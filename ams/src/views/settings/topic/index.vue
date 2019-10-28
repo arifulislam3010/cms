@@ -12,7 +12,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
       </form>
 
-      <table class="table table-sm">
+      <table class="table table-sm" v-if="false">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -46,10 +46,17 @@
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
     <ViewTopicModal ref="view_topic_modal"></ViewTopicModal>
     <Loader v-if="loading"></Loader>
+    <div>
+        <div v-for="(i,k) in topic_parents" :key="k">
+          
+          <RecCom :node="i"></RecCom>
+        </div>      
+    </div>
   </div>
 </template>
 
 <script>
+import RecCom from "./RecCom"
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
 import Loader from "@/views/common/Loader";
@@ -225,7 +232,8 @@ export default {
     ViewTopicModal,
     pagination,
     AddTopicModal,
-    Loader
+    Loader,
+    RecCom
   }
 };
 </script>

@@ -1,20 +1,20 @@
 <template>
-    <b-modal title="topic"  no-close-on-backdrop hide-footer size="xl" v-model="largeModal"  @ok="largeModal = false">
+    <b-modal title="Area"  no-close-on-backdrop hide-footer size="xl" v-model="largeModal"  @ok="largeModal = false">
         <form>
             <div class="form-group row">
                 <div class="col-sm-5">
-                    <p><b>Title:</b> {{topic.title}}</p>
+                    <p><b>Title:</b> {{area.title}}</p>
                 </div>
 
                 <div class="col-sm-5">
-                    <p><b>Parent :</b> {{topic.parent_id}}</p>
+                    <p><b>Parent :</b> {{area.parent_id}}</p>
                 </div>
 
                 <div class="col-sm-5">
-                    <p><b>Created by :</b> {{topic.created_by}}</p>
+                    <p><b>Created by :</b> {{area.created_by}}</p>
                 </div>
                 <div class="col-sm-5">
-                    <p><b>Updated by:</b> {{topic.updated_by}}</p>
+                    <p><b>Updated by:</b> {{area.updated_by}}</p>
                 </div>
             </div>
         </form>
@@ -26,13 +26,13 @@ export default {
     data(){
         return{
             largeModal:false,
-            topic:''
+            area:''
         }
     },
     methods:{
-        openModal(topic){
+        openModal(area){
             this.largeModal = true
-            this.topic = topic
+            this.area = area
         }
     }
 }

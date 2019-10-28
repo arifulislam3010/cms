@@ -49,7 +49,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(Autocomplete)
 Vue.use(VeeValidate);
 Vue.prototype.$iziToast = iziToast
-
+import  'bootstrap'
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'
 axios.defaults.baseURL = 'http://api.banglapress.org'
 // axios.defaults.baseURL = 'http://bpress.api.istiak.net'
