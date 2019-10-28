@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Language;
+use Modules\Setting\Transformers\Language as LanguageResource;
 
 class LangController extends Controller
 {
@@ -15,33 +16,34 @@ class LangController extends Controller
      */
     public function index()
     {
-        return Language::all();
+        // return Language::all();
+        return LanguageResource::collection(Language::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('setting::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         // return $request->title;
         // validate 
-        $validatro = $request->validate([
-            'title' => 'required',
-            'slug' => 'required',
-        ]);
+        if($request->isMethod('post')){
+            // when adding new fields have to unique
+            $validatro = $request->validate([
+                'title' => 'required|unique:language',
+                'slug' => 'required|unique:language',
+            ]);
+
+        }else{
+            // when updating then dont check unique
+            $validatro = $request->validate([
+                'title' => 'required',
+                'slug' => 'required',
+            ]);
+        }
+        
+        // case while updating if title & slug are set to previously eiisting title & slug then what !
+        
         // post or put !
         // add or update !
+
         $lang = $request->isMethod('put')? Language::findOrfial($request->id) : new Language ;
         $lang->title  = $request->title;
         $lang->slug  = $request->slug;
@@ -56,7 +58,7 @@ class LangController extends Controller
             $lang->updated_by = $user_id ;
         }
         if($lang->save()){
-            return $lang ;
+            return new LanguageResource($lang) ;
         }
 
     }
@@ -67,7 +69,7 @@ class LangController extends Controller
         $lang = Language::findOrfail($id) ;
 
         if($lang->delete()){
-            return $lang ;
+            return new LanguageResource($lang) ;
         }
     }
 }

@@ -55,7 +55,16 @@ import  'bootstrap'
 // axios.defaults.baseURL = 'http://bpress.api.istiak.net'
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.headers.common["Authorization"] = 'Bearer '+ Vue.auth.getToken()
+// filters 
+Vue.filter('test_filter',function(arg){
+  return `i ❤ ${arg} `
+})
 
+Vue.filter('lang_filter',function(arg){
+    return store.getters.currentLang[arg] 
+})
+
+// 
 router.beforeEach(
   (to,from,next) => {
     if(to.matched.some(record => record.meta.forVisitors)){

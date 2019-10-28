@@ -10,6 +10,7 @@ export default {
   mounted(){
     this.loadPermission()
   },
+
   methods:{
       loadPermission(){
       //auth_permission
