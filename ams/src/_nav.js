@@ -139,7 +139,6 @@ export default {
           name: 'Photo Gallery',
           url: '/gallery/list',
           icon: 'fa fa-life-bouy',
-<<<<<<< HEAD
           children: [
             {
               name: 'Add Photo',
@@ -152,9 +151,6 @@ export default {
               icon: 'fa fa-life-bouy'
             },
           ]
-=======
-
->>>>>>> 7edc8462d126844686223cb548d65f0f6023bf16
         },
         {
           name: 'Video Gallery',
@@ -200,19 +196,8 @@ export default {
       icon: 'fa fa-money',
       children: [
         {
-<<<<<<< HEAD
           name: 'Tag',
           url: '/settings/scroll',
-=======
-          name: 'List News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy',
-
-        },
-        {
-          name: 'Add News',
-          url: '/news/add',
->>>>>>> 7edc8462d126844686223cb548d65f0f6023bf16
           icon: 'fa fa-life-bouy'
         },
         {
@@ -237,28 +222,6 @@ export default {
         },
       ]
     },
-<<<<<<< HEAD
-=======
-
-
-    // {
-    //   name: 'Items',
-    //   url: '/category',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Category',
-    //       url: '/category',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'item',
-    //       url: '/item',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
->>>>>>> e9d68a92c29dfeec6b605ffb4a2abacfc57ec2c2
     {
       name: 'Admin Controls',
       url: '/user-role',

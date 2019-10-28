@@ -125,4 +125,19 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .card{
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.8),0 0 6px rgba(0,0,0,0.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12), .3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 7px 80px 18px 36px;
+    cursor: pointer;
+  }
+  .card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+  }
+
+</style>
 

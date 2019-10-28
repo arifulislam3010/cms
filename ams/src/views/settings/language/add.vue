@@ -3,17 +3,19 @@
     <div class="card-body">
       <!-- </div> -->
       <!-- {{langList}} -->
+      <!-- {{title | test_filter}} -->
+
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-5">
             <label for>Title</label>
-            <input class="form-control" placeholder="enter title" />
+            <input v-model="title" class="form-control" placeholder="enter title" />
           </div>
         </div>
         <div class="row">
           <div class="col-sm-5">
             <label for>Slug</label>
-            <input class="form-control" placeholder="enter title" />
+            <input v-model="slug" class="form-control" placeholder="enter title" />
           </div>
         </div>
         <hr />
@@ -80,6 +82,9 @@ export default {
   },  
   data() {
     return {
+      id : ``,
+      title : ``,
+      slug : `` ,
       word_type : ''  ,
       admin_list: [
           
@@ -115,8 +120,16 @@ export default {
         let falt_admin = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.admin_list))
         let falt_front = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.front_list))
         let payload = {
+          id : ``,
+          title : this.title,
+          slug : this.slug ,
+          admin_field : JSON.stringify( falt_admin ) ,
+          frontend_field : JSON.stringify( falt_front) ,
         }
-        // call store 
+        // dispatch add 
+        console.log(payload)
+        // return 
+        this.$store.dispatch(`ADD_LANGUAGE`,payload)
     },
     add_to_admin(){
         this.admin_list.push(1)
