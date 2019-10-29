@@ -39,6 +39,10 @@ import ToggleButton from 'vue-js-toggle-button'
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 import VeeValidate from 'vee-validate';
+// dialog 
+import VuejsDialog from "vuejs-dialog"
+// include the default style
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 // import JsonExcel from 'vue-json-excel'
 // import jsPDF from 'jspdf';
 Vue.component('multiselect', Multiselect)
@@ -48,6 +52,7 @@ Vue.component('ToggleButton', ToggleButton)
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(Autocomplete)
 Vue.use(VeeValidate);
+Vue.use(VuejsDialog)
 Vue.prototype.$iziToast = iziToast
 import  'bootstrap'
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'
@@ -61,7 +66,13 @@ Vue.filter('test_filter',function(arg){
 })
 
 Vue.filter('lang_filter',function(arg){
-    return store.getters.currentLang[arg] 
+    let ret = store.getters.currentLang.admin_field[arg.toLowerCase()] 
+    // return store.getters.currentLang ;
+    if(ret){
+      return ret 
+    }else{
+      return arg
+    }
 })
 
 // 

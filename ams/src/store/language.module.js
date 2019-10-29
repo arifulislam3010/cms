@@ -2,6 +2,10 @@ import axios from "axios"
 
 const state = {
     lang_list : [] ,
+    current_lang : {
+        admin_field:{},
+        frontend_field:{},
+    },
     
 }
 
@@ -10,7 +14,7 @@ const getters = {
         return state.lang_list
     },
     currentLang(state){
-        return state.lang_list[0]
+        return state.current_lang 
     }
 }
 
@@ -46,11 +50,23 @@ const actions = {
         })
     },
     [`DELETE_LANGUAGE`]({commit},id){
-
+        return new Promise((resolve,reject)=>{
+            axios.delete(`api/lang/${id}`).then(response=>{
+                resolve(response)
+            }).catch(error=>{
+                reject(error)
+            })
+        })
+    },
+    [`CURRENT_LANG`]({commit},id){
+        commit('CHANGE_CURRENT_LANG',id)  
     }
 }
 
 const mutations = {
+    [`CHANGE_CURRENT_LANG`](state,id){
+        state.current_lang = state.lang_list.find( v => v.id == id)  
+    },
     [`SET_LANGUAGES`](state,paylaod){
         state.lang_list = paylaod
     }

@@ -1,11 +1,11 @@
 <template>
     <div >
-        <div class="card"> 
+        <!-- <div class="card"> 
             <div class="card-header">
                 <label>admin panel language </label>
             </div>
             <multiselect :options=langList track-by="id" label="title"></multiselect>
-        </div>
+        </div> -->
         <!-- {{langList}} -->
         <!-- {{currentLang}} -->
         <!-- {{"alu" | test_filter}} -->
@@ -22,11 +22,12 @@
                 </thead>
                 <tbody>
                     <tr v-for="(i,k) in langList" :key="k">
-                        <td>{{key+1}}</td>
+                        <td>{{i.id}}</td>
                         <td>{{i.slug}}</td>
                         <td>{{i.title}}</td>
                         <td>
-                            <a href="#">action</a>
+                            <a href="#" @click="edit()">edit</a> 
+                            <a href="#" @click="del(i)" >delete</a> 
                         </td>
                     </tr>
                 </tbody>
@@ -55,11 +56,35 @@ export default {
     methods:{
         getLangList(){
             this.$store.dispatch(`FETCH_LANGUAGES`)
-        }
+        },
+        edit(){
+            console.log(this.$refs)
+        },
+        del({id}){
+            let self = this
+            this.$dialog
+            .confirm('Please confirm to continue')
+            .then(function(dialog) {
+                console.log(`clicked on proceed ${id}`)
+                try{
+
+                    self.$store.dispatch(`DELETE_LANGUAGE`,id).then(response=>{
+                        self.getLangList()
+                    })
+                }catch(e){
+                    console.log(e)
+                }
+            })
+            .catch(function() {
+                console.log('Clicked on cancel');
+            });           
+        },
     },
 }
 </script>
 <style scoped>
-
+    td > a {
+        margin-left: 12px;
+    }
 </style>
 

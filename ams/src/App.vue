@@ -9,6 +9,7 @@ export default {
   name: 'app',
   mounted(){
     this.loadPermission()
+    this.getLanguages()
   },
 
   methods:{
@@ -16,6 +17,9 @@ export default {
       //auth_permission
           this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
       } ,
+      getLanguages(){
+        this.$store.dispatch(`FETCH_LANGUAGES`)
+      }
   }
 }
 </script>

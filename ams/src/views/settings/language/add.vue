@@ -1,10 +1,9 @@
-<template>
+<template ref="add_lang">
   <div class="card">
     <div class="card-body">
       <!-- </div> -->
       <!-- {{langList}} -->
       <!-- {{title | test_filter}} -->
-
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-5">
@@ -82,19 +81,20 @@ export default {
   },  
   data() {
     return {
+      
       id : ``,
       title : ``,
       slug : `` ,
       word_type : ''  ,
       admin_list: [
           
-              {'dashboard':''}        
+              // {'dashboard':''}        
       ],
       front_list: []
     };
   },
   computed: {
-    ...mapGetters(["langList"])
+    ...mapGetters(["langList","currentLang"])
   },
   methods: {
       demofn() {
