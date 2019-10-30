@@ -70,6 +70,14 @@ Route::prefix('api/')->group(function() {
 		Route::delete('/{id}','LangController@destroy');
 	});
 
+	// site_info 
+	Route::prefix('site_info')->middleware(['auth:api'])->group(function(){
+		Route::get('/','SiteInfoController@index');
+		Route::post('/','SiteInfoController@store');
+		Route::put('/','SiteInfoController@store');
+		Route::delete('/{id}','SiteInfoController@destroy');
+	});
+
 });
 
 // Route::prefix('topic')->middleware(['auth:api'])->group(function() {

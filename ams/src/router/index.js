@@ -128,6 +128,9 @@ const editLanguage = () => import(`@/views/settings/language/edit`)
 // poll 
 const PollList = () => import(`@/views/poll/index`)
 const AddPoll = () => import(`@/views/poll/Add`)
+// site 
+const SiteList = () => import(`@/views/settings/site/index`)
+const SiteAdd = () => import(`@/views/settings/site/add`)
 export default new Router({
   mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
@@ -165,6 +168,15 @@ export default new Router({
             forAuth: true
           }
         },
+
+        {
+          path: 'language/list',
+          name: 'Language-List',
+          component: Language,
+          meta: {
+            forAuth: true
+          }
+        },
         {
           path: 'language/add/',
           name: 'Add-Language',
@@ -181,22 +193,34 @@ export default new Router({
             forAuth: true
           }
         },
-        // {
-        //   path: 'language/edit/:id',
-        //   name: 'Edit-Language',
-        //   component: editLanguage,
-        //   meta: {
-        //     forAuth: true
-        //   }
-        // },
+
+        // todo 
         {
-          path: 'language/list',
-          name: 'Language-List',
-          component: Language,
+          path: 'site/list',
+          name: 'site-List',
+          component: SiteList,
           meta: {
             forAuth: true
           }
         },
+        {
+          path: 'site/add/',
+          name: 'site-add',
+          component: SiteAdd,
+          meta: {
+            forAuth: true
+          }
+        },
+        {
+          path: 'language/add/:id', // reused for update 
+          name: 'site-edit',
+          component: addLanguage,
+          meta: {
+            forAuth: true
+          }
+        },
+
+
         {
           path: 'poll/add',
           name: 'AddPoll',
