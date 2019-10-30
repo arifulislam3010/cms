@@ -10,7 +10,7 @@ export default {
       }
     },
       {
-        // todo 
+        // lang 
         name: 'language',
         url: 'language/add',
         icon: 'fa fa-life-bouy',
@@ -23,6 +23,26 @@ export default {
           {
             name: 'add',
             url: '/language/add',
+            icon: 'fa fa-life-bouy',
+          },
+
+        ]
+      },
+      {
+        // todo 
+        // site setting 
+        name: 'site',
+        url: 'site/list',
+        icon: 'fa fa-life-bouy',
+        children: [
+          {
+            name: 'list',
+            url: '/site/list',
+            icon: 'fa fa-life-bouy',
+          },
+          {
+            name: 'add',
+            url: '/site/add/',
             icon: 'fa fa-life-bouy',
           },
 
