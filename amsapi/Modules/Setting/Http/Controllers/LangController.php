@@ -22,7 +22,7 @@ class LangController extends Controller
 
     public function store(Request $request)
     {
-        // return $request->title;
+        // return $request->method();
         // validate 
         if($request->isMethod('post')){
             // when adding new fields have to unique
@@ -44,7 +44,7 @@ class LangController extends Controller
         // post or put !
         // add or update !
 
-        $lang = $request->isMethod('put')? Language::findOrfial($request->id) : new Language ;
+        $lang = $request->isMethod('put')? Language::findOrfail($request->id) : new Language ;
         $lang->title  = $request->title;
         $lang->slug  = $request->slug;
         $lang->admin_field  = $request->admin_field;

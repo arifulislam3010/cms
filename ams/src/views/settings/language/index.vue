@@ -26,7 +26,7 @@
                         <td>{{i.slug}}</td>
                         <td>{{i.title}}</td>
                         <td>
-                            <a href="#" @click="edit()">edit</a> 
+                            <a href="#" @click="edit(i)">edit</a> 
                             <a href="#" @click="del(i)" >delete</a> 
                         </td>
                     </tr>
@@ -57,8 +57,8 @@ export default {
         getLangList(){
             this.$store.dispatch(`FETCH_LANGUAGES`)
         },
-        edit(){
-            console.log(this.$refs)
+        edit({id}){
+            this.$router.push({name:`Edit-Language`,params:{id}})
         },
         del({id}){
             let self = this

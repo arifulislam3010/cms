@@ -123,6 +123,7 @@ const Role = () => import('@/views/role/index')
 // language 
 const Language = () => import(`@/views/settings/language/index`)
 const addLanguage = () => import(`@/views/settings/language/add`)
+const editLanguage = () => import(`@/views/settings/language/edit`)
 // poll 
 const PollList = () => import(`@/views/poll/index`)
 const AddPoll = () => import(`@/views/poll/Add`)
@@ -164,13 +165,29 @@ export default new Router({
           }
         },
         {
-          path: 'language/add',
+          path: 'language/add/',
           name: 'Add-Language',
           component: addLanguage,
           meta: {
             forAuth: true
           }
         },
+        {
+          path: 'language/add/:id', // reused for update 
+          name: 'Edit-Language',
+          component: addLanguage,
+          meta: {
+            forAuth: true
+          }
+        },
+        // {
+        //   path: 'language/edit/:id',
+        //   name: 'Edit-Language',
+        //   component: editLanguage,
+        //   meta: {
+        //     forAuth: true
+        //   }
+        // },
         {
           path: 'language/list',
           name: 'Language-List',
@@ -180,7 +197,7 @@ export default new Router({
           }
         },
         {
-          path: 'language/add',
+          path: 'poll/add',
           name: 'AddPoll',
           component: AddPoll,
           meta: {

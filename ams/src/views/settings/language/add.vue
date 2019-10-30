@@ -96,7 +96,33 @@ export default {
   computed: {
     ...mapGetters(["langList","currentLang"])
   },
+  mounted(){
+     this.handelUpdate()
+  },
   methods: {
+    handelUpdate(){
+      let route_id = this.$route.params.id 
+      if(route_id){
+         let lang = this.langList.find( v=> v.id == route_id) 
+         console.log(lang)
+         this.id = lang.id 
+         this.title = lang.title 
+         this.slug  = lang.slug 
+        //  this.admin_list = lang.admin_field 
+         this.admin_list = Object.keys(lang.admin_field).map(i=>{
+            let _ob = {}
+            _ob[i] = lang.admin_field[i]
+            return _ob 
+         })
+        
+        this.front_list = Object.keys(lang.frontend_field).map(i=>{
+          let _ob = {}
+          _ob[i] = lang.frontend_field[i]
+          return _ob 
+        })
+         
+      }
+    },
       demofn() {
           // do samll and make it large
       this.$router.push({ name: "addLanguage" });
@@ -120,7 +146,7 @@ export default {
         let falt_admin = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.admin_list))
         let falt_front = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.front_list))
         let payload = {
-          id : ``,
+          id : this.id ,
           title : this.title,
           slug : this.slug ,
           admin_field : JSON.stringify( falt_admin ) ,
@@ -129,7 +155,11 @@ export default {
         // dispatch add 
         console.log(payload)
         // return 
-        this.$store.dispatch(`ADD_LANGUAGE`,payload)
+        this.$store.dispatch(`ADD_LANGUAGE`,payload).then(response=>{
+          this.$iziToast.success({position:'topRight',title:'Success',message:``})       
+        }).catch(error=>{
+          this.$iziToast.success({position:'topRight',title:'Success',message:``})       
+        })
     },
     add_to_admin(){
         this.admin_list.push(1)
