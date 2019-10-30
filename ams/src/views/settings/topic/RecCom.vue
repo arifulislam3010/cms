@@ -4,21 +4,21 @@
       {{ node.label}}
       <!-- {{ node}} -->
       <div>
-        <a href="#" @click="editTopicModal(node)" style="margin-right:30px">update</a>
-        <a href="#" @click="addChild(node)" style="margin-right:30px">AddChild</a>
-        <a href="#" @click="deleteTopic(node.id)" style="margin-right:30px">delete</a>
+        <a href="#" @click="editTopicModal(node)" style="margin-right:30px; color:green">Update</a>
+        <a href="#" @click="addChild(node)" style="margin-right:30px; color:#000099">AddChild</a>
+        <a href="#" @click="deleteTopic(node.id)" style="margin-right:30px; color:red">Delete</a>
         <a
           href="#"
           @click="()=>{ show_children = false}"
           v-if="show_children && node.children.length > 0"
           style="margin-right:30px"
-        >minimize</a>
+        >Minimize</a>
         <a
           href="#"
           @click="()=>{ show_children = true }"
           style="margin-right:30px"
           v-if="!show_children && node.children.length > 0"
-        >expand</a>
+        >Expand</a>
       </div>
     </div>
     <div v-if="show_children">
