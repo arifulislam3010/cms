@@ -10,6 +10,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegistrationController extends Controller
 {
+
+    public function permission(){
+        return "hello";
+    }
     /*
     |--------------------------------------------------------------------------
     | Register Controller

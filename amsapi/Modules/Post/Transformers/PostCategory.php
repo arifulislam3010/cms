@@ -3,6 +3,7 @@
 namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
+//use Modules\Setting\Transformers\Category as CategoryResource;
 
 class PostCategory extends Resource
 {
@@ -14,6 +15,15 @@ class PostCategory extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'post_id'=>$this->post_id,
+            'category_id'=>$this->category_id,
+//            'category'   => CategoryResource::collection($this->parent),
+            'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
+            'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }

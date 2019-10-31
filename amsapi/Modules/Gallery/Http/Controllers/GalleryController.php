@@ -15,7 +15,7 @@ class GalleryController extends Controller
 {
     public function index(Request $request){
         $album_list = Album::all(); 
-        return AlbumResource::collection();
+        return AlbumResource::collection($album_list);
     }
 
 

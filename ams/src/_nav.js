@@ -89,45 +89,105 @@ export default {
       url: '/news/add',
       children: [
         {
-          name: 'Add News',
-          url: '/news/add',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'List News',
+          name: 'General News',
           url: '/news/list',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Create News',
+              url: '/news/add',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Edit News',
+              url: '/news/edit-news-list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'List News',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Schedule News',
+              url: '/news/scheduled-news',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: "Reporter's News",
+              url: '/news/reporters-news',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
-          name: 'Scheduled News',
+          name: 'Topic News',
           url: '/news/scheduled-news',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Create Topic',
+              url: '/news/add',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Topic News',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'List Topic',
+              url: '/news/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
-          name: "reporter's news",
+          name: "Arcrive",
           url: '/news/reporters-news',
           icon: 'fa fa-life-bouy'
         },
-
-
       ]
     },
-
     {
-      name: 'Scheduled',
-      url: '/news/scheduled-news',
+      name: 'Media Manager',
+      url: '/gallery/list',
       icon: 'fa fa-life-bouy',
+      url: '/gallery/list',
       children: [
         {
-          name: 'List News',
-          url: '/news/list',
+          name: 'Photo Gallery',
+          url: '/gallery/list',
           icon: 'fa fa-life-bouy',
-
+          children: [
+            {
+              name: 'Add Photo',
+              url: '/gallery/add-album',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Photo List',
+              url: '/gallery/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
         {
-          name: 'Add News',
-          url: '/news/add',
-          icon: 'fa fa-life-bouy'
+          name: 'Video Gallery',
+          url: '/gallery/list',
+          icon: 'fa fa-life-bouy',
+          children: [
+            {
+              name: 'Add Video',
+              url: '/gallery/add-album',
+              icon: 'fa fa-life-bouy'
+            },
+            {
+              name: 'Video List',
+              url: '/gallery/list',
+              icon: 'fa fa-life-bouy'
+            },
+          ]
         },
       ]
     },
@@ -151,80 +211,39 @@ export default {
       ]
     },
     {
-      name: "reporter's",
-      url: '/news/reporters-news',
-      icon: 'fa fa-life-bouy',
+      name: 'News Controls',
+      url: '/settings/category',
+      icon: 'fa fa-money',
       children: [
         {
-          name: 'List News',
-          url: '/news/list',
-          icon: 'fa fa-life-bouy',
-
+          name: 'Tag',
+          url: '/settings/scroll',
+          icon: 'fa fa-life-bouy'
         },
         {
-          name: 'Add News',
-          url: '/news/add',
+          name: 'Category',
+          url: '/settings/category',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Topic',
+          url: '/settings/topic',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Area',
+          url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },
+        {
+          name: 'Section',
+          url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },
       ]
     },
     {
-      name: 'Photo Gallery',
-      url: '/gallery/list',
-      icon: 'fa fa-life-bouy',
-      url: '/gallery/list',
-      children: [
-        {
-          name: 'list',
-          url: '/gallery/list',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'add album',
-          url: '/gallery/add-album',
-          icon: 'fa fa-life-bouy'
-        },
-      ]
-    },
-    {
-      name: 'Video Gallery',
-      url: '/gallery/list',
-      icon: 'fa fa-life-bouy',
-      url: '/gallery/list',
-      children: [
-        {
-          name: 'list',
-          url: '/gallery/list',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'add album',
-          url: '/gallery/add-album',
-          icon: 'fa fa-life-bouy'
-        },
-      ]
-    },
-
-
-    // {
-    //   name: 'Items',
-    //   url: '/category',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Category',
-    //       url: '/category',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'item',
-    //       url: '/item',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
-    {
-      name: 'System Users',
+      name: 'Admin Controls',
       url: '/user-role',
       icon: 'fa fa-money',
       children: [
@@ -238,11 +257,75 @@ export default {
           url: '/user-list',
           icon: 'icon-star'
         },
-        // {
-        //   name: 'Assign Role',
-        //   url: '/assign-role',
-        //   icon: 'icon-star'
-        // },
+      ]
+    },
+    {
+      name: 'Manage Poll',
+      url: '/ManagePoll',
+      icon: 'fa fa-money',
+    },
+    {
+      name: 'Advertisements',
+      url: '/Advertisements',
+      icon: 'fa fa-money',
+    },
+    
+    {
+      name: 'Geo Graphical',
+      url: '/GGM',
+      icon: 'fa fa-money',
+    },
+    {
+      name: 'Language',
+      url: '/lm',
+      icon: 'fa fa-money',
+    },
+    {
+      name: 'Comments',
+      url: '/comments',
+      icon: 'fa fa-money',
+    },
+    
+    {
+      name: 'Theme',
+      url: '/tm',
+      icon: 'fa fa-money',
+      children: [
+        {
+          name: 'Theme',
+          url: 't',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Pages',
+          url: '/pa',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Customize',
+          url: '/cu',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Widgets',
+          url: '/wi',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Header',
+          url: '/hea',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Footer',
+          url: '/foo',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Menus',
+          url: '/me',
+          icon: 'icon-star'
+        },
       ]
     },
 

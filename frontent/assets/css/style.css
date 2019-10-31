@@ -30,6 +30,32 @@
 @import url(css/classy-nav.min.css);
 @import url(css/nice-select.min.css); */
 /* :: 3.0 Base CSS */
+.max_one_line_allow {
+  -webkit-line-clamp: 1
+}
+
+.max_two_lines_allow {
+  -webkit-line-clamp: 2
+}
+
+.max_three_lines_allow {
+  -webkit-line-clamp: 3
+}
+
+.max_four_lines_allow {
+  -webkit-line-clamp: 4
+}
+
+.max_five_lines_allow {
+  -webkit-line-clamp: 5
+}
+.text_overflow {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
 * {
   margin: 0;
   padding: 0; }
@@ -169,8 +195,27 @@ img {
 .section-heading {
   position: relative;
   z-index: 1;
-  margin-bottom: 90px;
+  margin-bottom: 5px;
   border-bottom: 1px solid #d0d5d8; }
+  .section_heading_active{
+    background-color: #f70606 !important ;
+    color:#fff !important;
+  }
+  .section-heading h5{
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 45px;
+    height: 45px;
+    min-width: 49%;
+    /* padding: 0 30px; */
+    background-color: #eff4f9;
+    color: #f70606;
+    font-weight: 700;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #f30505;
+  }
   .section-heading h6 {
     font-size: 16px;
     margin-bottom: 0;
@@ -300,7 +345,7 @@ textarea:focus {
   .header-area .top-header-area {
     width: 100%;
     height: 100px;
-    background-color: #ee002d;
+    background-color: #fff;
     position: relative;
     z-index: 1; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -312,7 +357,7 @@ textarea:focus {
     .header-area .top-header-area .top-header-content {
       width: 100%;
       height: 100px;
-      background-color: #ee002d;
+      background-color: #fff;
       position: relative;
       z-index: 1; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -338,7 +383,7 @@ textarea:focus {
       .header-area .top-header-area .login-search-area .login a {
         display: inline-block;
         padding: 0 10px;
-        color: #fff; }
+        color: #e91d24; }
       .header-area .top-header-area .login-search-area .search-form form {
         width: 250px;
         height: 40px;
@@ -615,7 +660,7 @@ textarea:focus {
     position: relative;
     z-index: 1; }
     .single-blog-post.featured-post .post-data {
-      padding: 30px 0; }
+      padding: 0px 0px 15px 0px; }
       .single-blog-post.featured-post .post-data .post-title h6 {
         font-size: 40px;
         line-height: 1.2;
@@ -633,7 +678,7 @@ textarea:focus {
           color: #ee002d; }
       .single-blog-post.featured-post .post-data .post-excerp {
         font-weight: 500;
-        margin-bottom: 40px;
+        margin-bottom: 0px;
         display: block;
         line-height: 2.1; }
     .single-blog-post.featured-post.single-post .post-data {
@@ -737,7 +782,7 @@ textarea:focus {
   position: relative;
   z-index: 1;
   background-color: #eff4f9;
-  padding: 60px 25px; }
+  padding: 10px 10px; }
   .popular-news-widget h3 {
     font-size: 30px;
     margin-bottom: 30px;

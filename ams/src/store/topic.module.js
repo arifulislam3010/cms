@@ -31,7 +31,7 @@ const actions = {
     },
     ['ADD_TOPIC']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('api/topic/',payload).then(response=>{
+            axios.post('api/topic',payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)

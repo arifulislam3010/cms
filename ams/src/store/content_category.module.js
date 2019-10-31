@@ -46,7 +46,7 @@ const actions = {
     },
     ['ADD_CONTENT_CATEGORY']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post(`/api/content_category/`,payload).then(response=>{
+            axios.post(`/api/content_category`,payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
