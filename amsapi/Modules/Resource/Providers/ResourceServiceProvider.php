@@ -89,11 +89,7 @@ class ResourceServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-<<<<<<< HEAD
         if (! app()->environment('production') && $this->app->runningInConsole()) {
-=======
-        if (! app()->environment('production')) {
->>>>>>> 9e75e65b875438f1859fa372d07440c5cda89fae
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
     }
