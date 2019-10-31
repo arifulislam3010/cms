@@ -40,7 +40,7 @@ class PostController extends Controller
             'shoulder' => 'required',
             'headline' => 'required',
             'reporter' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             'content' => 'required|min:10',    
             'status' => 'required',
 
@@ -52,7 +52,7 @@ class PostController extends Controller
         $post->headline = $request->headline;
         $post->hanger = $request->hanger;
         $post->reporter_id = $request->reporter['id'];
-        $post->author_id = $request->author['id'];
+        $post->author_id = $auth_user_id ;//$request->author['id'];
         $post->content   = $request->content;
 
         $post->share_at = $request->share_at;
@@ -90,7 +90,7 @@ class PostController extends Controller
             'shoulder' => 'required',
             'headline' => 'required',
             'reporter' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             'status' => 'required',
         ]);
         $auth_user_id = Auth()->user()->id ;            
@@ -98,7 +98,7 @@ class PostController extends Controller
         $post->headline = $request->headline;
         $post->hanger = $request->hanger;
         $post->reporter_id = $request->reporter['id'];
-        $post->author_id = $request->author['id'];
+        $post->author_id = $auth_user_id ;//$request->author['id'];
         $post->content   = $request->content;
 
         $post->share_at = $request->share_at;

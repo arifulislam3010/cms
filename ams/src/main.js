@@ -34,6 +34,7 @@ import Auth from './packages/Auth'
 import iziToast from 'izitoast'
 import Multiselect from 'vue-multiselect'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import ToggleButton from 'vue-js-toggle-button'
 //search 
 import Autocomplete from '@trevoreyre/autocomplete-vue'
@@ -75,6 +76,14 @@ Vue.filter('lang_filter',function(arg){
     }
 })
 
+
+// ClassicEditor
+//     .create( document.querySelector( '#editor' ), {
+//         plugins: [ Base64UploadAdapter, ... ],
+//         toolbar: [ ... ]
+//     } )
+//     .then( )
+//     .catch();
 // 
 router.beforeEach(
   (to,from,next) => {

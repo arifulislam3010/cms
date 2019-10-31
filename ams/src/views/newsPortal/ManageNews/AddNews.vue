@@ -4,7 +4,8 @@
       <div class="row">
         <div class="col-sm-6 form-group">
           <label>Shoulder</label>
-          <input v-model="news_data.shoulder" class="form-control" />
+          <ckeditor :editor="editor" v-model="news_data.shoulder" :config="editorConfig"></ckeditor>         
+          <!-- <input v-model="news_data.shoulder" class="form-control" /> -->
           <!-- <p v-if="news_data.shoulder.length<1" style="color:red">*required</p> -->
           <div v-show="errors.hasOwnProperty('shoulder')" class="help-block alert alert-danger">
             <p v-for="(i,k) in errors[`shoulder`]" :key="k">
@@ -12,7 +13,8 @@
             </p>
           </div>          
           <label>Headline</label>
-          <input v-model="news_data.headline" class="form-control" />
+          <ckeditor :editor="editor" v-model="news_data.headline" :config="editorConfig"></ckeditor>
+          <!-- <input v-model="news_data.headline" class="form-control" /> -->
           <!-- <p v-if="news_data.headline.length<1" style="color:red">*required</p> -->
           <div v-show="errors.hasOwnProperty('headline')" class="help-block alert alert-danger">
             <p v-for="(i,k) in errors[`headline`]" :key="k">
@@ -31,14 +33,14 @@
           </div>          
           <!-- <p v-if="news_data.reporter.length<1" style="color:red">*required</p>          -->
           <!-- <input v-model="news_data.reporter" class="form-control" /> -->
-          <hr />
+          <!-- <hr />
           <label>Author</label>
           <Multiselect v-model="news_data.author" :options="user_list" track-by="id" label="name"></Multiselect>
           <div v-show="errors.hasOwnProperty('author')" class="help-block alert alert-danger">
             <p v-for="(i,k) in errors[`author`]" :key="k">
               {{i}}
             </p>
-          </div>         
+          </div>          -->
          
           <!-- <p v-if="news_data.author.length<1" style="color:red">*required</p>          -->
         
@@ -194,8 +196,8 @@
     <div v-else class="card"> 
       <h2>you don`t have permission to add news </h2>
     </div>
-    <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
-    <ContentManager ref="video_manager_modal" :content="vid_content"></ContentManager>
+    <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
+    <ContentManager ref="video_manager_modal" :content="vid_content" ></ContentManager>
     <Loader v-if="loading"></Loader>
   </div>
 </template>
@@ -214,7 +216,15 @@ import FeatVideo from "./FeatVideo"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import Loader from "@/views/common/Loader";
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
+ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        plugins: [ Base64UploadAdapter, ],
+        toolbar: [ ]
+    } )
+    .then( )
+    .catch();
 Vue.component("ToggleButton", ToggleButton);
 export default {
   components: { 
@@ -227,6 +237,7 @@ export default {
     Treeselect,
     FeatVideo,
     Loader,
+    ClassicEditor,
   },
   data() {
     return {
@@ -292,6 +303,8 @@ export default {
         resize_enabled: false,
         toolbar: {
           items: [
+            "heading",
+            "|",
             "bold",
             "italic",
             "link",
@@ -300,9 +313,22 @@ export default {
             "NumberedList",
             "Underline",
             "undo",
-            "redo"
+            "redo",
+            "mediaEmbed",
+            // "imageUpload",
           ]
-        }
+        },
+
+        // heading: {
+        //   options: [
+        //     {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
+        //     {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
+        //     {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
+        //     {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
+        //     {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'}
+        //   ]
+        // }
+
       },
     };
   },
@@ -326,7 +352,7 @@ export default {
     // ...mapState(['news_data'])
   },
   mounted: function() {
-    
+    // ()=> ;  
     this.handel_update()
     this.getReporters();
     this.getUserList();
@@ -372,6 +398,7 @@ export default {
   },
   methods: {
     handel_update: function (){
+      console.log(ClassicEditor.defaultConfig.toolbar)
       this.loading = true 
       let ob = this.$route.params 
       if(ob.id){
