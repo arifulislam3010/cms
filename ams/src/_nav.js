@@ -189,8 +189,6 @@ export default {
         },
       ]
     },
-<<<<<<< HEAD
-=======
 
 
     // {
@@ -210,7 +208,6 @@ export default {
     //     },
     //   ]
     // },
->>>>>>> e9d68a92c29dfeec6b605ffb4a2abacfc57ec2c2
     {
       name: 'Admin Controls',
       url: '/user-role',

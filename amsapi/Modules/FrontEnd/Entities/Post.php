@@ -49,4 +49,18 @@ class Post extends Model
     {
         return $this->hasManyThrough('Modules\FrontEnd\Entities\Category','Modules\FrontEnd\Entities\PostCategory','post_id','id','id','category_id');
     }
+
+    public function Author(){
+        return $this->belongsTo('App\User','author_id');
+    }
+    public function Reporter(){
+        return $this->belongsTo('App\User','reporter_id');
+    }
+
+    public function createdBy(){
+        return $this->belongsTo('App\User','created_by');
+    }
+    public function updatedBy(){
+        return $this->belongsTo('App\User','updated_by');
+    }
 }
