@@ -33,7 +33,13 @@ Route::prefix('post')->middleware('auth:api')->group(function(){
 
     Route::get('/reporter/list','PostController@reporterNews');
 });
-
+// poll 
+Route::prefix('poll')->middleware(['auth:api'])->group(function(){
+    Route::get('list','PollController@index');
+    Route::post('/','PollController@store');
+    Route::put('/','PollController@store');
+    Route::delete('/{id}','PollController@destroy');
+});
 //Route::prefix('post')->middleware('auth:api')->group(function(){
 //    Route::get('/list','PostController@index');
 //    Route::get('/{id}','PostController@detail');
