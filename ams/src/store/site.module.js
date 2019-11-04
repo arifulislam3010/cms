@@ -2,6 +2,7 @@ import axios from "axios"
 const state = {
     site_info_list : [] ,
     site_info : {
+        id:``,  
         logo_url : ``,
         footer_logo_url:``,
         site_name:``,
@@ -42,8 +43,12 @@ const getters = {
         return state.site_info_list 
     },
     siteInfo(state){
-        return state.siteInfo 
+        return state.site_info 
     }
+    
+
+
+
 }
 
 const actions = {
@@ -59,6 +64,7 @@ const actions = {
     },
     [`ADD_SITE_INFO`]({commit},payload){
         let form_data = new FormData 
+        form_data.append(`id`,payload.id)
         form_data.append(`logo_url`,payload.logo_url)
         form_data.append(`footer_logo_url`,payload.footer_logo_url)
         form_data.append(`site_name`,payload.site_name)
@@ -94,8 +100,8 @@ const actions = {
         form_data.append(`selected`,payload.selected)
 
         if(payload.id!=``){
-            payload.append('_method',`PUT`)
-            payload.append('id',payload.id)
+            form_data.append('_method',`PUT`)
+            form_data.append('id',payload.id)
         }
 
         return new Promise((resolve,reject)=>{
@@ -114,6 +120,10 @@ const actions = {
                 reject(error)
             })
         })
+    },
+    [`UPDATE_SITE_INFO`]({commit},id){
+        commit('SET_UPDATE_SITE_INFO',id)
+        
     }
 }
 
@@ -121,6 +131,14 @@ const actions = {
 const mutations = {
     [`SET_SITE_INFOS`](state,payload){
         state.site_info_list = payload 
+    },
+    [`SET_UPDATE_SITE_INFO`](state,id){
+        let site = state.site_info_list.find( v => v.id == id) 
+        console.log(site)
+        console.log("update site")
+        if(site){ // if site with such id eists !!
+            state.site_info = site 
+        }
     }
 }
 

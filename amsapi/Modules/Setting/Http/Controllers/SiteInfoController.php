@@ -23,10 +23,11 @@ class SiteInfoController extends Controller
  
     public function store(Request $request)
     {
+        // return $request->method();
         // validate 
         // return Input::all();    
         // post or put 
-        $site = $request->isMethod("put") ? SiteInfo::findOrfail($request->id) : new SiteInfo(Input::all()) ;
+        $site = $request->isMethod("post") ?   new SiteInfo(Input::all()) : SiteInfo::findOrfail($request->id);
         if($request->isMethod("put")){
             $site->update(Input::all());
         }
