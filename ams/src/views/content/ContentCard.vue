@@ -1,10 +1,15 @@
 <template>
 <div class="row">
 <div class="col-md-3" v-for="(item,key) in items" v-bind:key="key">
+    <!-- <img src="../../static/selected.png" style="width:30px;"> -->
 <div class="card-content" style="margin-bottom:15px;">
     <div class="card-img">
-        <img :src="item.file" alt="" style="height:150px;">
-        <span :class="{ select_content : item.id == content.id }"  @click="ContentSelectC(item)"></span>
+        
+        <img :src="item.file" alt="" style="height:150px">
+        <span :class="{ select_content : item.id == content.id }"  @click="ContentSelectC(item)">
+            <img v-if="item.id == content.id" src="../../static/selected.png" style="width:50px;">
+            <img v-else src="../../static/unselect.png" style="width:50px;">
+        </span>
         
     </div>
     <div class="card-desc">
@@ -28,24 +33,59 @@ export default {
     },
     methods:{
         ContentSelectC(item){
-            alert('ss');
+            // copy to clip  
+            // alert('ss');
+            this.copyToclip(item.file)
             console.log(item);
             this.$parent.$parent.$parent.$parent.content = item;
-            //this.$parent.ContentSelect(item);
+            // this.$parent.ContentSelect(item);
+        },
+        copyToclip(arg){
+            // var text = "Example text to appear on clipboard";
+            let self = this 
+            navigator.clipboard.writeText(arg).then(function() {
+                    // console.log('Async: Copying to clipboard was successful!');
+                    self.$iziToast.success({position:'topRight',title:'Success',message:`image copied to clipboard`})       
+            }, function(err) {
+                     console.error('Async: Could not copy text: ', err);
+            });       
         },
         delete_image(id){
             // alert( `content id -> ${id} will be deleted`)
-            if(confirm(`content id -> ${id} will be deleted`)){
+            // if(confirm(`content id -> ${id} will be deleted`)){
 
-                // call to delete api 
-                this.$store.dispatch('DELETE_CONTENT',id).then(response=>{
-                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Content Deleted"})
-                    this.$parent.$parent.$parent.getData()
-                }).catch(error=>{
-                    this.$iziToast.success({position:'topRight',title:'Ok',message:"Error Occured"})
+            //     // call to delete api 
+            //     this.$store.dispatch('DELETE_CONTENT',id).then(response=>{
+            //         this.$iziToast.success({position:'topRight',title:'Ok',message:"Content Deleted"})
+            //         this.$parent.$parent.$parent.getData()
+            //     }).catch(error=>{
+            //         this.$iziToast.success({position:'topRight',title:'Ok',message:"Error Occured"})
+            //     })
+            //     // afte delete refresh the image list 
+            // }
+
+                let self = this
+                this.$dialog
+                .confirm('Please confirm to continue')
+                .then(function(dialog) {
+                    console.log(`clicked on proceed ${id}`)
+                    try{
+
+                        // call to delete api 
+                        self.$store.dispatch('DELETE_CONTENT',id).then(response=>{
+                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Content Deleted"})
+                            self.$parent.$parent.$parent.getData()
+                        }).catch(error=>{
+                            self.$iziToast.success({position:'topRight',title:'Ok',message:"Error Occured"})
+                        })
+                    }catch(e){
+                        console.log(e)
+                    }
                 })
-                // afte delete refresh the image list 
-            }
+                .catch(function() {
+                    console.log('Clicked on cancel');
+                });  
+            
         },
     }
 }
@@ -80,7 +120,8 @@ section{
 }
 
 .select_content{
-    background: #d70f0f !important;
+    /* background: #d70f0f !important; */
+    background-image: url('selected.png')
 }
 .card-img span {
     cursor: pointer;
@@ -88,7 +129,8 @@ section{
     top: 15%;
     left: 11%;
     padding: 20px;
-    background: #1fc002;
+    /* background-color: #02c022; */
+    /* background-image: url("./selected.png"); */
     color: #fff;
     font-size: 12px;
     border-radius: 4px;

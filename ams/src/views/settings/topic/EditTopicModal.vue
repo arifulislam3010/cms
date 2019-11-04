@@ -11,32 +11,36 @@
                   <b-row>
                     <b-col sm="6">
                       <b-form-group>
-                        <label for="Title">Topic</label>
-                        <b-form-input type="text" name="Title" id="title" v-model="editTopic.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
-                          <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
-                          <!-- {{  errors[`title`] }} -->
-                            <p v-for="(i,k) in errors[`title`]" :key="k">
+                        <label for="topic">Topic</label>
+                        <b-form-input type="text" name="topic" id="topic" v-model="editTopic.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
+                        
+                          <!-- <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
+                             {{  errors[`title`] }} -->
+                            <!-- <p v-for="(i,k) in errors[`title`]" :key="k">
                               {{i}}
                             </p>
-                          </div>
+                          </div> --> 
 
                       </b-form-group>
                     </b-col>
 
                   </b-row>
-                  <b-row>
+
+                   <b-row>
                     <b-col sm="6">
-                      <b-form-group>
-                        <label for="parent">Parent</label>
-                         <Treeselect 
-                         v-model="editTopic.parent_id" 
-                         :options="topic_parents"
-                         ></Treeselect>
-                       
-                      </b-form-group>
+                      <label for="Parent">Parent</label>
+                        <div class="input-group">
+                            <select name="Parent" v-model="editTopic.parent_id"  id="parent" class="form-control" >
+                                <option value="" >Select Parent</option>
+                                <option v-for="(topic,index) in topic_list" :key="index" :value="topic.id">{{topic.label}}</option>
+                            </select>
+
+                        </div>
                     </b-col>
 
                   </b-row>
+
+
                   <!-- <b-row>
                     <b-col sm="6">
                       <b-form-group>
@@ -72,21 +76,19 @@ import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate)
 
 import { UPDATE_TOPIC,ADD_TOPIC} from "@/store/action.type"
-// import { ADD_CONTACT_LOADER} from "../../store/mutation.type"
 import { mapState,mapGetters } from "vuex"
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+
 export default {
-  components:{Treeselect},
+
     data(){
         return{
-            errors:{},
+          
             largeModal:false,
             addLoader:false,
-            item_id :'',
             editTopic: {
                 title: '',
                 parent_id:'',
+                id:''
             }
 
         }
@@ -96,33 +98,32 @@ export default {
        updateTopic(){
             this.addLoader = true;
             var data = this.editTopic
-            var index = this.index
-            let payload = {
-              data:this.editTopic,
-              id:this.item_id,
-            }
-            this.$store.dispatch('UPDATE_TOPIC',payload)
+            var id = this.editTopic.id
+            this.$store.dispatch('UPDATE_TOPIC',{data,id})
             .then(response=>{
                 this.addLoader = false;
                 this.largeModal = false
                 this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Updated Successsfully"})
-                this.$parent.getTopics()
+                this.getAllTopics()
             })
             .catch(error=>{
                 this.addLoader = false;
-                // this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-                this.errors = error.response.data.errors 
+                this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
             });
         },
 
+        getAllTopics(){
+          this.$store.dispatch('FETCH_TOPICS').then(response=>{
+
+          })
+        },
+
         openModal(topic,index){
-            this.errors = {}
             this.largeModal = true
             this.index = index
             this.editTopic.title =topic.title
-            this.editTopic.cover =topic.cover
-            this.editTopic.status =topic.status
-            this.editTopic.topic_id =topic.id
+            this.editTopic.parent_id = topic.parent_id
+            this.editTopic.topic_id=topic.id
         },
         close(){
             this.largeModal = false

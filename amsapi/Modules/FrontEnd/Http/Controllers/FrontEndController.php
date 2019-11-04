@@ -5,16 +5,30 @@ namespace Modules\FrontEnd\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use Modules\FrontEnd\Entities\SiteInfo;
+use Modules\FrontEnd\Entities\Language;
+use Modules\FrontEnd\Transformers\Language as LanguageResource;
+use Modules\FrontEnd\Transformers\SiteInfo as SiteInfoResource;
 class FrontEndController extends Controller
 {
     /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function lanAll()
     {
-        return view('frontend::index');
+        $Language = Language::all();
+        return LanguageResource::collection($Language);
+    }
+
+    public function lanGet($id){
+        $Language = Language::where('id',$id)->get();
+        return new LanguageResource($Language);
+    }
+
+    public function SiteInfo($id){
+        $SiteInfo = SiteInfo::where('language_id',$id)->first();
+        return new SiteInfoResource($SiteInfo);
     }
 
 

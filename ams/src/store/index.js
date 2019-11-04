@@ -30,6 +30,8 @@ import Scroll from "./scroll.module"
 import Gallery from "./gallery.module"
 import ContentCategory from "./content_category.module"
 import Language from "./language.module"
+import Poll from "./poll.module"
+import SiteInfo from "./site.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -64,5 +66,7 @@ export default new Vuex.Store({
     Gallery,
     ContentCategory ,
     Language,
+    Poll ,
+    SiteInfo,
   }
 })

@@ -9,16 +9,50 @@ export default {
         // text: 'NEW'
       }
     },
+      {
+        // lang 
+        name: 'language',
+        url: 'language/add',
+        icon: 'fa fa-life-bouy',
+        children: [
+          {
+            name: 'list',
+            url: '/language/list',
+            icon: 'fa fa-life-bouy',
+          },
+          {
+            name: 'add',
+            url: '/language/add',
+            icon: 'fa fa-life-bouy',
+          },
+
+        ]
+      },
+      {
+        // todo 
+        // site setting 
+        name: 'site',
+        url: 'site/list',
+        icon: 'fa fa-life-bouy',
+        children: [
+          {
+            name: 'list',
+            url: '/site/list',
+            icon: 'fa fa-life-bouy',
+          },
+          {
+            name: 'add',
+            url: '/site/add/',
+            icon: 'fa fa-life-bouy',
+          },
+
+        ]
+      },
     {
       name: 'Settings',
       url: '/settings/category',
       icon: 'fa fa-money',
       children: [
-        {
-          name: 'language',
-          url: '/settings/language',
-          icon: 'fa fa-life-bouy'
-        },
         {
           name: 'category',
           url: '/settings/category',
@@ -157,6 +191,25 @@ export default {
         },
       ]
     },
+
+    {
+      name: 'Manage Poll',
+      url: '/poll/list',
+      icon: 'fa fa-life-bouy',
+      children: [
+        {
+          name: 'PollList',
+          url: '/poll/list',
+          icon: 'fa fa-life-bouy',
+        },
+        // {
+        //   name: 'AddPoll',
+        //   url: '/poll/add',
+        //   icon: 'fa fa-life-bouy',
+        // },
+
+      ]
+    },
     {
       name: 'News Controls',
       url: '/settings/category',
@@ -189,25 +242,6 @@ export default {
         },
       ]
     },
-
-
-    // {
-    //   name: 'Items',
-    //   url: '/category',
-    //   icon: 'fa fa-money',
-    //   children: [
-    //     {
-    //       name: 'Category',
-    //       url: '/category',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //     {
-    //       name: 'item',
-    //       url: '/item',
-    //       icon: 'fa fa-life-bouy'
-    //     },
-    //   ]
-    // },
     {
       name: 'Admin Controls',
       url: '/user-role',

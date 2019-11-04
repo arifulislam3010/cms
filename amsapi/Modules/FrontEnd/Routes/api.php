@@ -24,4 +24,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('/categories', 'PostsController@category');
     Route::post('/categories/home', 'PostsController@homeCategory');
     Route::get('/postSections', 'PostsController@postSection');
+    Route::get('/languages', 'FrontEndController@lanAll');
+    Route::get('/language/{id}', 'FrontEndController@lanGet');
+    Route::get('/site-info/{id}', 'FrontEndController@SiteInfo');
 });

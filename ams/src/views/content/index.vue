@@ -16,6 +16,7 @@
         <Treeselect v-model="search.content_category" :options="content_category_parents"></Treeselect>
       </div>
     </div>
+    <!-- {{selected_content_type}} -->
     <form @submit.prevent="addArea">
       <b-row>
         <div class="col-md-12 content_type">
@@ -262,6 +263,7 @@ export default {
   },
   methods: {
     setContentType: function() {
+      console.log(`content selected => ${this.selected_content_type}`)
       this.content_type = this.selected_content_type;
     },
     search_content: function(input) {

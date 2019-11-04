@@ -7,7 +7,10 @@
       </b-link>
       <SidebarToggler  class="d-md-down-none" display="lg"/>
       <b-navbar-nav class="d-md-down-none">
-        <b-nav-item class="px-3" to="/dashboard">Dashboard</b-nav-item>
+        <b-nav-item class="px-3" to="/dashboard">{{"dashboard" | lang_filter }}</b-nav-item>
+        <b-nav-item class="px-3">
+          <multiselect :options="langList"  v-model="current_lang" track-by="id" label="title" placeholder="select language"></multiselect>
+        </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <!-- <b-nav-item class="d-md-down-none">
@@ -61,6 +64,7 @@
 </template>
 
 <script>
+import multiselect from "vue-multiselect"
 import nav from '@/_nav'
 import { Header as AppHeader, SidebarToggler, Sidebar as AppSidebar, SidebarFooter, SidebarForm, SidebarHeader, SidebarMinimizer, SidebarNav, Aside as AppAside, AsideToggler, Footer as TheFooter, Breadcrumb } from '@coreui/vue'
 import DefaultAside from './DefaultAside'
@@ -83,13 +87,20 @@ export default {
     SidebarToggler,
     SidebarHeader,
     SidebarNav,
-    SidebarMinimizer
+    SidebarMinimizer,
+    multiselect
   },
   data () {
     return {
+      current_lang : ``,
       nav: nav.items,
       item2:'',
       navHide:false,
+    }
+  },
+  watch:{
+    current_lang:function(lang){
+      this.$store.dispatch(`CURRENT_LANG`,lang.id)
     }
   },
   computed: {
@@ -100,7 +111,7 @@ export default {
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     },
-    ...mapGetters(["user","userinfo","authuser"]),
+    ...mapGetters(["user","userinfo","authuser","langList"]),
   },
   methods:{
     allRole(){
@@ -127,9 +138,12 @@ export default {
     //     this.nav[12].children.push(a)
     //   })
     // }
+
   },
+
   mounted(){
     this.getPermission();
+    // this.getLanguages();
     // var that = this
     // setInterval(function(){
     //     that.menuAdd()

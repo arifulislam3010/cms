@@ -1,88 +1,90 @@
 <template>
-    <div class="card">
-      <div>    
-        <button class="btn btn-primary contct-b pull-left" @click="openModal">
-            <i v-if="auth_permission.scroll_create" class="fa fa-life-bouy"></i> Add Scroll
-        </button>
-      </div>  
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>title</th>
-                    <th>parent id</th>
-                    <th>created by</th>
-                    <th>updated by</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody v-if="auth_permission.scroll_view || auth_permission.scroll_viewall">
-                <tr v-for="(item,key) in scroll_list" :key="key">
-                       <td>{{key+1}}</td> 
-                       <td>{{item.label}}</td> 
-                       <td>{{item.parent_id}}</td> 
-                       <td>{{item.created_by}}</td> 
-                       <td>{{item.updated_by}}</td> 
-                       <td>
-                           <!-- <a href="#" @click="update_scroll(item)" style="margin-right:10px">update</a>
-                           <a href="#" @click="delete_scroll(item.id)">delete</a> -->
-                           <i v-if="auth_permission.scroll_update" @click="update_scroll(item)" class="icon-note icons actn"></i>
-                           <!-- <i @click="viewTopicModal(topic)" class="icon-eye icons actn"></i> -->
-                           <i v-if="auth_permission.scroll_delete || auth_permission.scroll_deleteall" @click="delete_scroll(item.id)" class="icon-trash icons actn"></i>
-                       </td> 
-                </tr>
-            </tbody>
-        </table>
-        <AddScroll ref="add_scroll_modal"></AddScroll>
-        <Loader v-if="loading"></Loader>
+  <div class="card">
+    <div>
+      <button class="btn btn-primary contct-b pull-left" @click="openModal">
+        <i v-if="auth_permission.scroll_create" class="fa fa-life-bouy"></i> Add Scroll
+      </button>
     </div>
+    
+
+    <AddScroll ref="add_scroll_modal"></AddScroll>
+    <ViewScrollModal ref="view_scroll_modal"></ViewScrollModal>
+
+    <Loader v-if="loading"></Loader>
+    <div class="row">
+      <div class="col-sm-8">
+        <div v-for="(i,k) in scroll_parents" :key="k">
+          <RecCom :node="i"></RecCom>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex"
-import AddScroll from "./AddScroll"
+import { mapGetters } from "vuex";
+import RecCom from "./RecCom.vue";
+import AddScroll from "./AddScroll.vue";
+import ViewScrollModal from "./ViewScrollModal.vue";
 import Loader from "@/views/common/Loader";
 
 export default {
-    components:{AddScroll,Loader},
-    data(){
-        return{
-            loading: false ,
-        }
+  components: {
+    AddScroll,
+    ViewScrollModal,
+    Loader,
+    RecCom
+  },
+  data() {
+    return {
+      loading: false,
+      showSection(index) {
+        isOpen: false;
+      },
+      parnt_index: "",
+      // permission:'',
+      search: {
+        search_item: ""
+      },
+      isActive: true
+    };
+  },
+  computed: {
+    ...mapGetters(["auth_permission", "scroll_list", "scroll_parents"])
+  },
+  mounted() {
+    this.getScrolls();
+  },
+  methods: {
+    editScrollModal(item) {
+      this.$refs.add_scroll_modal.openModal();
+      this.$refs.add_scroll_modal.update = true;
+      this.$refs.add_scroll_modal.newArea.parent_id = item.parent_id;
+      this.$refs.add_scroll_modal.newArea.title = item.label;
+      this.$refs.add_scroll_modal.item_id = item.id;
     },
-    computed:{
-        ...mapGetters(['auth_permission','scroll_list'])
+    deleteScroll(id) {
+      this.$store
+        .dispatch("DELETE_SCROLL", id)
+        .then(response => {
+          this.getScrolls();
+        })
+        .catch(error => {});
     },
-    mounted(){
-        this.getScrolls()
+    getScrolls() {
+      this.loading = true;
+      this.$store
+        .dispatch("FETCH_SCROLLS")
+        .then(response => {
+          this.loading = false;
+        })
+        .catch(error => {
+          this.loading = false;
+        });
     },
-    methods:{
-       
-        update_scroll: function(item){
-            this.$refs.add_scroll_modal.openModal();
-            this.$refs.add_scroll_modal.update = true;
-            this.$refs.add_scroll_modal.newScroll.parent_id = item.parent_id;
-            this.$refs.add_scroll_modal.newScroll.title = item.label;
-            this.$refs.add_scroll_modal.item_id = item.id;
-        },
-        delete_scroll: function(id){
-            this.$store.dispatch('DELETE_SCROLL',id).then(response=>{
-                this.getScrolls()
-            }).catch(error=>{
-
-            })
-        },
-        getScrolls: function(){
-            this.loading = true
-            this.$store.dispatch('FETCH_SCROLLS').then(response=>{
-                this.loading = false
-            }).catch(error=>{
-                this.loading = false
-            })
-        },
-        openModal: function(){
-            this.$refs.add_scroll_modal.openModal()
-        }
-    },
-}
+    openModal() {
+      this.$refs.add_scroll_modal.openModal();
+    }
+  }
+};
 </script>

@@ -15,7 +15,7 @@
                         <b-form-input type="text" name="ncategory" id="ncategory" v-model="editNcategory.title" v-validate="'required'" placeholder="Enter title..."></b-form-input>
                         <!-- <div v-show="errors.has('ncategory')" class="help-block alert alert-danger">
                         {{ errors.first('ncategory') }} -->
-                        </div>
+                        <!-- </div> -->
                       </b-form-group>
                     </b-col>
 
@@ -75,6 +75,7 @@ export default {
     methods:{
 
        updateNcategory(){
+         
             this.addLoader = true;
             var data = this.editNcategory
             var index = this.index

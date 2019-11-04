@@ -9,6 +9,7 @@
         <!-- {{category_list}} -->
         <!-- {{auth_permission}} -->
         <div class="container-fluid"  v-if="false">
+
             <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
 
             <form class="form-inline contct my-2 my-lg-0 pull-right">
@@ -50,11 +51,15 @@
             </nav> -->
 
         </div>
+
+
+
         <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
         <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
         <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
         <Loader v-if="loading"></Loader>    
   </div>
+  
     <div class="row">
         <div class="col-sm-3">
             <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>

@@ -20,7 +20,7 @@ const actions = {
     data.append('title',list.title);
     data.append('file',list.file);
     data.append('type',list.type)
-    data.append('content_category',list.content_category)
+    if(list.content_category) data.append('content_category',list.content_category)
     return new Promise((resolve,reject)=>{
         axios.post('api/contentmanager/store',data,{method: 'PATCH',
         headers: {

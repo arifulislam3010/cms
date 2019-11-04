@@ -1,5 +1,5 @@
 <template>
-    <b-modal title="Ttopic"  no-close-on-backdrop hide-footer size="xl" v-model="largeModal"  @ok="largeModal = false">
+    <b-modal title="topic"  no-close-on-backdrop hide-footer size="xl" v-model="largeModal"  @ok="largeModal = false">
         <form>
             <div class="form-group row">
                 <div class="col-sm-5">
