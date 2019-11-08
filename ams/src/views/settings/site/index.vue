@@ -1,9 +1,6 @@
 <template>
     <div>
-        <!-- show as list/table view with delete and update options + add button on top which navigates to add page   -->
-
-    {{siteInfo}}
-
+       
      <div class="card">
             <table class="table table-sm">
                 <thead>
@@ -13,6 +10,7 @@
                         <th>Site info</th>
                         <th>about</th>
                         <th>actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -29,13 +27,10 @@
                 </tbody>
             </table>
         </div>
-
-
-     <!-- <AddSite v-if="openEditModal" refs="add_site"></AddSite> -->
-
-
     </div>
 </template>
+
+
 <script>
 import {mapGetters} from "vuex"
 import AddSite from "./add.vue";
