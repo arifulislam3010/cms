@@ -35,11 +35,11 @@
               </button>
 
               <!-- Modal2 for adding slot -->
-              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <h5 class="modal-title" id="exampleModalLabel2">Add Slot</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -49,6 +49,7 @@
                         <b-form-input type="text" name="Title"  id="Title" v-model="titleS"  v-validate="'required'" placeholder="Enter title..." ></b-form-input>
                       </div>
                       <div class="col-sm-5">
+                        
                         <select class="form-control" v-model="selectedType">
                           <option>Text</option>
                           <option>Image</option>
@@ -72,11 +73,6 @@
               <div v-if="i.type= 'Text'">
                 <label >{{i.inputTitle}}</label>
                 <b-form-input type="text" name="Title"  id="Titlle" v-model="i.content"  v-validate="'required'" placeholder="Enter title" ></b-form-input>
-              </div>
-
-              <div v-if="i.type= 'CK'">
-                <label >{{i.inputTitle}}</label>
-                <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor>
               </div>
 
               
@@ -112,7 +108,7 @@ export default {
     return {
       modal: true,
       titleS: "",
-      selectedType:'',
+      selectedType:"",
       editor: ClassicEditor,
       editorConfig: {
         fullPage: false,
@@ -165,7 +161,8 @@ export default {
         inputTitle:this.titleS,
         content:''
       })
-      this.titleS = ""
+      console.log(this.selectedType)
+      this.titleS =""
       this.selectedType=""
     },
 
