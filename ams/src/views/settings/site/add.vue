@@ -1,89 +1,44 @@
-<template>
-  <div>
-    <!-- modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Tab</button>
-    <br /><br />
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <b-form-input type="text" name="Title" id="Title" v-model="titleS" v-validate="'required'"  placeholder="Enter title..."></b-form-input>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button  type="button" class="btn btn-primary" @click="addNewTab" data-dismiss="modal">Add Tab</button>
+<template ref="add_lang">
+  <div class="card">
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-5">
+            <label for>Title</label>
+            <input v-model="title" class="form-control" placeholder="enter title" />
           </div>
         </div>
-      </div>
-    </div>
-    <!-- main Body tabs -->
-    <div class="container">
-      <b-tabs content-class="mt-2">
-        <div v-for="(tab,k) in tabLists" :key="k">
-          <b-tab :title="tab.title">
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
-                Add Slot
-              </button>
-
-              <!-- Modal2 for adding slot -->
-              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel2">Add Slot</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body row">
-                      <div class="col-sm-7">
-                        <b-form-input type="text" name="Title"  id="Title" v-model="titleS"  v-validate="'required'" placeholder="Enter title..." ></b-form-input>
-                      </div>
-                      <div class="col-sm-5">
-                        
-                        <select class="form-control" v-model="selectedType">
-                          <option>Text</option>
-                          <option>Image</option>
-                          <option>Video</option>
-                          <option>CK</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" @click="addSlot"  data-dismiss="modal">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <!-- content in each tab  -->
-            <!-- {{tab.input}} -->
-            <div v-for="(i,kk) in tab.input" :key="kk">
-              
-              <div v-if="i.type= 'Text'">
-                <label >{{i.inputTitle}}</label>
-                <b-form-input type="text" name="Title"  id="Titlle" v-model="i.content"  v-validate="'required'" placeholder="Enter title" ></b-form-input>
-              </div>
-
+        <div class="row">
+          <div class="col-sm-5">
+            <label for>Slug</label>
+            <input v-model="slug" class="form-control" placeholder="enter title" />
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+            
+          <div class="col-sm-6">
+            <label>Contents</label>
+            <br />
+            <div class="row" v-for="(i,k) in contents" :key="k" style="margin-bottom:10px">  
               
               
             </div>
-
-
-          </b-tab>
+            <!-- loop -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_word">
+                Add Slot
+              </button>
+          </div>
+          {{content_list}}
+          
         </div>
-      </b-tabs>
+      </div>
     </div>
+    <div class="card-footer">
+        <button class="btn btn-success pull-right" @click="()=>{}"> save</button>
+    </div>
+    <AddWord  ref="add_word"></AddWord>
+    <ContentManager ref="content_manager_modal"></ContentManager>
   </div>
 </template>
 
@@ -91,21 +46,27 @@
 
 <script>
 import axios from "axios";
+import AddWord from "./word";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import { mapGetters } from "vuex";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { ADD_SITE_INFO, UPDATE_SITE_INFO } from "@/store/action.type";
-import ContentManager from "../../content/index";
+import ContentManager from "../../content/index"
 import { type } from "os";
+
+
+
 export default {
   components: {
     CKEditor,
     ClassicEditor,
-    ContentManager
+    ContentManager,
+    AddWord
   },
 
   data() {
     return {
+      content_list : [] ,
       modal: true,
       titleS: "",
       selectedType:"",
@@ -128,52 +89,68 @@ export default {
         }
       },
 
-      tabLists: []
+  
+    id:'',
+    title:'',
+    slug:'',
+    contents:[]
+  
     };
   },
   computed: {
-    ...mapGetters(["siteInfoList", "siteInfo"])
+    ...mapGetters(["site_list","contentList"]),
+    getContents(){
+      return this.content_list.length
+    }
+  },
+  mounted(){
+     this.handelUpdate()
   },
 
   methods: {
-    addNewTab() {
-      this.tabLists.push({
-        title: this.titleS,
-        input: [
-          // {
-          //    type: "type1",
-          //    inputTitle: "",
-          //    content: "asdafa"
-          //  },
-          //  {
-          //    type: "type2",
-          //    inputTitle: "",
-          //    content: "xvhd"
-          //  }
-        ]
-      })
-      this.titleS = ""
-      console.log(tabLists)
+    addData(arg){
+      console.log('addiing data')
+      this.content_list.push(arg)
+      console.log(this.content_list)
     },
-    addSlot(){
-      this.tabLists[0].input.push({
-        type:this.selectedType,
-        inputTitle:this.titleS,
-        content:''
-      })
-      console.log(this.selectedType)
-      this.titleS =""
-      this.selectedType=""
+    handelUpdate(){
+      
     },
+      demofn() {
+          // do samll and make it large
+      this.$router.push({ name: "addSite" });
+    },
+
+
+
+     edit_content(i,k){
+        this.word_type = `front`
+        this.$refs.add_word.is_update = true 
+        this.$refs.add_word.update_idx = k 
+        this.$refs.add_word.title = Object.keys(i).pop()
+        this.$refs.add_word.content = Object.values(i).pop()      
+    },
+
+    save(){
+      // flat nested object to simple object 
+
+      this.$store.dispatch(`ADD_LANGUAGE`,payload).then(response=>{
+        this.$iziToast.success({position:'topRight',title:'Success',message:``})       
+      }).catch(error=>{
+        this.$iziToast.success({position:'topRight',title:'Success',message:``})       
+      })
+    },
+
 
     ContentManagerModal() {
       this.$refs.content_manager_modal.openModal()
+    },
+    ContentVideoModal(){
+      this.$refs.content_video_modal.openModal()
     }
   }
 };
 </script>
-
-
 
 <style  scoped>
 </style>

@@ -1,118 +1,50 @@
 import axios from "axios"
 const state = {
-    site_info_list : [] ,
-    site_info : {
-        id:``,  
-        logo_url : ``,
-        footer_logo_url:``,
-        site_name:``,
-        site_author:``,
-        license_no:``,
-        registration_no:``,
-        copyright_text:``,
-        twitter_feed:``,
-        facebook_likebox:``,
-        primary_email:``,
-        secondary_email:``,
-        primary_phone:``,
-        secondary_phone:``,
-        primary_tel:``,
-        secondary_tel:``,
-        primary_fax:``,
-        secondary_fax:``,
-        po:``,
-        address:``,
-        map_url:``,
-        working_hours:``,
-        working_days:``,
-        facebook:``,
-        twitter:``,
-        google_plus:``,
-        linkedin:``,
-        skype:``,
-        youtube:``,
-        privacy_policy:``,
-        about:``,
-        terms_of_use:``,
-        selected:``,
-    }
+    site_info:[],
+    content_list : [],
 }
 
 const getters = {
-    siteInfoList(state){
-        return state.site_info_list 
-    },
-    siteInfo(state){
+
+    site_list(state){
         return state.site_info 
-    }
-    
-
-
-
-}
+    },
+    contentList(state){ return state.content_list },
+} 
 
 const actions = {
-    [`FETCH_SITE_INFOS`]({commit}){
+    [`UPDATE_CONTENT_LIST`]({commit},payload){
+        commit(`SET_CONTENT_LIST`,payload)
+    },
+    ['FETCH_SITE_INFOS']({commit}){
         return new Promise((resolve,reject)=>{
-            axios.get(`api/site_info`).then(response=>{
-                commit(`SET_SITE_INFOS`,response.data)
+            axios.get('api/site_info/list').then(response=>{
                 resolve(response)
+                commit('SET_SITE_INFOS',response.data)
             }).catch(error=>{
                 reject(error)
             })
         })
     },
-    [`ADD_SITE_INFO`]({commit},payload){
+    ['ADD_SITE_INFO']({commit},payload){
         let form_data = new FormData 
-        form_data.append(`id`,payload.id)
-        form_data.append(`logo_url`,payload.logo_url)
-        form_data.append(`footer_logo_url`,payload.footer_logo_url)
-        form_data.append(`site_name`,payload.site_name)
-        form_data.append(`site_author`,payload.site_author)
-        form_data.append(`license_no`,payload.license_no)
-        form_data.append(`registration_no`,payload.registration_no)
-        form_data.append(`copyright_text`,payload.copyright_text)
-        form_data.append(`twitter_feed`,payload.twitter_feed)
-        form_data.append(`facebook_likebox`,payload.facebook_likebox)
-        form_data.append(`primary_email`,payload.primary_email)
-        form_data.append(`secondary_email`,payload.secondary_email)
-        form_data.append(`primary_phone`,payload.primary_phone)
-        form_data.append(`secondary_phone`,payload.secondary_phone)
-        form_data.append(`primary_tel`,payload.primary_tel)
-        form_data.append(`secondary_tel`,payload.secondary_tel)
-        form_data.append(`primary_fax`,payload.primary_fax)
-        form_data.append(`secondary_fax`,payload.secondary_fax)
-        form_data.append(`po`,payload.po)
-        form_data.append(`address`,payload.address)
-        form_data.append(`map_url`,payload.map_url)
-        form_data.append(`working_hours`,payload.working_hours)
-        form_data.append(`working_days`,payload.working_days)
-        form_data.append(`facebook`,payload.facebook)
-        form_data.append(`twitter`,payload.twitter)
-        form_data.append(`twitter`,payload.twitter)
-        form_data.append(`google_plus`,payload.google_plus)
-        form_data.append(`linkedin`,payload.linkedin)
-        form_data.append(`skype`,payload.skype)
-        form_data.append(`youtube`,payload.youtube)
-        form_data.append(`privacy_policy`,payload.privacy_policy)
-        form_data.append(`about`,payload.about)
-        form_data.append(`terms_of_use`,payload.terms_of_use)
-        form_data.append(`selected`,payload.selected)
-
-        if(payload.id!=``){
-            form_data.append('_method',`PUT`)
-            form_data.append('id',payload.id)
+        form_data.append('title',paylaod.title)
+        form_data.append('slug',paylaod.slug)
+        form_data.append('content',paylaod.contents)
+       
+        if(paylaod.id!=``){
+            form_data.append(`_method`,`PUT`)
+            form_data.append(`id`,paylaod.id)
         }
-
         return new Promise((resolve,reject)=>{
-            axios.post(`api/site_info`,form_data,{method : '_patch'}).then(response=>{
+            axios.post(`api/site_info`,form_data,{method: `PATCH`}).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
             })
         })
     },
-    [`DELETE_SITE_INFO`]({commit},id){
+    ['DELETE_SITE_INFO']({commit},id){
         return new Promise((resolve,reject)=>{
             axios.delete(`api/site_info/${id}`).then(response=>{
                 resolve(response)
@@ -120,31 +52,21 @@ const actions = {
                 reject(error)
             })
         })
-    },
-    [`UPDATE_SITE_INFO`]({commit},id){
-        commit('SET_UPDATE_SITE_INFO',id)
-        
     }
 }
 
-
 const mutations = {
-    [`SET_SITE_INFOS`](state,payload){
-        state.site_info_list = payload 
+    [`SET_CONTENT_LIST`](state,payload){
+        state.content_list = payload
     },
-    [`SET_UPDATE_SITE_INFO`](state,id){
-        let site = state.site_info_list.find( v => v.id == id) 
-        console.log(site)
-        console.log("update site")
-        if(site){ // if site with such id eists !!
-            state.site_info = site 
-        }
-    }
+    ['SET_SITE_INFOS'](state,payload){
+        state.site_info = payload
+    },
 }
 
 export default {
-    state , 
-    getters ,
-    actions ,
-    mutations ,
+    state,
+    getters,
+    actions,
+    mutations,
 }

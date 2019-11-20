@@ -72,9 +72,9 @@ Route::prefix('api/')->group(function() {
 
 	// site_info 
 	Route::prefix('site_info')->middleware(['auth:api'])->group(function(){
-		Route::get('/','SiteInfoController@index');
+		Route::get('/list','SiteInfoController@index');
 		Route::post('/','SiteInfoController@store');
-		Route::put('/','SiteInfoController@store');
+		Route::put('/{id}','SiteInfoController@store');
 		Route::delete('/{id}','SiteInfoController@destroy');
 	});
 

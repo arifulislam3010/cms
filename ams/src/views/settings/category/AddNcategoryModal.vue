@@ -14,9 +14,6 @@
                       <b-form-group>
                         <label for="Title">Name</label>
                         <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
-                        <!-- <div  class="help-block alert alert-danger">
-                        {{ errors.first('Title') }}
-                        </div> -->
                         <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
                         <!-- {{  errors[`title`] }} -->
                           <p v-for="(i,k) in errors[`title`]" :key="k">
@@ -30,17 +27,9 @@
                     <b-col sm="12">
                       <b-form-group>
                         <label for="Parent">Parent</label>
-                        <!-- <div class="input-group">
-                            <select name="Parent" v-model="newNcategory.parent_id"  id="parent" class="form-control" >
-                                <option value="" >Select Parent</option>
-                                <option v-for="(ncategory,index) in category_list" :key="index" :value="ncategory.id">{{ncategory.title}}</option>
-                            </select>
 
-                        </div> -->
                         <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
-                      </b-form-group>
-
-                      
+                      </b-form-group>                    
                     </b-col>
                   </b-row>
                 </b-card>
