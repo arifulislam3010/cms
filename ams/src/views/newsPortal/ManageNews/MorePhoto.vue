@@ -16,7 +16,7 @@
     <img v-if="item.file" :src="item.file" height="100px" width="100px" />
     <br>
     <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button>
-    <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
+    <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="`image`"></ContentManager>
   </div>
 </template>
 <script>
