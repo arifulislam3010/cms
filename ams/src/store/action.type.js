@@ -132,3 +132,13 @@ export const SEARCH_GALLERY = "SEARCH_GALLERY"
 export const GET_CONTENT = "GET_CONTENT"
 export const ADD_CONTENT = "ADD_CONTENT"
 export const DELETE_CONTENT = "DELETE_CONTENT"
+
+//site
+
+export const FETCH_SITE_INFOS = "FETCH_SITE_INFOS"
+export const ADD_SITE_INFO = "ADD_SITE_INFO"
+export const DELETE_SITE_INFO = "DELETE_SITE_INFO"
+export const SET_SITE_INFOS = "SET_SITE_INFOS"
+export const UPDATE_SITE_INFO = "UPDATE_SITE_INFO"
+
+
