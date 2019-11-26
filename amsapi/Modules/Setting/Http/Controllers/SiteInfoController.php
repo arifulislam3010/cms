@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 
 use Modules\Setting\Entities\SiteInfo;
+use Modules\Setting\Transformers\SiteInfo as SiteInfoResource;
 
 class SiteInfoController extends Controller
 {
@@ -17,21 +18,45 @@ class SiteInfoController extends Controller
      */
     public function index()
     {
-        return SiteInfo::all();
+        $SiteInfo = SiteInfo::all();
+        return SiteInfoResource::collection($SiteInfo);
     }
 
  
     public function store(Request $request)
     {
+        // return $request->method();
         // validate 
-        // return Input::all();    
-        // post or put 
-        $site = $request->isMethod("put") ? SiteInfo::findOrfail($request->id) : new SiteInfo(Input::all()) ;
-        if($request->isMethod("put")){
-            $site->update(Input::all());
+        if($request->isMethod('post')){
+            // when adding new fields have to unique
+            $validatro = $request->validate([
+                'title' => 'required|unique:site',
+                'slug' => 'required|unique:site',
+            ]);
+
+        }else{
+            // when updating then dont check unique
+            $validatro = $request->validate([
+                'title' => 'required',
+                'slug' => 'required',
+            ]);
+        }
+        
+        
+        $site = $request->isMethod('put')? SiteInfo::findOrfail($request->id) : new SiteInfo ;
+        $site->title  = $request->title;
+        $site->slug  = $request->slug;
+        $site->content  = json_encode($request->content);
+
+        // who did this ? (create/ update)
+        $user_id = Auth()->user()->id ;
+        if($request->isMethod('post')){ // create 
+            $site->created_by = $user_id ;
+        }else{
+            $site->updated_by = $user_id ;
         }
         if($site->save()){
-            return $site ;
+            return new SiteInfoResource($site) ;
         }
 
     }

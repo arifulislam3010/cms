@@ -1,9 +1,6 @@
 <template ref="add_lang">
   <div class="card">
     <div class="card-body">
-      <!-- </div> -->
-      <!-- {{langList}} -->
-      <!-- {{title | test_filter}} -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-5">
@@ -87,8 +84,7 @@ export default {
       slug : `` ,
       word_type : ''  ,
       admin_list: [
-          
-              // {'dashboard':''}        
+    
       ],
       front_list: []
     };
@@ -142,6 +138,7 @@ export default {
         this.$refs.add_word.value = Object.values(i).pop()
     },
     save(){
+      console.log(this.admin_list)
         // flat nested object to simple object 
         let falt_admin = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.admin_list))
         let falt_front = Object.assign({}, ...function _flatten(o) { return [].concat(...Object.keys(o).map(k => typeof o[k] === 'object' ? _flatten(o[k]) : ({[k]: o[k]})))}(this.front_list))

@@ -11,8 +11,6 @@ use Modules\Setting\Transformers\Area as AreaResource;
 class AreaController extends Controller
 {
     public function index(Request $request){
-
-
         $areas = Area::all();
         return AreaResource::collection($areas);
     }
