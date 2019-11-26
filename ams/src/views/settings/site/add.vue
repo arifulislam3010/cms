@@ -4,7 +4,7 @@
         <b-card no-body>
             <b-tabs >
             <b-tab title="Logo" active>
-                <b-card-text>Tab Contents 1</b-card-text>
+                <b-card-text></b-card-text>
             </b-tab>
             <b-tab title="Footer Logo">
                 <b-card-text>footer logo </b-card-text>
