@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(i,k) in siteInfoList" :key="k">
+                    <tr v-for="(i,k) in site_list" :key="k">
                         <td>{{i.id}}</td>
                         <td>{{i.logo_url}}</td>
                          <td>{{i.site_name}}</td>
@@ -26,6 +26,7 @@
                     </tr>
                 </tbody>
             </table>
+            {{contentList}}
         </div>
     </div>
 </template>
@@ -41,11 +42,10 @@ export default {
     },
     data(){
         return {
-            
         }
     },
     computed:{
-        ...mapGetters(['siteInfoList','siteInfo'])
+        ...mapGetters(['site_list',`contentList`])
     },
     mounted(){
         this.getSiteInfos()
@@ -71,11 +71,10 @@ export default {
             })
             this.getSiteInfos()
         },
-
         
         editSite(site){
             console.log(site.id)   
-            this.$store.dispatch(`UPDATE_SITE_INFO`,site.id).then(response=>{
+            this.$store.dispatch(`UPDATE_SITE_INFO`,site).then(response=>{
                 //this.$iziToast.success({position:'topRight',title:'Ok',message:"Site updated Successsfully"})
             }).catch(error=>{
 
@@ -84,7 +83,6 @@ export default {
             this.getSiteInfos()
              
         }
-
     }
 }
 </script>

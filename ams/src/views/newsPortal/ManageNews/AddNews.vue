@@ -216,11 +216,11 @@ import FeatVideo from "./FeatVideo"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import Loader from "@/views/common/Loader";
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 ClassicEditor
     .create( document.querySelector( '#editor' ), {
-        plugins: [ Base64UploadAdapter, ],
+        // plugins: [ Base64UploadAdapter, ],
         toolbar: [ ]
     } )
     .then( )
