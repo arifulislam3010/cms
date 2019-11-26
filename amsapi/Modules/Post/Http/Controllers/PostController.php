@@ -34,7 +34,6 @@ class PostController extends Controller
 
     public function postCategory()
     {
-        return "ok";
         $category = Ncategory::all();
          return NcategoryResource::collection($category);
         return PostResource::collection(Post::all());
@@ -117,7 +116,7 @@ class PostController extends Controller
         $post->headline = $request->headline;
         $post->hanger = $request->hanger;
         $post->reporter_id = $request->reporter['id'];
-        $post->author_id = $auth_user_id ;//$request->author['id'];
+        $post->author_id = $request->author['id'];
         $post->content   = $request->content;
 
         $post->share_at = $request->share_at;

@@ -242,6 +242,25 @@ export default {
         },
       ]
     },
+
+
+    // {
+    //   name: 'Items',
+    //   url: '/category',
+    //   icon: 'fa fa-money',
+    //   children: [
+    //     {
+    //       name: 'Category',
+    //       url: '/category',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //     {
+    //       name: 'item',
+    //       url: '/item',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
     {
       name: 'Admin Controls',
       url: '/user-role',

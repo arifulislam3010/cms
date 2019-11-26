@@ -31,6 +31,8 @@ class PostsController extends Controller
 
         $section     = ($request->has('section'))?$request['section']:null;
         $category     = ($request->has('category'))?$request['category']:null;
+        $tag     = ($request->has('tag'))?$request['tag']:null;
+        $area     = ($request->has('area'))?$request['area']:null;
         $limit     = ($request->has('limit'))?$request['limit']:10;
         $search     = ($request->has('search'))?$request['search']:null;
         $popular     = ($request->has('popular'))?$request['popular']:null;
@@ -44,6 +46,8 @@ class PostsController extends Controller
         $post = Post::select('posts.*')
         ->when($section,function($q) use($section){return $q->join('post_sections','post_sections.post_id','=','posts.id')->where('post_sections.section_id', $section);})
         ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id', $category);})
+        ->when($tag,function($q) use($tag){return $q->join('post_tags','post_tags.post_id','=','posts.id')->where('post_tags.tag_id',$tag);})
+        ->when($area,function($q) use($area){return $q->join('post_areas','post_areas.post_id','=','posts.id')->where('post_areas.area_id', $area);})
             ->orderBy('posts.id', 'DESC')
             ->paginate($limit);
         return PostResource::collection($post);

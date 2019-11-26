@@ -5,6 +5,7 @@ namespace Modules\FrontEnd\Transformers;
 use Illuminate\Http\Resources\Json\Resource;
 use App\User ;
 use Modules\FrontEnd\Transformers\Content as ContentResource;
+use Modules\FrontEnd\Transformers\User as UserResource;
 use Modules\FrontEnd\Entities\PostContent;
 class Post extends Resource
 {
@@ -22,8 +23,8 @@ class Post extends Resource
             'shoulder'=>$this->shoulder,
             'headline'=>$this->headline,
             'hanger'=>$this->hanger,
-            'athor_id'=>$this->athor_id,
-            'reporter_id'=>$this->reporter_id,
+            'athor'=>$this->Author->name,
+            'reporter'=>$this->Reporter->name,
             'content'=>$this->content,
             'featured_image_id'=>$this->featured_image_id,
             'FeaturedImage'=>new ContentResource($this->FeaturedImage),
@@ -40,7 +41,7 @@ class Post extends Resource
             'Instant_article'=>$this->Instant_article,
             'updated_by' => $this->updatedBy ? $this->updatedBy->name : "" ,
             'created_by' => $this->createdBy ? $this->createdBy->name : "" ,
-            'created_at' => $this->created_at,
+            'created_at' => \Carbon\Carbon::parse($this->created_at)->format('d/m/Y'),
             'updated_at' => $this->updated_at
         ];
     }
