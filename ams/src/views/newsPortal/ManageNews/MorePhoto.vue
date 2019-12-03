@@ -2,20 +2,29 @@
   <div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select</button>
+        <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
+          <span>
+            <i class="icon-picture"></i>
+          </span>
+        </button>
       </div>
       <input
         type="text"
         class="form-control"
-        placeholder
+        placeholder="enter caption"
         aria-label
         aria-describedby="basic-addon1"
         v-model="item.title"
       />
+      <i class="icon-trash"
+        @click="del_photo"
+        data-toggle="tooltip" title="remove"
+        style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+      </i>
     </div>
     <img v-if="item.file" :src="item.file" height="100px" width="100px" />
     <br>
-    <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button>
+    <!-- <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button> -->
     <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="`image`"></ContentManager>
   </div>
 </template>

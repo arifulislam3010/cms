@@ -1,32 +1,30 @@
 <template>
-    <div>
-       
+    <div>      
      <div class="card">
             <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Logo</th>
-                        <th>Site info</th>
-                        <th>about</th>
+                        <th>Title</th>
+                        <th>Slug</th>
                         <th>actions</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(i,k) in site_list" :key="k">
                         <td>{{i.id}}</td>
-                        <td>{{i.logo_url}}</td>
-                         <td>{{i.site_name}}</td>
-                        <td>{{i.about}}</td>
+                        <td>{{i.title}}</td>
+                         <td>{{i.slug}}</td>
+                            
                         <td>
                             <a href="#" @click="editSite(i)">Edit//</a> 
                             <a href="#" @click="deleteSite(i)" >Delete</a> 
                         </td>
+                      <!-- {{i.content}} -->
                     </tr>
                 </tbody>
             </table>
-            {{contentList}}
+           
         </div>
     </div>
 </template>
@@ -45,7 +43,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['site_list',`contentList`])
+        ...mapGetters(['site_list'])
     },
     mounted(){
         this.getSiteInfos()
@@ -73,13 +71,17 @@ export default {
         },
         
         editSite(site){
-            console.log(site.id)   
-            this.$store.dispatch(`UPDATE_SITE_INFO`,site).then(response=>{
-                //this.$iziToast.success({position:'topRight',title:'Ok',message:"Site updated Successsfully"})
-            }).catch(error=>{
-
+            
+            this.$store.dispatch(`GET_SITE_DETAIL`,site.id).then(response=>{
+                this.$router.push({path:'/site/add',params:site.id})
             })
-            this.$router.push({name:`site-add`})
+            // this.$router.push({name:`Edit-Language`,params:{id}})
+            // this.$store.dispatch(`UPDATE_SITE_INFO`,site).then(response=>{
+            //     //this.$iziToast.success({position:'topRight',title:'Ok',message:"Site updated Successsfully"})
+            // }).catch(error=>{
+
+            // })
+            // this.$router.push({name:`site-add`})
             this.getSiteInfos()
              
         }

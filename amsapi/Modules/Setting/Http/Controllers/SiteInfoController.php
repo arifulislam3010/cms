@@ -30,8 +30,8 @@ class SiteInfoController extends Controller
         if($request->isMethod('post')){
             // when adding new fields have to unique
             $validatro = $request->validate([
-                'title' => 'required|unique:site',
-                'slug' => 'required|unique:site',
+                'title' => 'required|unique:site_infos',
+                'slug' => 'required|unique:site_infos',
             ]);
 
         }else{
@@ -69,5 +69,10 @@ class SiteInfoController extends Controller
         if($site->delete()){
             return $site ;
         }
+    }
+    public function detail($id){
+        // return "ok";
+        $site_info = SiteInfo::findOrfail($id) ;
+        return new SiteInfoResource($site_info);
     }
 }

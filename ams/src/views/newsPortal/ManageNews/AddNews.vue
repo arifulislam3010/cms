@@ -2,9 +2,18 @@
   <div>
     <b-card v-if="auth_permission.news_create">
       <div class="row">
-        <div class="col-sm-6 form-group">
-          <label>Shoulder</label>
-          <ckeditor :editor="editor" v-model="news_data.shoulder" :config="editorConfig"></ckeditor>         
+        <div class="col-sm-8 form-group">
+          <label>Shoulder
+            <i class="icon-user"></i>
+          </label>
+          <!-- <ckeditor :editor="editor" v-model="news_data.shoulder" :config="editorConfig"></ckeditor>   -->
+        <quill-editor :content="news_data.content"
+                        :options="config2"
+                        @change="()=>{}">
+          </quill-editor>             
+          <!-- todo        -->
+         <!-- <yimo-vue-editor :config="config1" v-model="news_data.shoulder"> </yimo-vue-editor> -->
+          
           <!-- <input v-model="news_data.shoulder" class="form-control" /> -->
           <!-- <p v-if="news_data.shoulder.length<1" style="color:red">*required</p> -->
           <div v-show="errors.hasOwnProperty('shoulder')" class="help-block alert alert-danger">
@@ -12,8 +21,14 @@
               {{i}}
             </p>
           </div>          
-          <label>Headline</label>
-          <ckeditor :editor="editor" v-model="news_data.headline" :config="editorConfig"></ckeditor>
+          <label>Headline
+            <i class="icon-pin"></i>
+          </label>
+          <!-- <ckeditor :editor="editor" v-model="news_data.headline" :config="editorConfig"></ckeditor> -->
+        <quill-editor :content="news_data.content"
+                        :options="config2"
+                        @change="()=>{}">
+          </quill-editor>          
           <!-- <input v-model="news_data.headline" class="form-control" /> -->
           <!-- <p v-if="news_data.headline.length<1" style="color:red">*required</p> -->
           <div v-show="errors.hasOwnProperty('headline')" class="help-block alert alert-danger">
@@ -21,55 +36,62 @@
               {{i}}
             </p>
           </div>           
-          <label>Hanger</label>
-          <input v-model="news_data.hanger" class="form-control" />
+          <label>Hanger
+            <i class="icon-paper-clip"></i>
+          </label>
+          <input v-model="news_data.hanger" class="form-control"  placeholder="enter hanger"/>
           <!-- <p v-if="news_data.hanger.length<1" style="color:red">*required</p> -->
-          <label>Reporter</label>
+          <label>Reporter
+            <i class="icon-pencil"></i>
+          </label>
           <Multiselect v-model="news_data.reporter" :options="user_list" track-by="id" label="name"></Multiselect>
           <div v-show="errors.hasOwnProperty('reporter')" class="help-block alert alert-danger">
             <p v-for="(i,k) in errors[`reporter`]" :key="k">
               {{i}}
             </p>
-          </div>          
-          <!-- <p v-if="news_data.reporter.length<1" style="color:red">*required</p>          -->
-          <!-- <input v-model="news_data.reporter" class="form-control" /> -->
-          <!-- <hr />
-          <label>Author</label>
-          <Multiselect v-model="news_data.author" :options="user_list" track-by="id" label="name"></Multiselect>
-          <div v-show="errors.hasOwnProperty('author')" class="help-block alert alert-danger">
-            <p v-for="(i,k) in errors[`author`]" :key="k">
+          </div>   
+          <div class="row">       
+            <div class="col-sm-11">
+            <label>Tags
+              <i class="icon-tag"></i>
+            </label>
+              <Multiselect
+                v-model="news_data.news_tags"
+                :options="tag_list"
+                track-by="id"
+                label="title"
+                :multiple="true"
+              >hello</Multiselect>
+            </div>
+            <div  class="col-sm-1" style="margin-top:38px;">
+              <i class="icon-plus" style="font-size:20px;" data-toggle="tooltip" title="add tag"></i>
+            </div>
+        </div>
+
+          <label>Content
+            <i class="icon-book-open"></i>
+          </label>
+          <!-- <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor> -->
+          <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
+          <quill-editor :content="news_data.content"
+                        :options="{}"
+                        @change="()=>{}">
+          </quill-editor>
+          <div v-show="errors.hasOwnProperty('content')" class="help-block alert alert-danger">
+            <p v-for="(i,k) in errors[`content`]" :key="k">
               {{i}}
             </p>
-          </div>          -->
-         
-          <!-- <p v-if="news_data.author.length<1" style="color:red">*required</p>          -->
-        
-          <!-- <label>User</label>
-          <Multiselect v-model="news_data.user" :options="user_list" track-by="id" label="name"></Multiselect>
-          <hr /> -->
-          <!-- <label>Content</label>
-          <CKEditor></CKEditor>-->
-          <label>Tags</label>
-          <Multiselect
-            v-model="news_data.news_tags"
-            :options="tag_list"
-            track-by="id"
-            label="title"
-            :multiple="true"
-          ></Multiselect>
-          <label>Content</label>
-          <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor>
-          <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
-            <div v-show="errors.hasOwnProperty('content')" class="help-block alert alert-danger">
-              <p v-for="(i,k) in errors[`content`]" :key="k">
-                {{i}}
-              </p>
-            </div>           
+          </div>           
           <hr />
-          <label>Featured Photo</label>
+          
+          <label>Featured Photo
+            <i class="icon-picture"></i>
+          </label>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select</button>
+              <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
+                <i class="icon-picture"></i>
+              </button>
             </div>
             <input
               type="text"
@@ -79,47 +101,74 @@
               aria-describedby="basic-addon1"
               v-model="news_data.featured_img.title"
             />
+            <i class="icon-trash"
+              @click="()=>{}"
+              data-toggle="tooltip" title="remove"
+              style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+            </i>
           </div>
             <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="100px" width="100px"/>
             <!-- <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/> -->
           <hr />
-          <label>More Photos</label>       
+          <!-- <label>More Photos</label>        -->
           <br>
-          <b-button variant="success" style="margin-bottom:10px" @click="add_more_photo">add more</b-button>
+
           <!-- <div class="input-group mb-3"> -->
             <div v-for="(item,key) in news_data.more_photo_arr" :key="key">
               <MorePhoto :item="item" :idx="key" style="margin-bottom:10px"></MorePhoto>
               <hr>
             </div>
           <!-- </div>          -->
+          <b-button variant="success" style="margin-bottom:10px" @click="add_more_photo">add more
+            <span> <i class="icon-plus "></i></span>
+          </b-button>
+
           <div></div>
           <hr />
           <!-- todo2 -->
-          <label>Featured Video </label>
+          <label>Featured Video 
+            <i class="icon-film"></i>
+          </label>
           <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
           <hr />
-          <label>Video Position</label>
+          <label>Video Position
+            <i class="icon-size-fullscreen "></i>
+          </label>
           <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
         </div>
-        <div class="col-sm-5">
-          <label>Share at</label>
+        <div class="col-sm-3">
+          <label>publish at
+            <i class="icon-paper-plane"></i>
+          </label>
+          <datetime width="300px" v-model="news_data.publish_at"></datetime>
+          <!-- <datetime width="300px" ></datetime> -->
+          
+          <label>Share at
+            <i class="icon-share-alt "></i>
+          </label>
           <datetime width="300px" v-model="news_data.share_at"></datetime>
           <!-- <input class="form-control" /> -->
-          <label>publish at</label>
-          <datetime width="300px" v-model="news_data.publish_at"></datetime>
           <!-- <input class="form-control" /> -->
           <hr />
-          <label>Status</label>
+          <!-- <label>Status</label>
           <br />
-          <toggle-button v-model="news_data.status" />
+          <toggle-button v-model="news_data.status" /> -->
           <br />
-          <label>Instant article</label>
+          <label>Instant article
+            <span> 
+             <i class="icon-social-twitter "> </i> 
+              <i class="icon-social-facebook"> </i> 
+             <i class="icon-social-instagram "> </i> 
+             </span>
+          </label>
           <br />
           <toggle-button v-model="news_data.instant_article" />
           <hr />
-          <label>Topic</label>
+          <label>Topic
+            <i class="icon-list "></i>
+          </label>
           <!-- <Multiselect v-model="news_data.selected_topics" :multiple=true :options="topic_list" track-by="id" label="title"></Multiselect> -->
-          {{news_data.selected_topics}}
+          <!-- {{news_data.selected_topics}} -->
           <Treeselect
            :multiple="true"
            :flat="true"
@@ -127,8 +176,10 @@
            :options="topic_parents"
           
            ></Treeselect>
-          <label>Category</label>
-          {{news_data.selected_categories}}
+          <label>Category
+            <i class="icon-layers "></i>
+          </label>
+          <!-- {{news_data.selected_categories}} -->
            <!-- todo  -->
           <Treeselect
            :multiple="true"
@@ -138,8 +189,11 @@
           
            ></Treeselect>
 
-          <label>Area</label>
-          {{news_data.selected_areas}}
+          <label>Area
+            <!-- <i class="icon-map"></i> -->
+            <i class="icon-location-pin"></i>
+          </label>
+          <!-- {{news_data.selected_areas}} -->
           <Treeselect
             :options="area_parents"
             :multiple="true"
@@ -154,7 +208,9 @@
             track-by="id"
             label="name_eng"
           ></Multiselect> -->
-          <label>Scroll</label>
+          <label>Scroll
+            <i class="icon-link"></i>
+          </label>
           <Treeselect
             v-model="news_data.selected_scrolls"
             :options="scroll_parents"
@@ -204,8 +260,7 @@
 <script>
 import Vue from "vue";
 import Multiselect from "vue-multiselect";
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import { ToggleButton } from "vue-js-toggle-button";
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
@@ -217,7 +272,8 @@ import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import Loader from "@/views/common/Loader";
 // import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-
+import { quillEditor } from 'vue-quill-editor'
+//
 ClassicEditor
     .create( document.querySelector( '#editor' ), {
         // plugins: [ Base64UploadAdapter, ],
@@ -225,11 +281,11 @@ ClassicEditor
     } )
     .then( )
     .catch();
+    
 Vue.component("ToggleButton", ToggleButton);
 export default {
   components: { 
     Multiselect,
-    CKEditor, 
     ToggleButton, 
     datetime,
     ContentManager ,
@@ -238,6 +294,8 @@ export default {
     FeatVideo,
     Loader,
     ClassicEditor,
+    quillEditor
+
   },
   data() {
     return {
@@ -255,6 +313,46 @@ export default {
       TreeSelectMultipleOption:true,
       valueConsistsOf:'BRANCH_PRIORITY',
       more_photo_arr:[],
+      config2: {
+      modules: {
+                toolbar: [
+                  ['bold', 'italic', 'underline', 'strike','blockquote', 'code-block',{ 'align': [] },{ 'color': [] }, { 'font': [] },{ 'background': [] }],
+          
+                ],
+                syntax: {
+                  highlight: text => hljs.highlightAuto(text).value
+                }
+              }
+        
+        
+      }
+      ,
+      config1: {
+      modules: {
+                toolbar: [
+                  ['bold', 'italic', 'underline', 'strike'],
+                  ['blockquote', 'code-block'],
+                  [{ 'header': 1 }, { 'header': 2 }],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                  [{ 'script': 'sub' }, { 'script': 'super' }],
+                  [{ 'indent': '-1' }, { 'indent': '+1' }],
+                  [{ 'direction': 'rtl' }],
+                  [{ 'size': ['small', false, 'large', 'huge'] }],
+                  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                  [{ 'font': [] }],
+                  [{ 'color': [] }, { 'background': [] }],
+                  [{ 'align': [] }],
+                  ['clean'],
+                  ['link', 'image', 'video']
+                ],
+                syntax: {
+                  highlight: text => hljs.highlightAuto(text).value
+                }
+              }
+        
+        
+      }
+      ,
       featured_img:{
         id:'',
         title:'',
@@ -353,6 +451,7 @@ export default {
   },
   mounted: function() {
     // ()=> ;  
+    this.setDates()
     this.handel_update()
     this.getReporters();
     this.getUserList();
@@ -363,6 +462,9 @@ export default {
     this.getScrolls()
   },
   watch:{
+    [`news_data.news_tags`](val){
+
+    },
     content: function(val){
       console.log(val)
       this.news_data.featured_img.title = val.title
@@ -397,6 +499,10 @@ export default {
 
   },
   methods: {
+    setDates(){
+      this.news_data.publish_at = new Date().toISOString() 
+      this.news_data.share_at = new Date().toISOString() 
+    },
     handel_update: function (){
       console.log(ClassicEditor.defaultConfig.toolbar)
       this.loading = true 
@@ -523,6 +629,10 @@ export default {
       this.loading = true
       this.$store.dispatch("FETCH_TAGS").then(response=>{
         this.loading = false
+        // this.news_data.news_tags.unshift({
+        //   'title' : 'add new ',
+        //   'id':0
+        // })
       }).catch(error=>{
         this.loading = false
       });
@@ -555,4 +665,5 @@ export default {
 };
 </script>
 <style scoped>
+div.inline { float: right; }
 </style>

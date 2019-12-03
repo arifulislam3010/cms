@@ -234,7 +234,8 @@ export default {
         "mpeg-ps",
         "flv",
         "3gpp",
-        "webm"
+        "webm",
+        "gif"
       ],
       document_ext: ["doc", "docx", "pdf", "pptx", "ppt", "xls", "xlsx", "txt"],
       servererrors: {},

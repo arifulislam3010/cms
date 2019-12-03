@@ -12,7 +12,11 @@
                 <div class="card" v-for="(i,k) in paginate_polls.data" :key="k" >
                     <span style="margin-left:10px;margin-top:5px;"> 
                         <!-- {{i}} -->
-                        <ckeditor  :value="i.content" :config="editorConfig"></ckeditor>
+                        <!-- <ckeditor  :value="i.content" :config="editorConfig"></ckeditor> -->
+                        <quill-editor :content="i.content"
+                        :options="{}"
+                        @change="()=>{}">
+                        </quill-editor> 
                         <div v-for="(i,k) in JSON.parse(i.options)" :key="k">
                             &bull; 
                             {{i.option}}
@@ -32,15 +36,16 @@
 </template>
 <script>
 import {mapGetters} from "vuex"
+import { quillEditor } from 'vue-quill-editor'
 
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 
 import AddPoll from "./Add"
 export default {
     components:{
 
         AddPoll ,
+        quillEditor,
     },
     data(){
         return {
