@@ -141,7 +141,7 @@ import { quillEditor } from 'vue-quill-editor'
 
 export default {
   components: {
-    ClassicEditor,
+    // ClassicEditor,
     ContentManager,
     AddWord,
     quillEditor,
@@ -154,7 +154,7 @@ export default {
       vid_content:{},
       titleS: "",
       selectedType: "",
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       editorConfig: {
         fullPage: false,
         resize_enabled: false,

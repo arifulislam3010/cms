@@ -274,13 +274,13 @@ import Loader from "@/views/common/Loader";
 // import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import { quillEditor } from 'vue-quill-editor'
 //
-ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-        // plugins: [ Base64UploadAdapter, ],
-        toolbar: [ ]
-    } )
-    .then( )
-    .catch();
+// ClassicEditor
+//     .create( document.querySelector( '#editor' ), {
+//         // plugins: [ Base64UploadAdapter, ],
+//         toolbar: [ ]
+//     } )
+//     .then( )
+//     .catch();
     
 Vue.component("ToggleButton", ToggleButton);
 export default {
@@ -293,7 +293,7 @@ export default {
     Treeselect,
     FeatVideo,
     Loader,
-    ClassicEditor,
+    // ClassicEditor,
     quillEditor
 
   },
@@ -395,7 +395,7 @@ export default {
         }
       ],
       scrolls: [],
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       editorConfig: {
         fullPage: false,
         resize_enabled: false,
@@ -504,7 +504,7 @@ export default {
       this.news_data.share_at = new Date().toISOString() 
     },
     handel_update: function (){
-      console.log(ClassicEditor.defaultConfig.toolbar)
+      // console.log(ClassicEditor.defaultConfig.toolbar)
       this.loading = true 
       let ob = this.$route.params 
       if(ob.id){
