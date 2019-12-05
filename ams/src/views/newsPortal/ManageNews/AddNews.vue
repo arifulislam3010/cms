@@ -204,8 +204,9 @@
 <script>
 import Vue from "vue";
 import Multiselect from "vue-multiselect";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import { ToggleButton } from "vue-js-toggle-button";
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
@@ -216,8 +217,6 @@ import FeatVideo from "./FeatVideo"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import Loader from "@/views/common/Loader";
-// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-
 ClassicEditor
     .create( document.querySelector( '#editor' ), {
         // plugins: [ Base64UploadAdapter, ],
@@ -237,7 +236,7 @@ export default {
     Treeselect,
     FeatVideo,
     Loader,
-    ClassicEditor,
+    // ClassicEditor,
   },
   data() {
     return {

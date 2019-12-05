@@ -57,7 +57,7 @@ Vue.use(VuejsDialog)
 Vue.prototype.$iziToast = iziToast
 import  'bootstrap'
 //axios.defaults.baseURL = 'http://nishutiapi.bemantech.com'
-// axios.defaults.baseURL = 'http://api.banglapress.org'
+axios.defaults.baseURL = 'http://api.banglapress.org'
 // axios.defaults.baseURL = 'http://bpress.api.istiak.net'
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.headers.common["Authorization"] = 'Bearer '+ Vue.auth.getToken()
