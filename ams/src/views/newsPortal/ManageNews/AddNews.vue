@@ -106,41 +106,59 @@
           <label>Featured Photo
             <i class="icon-picture"></i>
           </label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
-                <i class="icon-picture"></i>
-              </button>
+          <div class="row">
+            <div class="col-sm-2">
+              <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="80px" width="100px"/>
+              <!-- <p v-else style="margin-top:20px">select image</p> -->
+              <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
+                <p style="position:relative;top:25px;left:10px;">select image</p>
+              </div>           
             </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder
-              aria-label
-              aria-describedby="basic-addon1"
-              v-model="news_data.featured_img.title"
-            />
-            <i class="icon-trash"
-              @click="remove_feat_img"
-              data-toggle="tooltip" title="remove"
-              style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
-            </i>
+            <div class="col-sm-10">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
+                      <i class="icon-picture"></i>
+                    </button>
+                  </div>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    placeholder
+                    aria-label
+                    aria-describedby="basic-addon1"
+                    v-model="news_data.featured_img.title"
+                  />
+                  <i class="icon-trash"
+                    @click="remove_feat_img"
+                    data-toggle="tooltip" title="remove"
+                    style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+                  </i>
+                </div>
+            </div>
           </div>
-            <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="100px" width="100px"/>
+
             <!-- <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/> -->
           <hr />
           <!-- <label>More Photos</label>        -->
           <br>
 
           <!-- <div class="input-group mb-3"> -->
+            <!-- <label>More Photoes </label> -->
             <div v-for="(item,key) in news_data.more_photo_arr" :key="key">
               <MorePhoto :item="item" :idx="key" style="margin-bottom:10px"></MorePhoto>
               <hr>
             </div>
           <!-- </div>          -->
-          <b-button variant="success" style="margin-bottom:10px" @click="add_more_photo">add more
-            <span> <i class="icon-plus "></i></span>
-          </b-button>
+          <div class="row">
+
+            <div class="col-sm-12 ">
+              <b-button class="pull-right" variant="success" style="margin-bottom:10px;" @click="add_more_photo" >add more
+                <span> <i class="icon-plus "></i></span>
+              </b-button>
+
+            </div>
+          </div>
 
           <div></div>
           <hr />
