@@ -12,12 +12,17 @@
         aria-describedby="basic-addon1"
         v-model="item.title"
       />
+      <i class="icon-trash"
+        @click="del_photo"
+        data-toggle="tooltip" title="remove"
+        style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+      </i>       
     </div>
-    <img v-if="Object.keys(content).length" :src="content.file" height="100px" width="100px" />
-    <img v-else :src="item.file" height="100px" width="100px" />
+    <img v-if="Object.keys(content).length && content.file !=``" :src="content.file" height="100px" width="100px" />
+    <img v-if="item.file && content.file == ``" :src="item.file" height="100px" width="100px" />
     <!-- <img v-else :src="get_src(item)" height="100px" width="100px" /> -->
     <br>
-    <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button>
+    <!-- <b-button style="margin-top:5px" variant="danger" @click="del_photo">Delete</b-button> -->
     <ContentManager ref="content_manager_modal" :content="content"></ContentManager>
   </div>
 </template>
@@ -31,7 +36,9 @@ export default {
     return {
       image_name: "",
       img_src: "",
-      content: {}
+      content: {
+        file :``
+      }
     };
   },
   watch: {

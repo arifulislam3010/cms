@@ -50,7 +50,7 @@ export default {
     data(){
         return {
            temp_list : [],
-            editor: ClassicEditor,
+            // editor: ClassicEditor,
             editorConfig: {
                 fullPage: false,
                 resize_enabled: false,

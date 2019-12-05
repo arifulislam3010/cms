@@ -65,7 +65,7 @@ export default {
       this.$refs.content_manager_modal.openModal();     
     },
     del_photo(){
-        
+          this.$parent.remove_feat_video()
     },
   }
 };
