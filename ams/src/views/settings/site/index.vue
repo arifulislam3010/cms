@@ -12,13 +12,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="(i,k) in site_list" :key="k">
-                        <td>{{i.id}}</td>
+                        <td>{{k+1}}</td>
                         <td>{{i.title}}</td>
                          <td>{{i.slug}}</td>
                             
                         <td>
-                            <a href="#" @click="editSite(i)">Edit//</a> 
-                            <a href="#" @click="deleteSite(i)" >Delete</a> 
+                            <a href="#" @click="editSite(i)"><i class="fa fa-edit" style="font-size:18px"></i></a> 
+                            <a href="#" @click="deleteSite(i)" ><i class="fa fa-trash" style="font-size:18px"></i></a> 
                         </td>
                       <!-- {{i.content}} -->
                     </tr>

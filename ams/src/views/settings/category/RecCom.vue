@@ -1,18 +1,31 @@
 <template>
-    <div>
-        <div class="card">
-            {{ node.label}}
-            
-            <div>
-                <a href="#" @click="editCategoryModal(node)" style="margin-right:30px; color:green">Update</a>
-                <a href="#" @click="addChild(node)" style="margin-right:30px; color:#000099">AddChild</a>
-                <a href="#" @click="deleteCategory(node.id)" style="margin-right:30px; color:red">Delete</a>
-                <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-right:30px">Minimize</a>
-                <a href="#" @click="()=>{ show_children = true }" style="margin-right:30px" v-if="!show_children && node.children.length > 0" >Expand</a>
+    <div class="container">
+        <br/>
+
+
+        <div class="card " style="height:60px; width:140%">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ node.label}}
+                </div>
+                <div class="col-md-2" >
+                    <a href="#" @click="editCategoryModal(node)" style="margin-right:10px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                    <a href="#" @click="addChild(node)" style="margin-right:10px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
+                    <a href="#" @click="deleteCategory(node.id)" style="margin-right:10px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-right:10px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = true }" style="margin-right:10px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>          
+                </div>
             </div>
+                
+                   
+                
+                        
+                
+           
+            
         </div>
         <div v-if="show_children">
-            <div  v-for="(i,k) in node.children" :key="k" style="margin-left:30px">
+            <div  v-for="(i,k) in node.children" :key="k" style="margin-left:10px">
                 <RecCat :node="i"></RecCat>
             </div>
         </div>
@@ -46,15 +59,26 @@ export default {
     props:['node'],
     data(){
         return {
-            show_children : true ,
+            show_children : false ,
             loading: false ,
         }
     },
     methods:{
             addChild(node){
                 this.$refs.add_ncategory_modal.newCategory.title = ``
+                this.$refs.add_ncategory_modal.newCategory.display_name = ``
+                this.$refs.add_ncategory_modal.newCategory.color = ``
+                this.$refs.add_ncategory_modal.newCategory.header_display = `Yes`
+                this.$refs.add_ncategory_modal.newCategory.home_display = `Yes`
+                this.$refs.add_ncategory_modal.newCategory.photo_display = `Yes`
+                this.$refs.add_ncategory_modal.newCategory.video_display = `Yes`
+                this.$refs.add_ncategory_modal.newCategory.status = `Active`
+                this.$refs.add_ncategory_modal.newCategory.menubar_display = `Yes`
                 this.$refs.add_ncategory_modal.openModal()
                 this.$refs.add_ncategory_modal.selected_parent = node.id 
+
+                // new
+                
             },
             editCategoryModal(item){
                 this.$refs.add_ncategory_modal.openModal()
@@ -62,6 +86,14 @@ export default {
                 this.$refs.add_ncategory_modal.item_id = item.id
                 this.$refs.add_ncategory_modal.newCategory.title = item.label
                 this.$refs.add_ncategory_modal.selected_parent = item.parent_id// this.category_list.find( v => v.id == item.parent_id).id 
+                this.$refs.add_ncategory_modal.newCategory.display_name = item.display_name
+                this.$refs.add_ncategory_modal.newCategory.color = item.color
+                this.$refs.add_ncategory_modal.newCategory.header_display = item.header_display
+                this.$refs.add_ncategory_modal.newCategory.home_display = item.home_display
+                this.$refs.add_ncategory_modal.newCategory.menubar_display = item.menubar_display
+                this.$refs.add_ncategory_modal.newCategory.photo_display = item.photo_display
+                this.$refs.add_ncategory_modal.newCategory.video_display = item.video_display
+                this.$refs.add_ncategory_modal.newCategory.status = item.status
 
             },    
             getCategories(){
@@ -86,11 +118,12 @@ export default {
 
 <style scoped>
   .card{
-    border-radius: 10px;
+    
+    border-radius: 5px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,0.8),0 0 6px rgba(0,0,0,0.05);
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12), .3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    padding: 7px 80px 18px 36px;
+    padding: 7px 80px 10px 36px;
     cursor: pointer;
   }
   .card:hover{

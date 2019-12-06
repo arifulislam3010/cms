@@ -51,7 +51,7 @@ export default {
   props: ["node"],
   data() {
     return {
-      show_children: true,
+      show_children: false,
       loading: false
     };
   },
