@@ -64,10 +64,19 @@ export default {
         return{
             largeModal:false,
             addLoader:false,
+            
             editNcategory: {
-                title: '',
-                parent_id: '',
-                ncategory_id:''
+              display_name:'',
+              title: '',
+              color:'',
+              parent_id: '',
+              header_display: '',
+              home_display:'',
+              menubar_display:'',
+              photo_display:'',
+              video_display:'',
+              status:'' ,
+              ncategory_id:''
             }
 
         }
@@ -79,7 +88,7 @@ export default {
             this.addLoader = true;
             var data = this.editNcategory
             var index = this.index
-            this.$store.dispatch('UPDATE_NCATEGORY',{data,index})
+            this.$store.dispatch('UPDATE_CATEGORY',{data,index})
             .then(response=>{
                 this.addLoader = false;
                 this.largeModal = false
@@ -93,11 +102,25 @@ export default {
         },
 
         openModal(ncategory,index){
+
+          console.log('updateeee', ncategory)
             this.largeModal = true
             this.index = index
             this.editNcategory.title =ncategory.title
             this.editNcategory.parent_id =ncategory.parent_id
             this.editNcategory.ncategory_id =ncategory.id
+            this.editNcategory.display_name =ncategory.display_name
+
+            this.editNcategory.color =ncategory.color
+            this.editNcategory.header_display =ncategory.header_display
+            this.editNcategory.home_display =ncategory.home_display
+            this.editNcategory.menubar_display =ncategory.menubar_display
+            this.editNcategory.photo_display =ncategory.photo_display
+            this.editNcategory.video_display =ncategory.video_display
+            this.editNcategory.status =ncategory.status
+
+            
+
         },
         close(){
             this.largeModal = false

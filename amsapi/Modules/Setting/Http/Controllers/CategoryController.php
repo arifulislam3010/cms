@@ -13,11 +13,13 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request )
     {
+        
         // $categories = Category::where('parent_id',null)->get();
         $categories = Category::all();
-        return CategoryResource::collection($categories);
+       // return $categories ;
+         return CategoryResource::collection($categories);
     }
 
     /**
@@ -26,12 +28,22 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
+
+        //return 'ok';
         $validator = $request->validate([
             'title'=>'required',
             // 'parent_id'=>'required',
         ]);
         $category = new Category ;
         $category->title = $request->title ;
+        $category->display_name = $request->display_name ;
+        $category->color = $request->color ;
+        $category->header_display = $request->header_display ;
+        $category->home_display = $request->home_display ;
+        $category->menubar_display = $request->menubar_display ;
+        $category->photo_display = $request->photo_display ;
+        $category->video_display = $request->video_display ;
+        $category->status = $request->status ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
         if($category->save()){
             return new CategoryResource($category);
@@ -83,6 +95,14 @@ class CategoryController extends Controller
         ]);
         $category = Category::findOrfail($id) ;    
         $category->title = $request->title ;
+        $category->display_name = $request->display_name ;
+        $category->color = $request->color ;
+        $category->header_display = $request->header_display ;
+        $category->home_display = $request->home_display ;
+        $category->menubar_display = $request->menubar_display ;
+        $category->photo_display = $request->photo_display ;
+        $category->video_display = $request->video_display ;
+        $category->status = $request->status ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
         if($category->save()){
             return new CategoryResource($category);
