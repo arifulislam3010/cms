@@ -19,6 +19,8 @@ class SiteInfo extends Resource
             'title' => $this->title ,
             'slug'  => $this->slug ,
             'content' => json_decode($this->content ),
+            // 'content' => json_encode($this->content ),
+            // 'content' => $this->content ,
         ];
     }
 }

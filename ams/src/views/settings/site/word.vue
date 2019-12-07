@@ -5,7 +5,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <!-- {{is_update}} -->
-            {{this.$parent.content_list}}
+            <!-- {{this.$parent.content_list}} -->
             ADD
           </div>
           <div class="modal-body">
@@ -27,7 +27,7 @@
                     <option>Video</option>
                     <option>CK</option>
                   </select>
-                  {{selectedType}}
+                  <!-- {{selectedType}} -->
                 </div>
               </div>
             </div>
@@ -53,16 +53,9 @@ export default {
     return {
       title: ``,
       selectedType: '',
-      content: '',
-      is_update: false,
-      update_idx: -1
     };
   },
   methods: {
-    clear() {
-      this.is_update = false;
-      this.template = this.selectedType =this.content= ``;
-    },
     save_word() {
       let _ob = {
         title : this.title ,

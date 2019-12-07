@@ -7,85 +7,30 @@ export default {
       badge: {
         variant: 'primary',
         // text: 'NEW'
-      }
-    },
-      {
-        // lang 
-        name: 'language',
-        url: 'language/add',
-        icon: 'fa fa-life-bouy',
-        children: [
-          {
-            name: 'list',
-            url: '/language/list',
-            icon: 'fa fa-life-bouy',
-          },
-          {
-            name: 'add',
-            url: '/language/add',
-            icon: 'fa fa-life-bouy',
-          },
-
-        ]
       },
-      {
-        // todo 
-        // site setting 
-        name: 'site',
-        url: 'site/list',
-        icon: 'fa fa-life-bouy',
-        children: [
-          {
-            name: 'list',
-            url: '/site/list',
-            icon: 'fa fa-life-bouy',
-          },
-          {
-            name: 'add',
-            url: '/site/add/',
-            icon: 'fa fa-life-bouy',
-          },
-
-        ]
-      },
-    {
-      name: 'Settings',
-      url: '/settings/category',
-      icon: 'fa fa-money',
       children: [
         {
-          name: 'category',
-          url: '/settings/category',
-          icon: 'fa fa-life-bouy'
+          name: 'Index',
+          url: '/',
+          icon: 'icon-star'
         },
         {
-          name: 'topic',
-          url: '/settings/topic',
-          icon: 'fa fa-life-bouy'
+          name: 'Update',
+          url: '/',
+          icon: 'icon-star'
         },
         {
-          name: 'area',
-          url: '/settings/area',
-          icon: 'fa fa-life-bouy'
+          name: 'Message',
+          url: '/',
+          icon: 'icon-star'
         },
-        {
-          name: 'tags',
-          url: '/settings/tags',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'scroll',
-          url: '/settings/scroll',
-          icon: 'fa fa-life-bouy'
-        },
-
-
       ]
     },
+
     {
       name: 'Manage News',
       url: '/news/list',
-      icon: 'fa fa-money',
+      icon: 'icon-home ',
       url: '/news/add',
       children: [
         {
@@ -131,6 +76,11 @@ export default {
               icon: 'fa fa-life-bouy'
             },
             {
+              name: 'Edit Topic',
+              url: '/news/add',
+              icon: 'fa fa-life-bouy'
+            },
+            {
               name: 'Topic News',
               url: '/news/list',
               icon: 'fa fa-life-bouy'
@@ -152,7 +102,7 @@ export default {
     {
       name: 'Media Manager',
       url: '/gallery/list',
-      icon: 'fa fa-life-bouy',
+      icon: 'fa icon-film ',
       url: '/gallery/list',
       children: [
         {
@@ -191,38 +141,14 @@ export default {
         },
       ]
     },
-
-    {
-      name: 'Manage Poll',
-      url: '/poll/list',
-      icon: 'fa fa-life-bouy',
-      children: [
-        {
-          name: 'PollList',
-          url: '/poll/list',
-          icon: 'fa fa-life-bouy',
-        },
-        // {
-        //   name: 'AddPoll',
-        //   url: '/poll/add',
-        //   icon: 'fa fa-life-bouy',
-        // },
-
-      ]
-    },
     {
       name: 'News Controls',
       url: '/settings/category',
-      icon: 'fa fa-money',
+      icon: 'fa fa-gears',
       children: [
         {
           name: 'Tag',
           url: '/settings/scroll',
-          icon: 'fa fa-life-bouy'
-        },
-        {
-          name: 'Category',
-          url: '/settings/category',
           icon: 'fa fa-life-bouy'
         },
         {
@@ -234,18 +160,28 @@ export default {
           name: 'Area',
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
-        },
+        },        
+        {
+          name: 'Author',
+          url: '/settings/area',
+          icon: 'fa fa-life-bouy'
+        },        
         {
           name: 'Section',
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },
+        {
+          name: 'Category',
+          url: '/settings/category',
+          icon: 'fa fa-life-bouy'
+        },       
       ]
     },
     {
       name: 'Admin Controls',
       url: '/user-role',
-      icon: 'fa fa-money',
+      icon: 'fa fa-user-secret',
       children: [
         {
           name: 'User Role',
@@ -261,35 +197,87 @@ export default {
     },
     {
       name: 'Manage Poll',
-      url: '/ManagePoll',
-      icon: 'fa fa-money',
+      url: '/poll/list',
+      icon: 'fa fa-group',
+      children: [
+        {
+          name: 'PollList',
+          url: '/poll/list',
+          icon: 'fa fa-life-bouy',
+        },
+        // {
+        //   name: 'AddPoll',
+        //   url: '/poll/add',
+        //   icon: 'fa fa-life-bouy',
+        // },
+
+      ]
     },
+
+
+    // {
+    //   name: 'Items',
+    //   url: '/category',
+    //   icon: 'fa fa-money',
+    //   children: [
+    //     {
+    //       name: 'Category',
+    //       url: '/category',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //     {
+    //       name: 'item',
+    //       url: '/item',
+    //       icon: 'fa fa-life-bouy'
+    //     },
+    //   ]
+    // },
+
+    // {
+    //   name: 'Manage Poll',
+    //   url: '/ManagePoll',
+    //   icon: 'fa fa-money',
+    // },
     {
       name: 'Advertisements',
       url: '/Advertisements',
-      icon: 'fa fa-money',
+      icon: 'fa fa-flag',
     },
     
     {
       name: 'Geo Graphical',
       url: '/GGM',
-      icon: 'fa fa-money',
+      icon: 'fa fa-globe',
     },
     {
-      name: 'Language',
-      url: '/lm',
-      icon: 'fa fa-money',
+      // lang 
+      name: 'language',
+      url: 'language/add',
+      icon: 'fa fa-language ',
+      children: [
+        {
+          name: 'list',
+          url: '/language/list',
+          icon: 'fa fa-life-bouy',
+        },
+        {
+          name: 'add',
+          url: '/language/add',
+          icon: 'fa fa-life-bouy',
+        },
+
+      ]
     },
     {
       name: 'Comments',
       url: '/comments',
-      icon: 'fa fa-money',
+      icon: 'fa fa-comment',
     },
     
     {
       name: 'Theme',
       url: '/tm',
-      icon: 'fa fa-money',
+      icon: 'fa fa-book ',
       children: [
         {
           name: 'Theme',
@@ -328,7 +316,97 @@ export default {
         },
       ]
     },
+    {
+      // todo 
+      // site setting 
+      name: 'Site',
+      url: 'site/list',
+      icon: 'fa fa-desktop ',
+      children: [
+        {
+          name: 'List',
+          url: '/site/list',
+          icon: 'fa fa-life-bouy',
+        },
+        {
+          name: 'Add',
+          url: '/site/add/',
+          icon: 'fa fa-life-bouy',
+        },
 
+      ]
+    },
+
+  {
+    name : 'Plugin',
+    icon: 'fa fa-plug',
+    children:[
+      {
+        name : 'Installed Plugins',
+        icon : 'fa fa-life-bouy'
+      },
+      {
+        name : 'New Plugin',
+        icon : 'fa fa-life-bouy'
+      },
+      {
+        name : 'Plugin Editor',
+        icon : 'fa fa-life-bouy'
+      },
+    ],
+  },
+  {
+    name : 'Tools',
+    icon: 'fa fa-gavel'
+  },
+  {
+    name: 'Settings',
+    url: '/settings/category',
+    icon: 'fa fa-gear',
+    children: [
+      {
+        name: 'category',
+        url: '/settings/category',
+        icon: 'fa fa-life-bouy'
+      },
+      {
+        name: 'topic',
+        url: '/settings/topic',
+        icon: 'fa fa-life-bouy'
+      },
+      {
+        name: 'area',
+        url: '/settings/area',
+        icon: 'fa fa-life-bouy'
+      },
+      {
+        name: 'tags',
+        url: '/settings/tags',
+        icon: 'fa fa-life-bouy'
+      },
+      {
+        name: 'scroll',
+        url: '/settings/scroll',
+        icon: 'fa fa-life-bouy'
+      },
+
+
+    ]
+  },
+
+  {
+    name : 'Insight',
+    icon: 'fa fa-eye',
+  },
+  {
+    name : 'Optimization',
+    icon : 'fa fa-flash',
+
+  },
+  {
+    name : 'SEO',
+    icon: 'fa fa-bar-chart',
+  },
     // {
     //   name: 'Expense',
     //   url: '/expense',

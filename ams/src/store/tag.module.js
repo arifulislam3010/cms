@@ -70,6 +70,11 @@ const actions = {
 const mutations = {
     ['SET_TAGS'](state,payload){
         state.tags = payload
+        // set add new tag object 
+        state.tags.push({
+            title:`add new`,
+            id: 0 ,
+        })
     },
     ['SET_PAGINATE_TAGS'](state,payload){
         state.paginate_tags = payload

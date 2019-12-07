@@ -70,13 +70,22 @@ Route::prefix('api/')->group(function() {
 		Route::delete('/{id}','LangController@destroy');
 	});
 
+	// // site_info 
+	// Route::prefix('site_info')->middleware(['auth:api'])->group(function(){
+	// 	Route::get('/list','SiteInfoController@index');
+	// 	Route::post('/','SiteInfoController@store');
+	// 	Route::put('/{id}','SiteInfoController@store');
+	// 	Route::delete('/{id}','SiteInfoController@destroy');
+	// });
 	// site_info 
 	Route::prefix('site_info')->middleware(['auth:api'])->group(function(){
 		Route::get('/list','SiteInfoController@index');
 		Route::post('/','SiteInfoController@store');
-		Route::put('/{id}','SiteInfoController@store');
+		Route::put('/','SiteInfoController@store');
 		Route::delete('/{id}','SiteInfoController@destroy');
+		Route::get('/{id}','SiteInfoController@detail');
 	});
+
 
 });
 

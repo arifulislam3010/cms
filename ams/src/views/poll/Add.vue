@@ -13,7 +13,11 @@
             <div class="row">
               <div class="col-sm-8">
                 <label>content</label>
-                <ckeditor :editor="editor" v-model="list.content" :config="editorConfig"></ckeditor>
+                <!-- <ckeditor :editor="editor" v-model="list.content" :config="editorConfig"></ckeditor> -->
+                <quill-editor :content="list.content"
+                :options="{}"
+                @change="()=>{}">
+                </quill-editor>                 
                 <div v-show="errors.hasOwnProperty('content')" class="help-block alert alert-danger">
                 <!-- {{  errors[`title`] }} -->
                     <p v-for="(i,k) in errors[`content`]" :key="k">
@@ -95,14 +99,13 @@
 </template>
 <script>
 import datetime from "vuejs-datetimepicker";
+import { quillEditor } from 'vue-quill-editor'
 
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   components: {
     datetime,
-    CKEditor
+    quillEditor
   },
   data() {
     return {

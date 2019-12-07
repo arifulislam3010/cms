@@ -28,7 +28,7 @@ class PostController extends Controller
     public function index()
     {
 
-
+        return PostResource::collection(Post::all());
 
     }
 
@@ -116,11 +116,7 @@ class PostController extends Controller
         $post->headline = $request->headline;
         $post->hanger = $request->hanger;
         $post->reporter_id = $request->reporter['id'];
-<<<<<<< HEAD
-        $post->author_id = $request->author['id'];
-=======
         $post->author_id = $auth_user_id ;//$request->author['id'];
->>>>>>> 40fdb0c09518a49a291f40f2a147718fb60f4f3a
         $post->content   = $request->content;
 
         $post->share_at = $request->share_at;
