@@ -6,65 +6,83 @@
           <label>Shoulder
             <i class="icon-user"></i>
           </label>
-          <!-- <ckeditor :editor="editor" v-model="news_data.shoulder" :config="editorConfig"></ckeditor>   -->
-        <quill-editor :content="news_data.content"
+        <quill-editor  :content="news_data.shoulder"
+                        v-model="news_data.shoulder"
                         :options="config2"
                         @change="()=>{}">
           </quill-editor>             
-          <!-- todo        -->
-         <!-- <yimo-vue-editor :config="config1" v-model="news_data.shoulder"> </yimo-vue-editor> -->
-          
-          <!-- <input v-model="news_data.shoulder" class="form-control" /> -->
-          <!-- <p v-if="news_data.shoulder.length<1" style="color:red">*required</p> -->
-          <div v-show="errors.hasOwnProperty('shoulder')" class="help-block alert alert-danger">
+
+          <div v-show="errors.hasOwnProperty('shoulder')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`shoulder`]" :key="k">
-              {{i}}
+              <i class="fa fa-check-circle"></i> &nbsp; {{i}}
             </p>
           </div>          
           <label>Headline
             <i class="icon-pin"></i>
           </label>
-          <!-- <ckeditor :editor="editor" v-model="news_data.headline" :config="editorConfig"></ckeditor> -->
-        <quill-editor :content="news_data.content"
+        <quill-editor   :content="news_data.headline"
+                        v-model="news_data.headline"
                         :options="config2"
                         @change="()=>{}">
           </quill-editor>          
-          <!-- <input v-model="news_data.headline" class="form-control" /> -->
-          <!-- <p v-if="news_data.headline.length<1" style="color:red">*required</p> -->
-          <div v-show="errors.hasOwnProperty('headline')" class="help-block alert alert-danger">
+
+          <div v-show="errors.hasOwnProperty('headline')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`headline`]" :key="k">
-              {{i}}
+              <i class="fa fa-check-circle"></i> &nbsp;{{i}}
             </p>
           </div>           
-          <label>Hanger
-            <i class="icon-paper-clip"></i>
-          </label>
-          <input v-model="news_data.hanger" class="form-control"  placeholder="enter hanger"/>
-          <!-- <p v-if="news_data.hanger.length<1" style="color:red">*required</p> -->
-          <label>Reporter
-            <i class="icon-pencil"></i>
-          </label>
-          <Multiselect v-model="news_data.reporter" :options="user_list" track-by="id" label="name"></Multiselect>
-          <div v-show="errors.hasOwnProperty('reporter')" class="help-block alert alert-danger">
+
+
+          <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Hanger &nbsp; <i class="icon-paper-clip"></i>
+              </span>
+            </div>
+            <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Reporter &nbsp; <i class="icon-pencil"></i>
+              </span>
+            </div>
+            <!-- <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1"> -->
+          <Multiselect v-model="news_data.reporter" :options="user_list" class="form-control" track-by="id" label="name"></Multiselect>
+          </div>
+
+          <div v-show="errors.hasOwnProperty('reporter')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`reporter`]" :key="k">
-              {{i}}
+             <i class="fa fa-check-circle"></i> &nbsp; {{i}}
             </p>
           </div>   
+
           <div class="row">       
             <div class="col-sm-11">
-            <label>Tags
-              <i class="icon-tag"></i>
-            </label>
+
+              <div class="input-group mb-3" >
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    Tags &nbsp; <i class="icon-tag"></i>
+                  </span>
+                </div>
               <Multiselect
+                class="form-control"
                 v-model="news_data.news_tags"
                 :options="tag_list"
                 track-by="id"
                 label="title"
                 :multiple="true"
               >hello</Multiselect>
+
+              </div>
+
             </div>
-            <div  class="col-sm-1" style="margin-top:38px;">
-              <i class="icon-plus" style="font-size:20px;" data-toggle="tooltip" title="add tag"></i>
+            <div  class="col-sm-1" style="margin-top:15px;">
+              <i class="icon-plus" style="font-size:20px;" @click="tag_moldal" data-toggle="modal" data-target="#addTagModal" title="add tag">
+
+              </i>
             </div>
         </div>
 
@@ -74,12 +92,13 @@
           <!-- <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor> -->
           <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
           <quill-editor :content="news_data.content"
+                        v-model="news_data.content"  
                         :options="{}"
                         @change="()=>{}">
           </quill-editor>
-          <div v-show="errors.hasOwnProperty('content')" class="help-block alert alert-danger">
+          <div v-show="errors.hasOwnProperty('content')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`content`]" :key="k">
-              {{i}}
+              <i class="fa fa-check-circle"></i> &nbsp;{{i}}
             </p>
           </div>           
           <hr />
@@ -87,51 +106,69 @@
           <label>Featured Photo
             <i class="icon-picture"></i>
           </label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
-                <i class="icon-picture"></i>
-              </button>
+          <div class="row">
+            <div class="col-sm-2">
+              <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="80px" width="100px"/>
+              <!-- <p v-else style="margin-top:20px">select image</p> -->
+              <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
+                <p style="position:relative;top:25px;left:10px;">select image</p>
+              </div>           
             </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder
-              aria-label
-              aria-describedby="basic-addon1"
-              v-model="news_data.featured_img.title"
-            />
-            <i class="icon-trash"
-              @click="()=>{}"
-              data-toggle="tooltip" title="remove"
-              style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
-            </i>
+            <div class="col-sm-10">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
+                      <i class="icon-picture"></i>
+                    </button>
+                  </div>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    placeholder
+                    aria-label
+                    aria-describedby="basic-addon1"
+                    v-model="news_data.featured_img.title"
+                  />
+                  <i class="icon-trash"
+                    @click="remove_feat_img"
+                    data-toggle="tooltip" title="remove"
+                    style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+                  </i>
+                </div>
+            </div>
           </div>
-            <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="100px" width="100px"/>
+
             <!-- <img v-if="news_data.featured_img.file" :src="get_file(news_data.featured_img.file)" height="100px" width="100px"/> -->
           <hr />
           <!-- <label>More Photos</label>        -->
           <br>
 
           <!-- <div class="input-group mb-3"> -->
+            <!-- <label>More Photoes </label> -->
             <div v-for="(item,key) in news_data.more_photo_arr" :key="key">
               <MorePhoto :item="item" :idx="key" style="margin-bottom:10px"></MorePhoto>
               <hr>
             </div>
           <!-- </div>          -->
-          <b-button variant="success" style="margin-bottom:10px" @click="add_more_photo">add more
-            <span> <i class="icon-plus "></i></span>
-          </b-button>
+          <div class="row">
+
+            <div class="col-sm-12 ">
+              <b-button class="pull-right" variant="success" style="margin-bottom:10px;" @click="add_more_photo" >add more
+                <span> <i class="icon-plus "></i></span>
+              </b-button>
+
+            </div>
+          </div>
 
           <div></div>
           <hr />
           <!-- todo2 -->
-          <label>Featured Video 
+          <label>Featured Video  &nbsp;
             <i class="icon-film"></i>
           </label>
           <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
           <hr />
-          <label>Video Position
+          <label>Video Position &nbsp;
             <i class="icon-size-fullscreen "></i>
           </label>
           <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
@@ -254,13 +291,14 @@
     </div>
     <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
     <ContentManager ref="video_manager_modal" :content="vid_content" ></ContentManager>
+    <AddTagModal ref="add_tag_modal"></AddTagModal>
     <Loader v-if="loading"></Loader>
   </div>
 </template>
 <script>
 import Vue from "vue";
 import Multiselect from "vue-multiselect";
-
+import AddTagModal from "../../settings/tag/addTagModal"
 import { ToggleButton } from "vue-js-toggle-button";
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
@@ -294,7 +332,8 @@ export default {
     FeatVideo,
     Loader,
     // ClassicEditor,
-    quillEditor
+    quillEditor,
+    AddTagModal ,
 
   },
   data() {
@@ -451,6 +490,7 @@ export default {
   },
   mounted: function() {
     // ()=> ;  
+    this.clearData()
     this.setDates()
     this.handel_update()
     this.getReporters();
@@ -462,6 +502,13 @@ export default {
     this.getScrolls()
   },
   watch:{
+    $route(to,from){
+      // alert(to)
+      // console.log(to)
+      if(to.name == `AddNews`){
+        this.clearData()
+      }
+    },
     [`news_data.news_tags`](val){
 
     },
@@ -499,6 +546,18 @@ export default {
 
   },
   methods: {
+    clearData(){
+      this.$store.dispatch(`REST_NEWS`)
+    },
+    remove_feat_img(){
+      this.news_data.featured_img = {}
+    },
+    remove_feat_video(){
+      this.news_data.featured_vid = {}
+    },
+    tag_moldal(){
+      this.$refs.add_tag_modal.errors = {}
+    },
     setDates(){
       this.news_data.publish_at = new Date().toISOString() 
       this.news_data.share_at = new Date().toISOString() 
@@ -606,7 +665,10 @@ export default {
       this.$refs.video_manager_modal.openModal();
     },   
     getReporters: function(){
-
+      // set the first one 
+      if(this.user_list.length){
+        this.news_data.reporter = this.user_list[0]
+      }
     },
     getTopic() {
       this.loading = true
@@ -666,4 +728,8 @@ export default {
 </script>
 <style scoped>
 div.inline { float: right; }
+label{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 </style>

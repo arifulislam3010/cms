@@ -16,8 +16,8 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
-        $tags = Tag::all();
-        return $tags ;
+        // $tags = Tag::all();
+        return Tag::orderBy('created_at', 'DSC')->get();
         // return  TagResources::collection(Tag::all());
     }
     public function index2(Request $request){
@@ -26,7 +26,7 @@ class TagController extends Controller
 
     public function create(Request $request){
         $validator = $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:tags',
         ]);
         $user = Auth()->user();    
         $tag = new Tag ;

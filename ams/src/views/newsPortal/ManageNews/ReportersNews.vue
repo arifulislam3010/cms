@@ -12,7 +12,7 @@
             <tbody>
                 <tr v-for="(item,key) in reporter_news" :key="key">
                     <td>{{key+1}}</td>
-                    <td>{{item.shoulder}}</td>
+                    <td v-html="item.shoulder"></td>
                     <td>{{item.reporter}}</td>
                     <td>
                         <!-- <a href="#" style="margin-right:10px">dlt</a>

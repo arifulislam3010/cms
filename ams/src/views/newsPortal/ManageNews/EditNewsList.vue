@@ -26,7 +26,7 @@
                 <tbody v-if="auth_permission.news_view || auth_permission.news_viewall">
                     <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
-                      <td>{{item.shoulder}}</td>
+                      <td v-html="item.shoulder"></td>
                       <td>{{item.author}}</td>
                       <td>{{item.created_by}}</td>
                       <td>{{item.updated_by}}</td>

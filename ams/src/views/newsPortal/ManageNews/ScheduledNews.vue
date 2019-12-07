@@ -12,8 +12,8 @@
             </thead>
             <tbody>
                 <tr v-for="(item,key) in news_list" :key="key">
-                    <td>{{item.headline}}</td>
-                    <td>{{item.shoulder}}</td>
+                    <td v-html="item.headline"></td>
+                    <td v-html="item.shoulder"></td>
                     <td>{{item.created_at.Date}}</td>
                     <td>{{item.published_at}}</td>
                     <td>

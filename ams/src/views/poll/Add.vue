@@ -126,7 +126,7 @@ export default {
         expire_at: ``
       },
       errors: {},
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       editorConfig: {
         fullPage: false,
         resize_enabled: false,
