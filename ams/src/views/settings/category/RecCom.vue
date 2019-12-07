@@ -3,7 +3,7 @@
         <br/>
 
 
-        <div class="card " style="height:60px; width:140%">
+        <div class="card ">
             <div class="row">
                 <div class="col-md-6">
                     {{ node.label}}

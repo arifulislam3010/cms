@@ -10,7 +10,7 @@
     <br />
     <div class="container-fluid">
       <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i v-if="auth_permission.area_create" class="fa fa-life-bouy"></i> Add Area
+        <i v-if="auth_permission.area_create" class="fa fa-plus"></i> Add Area
       </button>
       <br />
        <br />
@@ -21,10 +21,10 @@
       </form>
       
 
-      <table class="table table-sm"  v-if="false">
+      <table class="table table-sm" >
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">SL</th>
             <th scope="col">Title</th>
             <th scope="col">Parent_id</th>
             <th scope="col">Created By</th>
@@ -48,7 +48,7 @@
         </tbody>
       </table>
 
-       <div class="row">
+       <div class="row" v-if="false">
          <div class="col-sm-8">
           <div v-for="(i,k) in area_parents" :key="k"> 
             <RecCom :node="i"></RecCom>
