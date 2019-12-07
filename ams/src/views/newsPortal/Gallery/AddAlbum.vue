@@ -29,18 +29,22 @@
               aria-label
               aria-describedby="basic-addon1"
             />
-              
+            <i class="icon-trash"
+              @click="remove_album_cover"
+              data-toggle="tooltip" title="remove"
+              style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+            </i>  
           </div>
           <!-- <p>*required</p>                    -->
-          <!-- {{Object.keys(content).length}} -->
-
+          <!-- {{Object.keys(content).length != 0}} -->
+              <!-- {{content.file != ``}} -->
           <img
-            v-if="Object.keys(content).length"
+            v-if="Object.keys(content).length != 0  && content.file !=``"
             :src="content.file"
             style="width:100px;height:100px;"
           />
           <img
-            v-else
+            v-if="album_detail.cover.file!=`` && content.file == ``"
             :src="album_detail.cover.file"
             style="width:100px;height:100px;"
           />
@@ -60,15 +64,15 @@
       <hr />
       <div class="row">
         <div class="col-sm-6">
-          album content
+          <h3>Album Photos</h3>
           <br />
-          <b-button @click="add_media">Add Media</b-button>
           <br />
           <br />
           <div v-for="(item,key) in album_detail.more_photo" :key="key">
             <MorePhoto :item="item"></MorePhoto>
             <hr />
           </div>
+          <b-button @click="add_media" style="margin-bottom:20px">Add Media</b-button>
         </div>
       </div>
       <div class="row">
@@ -107,25 +111,45 @@ export default {
       errors:{},
       loading:false ,
       selected_content_type:'',
-      content:{},
+      content:{
+        file : ``,
+      },
       more_photo_arr: []
     };
   },
 
   mounted() {
+    this.clearAlbum()
     this.getAlbums()
     this.handel_update()
   },
   watch: {
+    $route(to,from){
+      console.log(`route changed`)
+      if(to.name == `AddAlbum`){
+        this.clearAlbum()
+      }
+    },    
     content: function(val) {
       this.album_detail.cover_id = val.id;
       this.album_detail.cover = val;
-    }
+    },
+     
+
+  
   },
   computed: {
     ...mapGetters(["auth_permission","album_detail","album_list"])
   },
   methods: {
+    remove_album_cover(){
+        // alert(`album cover removed`)
+        this.album_detail.cover = {file:``}
+        this.content = {file:``}
+    },
+    clearAlbum(){
+    this.$store.dispatch(`EMPTY_ALBUM`)
+    },
     handel_update: function(){
       this.loading = true 
       let ob = this.$route.params

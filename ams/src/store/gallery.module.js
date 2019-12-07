@@ -6,7 +6,9 @@ const state = {
    
    album:{
      title:null,
-     cover:{},
+     cover:{
+       file: ``
+     },
      cover_id:null,
      more_photo:[],
      more_photo_ids:[],
@@ -15,7 +17,9 @@ const state = {
 
    initial_album:{
     title:null,
-    cover:{},
+    cover:{
+      file :``
+    },
     cover_id:null,
     more_photo:[],
     more_photo_ids:[],
@@ -77,9 +81,15 @@ const actions = {
         })
       })
     },
+    [`EMPTY_ALBUM`]({commit}){
+      commit(`SET_ALBUM_EMPTY`)
+    }
 };
 
 const mutations = {
+    [`SET_ALBUM_EMPTY`](state){
+      state.album = { ...state.initial_album }
+    },
     ['SET_ALBUM_DETAIL'](state,payload){
       state.album = payload
       state.album.is_update = true 

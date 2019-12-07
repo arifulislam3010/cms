@@ -111,12 +111,12 @@ export default {
           icon: 'fa fa-life-bouy',
           children: [
             {
-              name: 'Add Photo',
+              name: 'Create Gallery',
               url: '/gallery/add-album',
               icon: 'fa fa-life-bouy'
             },
             {
-              name: 'Photo List',
+              name: 'Gallery List',
               url: '/gallery/list',
               icon: 'fa fa-life-bouy'
             },
@@ -128,12 +128,12 @@ export default {
           icon: 'fa fa-life-bouy',
           children: [
             {
-              name: 'Add Video',
+              name: 'Create Gallery',
               url: '/gallery/add-album',
               icon: 'fa fa-life-bouy'
             },
             {
-              name: 'Video List',
+              name: 'Gallery List',
               url: '/gallery/list',
               icon: 'fa fa-life-bouy'
             },

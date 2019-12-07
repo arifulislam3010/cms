@@ -4,7 +4,7 @@
       <!-- <button class="btn btn-primary contct-b pull-left">
         <i v-if="auth_permission.album_create" class="fa fa-life-bouy"></i> Add Album
       </button> -->
-       <a href="/gallery/add-album" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New Add</a>
+       <a href="#" class="btn btn-primary contct-b pull-left" @click="add_album"><i class="fa fa-life-bouy"></i> New Add</a>
       <form class="form-inline contct my-2 my-lg-0 pull-right">
         <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
@@ -75,14 +75,23 @@ export default {
       loading: false ,
     };
   },
+
   mounted() {
+    this.clearData()
     this.getAlbums();
   },
   computed: {
     ...mapGetters(["auth_permission","album_list","album_detail"])
   },
   methods: {
-      
+    clearData(){
+      this.album_detail = {}
+    },
+    add_album(){
+      //todo8
+      this.$router.push({ name: "AddAlbum" });
+
+    },  
     get_file: function(arg) {
       return `${axios.defaults.baseURL}/uploads/${arg}`;
     },
