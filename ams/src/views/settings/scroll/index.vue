@@ -1,10 +1,12 @@
 <template>
-  <div class="card">
-    <div>
-      <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i v-if="auth_permission.scroll_create" class="fa fa-life-bouy"></i> Add Scroll
-      </button>
+  <div>
+     <div class="row">
+        <div class="col-sm-3">
+            <button v-if="auth_permission.scroll_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Scroll</button>
+        </div>
     </div>
+
+    <br/>
     
 
     <AddScroll ref="add_scroll_modal"></AddScroll>
@@ -12,7 +14,7 @@
 
     <Loader v-if="loading"></Loader>
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-12">
         <div v-for="(i,k) in scroll_parents" :key="k">
           <RecCom :node="i"></RecCom>
         </div>

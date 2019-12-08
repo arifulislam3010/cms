@@ -1,93 +1,23 @@
 <template>
 <div>
-
-   
-  <div class="card">
-       
-        <!-- {{category_list}} -->
-        <!-- <ShowList :list="category_list"></ShowList> -->
-        <!-- {{category_list}} -->
-        <!-- {{auth_permission}} -->
-        <div class="container-fluid" >
-
-            <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
-
-            <form class="form-inline contct my-2 my-lg-0 pull-right">
-                <!-- <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button> -->
-            </form>
- <br/>
- <br/>
- <br/>
-
-           
-            <table class="table table-sm">
-                
-                <thead>
-                    <tr>
-                      <th scope="col">SL</th>
-                      <th scope="col">Category <br/>Name</th>
-                      <!-- <th scope="col">Sub-Category <br/> Name</th> -->
-                      <th scope="col">Display <br/> Name</th>
-                      <th scope="col">Parent</th>
-                      <th scope="col">color</th>
-                      <th scope="col">Header<br/> Display</th>
-                      <th scope="col">Home<br/> Display</th>
-                      <th scope="col">Menubar <br/>Display</th>
-                      <th scope="col">Photo <br/>Display</th>
-                      <th scope="col">Video<br/> Display</th>
-                      <th scope="col"> Status</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody v-if="auth_permission.category_view || auth_permission.category_viewall">
-                    <tr v-for="(item,index) in category_list" :key="index">
-                      <td >{{index+1}}</td>
-                      <td>{{item.label}}</td>
-                      <td>{{item.display_name}}</td>
-                      <td>{{item.parent_id}}</td>
-                      <td>{{item.color}}</td>
-                      <td>{{item.header_display}}</td>
-                      <td>{{item.home_display}}</td>
-                      <td>{{item.menubar_display}}</td>
-                      <td>{{item.photo_display}}</td>
-                      <td>{{item.video_display}}</td>
-                      <td>{{item.status}}</td>
-                      <td>
-                            <i v-if="auth_permission.category_update"  @click="editCategoryModal(item)" class="icon-note icons actn"> </i>
-                            <!-- <i @click="viewNcategoryModal(item)" class="icon-eye icons   actn"> </i> -->
-                            <i v-if="auth_permission.category_delete"  @click="deleteCategory(item.id)" class="icon-trash icons   actn"> </i>
-                      </td>
-                    </tr>
-                </tbody>
-
-            </table>
-            <!-- <nav aria-label="Page navigation example">
-                <pagination :data="Object.assign({},ncategoryP2)" @pagination-change-page="getResults"></pagination>
-            </nav> -->
-
-        </div>
-
-
-
-        <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
-        <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
-        <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
-        <Loader v-if="loading"></Loader>    
-  </div>
-  
-    <div class="row" v-if="false">
+    <div class="row">
         <div class="col-sm-3">
-            <button v-if="auth_permission.category_create" class="btn btn-primary contct-b pull-left" @click="openModal"><i class="fa fa-life-bouy"></i> Add Category</button>
+            <button v-if="auth_permission.category_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Category</button>
         </div>
     </div>
-    <div class="row" v-if="false">
-        <div class="col-md-9">
+
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
             <div v-for="(i,k) in category_parents" :key="k">        
                 <RecCat :node="i"></RecCat>
             </div>
         </div>
     </div>
+        <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
+        <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
+        <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
+        <Loader v-if="loading"></Loader>  
 </div> 
 </template>
 
@@ -162,19 +92,11 @@ export default {
            this.$refs.add_ncategory_modal.selected_parent = null
            this.$refs.add_ncategory_modal.openModal()
         },
-        // getPermission(){
-        //     this.$store.dispatch('ALL_USER_ROLE2')
-        //     .then(response=>{
-        //         this.permission = response.data.permission
-        //     })
-        // }
+
     },
 
-     mounted(){
-        // this.getResults()
+     mounted(){     
         this.getCategories()
-        // this.getPermission()
-
     },
     computed: {
       ...mapGetters(["auth_permission","category_list","category_parents"]),

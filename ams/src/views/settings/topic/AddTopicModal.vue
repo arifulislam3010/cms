@@ -3,11 +3,8 @@
     <form @submit.prevent="addTopic">
       <b-row>
         <b-col sm="12">
-          <b-card>
-            <div slot="header">
-              <strong>Topic</strong>
-              <small>Form</small>
-            </div>
+         
+
             <b-row>
               <b-col sm="12">
                 <b-form-group>
@@ -56,7 +53,7 @@
                       </b-form-group>
                     </b-col>
             </b-row>-->
-          </b-card>
+
         </b-col>
       </b-row>
       <div class="form-group row">

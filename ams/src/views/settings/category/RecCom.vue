@@ -1,31 +1,22 @@
 <template>
-    <div class="container">
-        <br/>
-
-
-        <div class="card ">
+    <div >
+        <div class="card " style="height:50px;width:95%;margin-bottom:10px">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-10">
                     {{ node.label}}
                 </div>
                 <div class="col-md-2" >
-                    <a href="#" @click="editCategoryModal(node)" style="margin-right:10px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
-                    <a href="#" @click="addChild(node)" style="margin-right:10px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
-                    <a href="#" @click="deleteCategory(node.id)" style="margin-right:10px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
-                    <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-right:10px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
-                    <a href="#" @click="()=>{ show_children = true }" style="margin-right:10px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>          
+                    
+                    <a href="#" @click="addChild(node)" style="margin-left:8px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
+                    <a href="#" @click="editCategoryModal(node)" style="margin-left:8px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                    <a href="#" @click="deleteCategory(node.id)" style="margin-left:8px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-left:8px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = true }" style="margin-left:8px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>        
                 </div>
-            </div>
-                
-                   
-                
-                        
-                
-           
-            
+            </div>    
         </div>
-        <div v-if="show_children">
-            <div  v-for="(i,k) in node.children" :key="k" style="margin-left:10px">
+        <div v-if="show_children" style="margin-left:15px">
+            <div  v-for="(i,k) in node.children" :key="k" >
                 <RecCat :node="i"></RecCat>
             </div>
         </div>
@@ -117,17 +108,16 @@ export default {
 </script>
 
 <style scoped>
-  .card{
-    
-    border-radius: 5px;
+  .card{  
+    border-radius: 10px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,0.8),0 0 6px rgba(0,0,0,0.05);
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12), .3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    padding: 7px 80px 10px 36px;
+    padding: 13px 0px 7px 20px;
     cursor: pointer;
   }
   .card:hover{
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
   }
 

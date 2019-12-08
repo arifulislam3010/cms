@@ -4,10 +4,6 @@
 
             <b-row>
               <b-col sm="12">
-                <b-card>
-                  <div slot="header">
-                    <strong>Area </strong> <small>Form</small>
-                  </div>
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
@@ -42,7 +38,6 @@
 
                     </b-col>
                   </b-row>
-                </b-card>
               </b-col>
             </b-row>
             <div class="form-group row">
@@ -108,24 +103,7 @@ export default {
                   this.errors = error.response.data.errors
                 })  
             }
-            // this.$validator.validateAll().then( result =>{
-            //     if(result){
-            //         var data = this.newArea
-            //         this.addLoader = true
-            //         this.$store.dispatch('ADD_AREA',data)
-            //         .then(response=>{
-            //             this.addLoader = false;
-            //             this.largeModal = false
-            //             this.$iziToast.success({position:'topRight',title:'Ok',message:"Area Added Successsfully"})
-
-            //         })
-            //         .catch(error=>{
-            //             this.addLoader = false;
-            //             this.$iziToast.error({position:'topRight',title:'Error',message:"Something Wrong !!"})
-            //         });
-            //     }
-
-            // })
+        
 
         },
 

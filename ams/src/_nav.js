@@ -251,17 +251,17 @@ export default {
     },
     {
       // lang 
-      name: 'language',
+      name: 'Language',
       url: 'language/add',
       icon: 'fa fa-language ',
       children: [
         {
-          name: 'list',
+          name: 'List',
           url: '/language/list',
           icon: 'fa fa-life-bouy',
         },
         {
-          name: 'add',
+          name: 'Add',
           url: '/language/add',
           icon: 'fa fa-life-bouy',
         },
@@ -365,27 +365,27 @@ export default {
     icon: 'fa fa-gear',
     children: [
       {
-        name: 'category',
+        name: 'Category',
         url: '/settings/category',
         icon: 'fa fa-life-bouy'
       },
       {
-        name: 'topic',
+        name: 'Topic',
         url: '/settings/topic',
         icon: 'fa fa-life-bouy'
       },
       {
-        name: 'area',
+        name: 'Area',
         url: '/settings/area',
         icon: 'fa fa-life-bouy'
       },
       {
-        name: 'tags',
+        name: 'Tags',
         url: '/settings/tags',
         icon: 'fa fa-life-bouy'
       },
       {
-        name: 'scroll',
+        name: 'Scroll',
         url: '/settings/scroll',
         icon: 'fa fa-life-bouy'
       },
