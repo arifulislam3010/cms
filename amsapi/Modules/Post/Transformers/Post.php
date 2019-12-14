@@ -14,13 +14,20 @@ class Post extends Resource
      */
     public function toArray($request)
     {
+        $reporter_name =  User::where('id',$this->reporter_id)->first() ;
+        $author_name   =  User::where('id',$this->author_id)->first();
+        if($reporter_name!=null) $reporter_name = $reporter_name->name;
+        if($author_name!=null) $author_name = $author_name->name;
+
         return [
             'id'=>$this->id,
             'shoulder'=>$this->shoulder,
             'headline'=>$this->headline,
             'hanger'=>$this->hanger,
-            'athor_id'=>$this->athor_id,
+            'author_id'=>$this->author_id,
+            'author_name'=>$author_name,
             'reporter_id'=>$this->reporter_id,
+            'reporter_name'=>$reporter_name,
             'featured_image_id'=>$this->featured_image_id,
             'featured_video_id'=>$this->featured_video_id,
             'video_position'=>$this->video_position,

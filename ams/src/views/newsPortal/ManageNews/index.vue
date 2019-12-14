@@ -3,7 +3,7 @@
   <div class="card">
         <div class="container-fluid">
             <!-- <button  @click="openModal"><i class="fa fa-life-bouy"></i> New News</button> -->
-            <a href="/news/add" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New News</a>
+            <a href="#" @click="$router.push({name:`AddNews`})" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New News</a>
             <!-- <form class="form-inline contct my-2 my-lg-0 pull-right">
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
@@ -16,20 +16,21 @@
                 <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Shoulder</th>
-                      <th scope="col">Athor ID</th>
-                      <th scope="col">Created By</th>
-                      <th scope="col">Updated By</th>
+                      <th scope="col">Headline</th>
+                      <th scope="col">Author</th>
+                      <th scope="col">Reporter</th>
+                      <!-- <th scope="col">Created By</th> -->
+                      <!-- <th scope="col">Updated By</th> -->
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody v-if="auth_permission.news_view || auth_permission.news_viewall">
                     <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
-                      <td v-html="item.shoulder"></td>
-                      <td>{{item.author}}</td>
-                      <td>{{item.created_by}}</td>
-                      <td>{{item.updated_by}}</td>
+                      <td v-html="item.headline"></td>
+                      <td>{{item.author_name}}</td>
+                      <td>{{item.reporter_name}}</td>
+                      <!-- <td>{{item.updated_by}}</td> -->
                       <td>
                             <i  v-if="auth_permission.news_update" @click="editAreaModal(item)" class="icon-note icons actn"> </i>
                             <!-- <i @click="viewAreaModal(item)" class="icon-eye icons   actn"> </i> -->

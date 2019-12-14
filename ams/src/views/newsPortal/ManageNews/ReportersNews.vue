@@ -1,5 +1,6 @@
 <template>
     <div class="card">
+    <div class="container-fluid">
         <table class="table table-sm">
             <thead>
                 <tr>
@@ -25,6 +26,7 @@
             </tbody>
         </table>
         <Loader v-if="loading"></Loader>
+        </div>
     </div>
 </template>
 <script>

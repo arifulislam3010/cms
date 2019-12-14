@@ -12,7 +12,7 @@ use Modules\Setting\Transformers\Category as CategoryResource ;
 use Modules\Setting\Transformers\Area as AreaResource ;
 use Modules\ContentManager\Entities\Content ;
 use Modules\ContentManager\Transformers\Content as ContentResource ;
-
+use Modules\Setting\Transformers\Scroll as ScrollResource; 
 class PostDetail extends Resource
 {
     /**
@@ -23,6 +23,8 @@ class PostDetail extends Resource
      */
     public function toArray($request)
     {
+        $temp = null ;
+        
         return [
             'id' => $this->id,
             'shoulder' => $this->shoulder,
@@ -42,7 +44,9 @@ class PostDetail extends Resource
             'news_tags' => TagResource::collection($this->tags),
             'selected_topics' => TopicResource::collection($this->topics),
             'selected_categories' => CategoryResource::collection($this->categories),
+            'selected_scrolls' => ScrollResource::collection($this->scrolls),
             'selected_areas' => AreaResource::collection($this->areas),
+            'selected_areas2' => AreaResource::collection($this->areas),
 
         ];
     }

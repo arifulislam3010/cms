@@ -2,11 +2,302 @@
   <div>
     <b-card v-if="auth_permission.news_create">
       <div class="row">
-        <div class="col-sm-8 form-group">
+
+        <div class="col-sm-3" style="outline: 1px solid;">
+          <label>Publish Time 
+            <i class="icon-paper-plane"></i>
+          </label>
+          <datetime width="300px" v-model="news_data.publish_at"></datetime>
+          <!-- <datetime width="300px" ></datetime> -->
+
+          <!-- <label>Share at
+            <i class="icon-share-alt "></i>
+          </label>
+          <datetime width="300px" v-model="news_data.share_at"></datetime> -->
+          <!-- <input class="form-control" /> -->
+          <!-- <input class="form-control" /> -->
+          <!-- <hr /> -->
+          <!-- <label>Status</label>
+          <br />
+          <toggle-button v-model="news_data.status" /> -->
+
+          <!-- <label>Area
+            <i class="icon-location-pin"></i>
+          </label> -->
+     
+          <!-- <Treeselect
+            :options="area_parents"
+            :multiple="true"
+            :flat="true"
+            v-model="news_data.selected_areas"
+          ></Treeselect>
+          <hr> -->
+        <!-- {{news_data.selected_areas}} -->
+          <hr>
+          <label>Division
+            <i class="icon-location-pin"></i>
+          </label>
+          <multiselect
+            :options="area_parents"    
+            placeholder="select division"  
+            :nullable="true"
+            v-model="area_1"
+            label="label"
+          ></multiselect>
+          
+          <!-- area 1 -->
+          <div v-if="area_1.children.length">
+            <label for="">District</label>
+          <multiselect
+            :options="area_1.children"
+         
+            :flat="true"
+            v-model="area_2"
+            label="label"
+           ></multiselect>
+          </div>
+          <!-- area 2 -->
+          <div v-if="area_1.children.length && area_2.children.length">
+
+            <label for="">Upazila</label>
+          <multiselect
+            :options="area_2.children"
+         
+            :flat="true"
+            v-model="area_3"
+            label="label"
+           ></multiselect>
+          </div>
+          <!-- area 1 -->
+          <div v-if="area_1.children.length && area_2.children.length && area_3.children.length">
+            <label for="">Union</label>
+          <multiselect
+            :options="area_3.children"
+         
+            :flat="true"
+            v-model="area_4"
+            label="label"
+           ></multiselect>
+          </div>
+          
+          <!-- old tree select category -->
+          <!-- <hr>
+           <label>Category
+             <i class="icon-layers "></i>
+          </label>
+           <div class="row">
+             <div class="col-sm-10">
+
+                <Treeselect
+                :multiple="true"
+                :flat="true"
+                v-model="news_data.selected_categories"
+                :options="category_parents"
+                
+                ></Treeselect>
+             </div>
+             
+             <div  class="col-sm-1" style="margin-top:8px;">
+              <i class="icon-plus" style="font-size:20px;"  @click="add_category" title="add category">
+              </i>
+            </div>              
+             
+           </div> -->
+          <!-- todo -->
+           <!-- new selective category  -->
+           <!-- category 1 -->
+           <hr>
+           <label>Category
+             <i class="icon-layers "></i>
+          </label>
+           <div class="row">
+             <div class="col-sm-10">
+
+                <!-- {{news_data.selected_categories}} -->
+                <multiselect
+                v-model="category_1"
+                :options="category_parents"
+                label="label"
+                placeholder="selece category"
+                ></multiselect>
+             </div>
+             
+             <div  class="col-sm-1" style="margin-top:8px;">
+              <i class="icon-plus" style="font-size:20px;"  @click="add_category" title="add category">
+              </i>
+            </div>              
+           </div>
+
+
+           <div class="row" v-if="category_1.children.length">
+             <div class="col-sm-10">
+                <label>Sub Category
+                  <i class="icon-layers "></i>
+                </label>
+                <!-- {{news_data.selected_categories}} -->
+                <multiselect
+                v-model="category_2"
+                :options="category_1.children"
+                label="label"
+                placeholder="selece category"
+                ></multiselect>
+             </div>             
+           </div>
+
+           <div class="row" v-if="category_2.children.length">
+             <div class="col-sm-10">
+                <label>Sub Category
+                  <i class="icon-layers "></i>
+                </label>
+                <!-- {{news_data.selected_categories}} -->
+                <multiselect
+                v-model="category_3"
+                :options="category_2.children"
+                label="label"
+                placeholder="selece category"
+                ></multiselect>
+             </div>             
+           </div>
+
+           <div class="row" v-if="category_3.children.length">
+             <div class="col-sm-10">
+                <label>Sub Category
+                  <i class="icon-layers "></i>
+                </label>
+                <!-- {{news_data.selected_categories}} -->
+                <multiselect
+                v-model="category_4"
+                :options="category_3.children"
+                label="label"
+                placeholder="selece category"
+                ></multiselect>
+             </div>             
+           </div>
+
+
+
+          <hr>
+            <!-- placement hear   -->
+          <label >Placement</label>
+          <input class="form-control" placeholder="enter placement hear"/>  
+          <label>Scroll
+            <i class="icon-link"></i>
+          </label>
+          <!-- {{news_data.selected_scrolls}} -->
+          <Treeselect
+            v-model="news_data.selected_scrolls"
+            :options="scroll_parents"
+            :multiple="true"
+            :flat="true"
+          ></Treeselect>
+              <label >
+                Tags &nbsp; <i class="icon-tag"></i>
+              </label>
+               <div class="row">
+                 <div class="col-sm-10">
+                    <Multiselect
+                      
+                      v-model="news_data.news_tags"
+                      :options="tag_list"
+                      track-by="id"
+                      label="title"
+                      :multiple="true"
+                    >hello</Multiselect>
+                 </div>
+            
+                <div  class="col-sm-1" style="margin-top:15px;">
+                  <i class="icon-plus" style="font-size:20px;" @click="tag_moldal" data-toggle="modal" data-target="#addTagModal" title="add tag">
+
+                  </i>
+                </div>
+
+               </div>
+
+          <label>Topic
+            <i class="icon-list "></i>
+          </label>
+          <!-- <Multiselect v-model="news_data.selected_topics" :multiple=true :options="topic_list" track-by="id" label="title"></Multiselect> -->
+          <!-- {{news_data.selected_topics}} -->
+          <div class="row">
+            <div class="col-sm-10">
+                <Treeselect
+                :multiple="true"
+                :flat="true"
+                v-model="news_data.selected_topics"
+                :options="topic_parents"
+                
+                ></Treeselect>
+            </div>
+            <div class="col-sm-1" style="margin-top:8px;">
+               <i class="icon-plus" style="font-size:20px;"  @click="add_topic" title="add topic">
+              </i>             
+            </div>
+          </div>
+
+          <!-- <label>Instant article</label> &nbsp;
+          <toggle-button v-model="news_data.instant_article" />
+          <hr/>
+           -->
+           <hr>
+          <div >
+              <!-- {{news_data.instant_article}} -->
+            <span>Instant Article
+              <span> 
+              <i class="icon-social-twitter "> </i> 
+                <i class="icon-social-facebook"> </i> 
+              <i class="icon-social-instagram "> </i> 
+              </span>
+              &nbsp;<toggle-button v-model="news_data.instant_article" :value="news_data.instant_article" />
+            </span>
+            <br />
+            <!-- time selector  -->
+            <div v-if="news_data.instant_article!=0">
+              <label>Caption</label>
+              <br>
+              <textarea placeholder="Enter Caption "></textarea>
+              <hr>
+              <label>Share Time</label>
+              <datetime width="300px"  v-model="news_data.share_at"></datetime>
+              <hr>
+            </div>
+          </div>
+
+          <label>Page Status </label> &nbsp;
+          <toggle-button v-model="news_data.page_status" />
+          <hr/>
+          
+
+
+
+
+
+
+          <!-- <label>Position</label>
+          <Multiselect
+            v-model="news_data.selected_positions"
+            :options="positions"
+            track-by="id"
+            label="name_eng"
+          ></Multiselect> -->
+
+          <!-- <Multiselect
+            v-model="news_data.selected_scrolls"
+            :options="positions"
+            track-by="id"
+            label="name_eng"
+          ></Multiselect> -->
+        </div>
+        <!-- <div class="col-sm-1"></div>   -->
+        <div class="col-sm-8 form-group" style="outline: 1px solid;margin-left:20px;margin-bottom:1px;">
+
+
+
           <label>Shoulder
             <i class="icon-user"></i>
           </label>
+        
         <quill-editor  :content="news_data.shoulder"
+                        style="border: 1px solid;"
                         v-model="news_data.shoulder"
                         :options="config2"
                         @change="()=>{}">
@@ -21,6 +312,7 @@
             <i class="icon-pin"></i>
           </label>
         <quill-editor   :content="news_data.headline"
+                        style="border:1px solid;margin-bottom:50px;;"
                         v-model="news_data.headline"
                         :options="config2"
                         @change="()=>{}">
@@ -57,8 +349,8 @@
              <i class="fa fa-check-circle"></i> &nbsp; {{i}}
             </p>
           </div>   
-
-          <div class="row">       
+          <!-- old tag -->
+          <!-- <div class="row">       
             <div class="col-sm-11">
 
               <div class="input-group mb-3" >
@@ -84,9 +376,9 @@
 
               </i>
             </div>
-        </div>
+        </div> -->
 
-          <label>Content
+          <label>Body
             <i class="icon-book-open"></i>
           </label>
           <!-- <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor> -->
@@ -162,105 +454,22 @@
 
           <div></div>
           <hr />
-          <!-- todo2 -->
           <label>Featured Video  &nbsp;
             <i class="icon-film"></i>
           </label>
           <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
           <hr />
-          <label>Video Position &nbsp;
-            <i class="icon-size-fullscreen "></i>
-          </label>
-          <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
+          <div style="margin-bottom:10px;">
+            <label>Video Position &nbsp;
+              <i class="icon-size-fullscreen "></i>
+            </label>
+            <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
+          </div>
         </div>
-        <div class="col-sm-3">
-          <label>publish at
-            <i class="icon-paper-plane"></i>
-          </label>
-          <datetime width="300px" v-model="news_data.publish_at"></datetime>
-          <!-- <datetime width="300px" ></datetime> -->
-          
-          <label>Share at
-            <i class="icon-share-alt "></i>
-          </label>
-          <datetime width="300px" v-model="news_data.share_at"></datetime>
-          <!-- <input class="form-control" /> -->
-          <!-- <input class="form-control" /> -->
-          <hr />
-          <!-- <label>Status</label>
-          <br />
-          <toggle-button v-model="news_data.status" /> -->
-          <br />
-          <label>Instant article
-            <span> 
-             <i class="icon-social-twitter "> </i> 
-              <i class="icon-social-facebook"> </i> 
-             <i class="icon-social-instagram "> </i> 
-             </span>
-          </label>
-          <br />
-          <toggle-button v-model="news_data.instant_article" />
-          <hr />
-          <label>Topic
-            <i class="icon-list "></i>
-          </label>
-          <!-- <Multiselect v-model="news_data.selected_topics" :multiple=true :options="topic_list" track-by="id" label="title"></Multiselect> -->
-          <!-- {{news_data.selected_topics}} -->
-          <Treeselect
-           :multiple="true"
-           :flat="true"
-           v-model="news_data.selected_topics"
-           :options="topic_parents"
-          
-           ></Treeselect>
-          <label>Category
-            <i class="icon-layers "></i>
-          </label>
-          <!-- {{news_data.selected_categories}} -->
-           <!-- todo  -->
-          <Treeselect
-           :multiple="true"
-           :flat="true"
-           v-model="news_data.selected_categories"
-           :options="category_parents"
-          
-           ></Treeselect>
 
-          <label>Area
-            <!-- <i class="icon-map"></i> -->
-            <i class="icon-location-pin"></i>
-          </label>
-          <!-- {{news_data.selected_areas}} -->
-          <Treeselect
-            :options="area_parents"
-            :multiple="true"
-            :flat="true"
-            v-model="news_data.selected_areas"
-          ></Treeselect>
-   
-          <!-- <label>Position</label>
-          <Multiselect
-            v-model="news_data.selected_positions"
-            :options="positions"
-            track-by="id"
-            label="name_eng"
-          ></Multiselect> -->
-          <label>Scroll
-            <i class="icon-link"></i>
-          </label>
-          <Treeselect
-            v-model="news_data.selected_scrolls"
-            :options="scroll_parents"
-            :multiple="true"
-            :flat="true"
-          ></Treeselect>
-          <!-- <Multiselect
-            v-model="news_data.selected_scrolls"
-            :options="positions"
-            track-by="id"
-            label="name_eng"
-          ></Multiselect> -->
-        </div>
+
+
+
       </div>
       <hr>
       <div class="row">
@@ -275,14 +484,33 @@
           <input style="margin-left:10px;margin-right:5px" type="radio" v-model="test3" value="0">continue editing -->
 
          </div> 
-         <div class="col-sm-3"></div>
-         <div class="col-sm-2">
-            <b-button variant="danger" @click="reset_news" >Reset</b-button>
+         <div class="col-sm-1"></div>
+         <div class="col-sm-4">
+              <div class="btn-group pull-right" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-secondary" @click="reset_news">cancel</button>
+                <button type="button" class="btn btn-secondary">Draft</button>
+                <button type="button" class="btn btn-secondary">Preview</button>
+                <!-- <button type="button" class="btn btn-secondary">4</button> -->
+
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" @click="submit" >Post</a>
+                    <a class="dropdown-item" @click="submit">Schedule Post</a>
+                    <a class="dropdown-item" @click="submit">Backdate Post</a>
+                    <a class="dropdown-item" @click="submit">Draft Post</a>
+                  </div>
+                </div>
+              </div>          
+            
+            <!-- <b-button variant="danger" @click="reset_news" >Reset</b-button>
             <button v-if="addLoader" style="margin-left:10px" class="btn btn-primary pull-right" type="button" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 wait
             </button>
-            <b-button v-else variant="success" style="margin-left:10px" @click="submit">{{submit_btn_txt}}</b-button>
+            <b-button v-else variant="success" style="margin-left:10px" @click="submit">{{submit_btn_txt}}</b-button> -->
          </div>
       </div>
     </b-card>
@@ -292,6 +520,8 @@
     <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
     <ContentManager ref="video_manager_modal" :content="vid_content" ></ContentManager>
     <AddTagModal ref="add_tag_modal"></AddTagModal>
+    <AddNcategoryModal ref="add_category_modal"></AddNcategoryModal>
+    <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <Loader v-if="loading"></Loader>
   </div>
 </template>
@@ -311,6 +541,8 @@ import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import Loader from "@/views/common/Loader";
 // import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import { quillEditor } from 'vue-quill-editor'
+import AddNcategoryModal from "../../settings/category/AddNcategoryModal"
+import AddTopicModal from "../../settings/topic/AddTopicModal"
 //
 // ClassicEditor
 //     .create( document.querySelector( '#editor' ), {
@@ -334,13 +566,50 @@ export default {
     // ClassicEditor,
     quillEditor,
     AddTagModal ,
+    AddNcategoryModal,
+    AddTopicModal,
 
   },
   data() {
     return {
-      // test1:[],
-      // test2:'',
-      // test3:'',
+      test1:``,
+      test2:'',
+      test3:'',
+      // areas 
+      area_1 : {
+        label:``,
+        children:[]
+      },
+      area_2 : {
+        children:[]
+      },
+      area_3 : {
+        children:[]
+      },
+      area_4 : {
+        children:[]
+      },
+      area_5 : {
+        children:[]
+      },
+
+      // categories 
+      category_1:{
+        children:[],
+      },
+      category_2:{
+        children:[],
+      },
+      category_3:{
+        children:[],
+      },
+      category_4:{
+        children:[],
+      },
+      category_5:{
+        children:[],
+      },
+
       errors:{},
       view_news:true ,
       continue_editing: false ,
@@ -353,6 +622,7 @@ export default {
       valueConsistsOf:'BRANCH_PRIORITY',
       more_photo_arr:[],
       config2: {
+      theme: 'bubble',
       modules: {
                 toolbar: [
                   ['bold', 'italic', 'underline', 'strike','blockquote', 'code-block',{ 'align': [] },{ 'color': [] }, { 'font': [] },{ 'background': [] }],
@@ -497,7 +767,7 @@ export default {
     this.getUserList();
     this.getTagList();
     this.getAreas();
-    this.getTopic();
+    this.getTopics();
     this.getCategories()
     this.getScrolls()
   },
@@ -546,7 +816,14 @@ export default {
 
   },
   methods: {
+    add_topic(){
+      this.$refs.add_topic_modal.openModal()
+    }, 
+    add_category(){
+      this.$refs.add_category_modal.openModal()
+    },
     clearData(){
+      this.news_data.instant_article = false 
       this.$store.dispatch(`REST_NEWS`)
     },
     remove_feat_img(){
@@ -559,16 +836,21 @@ export default {
       this.$refs.add_tag_modal.errors = {}
     },
     setDates(){
-      this.news_data.publish_at = new Date().toISOString() 
-      this.news_data.share_at = new Date().toISOString() 
+      this.news_data.publish_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      this.news_data.share_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      // this.news_data.share_at = new Date().toISOString() 
     },
     handel_update: function (){
       // console.log(ClassicEditor.defaultConfig.toolbar)
-      this.loading = true 
+      // this.loading = true 
       let ob = this.$route.params 
       if(ob.id){
           this.$store.dispatch('NEWS_DETAIL',ob.id).then(response=>{
             this.loading = false 
+            // 
+            this.setSelectedArea()
+            this.setSelectedCategory()
+            // this.area_1 = {}
           }).catch(error=>{
             this.loading = false 
           })
@@ -581,6 +863,47 @@ export default {
         // this.reset_news()
       }
     },
+    setSelectedCategory: function(){ // helper method 
+            this.news_data.selected_categories.forEach(item => {
+                  let _pid = item.parent_id 
+                  if(_pid != null) {
+                    let idx = this.news_data.selected_categories.map(v => v.id).indexOf(_pid)
+                    if(idx!=-1){
+                      this.news_data.selected_categories[idx].children = [item]
+                    }
+                  }
+            })
+            console.log(this.news_data.selected_categories) ;
+            // return ;
+            // set area 
+            let _t = this.news_data.selected_categories.find( v => v.parent_id == null)
+            let said = this.news_data.selected_categories.map(v => v.id) // selected area ids
+            if(_t) this.category_1 = _t
+            if(this.category_1.children.length) this.category_2 = this.category_1.children.find(v => v.parent_id == this.category_1.id)
+            if(this.category_2.children.length) this.category_3 = this.category_2.children.find(v => v.parent_id == this.category_2.id)
+            if(this.category_3.children.length) this.category_4 = this.category_3.children.find(v => v.parent_id == this.category_3.id)
+    },
+    setSelectedArea: function (){ // helper method 
+            this.news_data.selected_areas.forEach(item => {
+              let _pid = item.parent_id 
+              if(_pid != null) {
+                 let idx = this.news_data.selected_areas.map(v => v.id).indexOf(_pid)
+                 if(idx!=-1){
+                   this.news_data.selected_areas[idx].children = [item]
+                 }
+              }
+            })
+            console.log(this.news_data.selected_areas) ;
+            // return ;
+            // set area 
+            let _t = this.news_data.selected_areas.find( v => v.parent_id == null)
+            let said = this.news_data.selected_areas.map(v => v.id) // selected area ids
+            if(_t) this.area_1 = _t
+            if(this.area_1.children.length) this.area_2 = this.area_1.children.find(v => v.parent_id == this.area_1.id)
+            if(this.area_2.children.length) this.area_3 = this.area_2.children.find(v => v.parent_id == this.area_2.id)
+            if(this.area_3.children.length) this.area_4 = this.area_3.children.find(v => v.parent_id == this.area_3.id)
+    },
+
     get_file: function(arg){
       if(this.news_data.is_update){
         return `${axios.defaults.baseURL}/uploads/${arg}`
@@ -589,6 +912,7 @@ export default {
       }
     },
     reset_news: function(){
+      this.errors = {}
       this.$store.dispatch('REST_NEWS')
       this.news_data.is_update = false 
       if(this.news_data.is_update){
@@ -598,10 +922,24 @@ export default {
       }
     },
     submit: function(){
-      // todo1
+      if(this.news_data.tag_ids.length) this.news_data.tag_ids = this.news_data.news_tags.map((v)=>v.id)
+      //  if(this.news_data.area_ids.length)this.news_data.area_ids = this.news_data.selected_areas.map((v)=>v.id)
+      this.news_data.area_ids = []
+    // division 
+      if(this.area_1.hasOwnProperty(`id`)) this.news_data.area_ids.push(this.area_1.id)
+      // district
+      if(this.area_2.hasOwnProperty(`id`)) this.news_data.area_ids.push(this.area_2.id)
+      // upazila
+      if(this.area_3.hasOwnProperty(`id`)) this.news_data.area_ids.push(this.area_3.id)
+      // union 
+      if(this.area_4.hasOwnProperty(`id`)) this.news_data.area_ids.push(this.area_4.id)
+      // category 
+     this.news_data.category_ids = []
+     if(this.category_1.hasOwnProperty(`id`)) this.news_data.category_ids.push(this.category_1.id)
+     if(this.category_2.hasOwnProperty(`id`)) this.news_data.category_ids.push(this.category_2.id)
+     if(this.category_3.hasOwnProperty(`id`)) this.news_data.category_ids.push(this.category_3.id)
+     if(this.category_4.hasOwnProperty(`id`)) this.news_data.category_ids.push(this.category_4.id)
 
-     if(this.news_data.tag_ids.length) this.news_data.tag_ids = this.news_data.news_tags.map((v)=>v.id)
-     if(this.news_data.area_ids.length)this.news_data.area_ids = this.news_data.selected_areas.map((v)=>v.id)
      this.news_data.featured_image_id = this.news_data.featured_img.id
      this.news_data.featured_video_id = this.news_data.featured_vid.id
      this.news_data.content_ids = this.news_data.more_photo_arr.map( v => v.id)
@@ -670,7 +1008,7 @@ export default {
         this.news_data.reporter = this.user_list[0]
       }
     },
-    getTopic() {
+    getTopics() {
       this.loading = true
       this.$store.dispatch("FETCH_TOPICS").then(response=>{
         this.loading = false

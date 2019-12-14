@@ -26,7 +26,7 @@ const state = {
         selected_areas:[],
         selected_positions:[],
         selected_scrolls:[],
-
+        page_status:``,
 
         // relational 
         tag_ids:[],
@@ -65,7 +65,7 @@ const state = {
         share_at:null,
         publish_at:null,
         status:true,
-        instant_article:true,
+        instant_article:false,
 
         news_tags: [],
         selected_topics:[],
@@ -73,7 +73,7 @@ const state = {
         selected_areas:[],
         selected_positions:[],
         selected_scrolls:[],
-
+        page_status:``,
 
         // relational 
         tag_ids:[],
@@ -196,11 +196,13 @@ const mutations = {
         state.news_data = { ...state.news_data , ...payload}
         state.news_data.selected_topics = payload.selected_topics.map( v=> v.id)
         // state.news_data.news_tags = payload.news_tags.map( v=> v.id)
-        state.news_data.selected_categories = payload.selected_categories.map( v=> v.id)
-        state.news_data.selected_areas = payload.selected_areas.map( v=> v.id)    
+        // state.news_data.selected_categories = payload.selected_categories.map( v=> v.id)
+        state.news_data.selected_scrolls = payload.selected_scrolls.map( v=> v.id)
+        // state.news_data.selected_areas = payload.selected_areas.map( v=> v.id)    
         state.news_data.is_update = true 
         state.news_data.featured_vid = state.news_data.featured_vid ? state.news_data.featured_vid : state.initial_news_data.featured_vid  
         state.news_data.featured_img = state.news_data.featured_img ? state.news_data.featured_img : state.initial_news_data.featured_img  
+        state.news_date.instant_article = false 
     },
 }
 
