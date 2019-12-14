@@ -1,56 +1,24 @@
 <template>
-  <div class="card">
-    <!-- {{topic_list}} -->
-      <!-- {{topic_parents}} -->
-    <div class="container-fluid">
-      <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i v-if="auth_permission.topic_create"  class="fa fa-life-bouy"></i> Add Topic
-      </button>
+  <div >
 
-      <form class="form-inline contct my-2 my-lg-0 pull-right">
-        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
-      </form>
-
-      <table class="table table-sm" v-if="false">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Parent id</th>
-            <th scope="col">Created By</th>
-            <th scope="col">Updated By</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody v-if="auth_permission.topic_view || auth_permission.topic_viewall">
-          <tr v-for="(topic,index) in topic_list" :key="index">
-            <td>{{index+1}}</td>
-            <td>{{topic.label}}</td>
-            <td>{{topic.parent_id}}</td>
-            <td>{{topic.created_by}}</td>
-            <td>{{topic.updated_by}}</td>
-            <td>
-              <i v-if="auth_permission.topic_update" @click="editTopicModal(topic)" class="icon-note icons actn"></i>
-              <!-- <i @click="viewTopicModal(topic)" class="icon-eye icons actn"></i> -->
-              <i v-if="auth_permission.topic_delete || auth_permission.topic_deleteall" @click="deleteTopic(topic.id)" class="icon-trash icons actn"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- <nav aria-label="Page navigation example">
-        <pagination :data="Object.assign({},topicP2)" @pagination-change-page="getResults"></pagination>
-      </nav> -->
+    <div class="row">
+        <div class="col-sm-3">
+            <button v-if="auth_permission.topic_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Topic</button>
+        </div>
     </div>
+
+    <br/>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
     <ViewTopicModal ref="view_topic_modal"></ViewTopicModal>
     <Loader v-if="loading"></Loader>
-    <div>
+
+    <div class="row">
+    <div class="col-sm-12">
         <div v-for="(i,k) in topic_parents" :key="k">
-          
           <RecCom :node="i"></RecCom>
         </div>      
+    </div>
     </div>
   </div>
 </template>

@@ -38,7 +38,15 @@ class NcategoryController extends Controller
 
         $ncategory = $request->isMethod('put') ? Ncategory::findOrFail($request->ncategory_id) : new Ncategory;
         $ncategory -> title = $request->input('title');
+        $ncategory -> display_name = $request->input('display_name');
+        $ncategory -> color = $request->input('color');
         $ncategory -> parent_id = $request->input('parent_id');
+        $ncategory -> header_display = $request->input('header_display');
+        $ncategory -> home_display = $request->input('home_display');
+        $ncategory -> menubar_display = $request->input('menubar_display');
+        $ncategory -> photo_display = $request->input('photo_display');
+        $ncategory -> video_display = $request->input('video_display');
+        $ncategory -> status = $request->input('status');
 
         //vat_reg_no
         $log_user = Auth()->user();

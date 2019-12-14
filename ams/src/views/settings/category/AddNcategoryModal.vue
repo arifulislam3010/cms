@@ -2,18 +2,211 @@
     <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
        
         <form @submit.prevent="addCategory" >
-          
+          <div class="container">
             <b-row>
               <b-col sm="12">
-                <b-card>
-                  <div slot="header">
+                <!-- <b-card> -->
+                  <!-- <div slot="header">
                     <strong>Category </strong> <small>Form</small>
-                  </div>
+                  </div> -->
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
-                        <label for="Title">Name</label>
-                        <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder="Enter name..."></b-form-input>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Title">Display Name*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                        <b-form-input type="text" name="Title"  v-model="newCategory.display_name" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                        </div>
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Title">Title*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Title">Color</label>
+                          </div>
+
+                          <div class="col-md-6">
+                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                          <div class="col-md-1">
+                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
+                            <!-- <ColorPicker :width="300" :height="300" :disabled="false" startColor="#ff0000"></ColorPicker> -->
+                          </div>
+                        </div>
+
+                         <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Parent*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
+                          </div>
+                        </div>
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Header Display*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.header_display"
+                            >
+                            
+                              <option>Yes</option>
+                              <option>No</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Home Dispaly*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.home_display"
+                            >
+                            
+                              <option>Yes</option>
+                              <option>No</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Menubar Dispaly*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.menubar_display"
+                            >
+                            
+                              <option>Yes</option>
+                              <option>No</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Photo Dispaly*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.photo_display"
+                            >
+                            
+                              <option>Yes</option>
+                              <option>No</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Video Dispaly*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.video_display"
+                            >
+                            
+                              <option>Yes</option>
+                              <option>No</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-3 ">
+                            <label for="Parent">Status*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.status"
+                            >
+                          
+                              <option>Active</option>
+                              <option>Inactive</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+
+
+                        <!-- {{newCategory}} -->
+
+
+
+                
+
                         <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
                         <!-- {{  errors[`title`] }} -->
                           <p v-for="(i,k) in errors[`title`]" :key="k">
@@ -23,16 +216,26 @@
                       </b-form-group>
                     </b-col>
                   </b-row>
-                  <b-row>
+                  <!-- <b-row>
                     <b-col sm="12">
                       <b-form-group>
-                        <label for="Parent">Parent</label>
 
-                        <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
+                        <br/>
+
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="Parent">Parent*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <Treeselect v-model="selected_parent" :options="category_parents.filter( v=> v.id!=item_id)" ></Treeselect>
+                          </div>
+                        </div>
+                 
                       </b-form-group>                    
                     </b-col>
-                  </b-row>
-                </b-card>
+                  </b-row> -->
+                <!-- </b-card> -->
               </b-col>
             </b-row>
             <div class="form-group row">
@@ -44,6 +247,7 @@
                 </button>
                 <button v-if="!addLoader"  @click.prevent="close" class="btn btn-success pull-right" style="margin-right:5px;">Close</button>
                 </div>
+            </div>
             </div>
         </form>
     </b-modal>
@@ -59,8 +263,11 @@ import { ADD_NCATEGORY,All_NCATEGORY} from "@/store/action.type"
 import { mapState,mapGetters } from "vuex"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import ColorPicker from 'vue-color-picker-wheel'
 export default {
-    components:{Treeselect},
+    components:{Treeselect,
+    ColorPicker},
+    
     data(){
         return{
             errors:{},
@@ -69,9 +276,18 @@ export default {
             selected_parent:null,
             largeModal:false,
             addLoader:false,
+
             newCategory: {
-                title: '',
-                parent_id: ''
+              display_name:'',
+              title: '',
+              color:'',
+              parent_id: '',
+              header_display: 'Yes',
+              home_display:'Yes',
+              menubar_display:'Yes',
+              photo_display:'Yes',
+              video_display:'Yes',
+              status:'Active'      
             },
     
         }
@@ -88,6 +304,7 @@ export default {
               id   : this.item_id ,
             }
             this.$store.dispatch('UPDATE_CATEGORY',payload).then(response=>{
+              
               this.$parent.getCategories()
               this.addLoader = false
             }).catch(error=>{
@@ -96,7 +313,9 @@ export default {
               this.error_list = error.data
             })
           }else{
-            this.newCategory.parent_id = this.selected_parent 
+            this.newCategory.parent_id = this.selected_parent
+            
+            //console.log(this.newCategory)
             this.$store.dispatch('ADD_CATEGORY',this.newCategory).then(response=>{
               this.$parent.getCategories()
               this.addLoader = false
@@ -109,6 +328,19 @@ export default {
             })
 
           }
+
+
+          // this.newCategory.display_name=''
+          // this.newCategory.title=''
+          // this.newCategory.color=''
+          // this.newCategory.parent_id=''
+          // this.newCategory.photo_display='Yes'
+          // this.newCategory.video_display='Yes'
+          // this.newCategory.header_display='Yes'
+          // this.newCategory.home_display='Yes'
+          // this.newCategory.status=''
+          // this.newCategory.menubar_display='Yes'
+          
         },
         openModal(){
             this.largeModal = true
@@ -117,6 +349,14 @@ export default {
             if(!this.update){
               this.newCategory.title =''
               this.newCategory.parent_id =''
+              this.newCategory.display_name =''
+              this.newCategory.color =''
+              this.newCategory.header_display ='Yes'
+              this.newCategory.home_display ='Yes'
+              this.newCategory.menubar_display ='Yes'
+              this.newCategory.photo_display ='Yes'
+              this.newCategory.video_display ='Yes'
+              this.newCategory.status ='Active'
             }
         },
         close(){

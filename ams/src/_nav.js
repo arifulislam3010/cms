@@ -17,12 +17,12 @@ export default {
         {
           name: 'Update',
           url: '/',
-          icon: 'icon-star'
+          icon: 'fa fa-edit'
         },
         {
           name: 'Message',
           url: '/',
-          icon: 'icon-star'
+          icon: 'fa fa-envelope'
         },
       ]
     },
@@ -46,12 +46,12 @@ export default {
             {
               name: 'Edit News',
               url: '/news/edit-news-list',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-edit'
             },
             {
               name: 'List News',
               url: '/news/list',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-list-alt'
             },
             {
               name: 'Schedule News',
@@ -68,17 +68,17 @@ export default {
         {
           name: 'Topic News',
           url: '/news/scheduled-news',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-tag',
           children: [
             {
               name: 'Create Topic',
               url: '/news/add',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-plus'
             },
             {
               name: 'Edit Topic',
               url: '/news/add',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-edit'
             },
             {
               name: 'Topic News',
@@ -88,7 +88,7 @@ export default {
             {
               name: 'List Topic',
               url: '/news/list',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-list-alt'
             },
           ]
         },
@@ -113,29 +113,29 @@ export default {
             {
               name: 'Create Gallery',
               url: '/gallery/add-album',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-plus'
             },
             {
               name: 'Gallery List',
               url: '/gallery/list',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-list-alt'
             },
           ]
         },
         {
           name: 'Video Gallery',
           url: '/gallery/list',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-list-alt',
           children: [
             {
               name: 'Create Gallery',
               url: '/gallery/add-album',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-plus'
             },
             {
               name: 'Gallery List',
               url: '/gallery/list',
-              icon: 'fa fa-life-bouy'
+              icon: 'fa fa-list-alt'
             },
           ]
         },
@@ -149,7 +149,7 @@ export default {
         {
           name: 'Tag',
           url: '/settings/scroll',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-tag'
         },
         {
           name: 'Topic',
@@ -174,7 +174,7 @@ export default {
         {
           name: 'Category',
           url: '/settings/category',
-          icon: 'fa fa-life-bouy'
+          icon: 'fa fa-list-alt'
         },       
       ]
     },
@@ -251,19 +251,19 @@ export default {
     },
     {
       // lang 
-      name: 'language',
+      name: 'Language',
       url: 'language/add',
       icon: 'fa fa-language ',
       children: [
         {
-          name: 'list',
+          name: 'List',
           url: '/language/list',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-list-alt',
         },
         {
-          name: 'add',
+          name: 'Add',
           url: '/language/add',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-plus',
         },
 
       ]
@@ -326,12 +326,12 @@ export default {
         {
           name: 'List',
           url: '/site/list',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-list-alt',
         },
         {
           name: 'Add',
           url: '/site/add/',
-          icon: 'fa fa-life-bouy',
+          icon: 'fa fa-plus',
         },
 
       ]
@@ -365,29 +365,29 @@ export default {
     icon: 'fa fa-gear',
     children: [
       {
-        name: 'category',
+        name: 'Category',
         url: '/settings/category',
-        icon: 'fa fa-life-bouy'
+        icon: 'fa fa-list-alt'
       },
       {
-        name: 'topic',
+        name: 'Topic',
         url: '/settings/topic',
-        icon: 'fa fa-life-bouy'
+        icon: 'fa fa-tag'
       },
       {
-        name: 'area',
+        name: 'Area',
         url: '/settings/area',
         icon: 'fa fa-life-bouy'
       },
       {
-        name: 'tags',
+        name: 'Tags',
         url: '/settings/tags',
-        icon: 'fa fa-life-bouy'
+        icon: 'fa fa-tag'
       },
       {
-        name: 'scroll',
+        name: 'Scroll',
         url: '/settings/scroll',
-        icon: 'fa fa-life-bouy'
+        icon: 'fa fa-list-alt'
       },
 
 

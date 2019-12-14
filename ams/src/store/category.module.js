@@ -30,6 +30,8 @@ const actions = {
         })
     },
     ['ADD_CATEGORY']({commit},payload){
+
+       
         return new Promise((resolve,reject)=>{
             axios.post('api/category',payload).then(response=>{
                 resolve(response)
@@ -39,6 +41,7 @@ const actions = {
         })
     },
     ['UPDATE_CATEGORY']({commit},payload){
+        //console.log('press update')
         return new Promise((resolve,reject)=>{
             axios.put(`api/category/${payload.id}`,payload.data).then(response=>{
                 resolve(response)
