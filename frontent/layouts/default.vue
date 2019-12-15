@@ -1,106 +1,114 @@
 <template>
   <div>
-    <header class="header-area">
-    <!-- Top Header Area -->
-    <top-header />
-
-    <!-- Navbar Area -->
-  
-  <div v-if="isMobile">
-      <MobileNavbar :categories = "categories" />
-  </div>
-   <div v-else>
-     <MainNavbar :categories = "categories"/>  
-  </div>
-
-  </header>
-    <div>
-      <nuxt />
+    <div v-if="loading">
+      <InitialLoading :message="LoadingMessage"></InitialLoading>
     </div>
-    <Footer />
-    
+    <div v-else>
+    <header>
+      <TopHeader></TopHeader>
+      <Menu></Menu>
+    </header>
+    <nuxt />
+    <Footer></Footer>
+    </div>
   </div>
 </template>
-
 <script>
-import { isMobile } from 'mobile-device-detect';
 import axios from '@/plugins/axios'
-import Header from "~/components/Header"
-import TopHeader from "~/components/TopHeader"
-import MainNavbar from "~/components/MainNavbar"
-import MobileNavbar from "~/components/MobileNavbar"
-import Footer from '@/components/Footer'
-import Loader from '~/components/loader/Loader'
-
+import TopHeader from '~/components/layout/TopHeader.vue'
+import Menu from '~/components/layout/Menu.vue'
+import Footer from '~/components/layout/Footer.vue'
+import { mapMutations, mapGetters } from 'vuex'
+import InitialLoading from "@/components/loader/InitialLoading";
 export default {
   components: {
     TopHeader,
-    Header,
-    TopHeader,
-    MainNavbar,
+    Menu,
     Footer,
-    Loader,
-    MobileNavbar
+    InitialLoading,
   },
- 
   data() {
     return {
-      show: false,
-      title : 'Home',
-      categories:[],
-      loading: false,
-      isMobile: isMobile,
-      sidebarShow: isMobile?false:true,
-      crossHide: true
-      
-    }
+      loading:true,
+      LoadingMessage:'Loading'
+    };
   },
-  asyncData () {
-    alert('aa');
-    return axios.get(`/api/frontend/categories`)
-    .then((res) => {
-      return { categories: res.data }
-    })
-    .catch((e) => {
-     alert('ss');
-    })
-  },
-  mounted() {            
-
-      this.getCategories();
-  },
- 
-  // async asyncData () {
-  //   const {data} = await axios.get('/api/frontend/categories')
-  //   return {categories:data}
-  // },
-
+   computed: mapGetters({
+    todos: 'todos/todos'
+  }),
   methods: {
-     getCategories(){
-           axios.get('/api/frontend/categories').then((response) => {      
-                  this.categories = response.data;
-
-                }).catch(function (error) {                    
-                });
-        },
-    toggleNavbar() {
-      this.show = !this.show;
-    }
+    addTodo (e) {
+      const text = e.target.value
+      if (text.trim()) {
+        this.$store.commit('todos/add', { text })
+      }
+      e.target.value = ''
+    },
+    getData(){
+        axios.get('/api/frontend/languages').then((response) => {      
+            const data = response.data;
+            this.$store.commit('todos/add', { data })
+            this.loading = false;
+        }).catch(function (error) {    
+            this.loading = true;
+        });
+    },
+    ...mapMutations({
+      toggle: 'todos/toggle'
+    })
   },
-
-  
+  mounted() {
+    this.getData();
+  },
   
 }
 </script>
-
-<style scoped>
-a:hover {
-  color: #ee002d;
+<style>
+html {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
-.pointer{
-  cursor: pointer;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
 }
 
+.button--green {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #3b8070;
+  color: #3b8070;
+  text-decoration: none;
+  padding: 10px 30px;
+}
 
+.button--green:hover {
+  color: #fff;
+  background-color: #3b8070;
+}
+
+.button--grey {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495e;
+  color: #35495e;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+
+.button--grey:hover {
+  color: #fff;
+  background-color: #35495e;
+}
 </style>

@@ -80,6 +80,7 @@ class RegisterLoginPasswordResetController extends Controller
 
     public function login(Request $request)
     {
+        // return $request->all();
         try{
             if(Sentinel::authenticate($request->all())){
                 $user = User::whereEmail($request->email)->first();
