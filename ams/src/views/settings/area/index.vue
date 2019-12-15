@@ -1,67 +1,21 @@
 <template>
-  <div class="card">
-    <div>
-
+  <div>
+    <div class="row">
+        <div class="col-sm-3">
+            <button v-if="auth_permission.area_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Area</button>
+        </div>
     </div>
-    <br />
-    <div>
 
-    </div>
-    <br />
-    <div class="container-fluid">
-      <button class="btn btn-primary contct-b pull-left" @click="openModal">
-        <i v-if="auth_permission.area_create" class="fa fa-life-bouy"></i> Add Area
-      </button>
-      <br />
-       <br />
-      
-      <form class="form-inline contct my-2 my-lg-0 pull-right" >
-        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0">Search</button> -->
-      </form>
-      
+    <br/>
 
-      <table class="table table-sm"  v-if="false">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Parent_id</th>
-            <th scope="col">Created By</th>
-            <th scope="col">Updated By</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody v-if="auth_permission.area_view || auth_permission.area_viewall">
-          <tr v-for="(area,index) in area_list" :key="index">
-            <td>{{index+1}}</td>
-            <td>{{area.label}}</td>
-            <td>{{area.parent_id}}</td>
-            <td>{{area.created_by}}</td>
-            <td>{{area.updated_by}}</td>
-            <td>
-              <i v-if="auth_permission.area_update" @click="editAreaModal(area)" class="icon-note icons actn"></i>
-              <!-- <i @click="viewAreaModal(area)" class="icon-eye icons actn"></i> -->
-              <i v-if="auth_permission.area_delete || auth_permission.area_deleteall" @click="deleteArea(area.id)" class="icon-trash icons actn"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-       <div class="row">
-         <div class="col-sm-8">
-          <div v-for="(i,k) in area_parents" :key="k"> 
+      <div class="row">
+        <div class="col-sm-12">
+          <div v-for="(i,k) in area_parents" :key="k">
             <RecCom :node="i"></RecCom>
           </div>
-         </div>      
-    </div>
+        </div>
+      </div>
 
-
-
-      <nav aria-label="Page navigation example">
-        <pagination :data="Object.assign({},areaP2)" @pagination-change-page="getResults"></pagination>
-      </nav>
-    </div>
     <AddAreaModal ref="add_area_modal"></AddAreaModal>
     <EditAreaModal ref="edit_area_modal"></EditAreaModal>
     <ViewAreaModal ref="view_area_modal"></ViewAreaModal>
@@ -70,14 +24,14 @@
 </template>
 
 <script>
-import RecCom from "./RecCom"
+import RecCom from "./RecCom";
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
 
 import AddAreaModal from "./AddAreaModal";
 import EditAreaModal from "./EditAreaModal";
 import ViewAreaModal from "./ViewAreaModal";
-import Loader from '@/views/common/Loader'
+import Loader from "@/views/common/Loader";
 
 import { mapState, mapGetters, mapActions } from "vuex";
 import {
@@ -103,18 +57,18 @@ export default {
     };
   },
   methods: {
- 
     getAreas() {
-      this.loading = true
-      this.$store.dispatch("FETCH_AREAS").then(response=>{
-        this.loading = false
-      }).catch(error=>{  
-        this.loading = false
-      });
+      this.loading = true;
+      this.$store
+        .dispatch("FETCH_AREAS")
+        .then(response => {
+          this.loading = false;
+        })
+        .catch(error => {
+          this.loading = false;
+        });
     },
 
-
- 
     listGroup(index) {
       this.showSection.isOpen = !this.showSection.isOpen;
     },
@@ -177,7 +131,6 @@ export default {
     },
 
     deleteArea(id) {
-
       var self = this;
       this.$iziToast.question({
         timeout: 10000,
@@ -194,14 +147,14 @@ export default {
             "<button><b>YES</b></button>",
             function(instance, toast) {
               self.$store
-                .dispatch("DELETE_AREA",id)
+                .dispatch("DELETE_AREA", id)
                 .then(response => {
                   self.$iziToast.success({
                     position: "topRight",
                     title: "Ok",
                     message: "Area Delated Successsfully"
                   });
-                  self.getAreas()
+                  self.getAreas();
                 })
                 .catch(error => {
                   self.$iziToast.error({
@@ -241,7 +194,7 @@ export default {
     // this.getPermission()
   },
   computed: {
-    ...mapGetters(["auth_permission","area_list", "area_parents"])
+    ...mapGetters(["auth_permission", "area_list", "area_parents"])
   },
 
   components: {
@@ -249,7 +202,7 @@ export default {
     ViewAreaModal,
     pagination,
     AddAreaModal,
-    Loader ,
+    Loader,
     RecCom
   }
 };

@@ -1,30 +1,25 @@
 <template>
   <div>
-    <div class="card">
-      {{ node.label}}
-      <div>
-        <a href="#" @click="editScrollModal(node)" style="margin-right:30px; color:green">Update</a>
-        <a href="#" @click="addChild(node)" style="margin-right:30px; color:#000099">AddChild</a>
-        <a href="#" @click="deleteScroll(node.id)" style="margin-right:30px; color:red">Delete</a>
-        <a
-          href="#"
-          @click="()=>{ show_children = false}"
-          v-if="show_children && node.children.length > 0"
-          style="margin-right:30px"
-        >Minimize</a>
-        <a
-          href="#"
-          @click="()=>{ show_children = true }"
-          style="margin-right:30px"
-          v-if="!show_children && node.children.length > 0"
-        >Expand</a>
-      </div>
-    </div>
-    <div v-if="show_children">
-      <div v-for="(i,k) in node.children" :key="k" style="margin-left:30px">
-        <RecCom :node="i"></RecCom>
-      </div>
-    </div>
+
+    <div class="card " style="height:50px;width:95%;margin-bottom:10px">
+            <div class="row">
+                <div class="col-md-10">
+                    {{ node.label}}
+                </div>
+                <div class="col-md-2" >                 
+                    <a href="#" @click="addChild(node)" style="margin-left:8px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
+                    <a href="#" @click="editScrollModal(node)" style="margin-left:8px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                    <a href="#" @click="deleteScroll(node.id)" style="margin-left:8px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-left:8px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = true }" style="margin-left:8px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>        
+                </div>
+            </div>    
+        </div>
+        <div v-if="show_children" style="margin-left:15px">
+            <div  v-for="(i,k) in node.children" :key="k" >
+                <RecCom :node="i"></RecCom>
+            </div>
+        </div>
     <AddScroll ref="add_scroll_modal"></AddScroll>
     <ViewScrollModal ref="view_scroll_modal"></ViewScrollModal>
 
@@ -138,19 +133,19 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-  .card{
+  .card{  
     border-radius: 10px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,0.8),0 0 6px rgba(0,0,0,0.05);
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12), .3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    padding: 7px 80px 18px 36px;
+    padding: 13px 0px 7px 20px;
     cursor: pointer;
   }
   .card:hover{
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
   }
 
 </style>
-

@@ -17,9 +17,10 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Shoulder</th>
-                      <th scope="col">Athor ID</th>
-                      <th scope="col">Created By</th>
-                      <th scope="col">Updated By</th>
+                      <th scope="col">Athor</th>
+                      <th scope="col">Reporter</th>
+                      <!-- <th scope="col">Created By</th> -->
+                      <!-- <th scope="col">Updated By</th> -->
                       <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -27,9 +28,10 @@
                     <tr v-for="(item,index) in news_list" :key="index">
                       <td>{{index+1}}</td>
                       <td v-html="item.shoulder"></td>
-                      <td>{{item.author}}</td>
-                      <td>{{item.created_by}}</td>
-                      <td>{{item.updated_by}}</td>
+                      <td>{{item.author_name}}</td>
+                      <td>{{item.reporter_name}}</td>
+                      <!-- <td>{{item.created_by}}</td> -->
+                      <!-- <td>{{item.updated_by}}</td> -->
                       <td>
                             <i  v-if="auth_permission.news_update" @click="editAreaModal(item)" class="icon-note icons actn"> </i>
                             <!-- <i @click="viewAreaModal(item)" class="icon-eye icons   actn"> </i> -->

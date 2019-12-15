@@ -35,7 +35,7 @@ export default {
         ContentSelectC(item){
             // copy to clip  
             // alert('ss');
-            this.copyToclip(item.file)
+            // this.copyToclip(item.file)
             console.log(item);
             this.$parent.$parent.$parent.$parent.content = item;
             // this.$parent.ContentSelect(item);

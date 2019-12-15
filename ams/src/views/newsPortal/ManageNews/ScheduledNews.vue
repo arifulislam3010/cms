@@ -1,5 +1,6 @@
 <template>
     <div class="card">
+        <div class="container-fluid">
         <table class="table table-sm">
             <thead>
                 <tr>
@@ -14,7 +15,7 @@
                 <tr v-for="(item,key) in news_list" :key="key">
                     <td v-html="item.headline"></td>
                     <td v-html="item.shoulder"></td>
-                    <td>{{item.created_at.Date}}</td>
+                    <td>{{item.created_at.date.split(' ')[0]}}</td>
                     <td>{{item.published_at}}</td>
                     <td>
                         <i v-if="auth_permission.news_update || auth_permission.news_updateall" @click="update_news(item.id)" class="icon-note icons actn"> </i>
@@ -24,6 +25,7 @@
             </tbody>
         </table>
         <Loader v-if="loading"></Loader>
+        </div>
     </div>
 </template>
 <script>

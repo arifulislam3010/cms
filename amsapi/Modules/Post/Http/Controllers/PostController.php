@@ -135,9 +135,11 @@ class PostController extends Controller
         // topic
         $post->topics()->attach($request->selected_topics);
         // category
-        $post->categories()->attach($request->selected_categories);
+        // $post->categories()->attach($request->selected_categories);
+        $post->categories()->attach($request->category_ids);
         // area
-        $post->areas()->attach($request->selected_areas);
+        // $post->areas()->attach($request->selected_areas);
+        $post->areas()->attach($request->area_ids);
         // content -> more photo
         $post->contents()->attach($request->content_ids);
         $post->scrolls()->attach($request->selected_scrolls);
@@ -226,11 +228,13 @@ class PostController extends Controller
         // topic
         $post->topics()->sync($request->selected_topics);
         //area
-        $post->areas()->sync($request->selected_areas);
+        // $post->areas()->sync($request->selected_areas);
+        $post->areas()->sync($request->area_ids);
         // content
         $post->contents()->sync($request->content_ids);
         // categories
-        $post->categories()->sync($request->selected_categories);
+        // $post->categories()->sync($request->selected_categories);
+        $post->categories()->sync($request->category_ids);
         // scroll
         $post->scrolls()->sync($request->selected_scrolls);
         if ($post->save()) {

@@ -4,11 +4,8 @@
         <form @submit.prevent="addScroll" >
           
             <b-row>
-              <b-col sm="12">
-                <b-card>
-                  <div slot="header">
-                    <strong>Scroll </strong> <small>Form</small>
-                  </div>
+              <b-col sm="12" class="container">
+                <!-- <b-card> -->               
                   <b-row>
                     <b-col sm="12">
                       <b-form-group>
@@ -41,7 +38,7 @@
                       </b-form-group>                     
                     </b-col>
                   </b-row>
-                </b-card>
+                <!-- </b-card> -->
               </b-col>
             </b-row>
             <div class="form-group row">
