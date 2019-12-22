@@ -54,9 +54,7 @@ export default {
     mounted(){
         this.getCategories()
     },
-    watch:{
 
-    }
     computed:{...mapGetters([`category_parents`])},
     methods:{
         search(){
