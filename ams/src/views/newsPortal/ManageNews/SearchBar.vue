@@ -26,6 +26,7 @@
             </div>
             {{demo}}
         </div>
+        <Loader v-if="loading"></Loader>
 
         <!-- <Multiselect v-model="temp" :options="category_parents"></Multiselect> -->
     </div>
@@ -33,29 +34,39 @@
 <script>
 import Treeselect from '@riophae/vue-treeselect'
 import Multiselect from "vue-multiselect";
+import Loader from "@/views/common/Loader";
 
 import {mapGetters} from "vuex"
 import axios from "axios";
 export default {
     name:`SearchBar`,
     components:{
-        Treeselect,Multiselect,
+        Treeselect,Multiselect,Loader
     },
     data(){
         return {
             demo :`` ,
             temp :[],
+            loading : false ,
+            btn_txt : `Search` ,
         }
     },
     mounted(){
         this.getCategories()
     },
+    watch:{
+
+    }
     computed:{...mapGetters([`category_parents`])},
     methods:{
         search(){
+            this.loading = true 
             // if temp list is empty then get all 
             if(this.temp.length == 0){
-                this.$store.dispatch(`FETCH_NEWS`)
+                this.$store.dispatch(`FETCH_NEWS`).then(response=>{
+                    this.loading = false 
+                }).catch(erroor=>{this.loading = false})
+                
                 return 
             }
             // alert(this.temp)
@@ -64,7 +75,8 @@ export default {
             }
             this.$store.dispatch(`SEARCH_POST_BY_CATEGORY`,payload).then(response=>{
                 // alert(`result fetched`)
-            })
+                this.loading = false
+            }).catch(error=>{this.loading = false})
             // axios.post(`api/post/search`,payload).then(response=>{
             //     this.demo = response.data 
             //     // alert(this.demo)
