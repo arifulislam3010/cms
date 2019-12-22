@@ -1,20 +1,22 @@
 <template>
   <div>
     <div class="row">
-        <div class="col-sm-2">
-            <img v-if="item.file" :src="item.file" height="80px" width="100px" />
-            <!-- <p v-else style="margin-top:20px">select image</p> -->
+        <div class="col-sm-0">
+            <!-- <img v-if="item.file" :src="item.file" height="80px" width="100px" />
             <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
              <p style="position:relative;top:25px;left:10px;">select image</p>
-           </div>
+           </div> -->
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-11">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
-                  <span>
-                    <i class="icon-picture"></i>
+                <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">
+                  
+                  <span v-if="!item.file">
+                    Select
+                    <i  class="icon-picture"></i>
                   </span>
+                  <img v-if="item.file" :src="item.file" height="50px" width="50px" />
                 </button>
               </div>
               <textarea

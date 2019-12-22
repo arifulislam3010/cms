@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Topic;
 
 use Modules\Setting\Transformers\Topic as TopicResource;
+use Modules\Setting\Transformers\TopicDetail;
 
 class TopicController extends Controller
 {
@@ -28,6 +29,9 @@ class TopicController extends Controller
         $topic = $request->isMethod('put') ? Topic::findOrFail($id) : new Topic;
         $topic -> title = $request->input('title');
         $topic -> parent_id = $request->input('parent_id');
+        $topic->deadline = $request->deadline ;
+        $topic->status   = $request->status ;
+        $topic->image_id = $request->image ;
 
         if($request->isMethod('put')){
             if($request->parent_id == $id){
@@ -45,7 +49,13 @@ class TopicController extends Controller
             return new TopicResource($topic);
         }
     }
-
+    public function detail($id){
+        $topic = Topic::findOrFail($id) ;
+        if($topic){
+            // return $topic ;
+            return new TopicDetail($topic);
+        }
+    }
     public function destroy($id)
     {
         $topic = Topic::findOrFail($id);

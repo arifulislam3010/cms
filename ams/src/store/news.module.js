@@ -27,7 +27,15 @@ const state = {
         selected_positions:[],
         selected_scrolls:[],
         page_status:``,
-
+        // auto share 
+        auto_share:{
+            flag : true ,
+            time : `` ,
+            caption : ``,
+        },
+        // schedule and backdate time
+        schedule_time :`` ,
+        backdate_time :`` ,
         // relational 
         tag_ids:[],
         topic_ids:[],
@@ -74,7 +82,15 @@ const state = {
         selected_positions:[],
         selected_scrolls:[],
         page_status:``,
-
+        // auto share 
+        auto_share:{
+            flag : true ,
+            time : `` ,
+            caption : ``,
+        },
+        // schedule and backdate time
+        schedule_time :`` ,
+        backdate_time :`` ,        
         // relational 
         tag_ids:[],
         topic_ids:[],

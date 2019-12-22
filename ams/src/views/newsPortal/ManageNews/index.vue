@@ -1,5 +1,7 @@
 
 <template>
+<div>
+    <SearchBar style="margin-bottom:20px;"></SearchBar>
   <div class="card">
         <div class="container-fluid">
             <!-- <button  @click="openModal"><i class="fa fa-life-bouy"></i> New News</button> -->
@@ -53,6 +55,7 @@
         <!-- {{news_data}} -->
 
   </div>
+ </div> 
 </template>
 
 <script>
@@ -68,7 +71,7 @@ import ContentManager from '../../content/index'
 
 import { mapState,mapGetters,mapActions } from "vuex"
 import { All_AREA,DELETE_AREA,SEARCH_AREA,ALL_USER_ROLE2 } from '@/store/action.type';
-
+import SearchBar from "./SearchBar"
 export default {
   data(){
         return {
@@ -245,6 +248,7 @@ export default {
         AddAreaModal,
         ContentManager,
         Loader ,
+        SearchBar,
     }
 }
 </script>

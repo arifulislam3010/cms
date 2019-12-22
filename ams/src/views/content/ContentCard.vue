@@ -38,6 +38,7 @@ export default {
             // this.copyToclip(item.file)
             console.log(item);
             this.$parent.$parent.$parent.$parent.content = item;
+            console.log(this.$parent.$parent.$parent.$parent)
             // this.$parent.ContentSelect(item);
         },
         copyToclip(arg){

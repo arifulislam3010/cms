@@ -1,16 +1,17 @@
 <template>
   <div>
-    <div class="card " style="height:50px;width:95%;margin-bottom:10px">
+    <div class="card " v-bind:style="{'color': node.status?  `green` : `red`  }" style="height:50px;width:95%;margin-bottom:10px">
             <div class="row">
                 <div class="col-md-10">
                     {{ node.label}}
+                    <!-- {{ node.status}} -->
                 </div>
                 <div class="col-md-2" >                 
-                    <a href="#" @click="addChild(node)" style="margin-left:8px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
-                    <a href="#" @click="editTopicModal(node)" style="margin-left:8px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
-                    <a href="#" @click="deleteTopic(node.id)" style="margin-left:8px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
-                    <a href="#" @click="()=>{ show_children = false}" v-if="show_children && node.children.length > 0" style="margin-left:8px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
-                    <a href="#" @click="()=>{ show_children = true }" style="margin-left:8px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>        
+                    <a href="#" data-toggle="tooltip" title="Manage Parent" @click="editTopicModal(node)" style="margin-left:8px; color:#000099"> <i class="fa fa-plus" style="font-size:18px"></i></a>
+                    <a href="#" data-toggle="tooltip" title="Edit Topic" @click="addChild(node)" style="margin-left:8px; color:green"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                    <a href="#" data-toggle="tooltip" title="Delete Topic" @click="deleteTopic(node.id)" style="margin-left:8px; color:red"> <i class="fa fa-trash" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = false}" data-toggle="tooltip" title="minimize" v-if="show_children && node.children.length > 0" style="margin-left:8px"><i class="fa fa-arrow-up" style="font-size:18px"></i></a>
+                    <a href="#" @click="()=>{ show_children = true }"  data-toggle="tooltip" title="expand" style="margin-left:8px" v-if="!show_children && node.children.length > 0" ><i class="fa fa-arrow-down" style="font-size:18px"></i></a>        
                 </div>
             </div>    
         </div>
@@ -51,11 +52,19 @@ export default {
   },
   methods: {
     addChild(topic) {
+      // get detail 
+      this.$store.dispatch(`EMPTY_CURRENT_TOPIC`)
+      this.$store.dispatch(`FETCH_CURRENT_TOPIC`,topic.id).then(response=>{
+
+      }).catch(error=>{
+        alert(error)
+      })      
       this.$refs.add_topic_modal.openModal();
       this.$refs.add_topic_modal.newTopic.title = ``
       this.$refs.add_topic_modal.newTopic.parent_id = topic.id;
     },
     editTopicModal(topic) {
+
       console.log(topic)
       this.$refs.edit_topic_modal.openModal(topic);
       this.$refs.edit_topic_modal.editTopic.title = topic.label;

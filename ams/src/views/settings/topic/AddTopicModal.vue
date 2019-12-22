@@ -2,9 +2,10 @@
   <b-modal title="Topic" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
     <form @submit.prevent="addTopic" class="container">
       <b-row>
+        {{this.current_topic}}
+        {{this.content}}
         <b-col sm="12">
          
-
             <b-row>
               <b-col sm="12">
                 <b-form-group>
@@ -15,7 +16,7 @@
                     </div>
 
                     <div class="col-md-7">
-                      <b-form-input type="textarea" name="Title" style="height:90px" v-model="newTopic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
+                      <b-form-input type="textarea" name="Title" style="height:90px" v-model="current_topic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
                     </div>
                   </div>
                   <br/>
@@ -25,7 +26,7 @@
                       <label for="Title">Deadline</label>
                     </div>
                     <div class="col-md-7">
-                       <datetime width="435px" v-model="newTopic.deadline"></datetime>
+                       <datetime width="435px" v-model="current_topic.deadline"></datetime>
                     </div>
                   </div>
 
@@ -36,7 +37,7 @@
                     </div>
                     <div class="col-md-3">
                       
-                       <b-btn class="btn-success" @click="contentManager()" >Select Image</b-btn>
+                       <b-btn class="btn-success" @click="contentManager" >Select Image</b-btn>
                     </div>
                     <div class="col-md-3">
                       <img :src="content.file" style="height:120px;width:150px"/>
@@ -55,7 +56,7 @@
                        <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newTopic.status"
+                              v-model="temp_status"
                             >
                           
                               <option>Active</option>
@@ -96,7 +97,7 @@
           >Close</button>
         </div>
       </div>
-       <ContentManager ref="content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
+       <ContentManager ref="add_topic_content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
     </form>
   </b-modal>
 </template>
@@ -123,6 +124,7 @@ export default {
       content:{},
       largeModal: false,
       addLoader: false,
+      temp_status : ``,
       newTopic: {
         title: "",
         parent_id: "",
@@ -133,19 +135,46 @@ export default {
     };
   },
   watch:{
-    content :function(val){
-      // alert(this.temp_key)
-      this.newTopic.topic_image = this.content.file 
+    temp_status : function (val){
+      // this.current_topic.status = 1
+      if(val == `Inactive`){
+        this.current_topic.status = 0
+      }
+      if(val == `Active`){
+        this.current_topic.status = 1
+      }
+      
     },
+    // content :function(val){
+    //   // alert(this.temp_key)
+    //   this.newTopic.topic_image = this.content.file 
+    // },
   },
   mounted() {
     //this.getTopics()
+    this.setStatus()
     this.setDates()
   },
   methods: {
+    setStatus(){
+      if(this.current_topic.status == 1){
+        this.temp_status = `Active`
+      }else{
+        this.temp_status = `Inactive`
+      }
+    },
     addTopic() {
+      // if has id then update 
+      if(this.current_topic.id){
+        this.$store.dispatch(`UPDATE_TOPIC`,this.current_topic).then(response=>{
+         this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Updated Successsfully"})
+         this.$store.dispatch(`FETCH_TOPICS`) 
+        })
+        return ;
+      }
       // this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
-      this.$store.dispatch('ADD_TOPIC',this.newTopic).then(response=>{
+      
+      this.$store.dispatch('ADD_TOPIC',this.current_topic).then(response=>{
         this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
         this.$parent.getTopics()
       }).catch(error=>{
@@ -158,8 +187,8 @@ export default {
       
     },
     contentManager(){
-      this.$refs.content_manager_modal.openModal();
-      this.newTopic.topic_image=this.content.file
+      this.$refs.add_topic_content_manager_modal.openModal();
+      // this.newTopic.topic_image=this.content.file
     },
     openModal() {
       this.errors = {}
@@ -179,11 +208,11 @@ export default {
       });
     },
     deleteButton(index) {
-      this.line.buttons.splice(index, 1);
+      this.line.buttons.splice(index,1);
     }
   },
   computed: {
-    ...mapGetters(["topic_list", "topic_parents"])
+    ...mapGetters(["topic_list", "topic_parents","current_topic"])
   }
 };
 </script>

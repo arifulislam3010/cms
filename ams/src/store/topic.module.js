@@ -1,6 +1,13 @@
 import axios from "axios"
 const state = {
     topics:[],
+    topic:{
+        id :`` ,
+        title :``,
+        deadline : ``,
+        image : ``,
+        status: 1,
+    },
 }
 
 const getters = {
@@ -16,6 +23,7 @@ const getters = {
     topic_parents(state){
         return state.topics.filter((v)=>v.parent_id == null)
     },
+    current_topic(state){ return state.topic}
 } 
 
 const actions = {
@@ -40,7 +48,7 @@ const actions = {
     },
     ['UPDATE_TOPIC']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.put(`api/topic/${payload.id}`,payload.data).then(response=>{
+            axios.put(`api/topic/${payload.id}`,payload).then(response=>{
                 resolve(response)
             }).catch(error=>{
                 reject(error)
@@ -55,12 +63,37 @@ const actions = {
                 reject(error)
             })
         })
+    },
+    [`FETCH_CURRENT_TOPIC`]({commit},id){
+        return new Promise((resolve,reject)=>{
+            axios.get(`api/topic/${id}`).then(response=>{
+                resolve(response)
+                commit('SET_CURRENT_TOPIC',response.data)
+            }).catch(error=>{
+                reject(error)
+            })
+        })        
+    },
+    [`EMPTY_CURRENT_TOPIC`]({commit}){
+        commit(`SET_EMPTY_CURRENT_TOPIC`)
     }
 }
 
 const mutations = {
     ['SET_TOPICS'](state,payload){
         state.topics = payload
+    },
+    [`SET_EMPTY_CURRENT_TOPIC`](state){
+        state.topic = {
+            id :`` ,
+            title :``,
+            deadline : ``,
+            image : ``,
+            status: 1,
+        }
+    },
+    [`SET_CURRENT_TOPIC`](state,payload){
+        state.topic = payload
     },
 }
 

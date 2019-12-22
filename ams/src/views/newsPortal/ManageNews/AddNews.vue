@@ -1,13 +1,19 @@
 <template>
   <div>
-    <b-card v-if="auth_permission.news_create">
+    <b-card v-if="auth_permission.news_create" style="margin-left:-15px;margin-top:-12px;">
       <div class="row">
 
-        <div class="col-sm-3" style="outline: 1px solid;">
-          <label>Publish Time 
-            <i class="icon-paper-plane"></i>
-          </label>
-          <datetime width="300px" v-model="news_data.publish_at"></datetime>
+        <div class="col-sm-4" style="outline: 1px solid;">
+
+          <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Publish &nbsp; <i class="icon-paper-plane"></i>
+              </span>
+            </div>
+            <datetime  class="form-control"  v-model="news_data.publish_at"></datetime>
+            <!-- <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1"> -->
+          </div>
           <!-- <datetime width="300px" ></datetime> -->
 
           <!-- <label>Share at
@@ -34,7 +40,22 @@
           <hr> -->
         <!-- {{news_data.selected_areas}} -->
           <hr>
-          <label>Division
+           <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Division &nbsp; <i class="icon-location-pin"></i>
+              </span>
+            </div>
+           <multiselect
+            class="form-control"
+            :options="area_parents"    
+            placeholder="select division"  
+            :nullable="true"
+            v-model="area_1"
+            label="label"
+          ></multiselect>  
+          </div>         
+          <!-- <label>Division
             <i class="icon-location-pin"></i>
           </label>
           <multiselect
@@ -43,196 +64,203 @@
             :nullable="true"
             v-model="area_1"
             label="label"
-          ></multiselect>
+          ></multiselect> -->
           
           <!-- area 1 -->
-          <div v-if="area_1.children.length">
-            <label for="">District</label>
+
+          <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                District &nbsp; <i class="icon-location-pin"></i>
+              </span>
+            </div>
           <multiselect
+          class="form-control"
             :options="area_1.children"
          
             :flat="true"
             v-model="area_2"
             label="label"
-           ></multiselect>
-          </div>
-          <!-- area 2 -->
-          <div v-if="area_1.children.length && area_2.children.length">
+           ></multiselect> 
+          </div>    
 
-            <label for="">Upazila</label>
+          <!-- area 2 -->
+          <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length && area_2.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Upazila &nbsp; 
+              </span>
+            </div>
           <multiselect
+          class="form-control"
             :options="area_2.children"
-         
             :flat="true"
             v-model="area_3"
             label="label"
-           ></multiselect>
-          </div>
-          <!-- area 1 -->
-          <div v-if="area_1.children.length && area_2.children.length && area_3.children.length">
-            <label for="">Union</label>
+           ></multiselect> 
+          </div> 
+
+            <!-- upazila -->
+           <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length && area_2.children.length && area_3.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Union &nbsp; 
+              </span>
+            </div>
           <multiselect
+            class="form-control"
             :options="area_3.children"
-         
             :flat="true"
             v-model="area_4"
             label="label"
            ></multiselect>
-          </div>
-          
-          <!-- old tree select category -->
-          <!-- <hr>
-           <label>Category
-             <i class="icon-layers "></i>
-          </label>
-           <div class="row">
-             <div class="col-sm-10">
-
-                <Treeselect
-                :multiple="true"
-                :flat="true"
-                v-model="news_data.selected_categories"
-                :options="category_parents"
-                
-                ></Treeselect>
-             </div>
-             
-             <div  class="col-sm-1" style="margin-top:8px;">
-              <i class="icon-plus" style="font-size:20px;"  @click="add_category" title="add category">
-              </i>
-            </div>              
-             
-           </div> -->
-          <!-- todo -->
-           <!-- new selective category  -->
+          </div>          
            <!-- category 1 -->
            <hr>
-           <label>Category
-             <i class="icon-layers "></i>
-          </label>
-           <div class="row">
-             <div class="col-sm-10">
+          <div class="row">
+              <div class="col-sm-11">
+                  <div class="input-group mb-3" style="margin-top:20px;" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        Category &nbsp; <i class="icon-layers"></i>
+                      </span>
+                    </div>
+                      <multiselect
+                      class="form-control"
+                        v-model="category_1"
+                        :options="category_parents"
+                        label="label"
+                        placeholder="selece category"
+                        ></multiselect>
+                  </div>
 
-                <!-- {{news_data.selected_categories}} -->
+              </div>
+               <div  class="col-sm-1" style="margin-top:35px;margin-left:-10px;">
+                <i class="icon-plus" style="font-size:20px;"  @click="add_category" title="add category">
+                </i>
+              </div>            
+          </div> 
+ 
+            <!-- sub cat 1  -->
+           <div class="input-group mb-3" style="margin-top:20px;" v-if="category_1.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Sub Category &nbsp; <i class="icon-layers"></i>
+              </span>
+            </div>
                 <multiselect
-                v-model="category_1"
-                :options="category_parents"
-                label="label"
-                placeholder="selece category"
-                ></multiselect>
-             </div>
-             
-             <div  class="col-sm-1" style="margin-top:8px;">
-              <i class="icon-plus" style="font-size:20px;"  @click="add_category" title="add category">
-              </i>
-            </div>              
-           </div>
-
-
-           <div class="row" v-if="category_1.children.length">
-             <div class="col-sm-10">
-                <label>Sub Category
-                  <i class="icon-layers "></i>
-                </label>
-                <!-- {{news_data.selected_categories}} -->
-                <multiselect
+                class="form-control"
                 v-model="category_2"
                 :options="category_1.children"
                 label="label"
                 placeholder="selece category"
-                ></multiselect>
-             </div>             
-           </div>
-
-           <div class="row" v-if="category_2.children.length">
-             <div class="col-sm-10">
-                <label>Sub Category
-                  <i class="icon-layers "></i>
-                </label>
-                <!-- {{news_data.selected_categories}} -->
+                ></multiselect> 
+          </div> 
+            <!-- sub cat 2  -->
+           <div class="input-group mb-3" style="margin-top:20px;" v-if="category_2.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Sub Category &nbsp; <i class="icon-layers"></i>
+              </span>
+            </div>
                 <multiselect
+                class="form-control"
                 v-model="category_3"
                 :options="category_2.children"
                 label="label"
                 placeholder="selece category"
-                ></multiselect>
-             </div>             
-           </div>
-
-           <div class="row" v-if="category_3.children.length">
-             <div class="col-sm-10">
-                <label>Sub Category
-                  <i class="icon-layers "></i>
-                </label>
-                <!-- {{news_data.selected_categories}} -->
+                ></multiselect> 
+          </div> 
+            <!-- sub cat 2  -->
+           <div class="input-group mb-3" style="margin-top:20px;" v-if="category_3.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Sub Category &nbsp; <i class="icon-layers"></i>
+              </span>
+            </div>
                 <multiselect
+                class="form-control"
                 v-model="category_4"
                 :options="category_3.children"
                 label="label"
                 placeholder="selece category"
                 ></multiselect>
-             </div>             
-           </div>
-
-
+          </div> 
 
           <hr>
             <!-- placement hear   -->
-          <label >Placement</label>
-          <input class="form-control" placeholder="enter placement hear"/>  
-          <label>Scroll
-            <i class="icon-link"></i>
-          </label>
-          <!-- {{news_data.selected_scrolls}} -->
-          <Treeselect
-            v-model="news_data.selected_scrolls"
-            :options="scroll_parents"
-            :multiple="true"
-            :flat="true"
-          ></Treeselect>
-              <label >
-                Tags &nbsp; <i class="icon-tag"></i>
-              </label>
-               <div class="row">
-                 <div class="col-sm-10">
+           <div class="input-group mb-3" style="margin-top:20px;" >
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Placement &nbsp; <i class="icon-link"></i>
+              </span>
+            </div>
+              <Treeselect
+                class="form-control"
+                v-model="news_data.selected_scrolls"
+                :options="scroll_parents"
+                :multiple="true"
+                :flat="true"
+              ></Treeselect>
+          </div>       
+          <hr>  
+            <!-- tags hear   -->
+            <div class="row">
+              <div class="col-sm-11">
+                  <div class="input-group mb-3" style="margin-top:50px;" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        Tags &nbsp; <i class="icon-tag"></i>
+                      </span>
+                    </div>
                     <Multiselect
-                      
+                      class="form-control"
                       v-model="news_data.news_tags"
                       :options="tag_list"
                       track-by="id"
                       label="title"
                       :multiple="true"
                     >hello</Multiselect>
-                 </div>
+                  </div>         
+
+              </div>
             
-                <div  class="col-sm-1" style="margin-top:15px;">
-                  <i class="icon-plus" style="font-size:20px;" @click="tag_moldal" data-toggle="modal" data-target="#addTagModal" title="add tag">
+              <div  class="col-sm-1" style="margin-top:65px;margin-left:-10px;">
+                <i class="icon-plus" style="font-size:20px;" @click="tag_moldal" data-toggle="modal" data-target="#addTagModal" title="add tag">
 
-                  </i>
-                </div>
-
-               </div>
-
-          <label>Topic
-            <i class="icon-list "></i>
-          </label>
-          <!-- <Multiselect v-model="news_data.selected_topics" :multiple=true :options="topic_list" track-by="id" label="title"></Multiselect> -->
-          <!-- {{news_data.selected_topics}} -->
-          <div class="row">
-            <div class="col-sm-10">
-                <Treeselect
-                :multiple="true"
-                :flat="true"
-                v-model="news_data.selected_topics"
-                :options="topic_parents"
-                
-                ></Treeselect>
+                </i>
+              </div>              
             </div>
-            <div class="col-sm-1" style="margin-top:8px;">
-               <i class="icon-plus" style="font-size:20px;"  @click="add_topic" title="add topic">
-              </i>             
+            <!-- topics hear   -->
+            <div class="row">
+              <div class="col-sm-11">
+                  <div class="input-group mb-3" style="margin-top:10px;" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        Topics &nbsp; <i class="icon-list"></i>
+                      </span>
+                    </div>
+                    <Treeselect
+                    class="form-control"
+                    :multiple="true"
+                    :flat="true"
+                    v-model="news_data.selected_topics"
+                    :options="topic_parents.filter(v => v.status == 1)"
+                    
+                    ></Treeselect>
+                  </div>         
+
+              </div>
+            
+              <div  class="col-sm-1" style="margin-top:25px;margin-left:-10px;">
+                 <i class="icon-plus" style="font-size:20px;"  @click="add_topic" title="add topic">
+                </i>
+              </div>              
             </div>
-          </div>
+
+          
+          
+
 
           <!-- <label>Instant article</label> &nbsp;
           <toggle-button v-model="news_data.instant_article" />
@@ -241,14 +269,14 @@
            <hr>
           <div >
               <!-- {{news_data.instant_article}} -->
-            <span>Instant Article
+            <!-- <span>Instant Article
               <span> 
               <i class="icon-social-twitter "> </i> 
                 <i class="icon-social-facebook"> </i> 
               <i class="icon-social-instagram "> </i> 
               </span>
               &nbsp;<toggle-button v-model="news_data.instant_article" :value="news_data.instant_article" />
-            </span>
+            </span> -->
             <br />
             <!-- time selector  -->
             <div v-if="news_data.instant_article!=0">
@@ -288,27 +316,67 @@
           ></Multiselect> -->
         </div>
         <!-- <div class="col-sm-1"></div>   -->
-        <div class="col-sm-8 form-group" style="outline: 1px solid;margin-left:20px;margin-bottom:1px;">
+        <div class="col-sm-7 form-group" style="outline: 1px solid;margin-left:20px;margin-bottom:1px;">
 
 
-
-          <label>Shoulder
-            <i class="icon-user"></i>
-          </label>
-        
-        <quill-editor  :content="news_data.shoulder"
+          <!-- <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Shoulder &nbsp; <i class="icon-user"></i>
+              </span>
+            </div>
+         <quill-editor
+                        class="formcontrol"
+                        :content="news_data.shoulder"
                         style="border: 1px solid;"
                         v-model="news_data.shoulder"
                         :options="config2"
                         @change="()=>{}">
-          </quill-editor>             
+          </quill-editor>          
+          </div> -->
+          
+          <div class="row">
+            <div class="col-sm-2">
+                <label class="input-group-text" style="height:48px;width:100px;">Shoulder
+                <i class="icon-user"></i>
+              </label>            
+            </div>
+            <div class="col-sm-10">
+            <quill-editor  :content="news_data.shoulder"
+                            style="border: 1px dashed ;margin-top:20px;margin-left:-5px;"
+                            v-model="news_data.shoulder"
+                            :options="config2"
+                            @change="()=>{}">
+              </quill-editor>   
+            </div>
+          </div>
+          
+
+          
 
           <div v-show="errors.hasOwnProperty('shoulder')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`shoulder`]" :key="k">
               <i class="fa fa-check-circle"></i> &nbsp; {{i}}
             </p>
-          </div>          
-          <label>Headline
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+                <label class="input-group-text" style="height:48px;width:100px;">Headline
+                <i class="icon-pin"></i>
+              </label>            
+            </div>
+            <div class="col-sm-10">
+            <quill-editor   :content="news_data.headline"
+                            style="border: 1px dashed ;margin-top:20px;margin-left:-5px;"
+                            v-model="news_data.headline"
+                            :options="config2"
+                            @change="()=>{}">
+              </quill-editor>    
+            </div>
+          </div>
+          
+          <!-- <label>Headline
             <i class="icon-pin"></i>
           </label>
         <quill-editor   :content="news_data.headline"
@@ -316,7 +384,7 @@
                         v-model="news_data.headline"
                         :options="config2"
                         @change="()=>{}">
-          </quill-editor>          
+          </quill-editor>           -->
 
           <div v-show="errors.hasOwnProperty('headline')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`headline`]" :key="k">
@@ -341,6 +409,7 @@
               </span>
             </div>
             <!-- <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1"> -->
+          
           <Multiselect v-model="news_data.reporter" :options="user_list" class="form-control" track-by="id" label="name"></Multiselect>
           </div>
 
@@ -377,17 +446,25 @@
               </i>
             </div>
         </div> -->
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="input-group-text" style="width:80px;height:100px;">Body
+                <i class="icon-book-open"></i>
+              </label>
+            </div>
+            <div class="col-sm-10">
+                <quill-editor :content="news_data.content"
+                              style="margin-top:20px;margin-left:-25px;"
+                              v-model="news_data.content"  
+                              :options="{}"
+                              @change="()=>{}">
+                </quill-editor>
+            </div>
+          </div>
 
-          <label>Body
-            <i class="icon-book-open"></i>
-          </label>
           <!-- <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor> -->
           <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
-          <quill-editor :content="news_data.content"
-                        v-model="news_data.content"  
-                        :options="{}"
-                        @change="()=>{}">
-          </quill-editor>
+
           <div v-show="errors.hasOwnProperty('content')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`content`]" :key="k">
               <i class="fa fa-check-circle"></i> &nbsp;{{i}}
@@ -399,18 +476,24 @@
             <i class="icon-picture"></i>
           </label>
           <div class="row">
-            <div class="col-sm-2">
-              <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="80px" width="100px"/>
+            <div class="col-sm-0">
+              <!-- <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="80px" width="100px"/> -->
               <!-- <p v-else style="margin-top:20px">select image</p> -->
-              <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
+              <!-- <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
                 <p style="position:relative;top:25px;left:10px;">select image</p>
-              </div>           
+              </div>            -->
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">Select
-                      <i class="icon-picture"></i>
+                    <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">
+                      <span v-if="!news_data.featured_img.file">
+
+                          Select
+                          <i class="icon-picture"></i>
+                      </span>
+                      <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="50px" width="50px"/>
+
                     </button>
                   </div>
                   <textarea
@@ -426,6 +509,11 @@
                     data-toggle="tooltip" title="remove"
                     style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
                   </i>
+                  <i class="icon-plus"
+                    @click="add_more_photo"
+                    data-toggle="tooltip" title="add photo"
+                    style="font-size:25px;color:green;margin-top:1px;margin-left:10px;" >  
+                  </i>
                 </div>
             </div>
           </div>
@@ -438,11 +526,11 @@
           <!-- <div class="input-group mb-3"> -->
             <!-- <label>More Photoes </label> -->
             <div v-for="(item,key) in news_data.more_photo_arr" :key="key">
-              <MorePhoto :item="item" :idx="key" style="margin-bottom:10px"></MorePhoto>
+              <MorePhoto :item="item" :idx="key" style="margin-bottom:10px;"></MorePhoto>
               <hr>
             </div>
           <!-- </div>          -->
-          <div class="row">
+          <!-- <div class="row">
 
             <div class="col-sm-12 ">
               <b-button class="pull-right" variant="success" style="margin-bottom:10px;" @click="add_more_photo" >add more
@@ -450,7 +538,7 @@
               </b-button>
 
             </div>
-          </div>
+          </div> -->
 
           <div></div>
           <hr />
@@ -459,12 +547,60 @@
           </label>
           <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
           <hr />
-          <div style="margin-bottom:10px;">
-            <label>Video Position &nbsp;
-              <i class="icon-size-fullscreen "></i>
-            </label>
-            <multiselect  v-model="news_data.video_position" :options="video_position_options"></multiselect>
+<!-- video position -->
+          <div class="input-group mb-3" style="margin-top:20px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Video Position &nbsp; <i class="icon-size-fullscreen"></i>
+              </span>
+            </div>
+            <multiselect  
+            class="form-control"
+            v-model="news_data.video_position" :options="video_position_options"></multiselect>
           </div>
+
+          <div class="input-group mb-3 row" style="margin-top:20px;">
+            <div class="input-group-prepend col-sm-3">
+              <span class="input-group-text" id="basic-addon1" style="height:30px;">
+                Auto Share &nbsp; <i class="icon-link"></i>
+                &nbsp;<toggle-button v-model="news_data.auto_share.flag" :value="news_data.auto_share.flag" />
+
+              </span>
+            </div>
+            <!-- <div class="col-sm-3">
+                &nbsp;<toggle-button v-model="news_data.auto_share.flag" :value="news_data.auto_share.flag" />
+            </div> -->
+
+            <!-- <div class="col-sm-1"></div> -->
+            <div class="col-sm-3" v-if="news_data.auto_share.flag">
+                <datetime
+                v-model="news_data.auto_share.time" title="share time"></datetime>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3" v-if="news_data.auto_share.flag">
+              <textarea  placeholder="  enter share caption..." v-model="news_data.auto_share.caption" cols="30" rows="3"></textarea>
+            </div>
+          </div>
+          <!-- todos -->
+          <!-- <div style="margin-bottom:20px;">
+            <label>Auto Share &nbsp;
+              <i class="icon-link "></i>
+            </label>
+             <div class="row">
+               <div class="col-sm-4">
+                  &nbsp;<toggle-button v-model="news_data.auto_share.flag" :value="news_data.auto_share.flag" />
+               </div>
+               <div class="col-sm-4">
+                 <datetime
+                 class="form-control" 
+                 v-model="news_data.auto_share.time" placeholder="share time"></datetime>
+               </div>
+               <div class="col-sm-4">
+                 <input class="form-control"/>
+               </div>
+             </div> 
+          </div> -->
+
         </div>
 
 
@@ -490,16 +626,17 @@
                 <button type="button" class="btn btn-secondary" @click="reset_news">cancel</button>
                 <button type="button" class="btn btn-secondary">Draft</button>
                 <button type="button" class="btn btn-secondary">Preview</button>
+                <button type="button" class="btn btn-secondary"  @click="submit">Post</button>
                 <!-- <button type="button" class="btn btn-secondary">4</button> -->
 
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Action
+                    
                   </button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <a class="dropdown-item" @click="submit" >Post</a>
-                    <a class="dropdown-item" @click="submit">Schedule Post</a>
-                    <a class="dropdown-item" @click="submit">Backdate Post</a>
+                    <a class="dropdown-item" @click="schedule_post" data-toggle="modal" data-target="#schedule_back_post">Schedule Post</a>
+                    <a class="dropdown-item"  data-toggle="modal" data-target="#schedule_back_post" @click="back_post">Backdate Post</a>
                     <a class="dropdown-item" @click="submit">Draft Post</a>
                   </div>
                 </div>
@@ -522,6 +659,7 @@
     <AddTagModal ref="add_tag_modal"></AddTagModal>
     <AddNcategoryModal ref="add_category_modal"></AddNcategoryModal>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
+    <ScheduleBackPost ref="schedule_back_post"></ScheduleBackPost>
     <Loader v-if="loading"></Loader>
   </div>
 </template>
@@ -532,7 +670,7 @@ import AddTagModal from "../../settings/tag/addTagModal"
 import { ToggleButton } from "vue-js-toggle-button";
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
-import datetime from "vuejs-datetimepicker";
+import datetime from "vuejs-datetimepicker"
 import ContentManager from '../../content/index'
 import MorePhoto from "./MorePhoto"
 import FeatVideo from "./FeatVideo"
@@ -543,6 +681,7 @@ import Loader from "@/views/common/Loader";
 import { quillEditor } from 'vue-quill-editor'
 import AddNcategoryModal from "../../settings/category/AddNcategoryModal"
 import AddTopicModal from "../../settings/topic/AddTopicModal"
+import ScheduleBackPost from "./schedule_back_post"
 //
 // ClassicEditor
 //     .create( document.querySelector( '#editor' ), {
@@ -553,6 +692,7 @@ import AddTopicModal from "../../settings/topic/AddTopicModal"
 //     .catch();
     
 Vue.component("ToggleButton", ToggleButton);
+
 export default {
   components: { 
     Multiselect,
@@ -568,7 +708,7 @@ export default {
     AddTagModal ,
     AddNcategoryModal,
     AddTopicModal,
-
+    ScheduleBackPost,
   },
   data() {
     return {
@@ -816,8 +956,17 @@ export default {
 
   },
   methods: {
+    schedule_post(){
+      // alert(1)
+      this.$refs.schedule_back_post.type = `Schedule`
+    },
+    back_post(){
+      this.$refs.schedule_back_post.type = `Backdate`
+    },
     add_topic(){
+      this.$store.dispatch(`EMPTY_CURRENT_TOPIC`)
       this.$refs.add_topic_modal.openModal()
+      
     }, 
     add_category(){
       this.$refs.add_category_modal.openModal()
@@ -838,6 +987,7 @@ export default {
     setDates(){
       this.news_data.publish_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
       this.news_data.share_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      this.news_data.auto_share.time = new Date().toJSON().slice(0,10).replace(/-/g,'-')
       // this.news_data.share_at = new Date().toISOString() 
     },
     handel_update: function (){

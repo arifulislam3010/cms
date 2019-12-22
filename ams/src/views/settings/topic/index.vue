@@ -6,7 +6,7 @@
             <button v-if="auth_permission.topic_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Topic</button>
         </div>
     </div>
-
+    {{content}}
     <br/>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
@@ -43,6 +43,7 @@ import {
 export default {
   data() {
     return {
+      content:{},
       loading: false,
       // showSection: false,
       showSection(index) {
@@ -183,6 +184,7 @@ export default {
     },
 
     openModal() {
+      this.$store.dispatch(`EMPTY_CURRENT_TOPIC`)
       this.$refs.add_topic_modal.openModal();
     },
  

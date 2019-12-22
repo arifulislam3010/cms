@@ -25,6 +25,11 @@ class PostDetail extends Resource
     {
         $temp = null ;
         
+        $auto_share['flag'] = $this->auto_share_flag    ;
+        $auto_share['time'] = $this->auto_share_date    ;
+        $auto_share['caption'] = $this->auto_share_caption ;   
+
+
         return [
             'id' => $this->id,
             'shoulder' => $this->shoulder,
@@ -36,7 +41,10 @@ class PostDetail extends Resource
             'featured_img' => new ContentResource (Content::where('id',$this->featured_image_id)->first()), 
             'featured_vid' => new ContentResource(Content::where('id',$this->featured_video_id)->first()), 
             'more_photo_arr' => ContentResource::collection($this->contents),
-
+            'video_position' => $this->video_position ,
+            'auto_share' => $auto_share ,
+            'schedule_time' => $this->schedule_post_date ,
+            'backdate_time' => $this->backdate_post_date ,
             'share_at' => $this->share_at,
             'publish_at' => $this->published_at,
             'status' => $this->status,

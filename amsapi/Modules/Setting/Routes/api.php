@@ -49,6 +49,7 @@ Route::prefix('api/')->group(function() {
 	Route::prefix('topic')->middleware(['auth:api'])->group(function() {
 	
 		Route::get('/list','TopicController@index');
+		Route::get('/{id}','TopicController@detail');
 		Route::post('/','TopicController@store');
 		Route::put('/{id}','TopicController@store');
 		Route::delete('/{id}','TopicController@destroy');

@@ -127,7 +127,17 @@ class PostController extends Controller
         // fetred photo
         $post->featured_image_id = $request->featured_image_id ;
         $post->featured_video_id = $request->featured_video_id ;
-
+        // video position 
+        $post->video_position = $request->video_position ;
+        // auto share 
+        $post->auto_share_flag = $request->auto_share['flag'] ;    
+        $post->auto_share_caption = $request->auto_share['caption'] ;    
+        $post->auto_share_date = $request->auto_share['time'] ;    
+        
+        // schedule date 
+        $post->schedule_post_date  = $request->schedule_time;
+        $post->backdate_post_date  = $request->backdate_time;
+        // backdate date
         $post->created_by = $auth_user_id ;
         $post->save();
         // tag
@@ -218,7 +228,16 @@ class PostController extends Controller
         // fetred photo
         $post->featured_image_id = $request->featured_image_id ;
         $post->featured_video_id = $request->featured_video_id ;
-
+        $post->video_position = $request->video_position ;
+        // auto share 
+        $post->auto_share_flag = $request->auto_share['flag'] ;    
+        $post->auto_share_caption = $request->auto_share['caption'] ;    
+        $post->auto_share_date = $request->auto_share['time'] ;    
+        
+        // schedule date 
+        $post->schedule_post_date  = $request->schedule_time;
+        $post->backdate_post_date  = $request->backdate_time;
+        //
         $post->updated_by = $auth_user_id ;
 
         $post->save();
