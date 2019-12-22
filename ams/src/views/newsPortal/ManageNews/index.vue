@@ -75,6 +75,7 @@ import SearchBar from "./SearchBar"
 export default {
   data(){
         return {
+            temp :`` ,
             content:{},
             loading:false,
             // news_list:[],

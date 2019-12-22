@@ -1,7 +1,10 @@
 <template>
-    <div class="card">
-        <input class="form-control" placeholder="search hear"/>
+    <div >
+        <!-- <input class="form-control" placeholder="search hear"/> -->
         <!-- {{category_parents}} -->
+        <!-- <label for="">
+            &nbsp;Search Hear
+        </label> -->
         <div class="row">
             <div class="col-sm-5">
                 <Treeselect
@@ -21,6 +24,7 @@
                 <!-- </span> -->
                </button>
             </div>
+            {{demo}}
         </div>
 
         <!-- <Multiselect v-model="temp" :options="category_parents"></Multiselect> -->
@@ -31,6 +35,7 @@ import Treeselect from '@riophae/vue-treeselect'
 import Multiselect from "vue-multiselect";
 
 import {mapGetters} from "vuex"
+import axios from "axios";
 export default {
     name:`SearchBar`,
     components:{
@@ -38,6 +43,7 @@ export default {
     },
     data(){
         return {
+            demo :`` ,
             temp :[],
         }
     },
@@ -47,7 +53,22 @@ export default {
     computed:{...mapGetters([`category_parents`])},
     methods:{
         search(){
-            alert(this.temp)
+            // if temp list is empty then get all 
+            if(this.temp.length == 0){
+                this.$store.dispatch(`FETCH_NEWS`)
+                return 
+            }
+            // alert(this.temp)
+            let payload = {
+                post_cat_ids : this.temp 
+            }
+            this.$store.dispatch(`SEARCH_POST_BY_CATEGORY`,payload).then(response=>{
+                // alert(`result fetched`)
+            })
+            // axios.post(`api/post/search`,payload).then(response=>{
+            //     this.demo = response.data 
+            //     // alert(this.demo)
+            // })    
         },
         getCategories(){
             this.loading = true

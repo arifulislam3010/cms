@@ -267,7 +267,16 @@ class PostController extends Controller
         $posts = Post::all();
         return ReporterPost::collection($posts);
     }
-
+    
+    public function search(Request $request){
+        $list  = PostCategory::whereIn('category_id',$request->post_cat_ids)->select('post_id')->get() ;   
+        $postIds = [] ;
+        foreach($list as $v){
+            array_push($postIds,$v->post_id) ;
+        }
+        $posts = Post::whereIn('id',$postIds)->get() ;
+        return PostResource::collection($posts);
+    }
 
     public function destroy($id)
     {

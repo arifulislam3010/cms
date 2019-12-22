@@ -190,9 +190,25 @@ const actions = {
             })
         })
     },
+    [`SEARCH_POST_BY_CATEGORY`]({commit},payload) {
+        return new Promise((resolve,reject)=>{
+            axios.post(`api/post/search`,payload).then(response=>{
+                // this.demo = response.data 
+                // alert(this.demo)
+                resolve(response)
+                commit(`SET_POST_BY_CATEGORY`,response.data)
+            }).catch(error=>{
+                reject(error)
+            }) 
+        })        
+    }
+
 }
 
 const mutations = {
+    [`SET_POST_BY_CATEGORY`](state,payload){
+        state.news = payload
+    },
     ['SET_UPDATE'](state){
         state.news_data.is_update = true 
     },

@@ -58,7 +58,8 @@ const actions = {
                 reject(error)
             })
         })
-    }
+    },
+
 }
 
 const mutations = {
