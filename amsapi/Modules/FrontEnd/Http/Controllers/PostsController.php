@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\FrontEnd\Entities\Category;
+use Modules\FrontEnd\Entities\Area;
 use Modules\FrontEnd\Entities\Post;
 use Modules\FrontEnd\Entities\PostSection;
 
 
 use Modules\FrontEnd\Entities\PostCategory;
 use Modules\FrontEnd\Transformers\Post as PostResource;
+use Modules\FrontEnd\Transformers\Area as AreaResource;
 use Modules\FrontEnd\Transformers\Category as CategoryResource;
 use Modules\FrontEnd\Transformers\PostSection as PostSectionResource;
 
@@ -25,6 +27,11 @@ class PostsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
+    public function area($title){
+        $area = Area::where('title',$title)->first();
+        $garea = Area::where('parent_id',$area->id)->get();
+        return AreaResource::collection($garea);
+    }
     public function index(Request $request)
     {
         //return $request->all();
@@ -37,7 +44,14 @@ class PostsController extends Controller
         $search     = ($request->has('search'))?$request['search']:null;
         $popular     = ($request->has('popular'))?$request['popular']:null;
         $latest     = ($request->has('latest'))?$request['latest']:null;
-        
+        if($area!=null){
+            $garea = Area::where('title',$area)->first();
+            if($garea){
+                $area = $garea->id;
+            }else{
+                $area = null;
+            }
+        }
         if($popular==1){
              $post = Post::select('posts.*')->orderBy('posts.view', 'DESC')->paginate($limit);
             return PostResource::collection($post);

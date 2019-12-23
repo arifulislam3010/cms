@@ -1,6 +1,6 @@
-# frontent
+# jagonews
 
-> banglapress project
+> My pioneering Nuxt.js project
 
 ## Build Setup
 

@@ -29,6 +29,7 @@ if (!global.fetch) { global.fetch = fetch }
 let _lastPaths = []
 let app
 let router
+let store
 
 // Try to rehydrate SSR data from window
 const NUXT = window.__NUXT__ || {}
@@ -38,7 +39,7 @@ Object.assign(Vue.config, {"silent":false,"performance":true})
 const logs = NUXT.logs || []
   if (logs.length > 0) {
   const ssrLogSyle = 'background: #2E495E;border-radius: 0.5em;color: white;font-weight: bold;padding: 2px 0.5em;'
-  console.group && console.group  ("%cNuxt SSR", ssrLogSyle)
+  console.group && console.group ("%cNuxt SSR", ssrLogSyle)
   logs.forEach(logObj => (console[logObj.type] || console.log)(...logObj.args))
   delete NUXT.logs
   console.groupEnd && console.groupEnd()
@@ -675,6 +676,7 @@ async function mountApp (__app) {
   // Set global variables
   app = __app.app
   router = __app.router
+  store = __app.store
 
   // Create Vue instance
   const _app = new Vue(app)

@@ -1,49 +1,78 @@
 <template>
-  <div class="container" style="margin-top:10px">
-      <div class="col-md-12">
-          <div class="row">
-              <div class="col-md-8">
-                  <div v-if="loading">
-                      <p>Loading</p>
-                  </div>
-                  <div v-else class="row mb-30">
-                    <div v-for="(item,key) in posts.data" v-bind:key="key" class="col-md-4">
-                        <nuxt-link :to="'/article/'+item.id+'/'+item.shoulder">
-                            <card :item="item"></card>
-                        </nuxt-link>
-                    </div>
+<main id="main-content">
+  <section class="leadBox paddingTop20">
+      <div class="container">
+      <div class="row">
+          <div class="col-sm-8 main-content">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="row">
+                          <div class="col-sm-8">
+                              <div v-if="loading">
+                                  <SmallLoader :counts='1'></SmallLoader>
+                              </div>
+                              <div v-else>
+                                  <div v-for="(item,mkey) in postsOne" v-bind:key="mkey">
+                                      <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                          <SingleBlock :blockType='mainLead' :item='item'></SingleBlock>
+                                      </nuxt-link>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-sm-4">
+                              <div v-if="loading">
+                                  <SmallLoader :counts='1'></SmallLoader>
+                                  <SmallLoader :counts='1'></SmallLoader>
+                              </div>
+                              <div v-else>
+                              <div v-for="(item,skey) in postsTwo" v-bind:key="skey">
+                                  <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                      <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
+                                  </nuxt-link>
+                              </div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
-              <div class="col-md-4">
-                   <Featured></Featured>
-                   <PopularLatest></PopularLatest>
+              <div class="row">
+                      <div v-if="loading">
+                          <SmallLoader :counts='1'></SmallLoader>
+                          <SmallLoader :counts='1'></SmallLoader>
+                      </div>
+                      <div v-else>
+                      <div v-for="(item,skey) in posts" v-bind:key="skey" class="col-sm-4">
+                          <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                              <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
+                          </nuxt-link>
+                      </div>
+                      </div>
               </div>
           </div>
+          <Section1Aside></Section1Aside>
       </div>
-  </div>
+    </div>
+  </section>
+</main>
 </template>
-
 <script>
 import axios from '@/plugins/axios'
-import Logo from "@/components/Logo.vue";
-import Hero from "@/components/Hero.vue";
-import Carousel1 from "@/components/carousels/Carousel1";
-import card from "@/components/share/post/Card";
-import Featured from "@/components/share/post/featured";
-import PopularLatest from "@/components/share/post/PopularLatest";
+import SmallLoaderVerticle from "~/components/loader/SmallLoaderVerticle";
+import SingleBlock from '~/components/post/SingleBlock.vue'
+import Section1Aside from '@/components/home/section/Section1Aside.vue'
+import SmallLoader from "@/components/loader/SmallLoader";
 export default {
-  name:"CategoryPage",
   components: {
-    Logo,
-    Hero,
-    Featured,
-    Carousel1,
-    card,
-    PopularLatest,
+    SingleBlock,
+    Section1Aside,
+    SmallLoader
   },
+  name:"CategoryPage",
   data() {
     return {
       title: "Home",
+      postsOne:[],
+      postsTwo:[],
       posts:[],
       loading:true,
     };
@@ -70,7 +99,9 @@ export default {
      getData(){
         let search = {category:this.$route.params.id,limit:4};
         axios.post('/api/frontend/posts',search).then((response) => {      
-            this.posts = response.data;
+            this.postsOne = response.data.data.slice(0, 1);
+            this.postsTwo = response.data.data.slice(1, 3);
+            this.posts = response.data.data.slice(3, 9);
             this.loading = false;
 
         }).catch(function (error) {    
@@ -80,13 +111,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.single-blog-post.featured-post .post-data .post-title h6 {
-  font-size: 15px;
-}
-
-.pt-20 {
-  padding-top: 20px;
-}
-</style>

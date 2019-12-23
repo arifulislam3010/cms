@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _7c51b65c = () => interopDefault(import('..\\pages\\about.vue' /* webpackChunkName: "pages_about" */))
-const _5978ec80 = () => interopDefault(import('..\\pages\\all-news.vue' /* webpackChunkName: "pages_all-news" */))
-const _1612203e = () => interopDefault(import('..\\pages\\articles.vue' /* webpackChunkName: "pages_articles" */))
-const _6247af44 = () => interopDefault(import('..\\pages\\article\\_id\\_title.vue' /* webpackChunkName: "pages_article__id__title" */))
-const _6a0dfda4 = () => interopDefault(import('..\\pages\\category\\_id\\_title.vue' /* webpackChunkName: "pages_category__id__title" */))
-const _c7ecddbe = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
+const _39405ba4 = () => interopDefault(import('..\\pages\\posts\\index.vue' /* webpackChunkName: "pages_posts_index" */))
+const _5ccb92f1 = () => interopDefault(import('..\\pages\\area\\_id\\_title.vue' /* webpackChunkName: "pages_area__id__title" */))
+const _121235c0 = () => interopDefault(import('..\\pages\\category\\_id\\_title.vue' /* webpackChunkName: "pages_category__id__title" */))
+const _3901933e = () => interopDefault(import('..\\pages\\post\\_id\\_title.vue' /* webpackChunkName: "pages_post__id__title" */))
+const _11a649be = () => interopDefault(import('..\\pages\\tag\\_id\\_title.vue' /* webpackChunkName: "pages_tag__id__title" */))
+const _6b48f09d = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
 
@@ -20,28 +20,28 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/about",
-    component: _7c51b65c,
-    name: "about"
+    path: "/posts",
+    component: _39405ba4,
+    name: "posts"
   }, {
-    path: "/all-news",
-    component: _5978ec80,
-    name: "all-news"
-  }, {
-    path: "/articles",
-    component: _1612203e,
-    name: "articles"
-  }, {
-    path: "/article/:id?/:title?",
-    component: _6247af44,
-    name: "article-id-title"
+    path: "/area/:id?/:title?",
+    component: _5ccb92f1,
+    name: "area-id-title"
   }, {
     path: "/category/:id?/:title?",
-    component: _6a0dfda4,
+    component: _121235c0,
     name: "category-id-title"
   }, {
+    path: "/post/:id?/:title?",
+    component: _3901933e,
+    name: "post-id-title"
+  }, {
+    path: "/tag/:id?/:title?",
+    component: _11a649be,
+    name: "tag-id-title"
+  }, {
     path: "/",
-    component: _c7ecddbe,
+    component: _6b48f09d,
     name: "index"
   }],
 
