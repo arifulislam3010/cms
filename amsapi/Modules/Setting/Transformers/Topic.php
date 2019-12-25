@@ -18,6 +18,7 @@ class Topic extends Resource
         return [
             'id'=> $this->id,
             'label'=> $this->title,
+            'color'=> $this->color,
             'status'=> $this->status,
             'parent_id'=> $this->parent_id,
             'children'   => TopicResource::collection($this->child),

@@ -28,6 +28,7 @@ class TopicController extends Controller
 
         $topic = $request->isMethod('put') ? Topic::findOrFail($id) : new Topic;
         $topic -> title = $request->input('title');
+        $topic -> color = $request->input('color');
         $topic -> parent_id = $request->input('parent_id');
         $topic->deadline = $request->deadline ;
         $topic->status   = $request->status ;

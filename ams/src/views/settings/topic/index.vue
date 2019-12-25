@@ -4,13 +4,17 @@
     <div class="row">
         <div class="col-sm-3">
             <button v-if="auth_permission.topic_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Topic</button>
+            <!-- <button @click="contentManager">test</button> -->
         </div>
     </div>
-    {{content}}
+    
+    <!-- {{content}} -->
     <br/>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
     <EditTopicModal ref="edit_topic_modal"></EditTopicModal>
     <ViewTopicModal ref="view_topic_modal"></ViewTopicModal>
+    <ContentManager ref="add_topic_content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
+
     <Loader v-if="loading"></Loader>
 
     <div class="row">
@@ -28,6 +32,7 @@ import RecCom from "./RecCom"
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
 import Loader from "@/views/common/Loader";
+import ContentManager from "../../content/index";
 
 import AddTopicModal from "./AddTopicModal";
 import EditTopicModal from "./EditTopicModal";
@@ -41,6 +46,7 @@ import {
   ALL_USER_ROLE2
 } from "@/store/action.type";
 export default {
+  name:'TopicIndex',
   data() {
     return {
       content:{},
@@ -58,6 +64,11 @@ export default {
     };
   },
   methods: {
+    contentManager(){
+      // console.log(this)
+      this.$refs.add_topic_content_manager_modal.openModal();
+      // this.newTopic.topic_image=this.content.file
+    },
     loadPermission(){
         this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')
     } ,    
@@ -203,7 +214,8 @@ export default {
     pagination,
     AddTopicModal,
     Loader,
-    RecCom
+    RecCom,
+    ContentManager,
   }
 };
 </script>

@@ -1,9 +1,10 @@
 <template>
+<div>
   <b-modal title="Topic" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
     <form @submit.prevent="addTopic" class="container">
       <b-row>
-        {{this.current_topic}}
-        {{this.content}}
+        <!-- {{this.current_topic}} -->
+        <!-- {{this.content}} -->
         <b-col sm="12">
          
             <b-row>
@@ -15,12 +16,23 @@
                       <label for="Title">Topic Title*</label>
                     </div>
 
-                    <div class="col-md-7">
-                      <b-form-input type="textarea" name="Title" style="height:90px" v-model="current_topic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
+                    <div class="col-md-6">
+                      <b-form-input type="textarea" name="Title" :style="`color:${current_topic.color}`" v-model="current_topic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
+                    </div>
+                    <div class="col-sm-1">
+                      <swatches v-model="current_topic.color" />
                     </div>
                   </div>
                   <br/>
-
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="">select parent </label>
+                    </div>
+                    <div class="col-sm-7">
+                      <Treeselect v-model="current_topic.parent_id" :options="topic_parents"></Treeselect>
+                    </div>
+                  </div>
+                  <br>
                   <div class="row">
                     <div class="col-md-3">
                       <label for="Title">Deadline</label>
@@ -37,11 +49,20 @@
                     </div>
                     <div class="col-md-3">
                       
-                       <b-btn class="btn-success" @click="contentManager" >Select Image</b-btn>
+                       <!-- <b-btn class="btn-success" @click="contentManager" >Select Image</b-btn> -->
+                        <button @click="contentManager" class="btn btn-outline-primary" type="button" >
+                          <span v-if="!content.file">
+
+                              Select
+                              <i class="icon-picture"></i>
+                          </span>
+                          <img v-if="content.file" :src="content.file" height="50px" width="50px"/>
+
+                        </button>                       
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                       <img :src="content.file" style="height:120px;width:150px"/>
-                    </div>
+                    </div> -->
 
                   </div>
 
@@ -97,9 +118,10 @@
           >Close</button>
         </div>
       </div>
-       <ContentManager ref="add_topic_content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
     </form>
   </b-modal>
+  <ContentManager ref="add_topic_content_manager_modal" :content="content" :selected_content_type="'image'"></ContentManager>
+  </div>
 </template>
 
 <script>
@@ -114,12 +136,16 @@ import { mapState, mapGetters } from "vuex";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import datetime from "vuejs-datetimepicker";
+import Swatches from 'vue-swatches'
 
+// Import the styles too, globally
+import "vue-swatches/dist/vue-swatches.min.css"
 export default {
-  components: { Treeselect ,datetime,ContentManager},
+  components: { Treeselect ,datetime,ContentManager,Swatches },
   data() {
     return {
       errors:{},
+      topic_color: 'black' ,
       selected_parent: "",
       content:{},
       largeModal: false,
@@ -156,6 +182,11 @@ export default {
     this.setDates()
   },
   methods: {
+    contentManager(){
+      // console.log(this)
+      this.$refs.add_topic_content_manager_modal.openModal();
+      // this.newTopic.topic_image=this.content.file
+    },    
     setStatus(){
       if(this.current_topic.status == 1){
         this.temp_status = `Active`
@@ -186,10 +217,8 @@ export default {
       this.newTopic.deadline = new Date().toISOString() 
       
     },
-    contentManager(){
-      this.$refs.add_topic_content_manager_modal.openModal();
-      // this.newTopic.topic_image=this.content.file
-    },
+
+  
     openModal() {
       this.errors = {}
       this.largeModal = true;

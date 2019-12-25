@@ -60,6 +60,7 @@
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.2",
+    "vue-swatches": "^1.0.4",
     "vue2-editor": "^2.10.0",
     "vuejs-datetimepicker": "^1.1.12",
     "vuejs-dialog": "^1.4.1",

@@ -3,7 +3,9 @@ const state = {
     topics:[],
     topic:{
         id :`` ,
+        parent_id: `` ,
         title :``,
+        color : ``,
         deadline : ``,
         image : ``,
         status: 1,
@@ -86,7 +88,9 @@ const mutations = {
     [`SET_EMPTY_CURRENT_TOPIC`](state){
         state.topic = {
             id :`` ,
+            parent_id : ``,
             title :``,
+            color :``,
             deadline : ``,
             image : ``,
             status: 1,

@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-card v-if="auth_permission.news_create" style="margin-left:-15px;margin-top:-12px;">
+      <div class="container">
       <div class="row">
 
         <div class="col-sm-4" style="outline: 1px solid;">
@@ -43,7 +44,7 @@
            <div class="input-group mb-3" style="margin-top:20px;">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                Division &nbsp; <i class="icon-location-pin"></i>
+                Area &nbsp; <i class="icon-location-pin"></i>
               </span>
             </div>
            <multiselect
@@ -71,7 +72,7 @@
           <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                District &nbsp; <i class="icon-location-pin"></i>
+                Division &nbsp; <i class="icon-location-pin"></i>
               </span>
             </div>
           <multiselect
@@ -88,7 +89,7 @@
           <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length && area_2.children.length">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                Upazila &nbsp; 
+                District &nbsp; 
               </span>
             </div>
           <multiselect
@@ -104,7 +105,7 @@
            <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length && area_2.children.length && area_3.children.length">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                Union &nbsp; 
+                Upazila &nbsp; 
               </span>
             </div>
           <multiselect
@@ -112,6 +113,21 @@
             :options="area_3.children"
             :flat="true"
             v-model="area_4"
+            label="label"
+           ></multiselect>
+          </div>          
+            <!-- union -->
+           <div class="input-group mb-3" style="margin-top:20px;" v-if="area_1.children.length && area_2.children.length && area_3.children.length && area_4.children.length">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Union &nbsp; 
+              </span>
+            </div>
+          <multiselect
+            class="form-control"
+            :options="area_4.children"
+            :flat="true"
+            v-model="area_5"
             label="label"
            ></multiselect>
           </div>          
@@ -607,7 +623,10 @@
 
 
       </div>
+      </div>
+
       <hr>
+      <div class="container">
       <div class="row">
          <div class="col-sm-7">
            <!-- <b-form-checkbox-group> -->
@@ -649,6 +668,7 @@
             </button>
             <b-button v-else variant="success" style="margin-left:10px" @click="submit">{{submit_btn_txt}}</b-button> -->
          </div>
+      </div>
       </div>
     </b-card>
     <div v-else class="card"> 
@@ -721,15 +741,19 @@ export default {
         children:[]
       },
       area_2 : {
+        label:``,
         children:[]
       },
       area_3 : {
+        label:``,
         children:[]
       },
       area_4 : {
+        label:``,
         children:[]
       },
       area_5 : {
+        label:``,
         children:[]
       },
 

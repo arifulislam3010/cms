@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card " v-bind:style="{'color': node.status?  `green` : `red`  }" style="height:50px;width:95%;margin-bottom:10px">
+    <div class="card " v-bind:style="{'color': node.color  }" style="height:50px;width:95%;margin-bottom:10px">
             <div class="row">
                 <div class="col-md-10">
                     {{ node.label}}
