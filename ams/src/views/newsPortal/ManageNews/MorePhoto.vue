@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row">
-        <div class="col-sm-0">
+        <div class="col-sm-2">
             <!-- <img v-if="item.file" :src="item.file" height="80px" width="100px" />
             <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
              <p style="position:relative;top:25px;left:10px;">select image</p>
            </div> -->
         </div>
-        <div class="col-sm-11">
+        <div class="col-sm-10">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">
@@ -31,7 +31,7 @@
               <i class="icon-trash"
                 @click="del_photo"
                 data-toggle="tooltip" title="remove"
-                style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+                style="font-size:25px;color:red;margin-top:1px;margin-left:40px;position:relative;left:-30px;" >  
               </i>
             </div>
         </div>

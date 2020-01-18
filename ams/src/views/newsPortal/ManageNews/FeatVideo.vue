@@ -24,7 +24,7 @@
           <textarea
             type="text"
             class="form-control"
-            placeholder
+            placeholder="enter caption"
             aria-label
             aria-describedby="basic-addon1"
             v-model="item.title"
@@ -32,7 +32,7 @@
           <i class="icon-trash"
             @click="del_photo"
             data-toggle="tooltip" title="remove"
-            style="font-size:25px;color:red;margin-top:1px;margin-left:10px;" >  
+            style="font-size:25px;color:red;margin-top:1px;margin-left:40px;" >  
           </i>     
         </div>
       </div>

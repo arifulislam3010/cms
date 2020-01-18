@@ -70,14 +70,15 @@ export default {
           url: '/news/scheduled-news',
           icon: 'fa fa-tag',
           children: [
+            // todo
             {
               name: 'Create Topic',
-              url: '/news/add',
+              url: '/settings/topic',
               icon: 'fa fa-plus'
             },
             {
               name: 'Edit Topic',
-              url: '/news/add',
+              url: '/settings/topic',
               icon: 'fa fa-edit'
             },
             {
@@ -151,21 +152,21 @@ export default {
           url: '/settings/scroll',
           icon: 'fa fa-tag'
         },
-        {
-          name: 'Topic',
-          url: '/settings/topic',
-          icon: 'fa fa-life-bouy'
-        },
+        // {
+        //   name: 'Topic',
+        //   url: '/settings/topic',
+        //   icon: 'fa fa-life-bouy'
+        // },
         {
           name: 'Area',
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },        
-        {
-          name: 'Author',
-          url: '/settings/area',
-          icon: 'fa fa-life-bouy'
-        },        
+        // {
+        //   name: 'Author',
+        //   url: '/settings/area',
+        //   icon: 'fa fa-life-bouy'
+        // },        
         {
           name: 'Section',
           url: '/settings/area',
@@ -183,28 +184,76 @@ export default {
       url: '/user-role',
       icon: 'fa fa-user-secret',
       children: [
+        // {
+        //   name: 'User Role',
+        //   url: '/user-role',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'User List',
+        //   url: '/user-list',
+        //   icon: 'icon-star'
+        // },\
         {
-          name: 'User Role',
+          name : `Users` ,
+          url: '/user-authors',
+          children : [
+            {
+              name: 'Author',
+              url: '/user-authors',
+              icon: 'icon-star'
+            },
+            {
+              name: 'Reporter',
+              url: '/user-reporters',
+              icon: 'icon-star'
+            },
+
+            // todo 
+          ],
+        },
+        {
+          name: 'Role & Permission',
           url: '/user-role',
-          icon: 'icon-star'
+          // icon: 'icon-star'
+        },        
+
+      ]
+    },
+    {
+      name : `Election Result` ,
+      icon : `fa fa-group` ,
+      children :[
+        {
+          name : `Create Result` 
         },
         {
-          name: 'User List',
-          url: '/user-list',
-          icon: 'icon-star'
-        },
-      ]
+          name : `List Result`
+        }
+      ],
     },
     {
       name: 'Manage Poll',
       url: '/poll/list',
       icon: 'fa fa-group',
       children: [
+        // {
+        //   name: 'PollList',
+        //   url: '/poll/list',
+        //   icon: 'fa fa-life-bouy',
+        // },
         {
-          name: 'PollList',
+          name: 'Create Poll',
+          url: '/poll/list',
+          icon: 'fa fa-life-bouy',
+        },       
+        {
+          name: 'Poll List',
           url: '/poll/list',
           icon: 'fa fa-life-bouy',
         },
+
+
         // {
         //   name: 'AddPoll',
         //   url: '/poll/add',
@@ -242,10 +291,18 @@ export default {
       name: 'Advertisements',
       url: '/Advertisements',
       icon: 'fa fa-flag',
+      children:[
+        {
+          name : `Create Add.`,
+        },
+        {
+          name : `Add List `,
+        }
+      ],
     },
     
     {
-      name: 'Geo Graphical',
+      name: 'Geo Management',
       url: '/GGM',
       icon: 'fa fa-globe',
     },
@@ -275,67 +332,101 @@ export default {
     },
     
     {
-      name: 'Theme',
+      name: 'Theme Management',
       url: '/tm',
       icon: 'fa fa-book ',
       children: [
         {
-          name: 'Theme',
-          url: 't',
-          icon: 'icon-star'
+          name : `Theme` ,
         },
         {
-          name: 'Pages',
-          url: '/pa',
-          icon: 'icon-star'
+          name : `Customize` ,
         },
         {
-          name: 'Customize',
-          url: '/cu',
-          icon: 'icon-star'
+          name : `Widgets` ,
         },
         {
-          name: 'Widgets',
-          url: '/wi',
-          icon: 'icon-star'
+          name : `Menus` ,
         },
         {
-          name: 'Header',
-          url: '/hea',
-          icon: 'icon-star'
+          name : `Header` ,
         },
         {
-          name: 'Footer',
-          url: '/foo',
-          icon: 'icon-star'
+          name : `Bacground` ,
         },
         {
-          name: 'Menus',
-          url: '/me',
-          icon: 'icon-star'
-        },
-      ]
-    },
-    {
-      // todo 
-      // site setting 
-      name: 'Site',
-      url: 'site/list',
-      icon: 'fa fa-desktop ',
-      children: [
-        {
-          name: 'List',
-          url: '/site/list',
-          icon: 'fa fa-list-alt',
+          name : `Premium Themes` ,
         },
         {
-          name: 'Add',
-          url: '/site/add/',
-          icon: 'fa fa-plus',
+          name : `About NewsCard` ,
         },
+        {
+          name : `Install Plugins`
+        },     
+        {
+          name : `Theme Editor`
+        },     
+        // {
+        //   name: 'Apperance',
+        //   url: 't',
+        //   icon: 'icon-star' ,
+        //   children :[
 
+  
+        //   ],
+        // },
+        // {
+        //   name: 'Pages',
+        //   url: '/pa',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'Customize',
+        //   url: '/cu',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'Widgets',
+        //   url: '/wi',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'Header',
+        //   url: '/hea',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'Footer',
+        //   url: '/foo',
+        //   icon: 'icon-star'
+        // },
+        // {
+        //   name: 'Menus',
+        //   url: '/me',
+        //   icon: 'icon-star'
+        // },
       ]
     },
+    // {
+    //   // todo 
+    //   // site setting 
+    //   name: 'Site',
+    //   url: 'site/list',
+    //   icon: 'fa fa-desktop ',
+    //   children: [
+    //     {
+    //       name: 'List',
+    //       url: '/site/list',
+    //       icon: 'fa fa-list-alt',
+    //     },
+    //     {
+    //       name: 'Add',
+    //       url: '/site/add/',
+    //       icon: 'fa fa-plus',
+    //     },
+
+    //   ]
+    // },
 
   {
     name : 'Plugin',
@@ -357,13 +448,68 @@ export default {
   },
   {
     name : 'Tools',
-    icon: 'fa fa-gavel'
+    icon: 'fa fa-gavel',
+    children : [
+      {
+        name : `Available Tolls`,
+      },
+      {
+        name : `Import`,
+      },
+      {
+        name : `Export`,
+      },
+      {
+        name : `Site Health`,
+      },
+      {
+        name : `Export Personal Data`,
+      },
+      {
+        name : `Erase Personal Data`,
+      },
+    ]
   },
   {
     name: 'Settings',
     url: '/settings/category',
     icon: 'fa fa-gear',
     children: [
+      {
+        name: 'Generel',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'Writing',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'Reading',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'Discussion',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'Media',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'PramaLinks',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
+      {
+        name: 'Privacy',
+        url: '/settings/category',
+        icon: 'fa fa-list-alt'
+      },
       {
         name: 'Category',
         url: '/settings/category',
@@ -397,6 +543,23 @@ export default {
   {
     name : 'Insight',
     icon: 'fa fa-eye',
+    children : [
+      {
+        name : `Reports`,
+      },
+      {
+        name : `Settings`,
+      },
+      {
+        name : `Tools`,
+      },
+      {
+        name : `Addons`,
+      },
+      {
+        name : `About Us`,
+      },
+    ]
   },
   {
     name : 'Optimization',

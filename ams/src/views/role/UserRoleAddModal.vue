@@ -1,5 +1,5 @@
 <template>
-    <b-modal title="Role" no-close-on-backdrop hide-footer size="xl"  v-model="largeModal" @ok="largeModal = false">
+    <b-modal title="Role & Permission" no-close-on-backdrop hide-footer size="xl"  v-model="largeModal" @ok="largeModal = false">
         <!-- <form @submit.prevent="addRole" > -->
             <!-- {{get_permission}} -->
             <div>

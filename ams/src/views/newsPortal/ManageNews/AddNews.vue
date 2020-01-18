@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-card v-if="auth_permission.news_create" style="margin-left:-15px;margin-top:-12px;">
-      <div class="container">
+    <b-card v-if="auth_permission.news_create" style="margin-left:-15px;margin-top:-12px;margin-right:-15px;">
+      <div class="container-fluid">
       <div class="row">
 
         <div class="col-sm-4" style="outline: 1px solid;">
@@ -219,7 +219,30 @@
                 :flat="true"
               ></Treeselect>
           </div>       
-          <hr>  
+          <hr>
+          <!-- scroll hear    -->
+            <!-- <label>scroll</label>
+            <Multiselect
+              v-model="news_data.selected_scrolls"
+              :options="positions"
+              track-by="id"
+              label="name_eng"
+            ></Multiselect>    -->
+            <div class="input-group mb-3" style="margin-top:20px;" >
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">
+                Scroll &nbsp; <i class="icon-link"></i>
+              </span>
+            </div>
+            <Multiselect
+              class="form-control"
+              v-model="news_data.selected_scrolls"
+              :options="positions"
+              track-by="id"
+              label="name_eng"
+            ></Multiselect> 
+          </div>                   
+          <hr>
             <!-- tags hear   -->
             <div class="row">
               <div class="col-sm-11">
@@ -277,11 +300,10 @@
           
           
 
-
-          <!-- <label>Instant article</label> &nbsp;
-          <toggle-button v-model="news_data.instant_article" />
           <hr/>
-           -->
+          <label>Instant article</label> &nbsp;
+          <toggle-button v-model="news_data.instant_article" />
+          
            <hr>
           <div >
               <!-- {{news_data.instant_article}} -->
@@ -295,7 +317,7 @@
             </span> -->
             <br />
             <!-- time selector  -->
-            <div v-if="news_data.instant_article!=0">
+            <div v-if="false">
               <label>Caption</label>
               <br>
               <textarea placeholder="Enter Caption "></textarea>
@@ -307,7 +329,7 @@
           </div>
 
           <label>Page Status </label> &nbsp;
-          <toggle-button v-model="news_data.page_status" />
+          <toggle-button v-model="news_data.page_status" /> &nbsp; {{ news_data.page_status? `lock` : `unlock` }}
           <hr/>
           
 
@@ -324,15 +346,10 @@
             label="name_eng"
           ></Multiselect> -->
 
-          <!-- <Multiselect
-            v-model="news_data.selected_scrolls"
-            :options="positions"
-            track-by="id"
-            label="name_eng"
-          ></Multiselect> -->
         </div>
         <!-- <div class="col-sm-1"></div>   -->
-        <div class="col-sm-7 form-group" style="outline: 1px solid;margin-left:20px;margin-bottom:1px;">
+        <!-- todo32 -->
+        <div class="col-sm-7 form-group" style="outline: 1px solid grey;margin-left:20px;margin-bottom:1px;">
 
 
           <!-- <div class="input-group mb-3" style="margin-top:20px;">
@@ -359,7 +376,7 @@
             </div>
             <div class="col-sm-10">
             <quill-editor  :content="news_data.shoulder"
-                            style="border: 1px dashed ;margin-top:20px;margin-left:-5px;"
+                            style="border: 1px solid ;margin-top:20px;margin-left:-5px;"
                             v-model="news_data.shoulder"
                             :options="config2"
                             @change="()=>{}">
@@ -384,7 +401,7 @@
             </div>
             <div class="col-sm-10">
             <quill-editor   :content="news_data.headline"
-                            style="border: 1px dashed ;margin-top:20px;margin-left:-5px;"
+                            style="border: 1px solid ;margin-top:20px;margin-left:-5px;"
                             v-model="news_data.headline"
                             :options="config2"
                             @change="()=>{}">
@@ -392,31 +409,40 @@
             </div>
           </div>
           
-          <!-- <label>Headline
-            <i class="icon-pin"></i>
-          </label>
-        <quill-editor   :content="news_data.headline"
-                        style="border:1px solid;margin-bottom:50px;;"
-                        v-model="news_data.headline"
-                        :options="config2"
-                        @change="()=>{}">
-          </quill-editor>           -->
+
 
           <div v-show="errors.hasOwnProperty('headline')" style="margin-top:5px;color:red;">
             <p v-for="(i,k) in errors[`headline`]" :key="k">
               <i class="fa fa-check-circle"></i> &nbsp;{{i}}
             </p>
-          </div>           
+          </div>   
 
 
-          <div class="input-group mb-3" style="margin-top:20px;">
+          <div class="row">
+            <div class="col-sm-2">
+                <label class="input-group-text" style="height:48px;width:100px;">Hanger
+                <i class="icon-paper-clip"></i>
+              </label>            
+            </div>
+            <div class="col-sm-10">
+            <quill-editor   :content="news_data.hanger"
+                            style="border: 1px solid ;margin-top:20px;margin-left:-5px;z-index:2"
+                            v-model="news_data.hanger"
+                            :options="config2"
+                            @change="()=>{}">
+              </quill-editor>    
+            </div>
+          </div>
+          
+
+          <!-- <div class="input-group mb-3" style="margin-top:20px;">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
                 Hanger &nbsp; <i class="icon-paper-clip"></i>
               </span>
             </div>
-            <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
+            <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1">         
+          </div> -->
 
           <div class="input-group mb-3" style="margin-top:20px;">
             <div class="input-group-prepend">
@@ -426,7 +452,7 @@
             </div>
             <!-- <input type="text" v-model="news_data.hanger" class="form-control" placeholder="enter hanger" aria-label="Username" aria-describedby="basic-addon1"> -->
           
-          <Multiselect v-model="news_data.reporter" :options="user_list" class="form-control" track-by="id" label="name"></Multiselect>
+          <Multiselect v-model="news_data.reporter" :options="user_list" class="form-control" track-by="id" label="name" style="z-index:1"></Multiselect>
           </div>
 
           <div v-show="errors.hasOwnProperty('reporter')" style="margin-top:5px;color:red;">
@@ -462,7 +488,23 @@
               </i>
             </div>
         </div> -->
-          <div class="row">
+
+
+          <div>
+              <label >Body
+                <i class="icon-book-open"></i>
+              </label>
+               
+            <div style="margin-left:30px;margin-top:-20px;">
+                <quill-editor :content="news_data.content"
+                              style="margin-top:20px;margin-left:-25px;"
+                              v-model="news_data.content"  
+                              :options="{}"
+                              @change="()=>{}">
+                </quill-editor>
+            </div>
+          </div>
+          <!-- <div class="row">
             <div class="col-sm-2">
               <label class="input-group-text" style="width:80px;height:100px;">Body
                 <i class="icon-book-open"></i>
@@ -476,7 +518,7 @@
                               @change="()=>{}">
                 </quill-editor>
             </div>
-          </div>
+          </div> -->
 
           <!-- <ckeditor :editor="editor" v-model="news_data.content" :config="editorConfig"></ckeditor> -->
           <!-- <p v-if="news_data.content.length<10" style="color:red">*required at least 10 charecters</p>          -->
@@ -488,18 +530,17 @@
           </div>           
           <hr />
           
-          <label>Featured Photo
+          <!-- <label>Featured Photo
             <i class="icon-picture"></i>
-          </label>
+          </label> -->
           <div class="row">
-            <div class="col-sm-0">
-              <!-- <img v-if="news_data.featured_img.file" :src="news_data.featured_img.file" height="80px" width="100px"/> -->
-              <!-- <p v-else style="margin-top:20px">select image</p> -->
-              <!-- <div v-else style="outline: 1px solid ;height:80px;width:100px;" >
-                <p style="position:relative;top:25px;left:10px;">select image</p>
-              </div>            -->
+            <div class="col-sm-2">
+              <label>
+                Featured Photo
+                <i class="icon-picture"></i>
+              </label>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <button @click="ContentManagerModal" class="btn btn-outline-primary" type="button">
@@ -515,7 +556,7 @@
                   <textarea
                     type="text"
                     class="form-control"
-                    placeholder
+                    placeholder="enter caption"
                     aria-label
                     aria-describedby="basic-addon1"
                     v-model="news_data.featured_img.title"
@@ -558,10 +599,19 @@
 
           <div></div>
           <hr />
-          <label>Featured Video  &nbsp;
+          <!-- <label>Featured Video  &nbsp;
             <i class="icon-film"></i>
-          </label>
-          <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
+          </label> -->
+          <div class="row"> 
+            <div class="col-sm-2">
+              <label>Featured Video  &nbsp;
+                <i class="icon-film"></i>
+              </label>             
+            </div>
+            <div class="col-sm-10">
+                <FeatVideo :item="news_data.featured_vid"></FeatVideo>    
+            </div>
+          </div>
           <hr />
 <!-- video position -->
           <div class="input-group mb-3" style="margin-top:20px;">
@@ -588,14 +638,23 @@
             </div> -->
 
             <!-- <div class="col-sm-1"></div> -->
-            <div class="col-sm-3" v-if="news_data.auto_share.flag">
-                <datetime
-                v-model="news_data.auto_share.time" title="share time"></datetime>
+            <div class="col-sm-3" v-if="news_data.auto_share.flag" style="margin-left:40px;">
+                <span>
+                   <!-- todos -->
+                   <nobr>
+                  
+                  <!-- <i class="icon-clock"></i> -->
+                  <datetime
+                  v-model="news_data.auto_share.time" title="share time">
+                  </datetime>
+                   </nobr>
+                </span>
             </div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-3" v-if="news_data.auto_share.flag">
+            <div class="col-sm-2" v-if="news_data.auto_share.flag" style="margin-left:40px;position:relative;left:-1px;">
               <textarea  placeholder="  enter share caption..." v-model="news_data.auto_share.caption" cols="30" rows="3"></textarea>
             </div>
+            <div class="col-sm-1"></div>
           </div>
           <!-- todos -->
           <!-- <div style="margin-bottom:20px;">
@@ -626,7 +685,7 @@
       </div>
 
       <hr>
-      <div class="container">
+      <div class="container-fluid">
       <div class="row">
          <div class="col-sm-7">
            <!-- <b-form-checkbox-group> -->
@@ -1009,9 +1068,9 @@ export default {
       this.$refs.add_tag_modal.errors = {}
     },
     setDates(){
-      this.news_data.publish_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
-      this.news_data.share_at = new Date().toJSON().slice(0,10).replace(/-/g,'-')
-      this.news_data.auto_share.time = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      this.news_data.publish_at = new Date()//.toJSON().slice(0,10).replace(/-/g,'-')
+      this.news_data.share_at = new Date() //.toJSON().slice(0,10).replace(/-/g,'-')
+      this.news_data.auto_share.time = new Date()//.toJSON().slice(0,10).replace(/-/g,'-')
       // this.news_data.share_at = new Date().toISOString() 
     },
     handel_update: function (){

@@ -63,6 +63,9 @@ const RolePermission = () => import('@/views/pages/UserRolePermission')
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
 const UserList = () => import('@/views/user/index')
+// Author and Reporter 
+const Author = () => import('@/views/user/authors')
+const Reporters = () => import('@/views/user/reporters')
 
 Vue.use(Router)
 
@@ -374,12 +377,30 @@ export default new Router({
           }
         },
         {
+          path : `/user-authors`,
+          name: `Authors` ,
+          component : Author ,
+          // meta:{
+          //   forAuth : true ,
+          // },
+        }, 
+        {
+          path : `/user-reporters`,
+          name: `Reporters` ,
+          component : Reporters ,
+          // meta:{
+          //   forAuth : true ,
+          // },
+        },        
+        {
           path: 'contact/',
           name: 'Contact',
           component: Contact,
           meta: {
             forAuth: true
           },
+         
+
           children: [
             {
               path: 'list',

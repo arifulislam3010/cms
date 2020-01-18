@@ -1,10 +1,10 @@
 <template>
-    <b-modal title="Role" no-close-on-backdrop hide-footer size="xl"  v-model="largeModal" @ok="largeModal = false">
+    <b-modal title="Role & Permissioin" no-close-on-backdrop hide-footer size="xl"  v-model="largeModal" @ok="largeModal = false">
         <!-- <form @submit.prevent="addRole" > -->
-            {{get_permission}}
+            <!-- {{get_permission}} -->
             <div>
                 <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Role Name</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Role Name *</label>
                     <div class="col-sm-10">
                     <input name="Name" v-validate="'required'" v-model="get_permission.role_name" type="text" class="form-control" id="inputPassword3" placeholder="Roll Name">
                     <div v-show="errors.has('Name')" class="help-block alert alert-danger">

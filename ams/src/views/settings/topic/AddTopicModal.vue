@@ -1,7 +1,7 @@
 <template>
 <div>
   <b-modal title="Topic" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
-    <form @submit.prevent="addTopic" class="container">
+    <form  class="container">
       <b-row>
         <!-- {{this.current_topic}} -->
         <!-- {{this.content}} -->
@@ -20,7 +20,7 @@
                       <b-form-input type="textarea" name="Title" :style="`color:${current_topic.color}`" v-model="current_topic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
                     </div>
                     <div class="col-sm-1">
-                      <swatches v-model="current_topic.color" />
+                      <swatches v-model="current_topic.color" data-toggle="tooltip" title="select color"/>
                     </div>
                   </div>
                   <br/>
@@ -38,7 +38,32 @@
                       <label for="Title">Deadline</label>
                     </div>
                     <div class="col-md-7">
-                       <datetime width="435px" v-model="current_topic.deadline"></datetime>
+                       <datetime  v-model="current_topic.deadline"></datetime>
+                    </div>
+                  </div>
+                    <br>  
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="Title">Header Design</label>
+                    </div>
+                    <div class="col-sm-7">
+                       <multiselect :options="[`option1`,`option2`]" v-model="test"></multiselect>
+                    </div>
+                  </div>
+                    <br>  
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="Title">Header Background</label>
+                    </div>
+                    <div class="col-sm-2">
+                       <multiselect :options="[`option1`,`option2`]" v-model="test" placeholder=""></multiselect>
+                    </div>
+                    <div class="col-sm-2">
+                      status * 
+                    </div>
+                    <div class="col-sm-3">
+                       <multiselect :options="[`active`,`inactive`]" placeholder="" v-model="test"></multiselect>
+              
                     </div>
                   </div>
 
@@ -47,7 +72,7 @@
                     <div class="col-md-3">
                       <label for="Title">Topic Image</label>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       
                        <!-- <b-btn class="btn-success" @click="contentManager" >Select Image</b-btn> -->
                         <button @click="contentManager" class="btn btn-outline-primary" type="button" >
@@ -60,9 +85,12 @@
 
                         </button>                       
                     </div>
-                    <!-- <div class="col-md-3">
-                      <img :src="content.file" style="height:120px;width:150px"/>
-                    </div> -->
+                    <div class="col-md-2">
+                      status*
+                    </div>
+                    <div class="col-md-3">
+                       <multiselect :options="[`active`,`inactive`]" placeholder="" v-model="test"></multiselect>
+                    </div>
 
                   </div>
 
@@ -71,7 +99,7 @@
 
                   <div class="row">
                     <div class="col-md-3">
-                      <label for="Title">Status*</label>
+                      <label for="Title">Topic Status*</label>
                     </div>
                     <div class="col-md-7">
                        <select
@@ -84,6 +112,20 @@
                               <option>Inactive</option>
                               
                             </select>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <!-- <label for="Title">Topic Status*</label> -->
+                    </div>
+                    <div class="col-md-7">
+                      
+                        <button v-if="!addLoader" @click="addTopic"  class="btn btn-success btn-block" >create</button>
+                        <button v-if="addLoader" class="btn btn-primaryt btn-block" type="button" disabled>
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Submitting...
+                        </button>
                     </div>
                   </div>
                 </b-form-group>
@@ -105,15 +147,15 @@
       </b-row>
       <div class="form-group row">
         <div class="col-sm-12">
-          <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right" />
+          <!-- <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right" />
           <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Submitting...
-          </button>
+          </button> -->
           <button
             v-if="!addLoader"
             @click.prevent="close"
-            class="btn btn-success pull-right"
+            class="btn btn-primary pull-right"
             style="margin-right:5px;"
           >Close</button>
         </div>
@@ -137,13 +179,14 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import datetime from "vuejs-datetimepicker";
 import Swatches from 'vue-swatches'
-
+import multiselect from "vue-multiselect"
 // Import the styles too, globally
 import "vue-swatches/dist/vue-swatches.min.css"
 export default {
-  components: { Treeselect ,datetime,ContentManager,Swatches },
+  components: { Treeselect ,datetime,ContentManager,Swatches,multiselect },
   data() {
     return {
+      test : ``,
       errors:{},
       topic_color: 'black' ,
       selected_parent: "",
@@ -178,6 +221,7 @@ export default {
   },
   mounted() {
     //this.getTopics()
+    this.addLoader = false 
     this.setStatus()
     this.setDates()
   },
@@ -195,14 +239,24 @@ export default {
       }
     },
     addTopic() {
+      this.addLoader = true 
       // if has id then update 
-      if(this.current_topic.id){
-        this.$store.dispatch(`UPDATE_TOPIC`,this.current_topic).then(response=>{
-         this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Updated Successsfully"})
-         this.$store.dispatch(`FETCH_TOPICS`) 
-        })
-        return ;
-      }
+    
+          if(this.current_topic.id){
+            this.$store.dispatch(`UPDATE_TOPIC`,this.current_topic).then(response=>{
+            this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Updated Successsfully"})
+            this.$store.dispatch(`FETCH_TOPICS`).then(response=> this.addLoader = false) 
+              this.addLoader = false 
+
+            }).catch(error=>{
+              this.addLoader = false 
+            this.$iziToast.error({position:'topRight',title:'',message:"Topic Not Added "})
+
+            })
+            return ;
+          }
+
+
       // this.$iziToast.success({position:'topRight',title:'Ok',message:"Topic Added Successsfully"})
       
       this.$store.dispatch('ADD_TOPIC',this.current_topic).then(response=>{
@@ -211,6 +265,10 @@ export default {
       }).catch(error=>{
         // this.$iziToast.error({position:'topRight',title:'error',message:error.data})
         this.errors = error.response.data.errors
+        this.addLoader = false 
+        this.$iziToast.error({position:'topRight',title:'',message:"Topic Not Added "})
+        
+
       })
    },
     setDates(){
