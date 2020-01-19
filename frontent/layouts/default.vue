@@ -10,7 +10,7 @@
       <MobileNavbar :categories = "categories" />
   </div>
    <div v-else>
-     <MainNavbar :categories = "categories"/>  
+     <MainNavbar :categories = "categories"/> 
   </div>
 
   </header>
