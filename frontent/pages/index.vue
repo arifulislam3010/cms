@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-8">
-                    <div class="row">
+                    <div class="row" style="margin-left:-80px;">
 
                         <!-- Single Featured Post -->
                         

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SmallAd></SmallAd>
+        <!-- <SmallAd></SmallAd> -->
         <div class="section-heading">
             <h6>Featured News</h6>
         </div>

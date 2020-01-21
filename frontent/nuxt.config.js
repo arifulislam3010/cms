@@ -110,6 +110,7 @@ export default {
 
    env: {
     apiBaseUrl: 'http://localhost:8000'  
+    // apiBaseUrl: 'http://bpress.api.istiak.net/public'  
     // apiBaseUrl: 'http://api.banglapress.org'  
   },
 

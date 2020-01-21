@@ -1,4 +1,5 @@
 <template>
+    <div>
     <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
        
         <form @submit.prevent="addCategory" >
@@ -18,13 +19,89 @@
                             <label for="Title">Display Name*</label>
                           </div>
 
-                          <div class="col-md-7">
-                        <b-form-input type="text" name="Title"  v-model="newCategory.display_name" v-validate="'required'" placeholder=""></b-form-input>
+                          <div class="col-md-5">
+                             <b-form-input type="text" name="Title"  v-model="newCategory.displayName" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                          <div class="col-md-1">
+                              <label for="">Color</label>
+                          </div>
+                          <div class="col-md-1">
+                            <input type="color" class="form-control" v-model="newCategory.displayNameColor">
                           </div>
                         </div>
 
                         <br/>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="">Header Design</label>
+                          </div>
+                          <div class="col-md-3">
+                             <input type="text" class="form-control" v-model="newCategory.headerDesign">
+                          </div>
+                          <div class="col-md-1">
+                            <label for=""  >status</label>
+                          </div>
+                          <div class="col-md-3">
+                            <select name="" class="form-control" v-model="newCategory.headerDesignStatus">
+                               <option value="1">active</option>
+                               <option value="0">inactive</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col-md-3">
+                              <label for="">Header Background</label>
+                          </div>
+                          <div class="col-sm-1">
+                            <input type="color" class="form-control" v-model="newCategory.headerBackground">
+                          </div>
+                          <div class="col-md-2"></div>
+                          <div class="col-sm-1">
+                            <label for="">status</label>
+                          </div>
+                          <div class="col-sm-3">
+                            <select name="" class="form-control" v-model="newCategory.headerBackgroundStatus">
+                              <option value="1">active</option>
+                              <option value="0">inactive</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="">Header Image</label>
+                            </div>
 
+                            <div class="col-md-3">
+                                <button class="btn btn-success" @click="selectHeaderImage" >select</button>
+                            </div>
+                            <div class="col-md-1">status</div>
+                            <div class="col-md-3">
+                                <select name="" class="form-control" v-model="newCategory.headerImageStatus">
+                                  <option value="1">active</option>
+                                  <option value="0">inactive</option>
+                                </select>                             
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="">Current Page</label>
+                            </div>
+
+                            <div class="col-md-3">
+                                select img 
+                            </div>
+                            <div class="col-md-1">status</div>
+                            <div class="col-md-3">
+                                <select name="" class="form-control" v-model="newCategory.categoryPageImageStatus">
+                                  <option value="">active</option>
+                                  <option value="">inactive</option>
+                                </select>                             
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                           <div class="col-md-3">
                             <label for="Title">Title*</label>
@@ -36,21 +113,6 @@
                         </div>
 
                         <br/>
-                        <div class="row">
-                          <div class="col-md-3">
-                            <label for="Title">Color</label>
-                          </div>
-
-                          <div class="col-md-6">
-                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
-                          </div>
-                          <div class="col-md-1">
-                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
-                            <!-- <ColorPicker :width="300" :height="300" :disabled="false" startColor="#ff0000"></ColorPicker> -->
-                          </div>
-                        </div>
-
-                         <br/>
 
                         <div class="row">
                           <div class="col-md-3">
@@ -64,6 +126,23 @@
 
 
                         <br/>
+                        
+
+                        <!-- <div class="row">
+                          <div class="col-md-3">
+                            <label for="Title">Color</label>
+                          </div>
+
+                          <div class="col-md-6">
+                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                          <div class="col-md-1">
+                            <b-form-input type="text" name="Title"  v-model="newCategory.color" v-validate="'required'" placeholder=""></b-form-input>
+                          </div>
+                        </div>
+
+                         <br/> -->
+
 
                         <div class="row">
                           <div class="col-md-3">
@@ -74,11 +153,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.header_display"
+                              v-model="newCategory.headerDisplay"
                             >
                             
-                              <option>Yes</option>
-                              <option>No</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
                               
                             </select>
                           </div>
@@ -98,11 +177,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.home_display"
+                              v-model="newCategory.homeDisplay"
                             >
                             
-                              <option>Yes</option>
-                              <option>No</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
                               
                             </select>
                           </div>
@@ -121,11 +200,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.menubar_display"
+                              v-model="newCategory.menubarDisplay"
                             >
                             
-                              <option>Yes</option>
-                              <option>No</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
                               
                             </select>
                           </div>
@@ -144,11 +223,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.photo_display"
+                              v-model="newCategory.photoDisplay"
                             >
                             
-                              <option>Yes</option>
-                              <option>No</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
                               
                             </select>
                           </div>
@@ -166,11 +245,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.video_display"
+                              v-model="newCategory.vedioDisplay"
                             >
                             
-                              <option>Yes</option>
-                              <option>No</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
                               
                             </select>
                           </div>
@@ -189,11 +268,11 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.status"
+                              v-model="newCategory.categoryStatus"
                             >
                           
-                              <option>Active</option>
-                              <option>Inactive</option>
+                              <option value="1">Active</option>
+                              <option value="0">Inactive</option>
                               
                             </select>
                           </div>
@@ -251,6 +330,9 @@
             </div>
         </form>
     </b-modal>
+    <ContentManager :content="headerImage" ref="headerImage"></ContentManager>
+    <ContentManager :content="categoryPageImage" ref="categoryPageImage"></ContentManager>
+    </div>
 </template>
 
 <script>
@@ -264,9 +346,13 @@ import { mapState,mapGetters } from "vuex"
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import ColorPicker from 'vue-color-picker-wheel'
+import ContentManager from "../../content/index"
 export default {
-    components:{Treeselect,
-    ColorPicker},
+    components:{
+      Treeselect,
+      ColorPicker,
+      ContentManager ,
+    },
     
     data(){
         return{
@@ -276,24 +362,36 @@ export default {
             selected_parent:null,
             largeModal:false,
             addLoader:false,
-
+            headerImage : {} ,
+            categoryPageImage : {} ,
             newCategory: {
-              display_name:'',
-              title: '',
-              color:'',
-              parent_id: '',
-              header_display: 'Yes',
-              home_display:'Yes',
-              menubar_display:'Yes',
-              photo_display:'Yes',
-              video_display:'Yes',
-              status:'Active'      
+                  displayName : ``,
+                  displayNameColor : `` ,
+                  headerDesign : `` ,
+                  headerDesignStatus : `` ,
+                  headerBackground  : `` ,
+                  headerBackgroundStatus : `` ,
+                  headerImage : `` ,
+                  headerImageStatus : `` ,
+                  categoryPageImage : `` ,
+                  categoryPageImageStatus : `` ,
+                  title : `` ,
+                  parent_id : `` ,
+                  parentTitle : `` ,
+                  headerDisplay : `` ,
+                  homeDisplay : `` ,
+                  menubarDisplay : `` ,
+                  photoDisplay : ``, 
+                  vedioDisplay : `` ,
+                  categoryStatus  : `` ,             
             },
     
         }
     },
     methods:{
-
+        selectHeaderImage(){
+          this.$refs.headerImage.openModal()
+        },
         addCategory(){
 
           this.addLoader = true  
@@ -347,16 +445,16 @@ export default {
             // clear errors 
             this.errors = {}
             if(!this.update){
-              this.newCategory.title =''
-              this.newCategory.parent_id =''
-              this.newCategory.display_name =''
-              this.newCategory.color =''
-              this.newCategory.header_display ='Yes'
-              this.newCategory.home_display ='Yes'
-              this.newCategory.menubar_display ='Yes'
-              this.newCategory.photo_display ='Yes'
-              this.newCategory.video_display ='Yes'
-              this.newCategory.status ='Active'
+              // this.newCategory.title =''
+              // this.newCategory.parent_id =''
+              // this.newCategory.display_name =''
+              // this.newCategory.color =''
+              // this.newCategory.header_display ='Yes'
+              // this.newCategory.home_display ='Yes'
+              // this.newCategory.menubar_display ='Yes'
+              // this.newCategory.photo_display ='Yes'
+              // this.newCategory.video_display ='Yes'
+              // this.newCategory.status ='Active'
             }
         },
         close(){

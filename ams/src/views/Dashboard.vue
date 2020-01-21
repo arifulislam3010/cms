@@ -22,6 +22,10 @@
         </b-col>
       </b-row>
     </b-card>
+    <!-- <div class="container">
+      <b-btn @click="test">save</b-btn>
+      <iframe src="http://localhost:3000/" id="some_frame_id" height="100%" width="100%"> </iframe>
+    </div> -->
   </div>
 </template>
 
@@ -171,6 +175,9 @@ export default {
     this.serachLeadger();
   },
   methods: {
+    test(){
+      document.getElementById('some_frame_id').contentWindow.location = 'http://localhost:3000/'
+    },
     getPermission(){
         // this.$store.dispatch('ALL_USER_ROLE2')
         this.$store.dispatch('FETCH_CURRENT_USER_PERMISSION')

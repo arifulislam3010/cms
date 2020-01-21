@@ -36,15 +36,23 @@ class CategoryController extends Controller
         ]);
         $category = new Category ;
         $category->title = $request->title ;
-        $category->display_name = $request->display_name ;
-        $category->color = $request->color ;
-        $category->header_display = $request->header_display ;
-        $category->home_display = $request->home_display ;
-        $category->menubar_display = $request->menubar_display ;
-        $category->photo_display = $request->photo_display ;
-        $category->video_display = $request->video_display ;
-        $category->status = $request->status ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
+        $category->displayName = $request->displayName ;
+        $category->displayNameColor = $request->displayNameColor ;
+        $category->headerDesign = $request->headerDesign ;
+        $category->headerDesignStatus = $request->headerDesignStatus ;
+        $category->headerBackground = $request->headerBackground ;
+        $category->headerBackgroundStatus = $request->headerBackgroundStatus ;
+        $category->headerImage = $request->headerImage ;
+        $category->categoryPageImage = $request->categoryPageImage ;
+        // $category->parentTitle = $request->parentTitle ;
+        $category->headerDisplay = $request->headerDisplay ;
+        $category->homeDisplay = $request->homeDisplay ;
+        $category->menubarDisplay = $request->menubarDisplay ;
+        $category->photoDisplay = $request->photoDisplay ;
+        $category->vedioDisplay = $request->vedioDisplay ;
+        $category->categoryPageImageStatus = $request->categoryPageImageStatus ;
+        $category->categoryStatus = $request->categoryStatus ;
         if($category->save()){
             return new CategoryResource($category);
         }
@@ -94,16 +102,34 @@ class CategoryController extends Controller
             'title' => 'required',
         ]);
         $category = Category::findOrfail($id) ;    
+        // $category->title = $request->title ;
+        // $category->display_name = $request->display_name ;
+        // $category->color = $request->color ;
+        // $category->header_display = $request->header_display ;
+        // $category->home_display = $request->home_display ;
+        // $category->menubar_display = $request->menubar_display ;
+        // $category->photo_display = $request->photo_display ;
+        // $category->video_display = $request->video_display ;
+        // $category->status = $request->status ;
+        // $category->parent_id = $request->parent_id ? $request->parent_id : null;
         $category->title = $request->title ;
-        $category->display_name = $request->display_name ;
-        $category->color = $request->color ;
-        $category->header_display = $request->header_display ;
-        $category->home_display = $request->home_display ;
-        $category->menubar_display = $request->menubar_display ;
-        $category->photo_display = $request->photo_display ;
-        $category->video_display = $request->video_display ;
-        $category->status = $request->status ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
+        $category->displayName = $request->displayName ;
+        $category->displayNameColor = $request->displayNameColor ;
+        $category->headerDesign = $request->headerDesign ;
+        $category->headerDesignStatus = $request->headerDesignStatus ;
+        $category->headerBackground = $request->headerBackground ;
+        $category->headerBackgroundStatus = $request->headerBackgroundStatus ;
+        $category->headerImage = $request->headerImage ;
+        $category->categoryPageImage = $request->categoryPageImage ;
+        // $category->parentTitle = $request->parentTitle ;
+        $category->headerDisplay = $request->headerDisplay ;
+        $category->homeDisplay = $request->homeDisplay ;
+        $category->menubarDisplay = $request->menubarDisplay ;
+        $category->photoDisplay = $request->photoDisplay ;
+        $category->vedioDisplay = $request->vedioDisplay ;
+        $category->categoryPageImageStatus = $request->categoryPageImageStatus ;
+        $category->categoryStatus = $request->categoryStatus ;
         if($category->save()){
             return new CategoryResource($category);
         }

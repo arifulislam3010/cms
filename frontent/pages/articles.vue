@@ -3,7 +3,7 @@
     <!-- <nuxt-link to="/about">Abouts</nuxt-link> -->
 
     <!-- <font-awesome-icon :icon="['fab', 'linkedin']"/> -->
-    <hero />
+    <!-- <hero /> -->
 
     <!-- ##### Blog Area Start ##### -->
     <div class="blog-area section-padding-0-80">

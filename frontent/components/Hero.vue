@@ -32,7 +32,7 @@
         </div>
 
         <!-- Hero Add -->
-        <HeroAdd />
+        <!-- <HeroAdd /> -->
       </div>
     </div>
   </div>

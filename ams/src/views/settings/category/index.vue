@@ -29,7 +29,7 @@ import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
 
-import AddNcategoryModal from './AddNcategoryModal'
+import AddNcategoryModal from './AddNcategoryModal2'
 import EditNcategoryModal from './EditNcategoryModal'
 import ViewNcategoryModal from './ViewNcategoryModal'
 
