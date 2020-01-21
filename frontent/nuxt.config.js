@@ -34,7 +34,7 @@ export default {
     'jquery',
     // '~/assets/css/bootstrap.min.css',
     '~/assets/css/owl.carousel.min.css',
-    // '~/assets/css/fontawsome.css',
+    '~/assets/css/fontawsome.css',
     '~/assets/css/animate.css',
     '~/assets/css/magnific-popup.css',
     '~/assets/css/custom-icon.css',
@@ -62,6 +62,7 @@ export default {
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
       [
+
         'nuxt-fontawesome', {
           imports: [
           {
@@ -76,6 +77,7 @@ export default {
         }
     ],
     '@nuxtjs/axios',
+    // '@nuxtjs/font-awesome',
   ],
 
   axios: {

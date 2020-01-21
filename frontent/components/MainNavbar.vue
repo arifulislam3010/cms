@@ -1,11 +1,16 @@
 <template>
  <div >
- <nav class="navbar navbar-expand-sm   navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+ <nav class="navbar navbar-expand-sm   navbar-light bg-light" >
+  <div>
+    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+  </div> 
+  <div class="container-fluid" style="margin-left:2.5vw;">
+  <button 
+   class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <nuxt-link to="/" class="navbar-brand" ><i class="fas fa-home"></i></nuxt-link>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="margin-left:32px;">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
     <ul class="navbar-nav  nav-fill w-100 mr-auto mt-2 mt-lg-0"  v-if="!searchBarBig">
       <!-- // loop  -->
       <span v-for="(category,key ) in categories" v-bind:key="key">
@@ -46,11 +51,18 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" style="margin-right:41px;">
-      <input @click="searchBig" 
+      <i class="fas fa-search"
+       style="font-size:24px;"
+       @click="searchBig" 
+       id="newsSearch" 
+       v-if="!searchBarBig"
+      ></i>
+      <!-- <input
+       @click="searchBig" 
        id="newsSearch" 
        v-if="!searchBarBig"   
      
-       class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+       class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
       <!-- <button class="btn btn-outline-default my-2 my-sm-0" type="submit">Search</button> -->
     </form>
   </div>
@@ -59,12 +71,12 @@
 
     @mouseout="searchBarBig=false"
     id="bigSearch"
-    style="margin-right:40px;"
+    style="margin-right:100px;"
     class="form-control"
     placeholder="অনুসন্ধান"
     v-if="searchBarBig">
   </div>
-
+  </div>
 </nav>
 <div class="card" v-if="showOnHover" style="background:#e1ede4;z-index:1000;position:absolute;width:100vw;" @mouseover="showOnHover=true;" @mouseout="showOnHover=false;">
         <div class="row" style="margin-bottom:20px;">
@@ -103,7 +115,7 @@ export default {
   props: ['categories', 'id','category'],
   data() {
     return{
-      searchBarBig : true ,
+      searchBarBig : false ,
       showOnHover : false ,
       selectedMegaCategory : `` ,
       hover:'a',
@@ -193,4 +205,8 @@ ul > li > a {
 #bigSearch:hover{
   width:85vw ;
 }
+.navbar-toggler-icon{
+  margin-left: 100px;
+}
+
 </style>

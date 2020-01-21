@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid" style="background:#e91d24 !important;color:white;">
+        
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-7" style="position:relative;left:-60px;">

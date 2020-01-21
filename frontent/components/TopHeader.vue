@@ -24,7 +24,7 @@
                           <li  target="_blank"><a href="" title="youtube page"><i class="youtube fab fa-youtube"></i></a></li>
               </div> -->  
             </div>
-              <!-- <HeroAdd style="postion:relative;right:-70px;" />                 -->
+              <HeroAdd style="postion:relative;right:-70px;" />                
           </div>
         </div>
       </div>
