@@ -211,13 +211,14 @@
                 Placement &nbsp; <i class="icon-link"></i>
               </span>
             </div>
-              <Treeselect
+              <multiselect
                 class="form-control"
-                v-model="news_data.selected_scrolls"
-                :options="scroll_parents"
-                :multiple="true"
+                v-model="news_data.selected_positions"
+                :options="positions"
+              
                 :flat="true"
-              ></Treeselect>
+                label="name_eng"
+              ></multiselect>
           </div>       
           <hr>
           <!-- scroll hear    -->
@@ -234,13 +235,14 @@
                 Scroll &nbsp; <i class="icon-link"></i>
               </span>
             </div>
-            <Multiselect
+            <Treeselect
               class="form-control"
               v-model="news_data.selected_scrolls"
-              :options="positions"
+              :options="scroll_parents"
               track-by="id"
+              :multiple="true"
               label="name_eng"
-            ></Multiselect> 
+            ></Treeselect> 
           </div>                   
           <hr>
             <!-- tags hear   -->
@@ -911,17 +913,17 @@ export default {
           name_eng: "Primary"
         },
         {
-          id: 1,
+          id: 2,
           name_bng: "প্রধান শিরোনাম",
           name_eng: "Main Headline"
         },
         {
-          id: 1,
+          id: 3,
           name_bng: "সেরা সংবাদ",
           name_eng: "Best News"
         },
         {
-          id: 1,
+          id: 4,
           name_bng: "বিশেষ সংবাদ",
           name_eng: "Special News"
         }

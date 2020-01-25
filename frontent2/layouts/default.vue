@@ -5,6 +5,7 @@
     </div>
     <div v-else>
     <header>
+      <DateLinks></DateLinks>
       <TopHeader></TopHeader>
       <Menu></Menu>
     </header>
@@ -16,6 +17,7 @@
 <script>
 import axios from '@/plugins/axios'
 import TopHeader from '~/components/layout/TopHeader.vue'
+import DateLinks from '~/components/layout/DateLinks.vue'
 import Menu from '~/components/layout/Menu.vue'
 import Footer from '~/components/layout/Footer.vue'
 import { mapMutations, mapGetters } from 'vuex'
@@ -23,6 +25,7 @@ import InitialLoading from "@/components/loader/InitialLoading";
 export default {
   components: {
     TopHeader,
+    DateLinks ,
     Menu,
     Footer,
     InitialLoading,

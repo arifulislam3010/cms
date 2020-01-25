@@ -1,4 +1,5 @@
 <template>
+    <div>
     <nav class="navbar navbar-default navbar-static-top no-margin hidden-print" role="navigation" style="z-index:10;" data-spy="affix" data-offset-top="70" id="menu">
     <div class="container">
         <div class="navbar-header">
@@ -12,7 +13,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-            <div class="container" style="position:relative;">
+            <!-- <div class="container" style="position:relative;">
                 <div id="sb-search" class="sb-search">
                     <form class="srch_submit" action="https://www.jagonews24.com/search" method="get" id="cse-search-box" target="_blank">
                         <input type="hidden" name="cx" value="009737550856177646857:g5gonwr4hw8">
@@ -21,21 +22,30 @@
                         <div>
                             <input class="sb-search-input srch_submit" onkeyup="if (!window.__cfRLUnblockHandlers) return false; buttonUp();" onblur="if (!window.__cfRLUnblockHandlers) return false; monkey();" type="text" placeholder="অনুসন্ধান" name="q" id="q" required data-cf-modified-fb380e6e4319ee63a1e2cb73-="">
                             <button type="submit" id="sa" name="sa" value=""><i class="fa fa-search"></i></button>
-                            <span class="sb-icon-search"><i class="fa fa-search"></i></span>
+                            <span class="sb-icon-search"><i class="fa fa-search" @click="searchNews"></i></span>
                         </div>
                     </form>
+                    <input type="text">
+                
                 </div>
+           
+            </div> -->
+            <div class="container" style="position:relative;top:10px;">
+                <input type="text" class="bigSearch" style="position:absolute;right:60px;z-index:500;" placeholder="অনুসন্ধান">
+                <!-- <input type="text" class="" style="position:absolute;right:10px;width:85vw;"> -->
+                <span  class="sb-icon-search"><i class="fa fa-search" @click="searchNews"></i></span>
             </div>
+            
         <ul class="nav navbar-nav">
             <li class="active"><nuxt-link to="/" class="navbar-brand" ><i class="fa fa-home"></i> </nuxt-link> </li>
             
-            <li v-for="(category,key ) in categories" v-bind:key="key" v-if="category.children.length>0"  @mouseover="hover=key"
-            @mouseleave="hover = 'a'" class="dropdown" :class="hover==key?'open':''">
+            <li v-for="(category,key ) in categories" v-bind:key="key" v-if="category.children.length>0"  @mouseover="hover=key;megaCard(category)"
+            @mouseleave="hover = 'a';jumboDropDown=false" class="dropdown" :class="hover==key?'open':''">
                 <nuxt-link :to="'/category/'+category.id+'/'+category.label"  class="dropdown-toggle" data-toggle="dropdown">{{category.label}} 
                 <i  :class="hover==key?'fa fa-angle-down fa-caret-up':'fa fa-angle-down'"></i> 
                 </nuxt-link>
 
-                <ul class="dropdown-menu" :style="hover==key?'display: block':'display: none'">
+                <ul v-if="category.children.length<5" class="dropdown-menu" :style="hover==key?'display: block':'display: none'">
                     <li v-for="(item,keyi) in category.children" v-bind:key="keyi">
                         <nuxt-link :to="'/category/' + item.label" class="dropdown-item">{{item.label}}</nuxt-link>
                     </li>
@@ -45,61 +55,37 @@
             <li v-else class="nav-item">
                 <nuxt-link :to="'/category/'+category.id+'/'+category.label"  class="nav-link">{{category.label}}</nuxt-link>
             </li>
-
-            <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">বাংলাদেশ <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a href="national.html">জাতীয়</a></li>
-                    <li><a href="politics.html">রাজনীতি</a></li>
-                    <li><a href="economy.html">অর্থনীতি</a></li>
-                </ul>
-            </li> -->
-        <li class="dropdown mega-dropdown" id="menu-dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">সকল বিভাগ <i class="fa fa-angle-down"></i></a>
-        <div class="dropdown-menu mega-dropdown-menu" style="max-height:300px;overflow: auto;">
-        <div class="container">
-        <div class="row">
-        <div class="col-sm-3">
-        <ul>
-        <li><a href="education.html">শিক্ষা</a></li>
-        <li><a href="campus.html">ক্যাম্পাস</a></li>
-        <li><a href="health.html">স্বাস্থ্য</a></li>
-        <li><a href="law-courts.html">আইন-আদালত</a></li>
-        </ul>
-        </div>
-        <div class="col-sm-3">
-        <ul>
-        <li><a href="religion.html">ধর্ম</a></li>
-        <li><a href="probash.html">প্রবাস</a></li>
-        <li><a href="mass-media.html">গণমাধ্যম</a></li>
-        <li><a href="women-and-children.html">নারী ও শিশু</a></li>
-        </ul>
-        </div>
-        <div class="col-sm-3">
-        <ul>
-        <li><a href="trade-fair.html">বাণিজ্য মেলা</a></li>
-        <li><a href="literature.html">সাহিত্য</a></li>
-        <li><a href="jago-jobs.html">জাগো জবস</a></li>
-        <li><a href="eid-magazine.html">ঈদ সংখ্যা ২০১৯</a></li>
-        </ul>
-        </div>
-        <div class="col-sm-3">
-        <ul class="media">
-        <li><span class="fa fa-clock-o"></span><a href="today-arrangement.html">আজকের আয়োজন</a></li>
-        <li><span class="fa fa-camera-retro"></span><a href="archive.html" rel="nofollow"> আর্কাইভ</a></li>
-        <li><span class="fa fa-share-alt"></span><a href="social-media.html" rel="nofollow"> সোশ্যাল মিডিয়া</a></li>
-        <li><span class="fa fa-language"></span><a target="_blank" href="bangla-converter.html"> ইউনিকোড কনভার্টার</a></li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </div>
-        </li>
-        <li><a href="en.html" target="_blank"><span class="en-edition"> EN </span></a></li>
+        <li><a href="en.html" target="_blank"><span class="en-edition" style="z-index:50;"> EN </span></a></li>
         </ul>
         </div>
     </div>
 </nav>
+<div class="card" v-if="jumboDropDown" id="jumboDropDown" @mouseover="jumboDropDown=true" @mouseout="jumboDropDown=false" >
+        <div class="row" style="margin-bottom:20px;">
+          <div class="col-sm-1"> </div>
+          <div class="col-sm-7">
+            <div class="row col-sm-12" style="margin-top:10px;">
+                <!-- <div class="col-sm-8"> -->
+                  <div class="row col-sm-4" v-for="(item,key) in selectedCategory.children" :key="key">
+                       <a href="#" style="font-size:18px;color:black;">
+                        {{item.label}}
+                       </a>
+                  </div>
+                <!-- </div> -->
+            </div>
+          </div>
+          <div class="col-sm-3" style="margin-top:10px;font-size:18px;">
+            <ul style="font-size:18px;">
+              <li > <a href="#"><i class="fa fa-clock-o"></i>&nbsp;আজকের খবর</a> </li>
+              <li> <a href="#"><i class="fa fa-share-alt"></i>&nbsp;সোশ্যাল মিডিয়া</a> </li>
+              <li> <a href="#"> <i class="fa fa-camera"></i>&nbsp;আর্কাইভ</a> </li>
+              <li> <a href="#"><i class="fa fa-language"></i>&nbsp;ইউনিকোড কনভার্টের</a> </li>
+            </ul>
+          </div>
+          <div class="sol-sm-1"></div>
+        </div>    
+</div>
+</div>
 </template>
 <script>
 import axios from '@/plugins/axios'
@@ -110,6 +96,8 @@ export default {
  
   data() {
     return {
+      jumboDropDown : false ,  
+      selectedCategory : `` ,
       categories:[],
       hover:'a',
     }
@@ -120,6 +108,15 @@ export default {
   },
  
   methods: {
+     searchNews(){
+         alert(`:)`)
+     },
+     megaCard(args){
+         if(args.children.length>5){
+             this.jumboDropDown = true 
+             this.selectedCategory = args 
+         }
+     }, 
      getCategories(){
            axios.get('/api/frontend/categories').then((response) => {      
                   this.categories = response.data;
@@ -136,3 +133,25 @@ export default {
   
 }
 </script>
+
+<style >
+    #jumboDropDown{
+        background:white;
+        z-index:1000;
+        position:absolute;
+        width:100vw;
+    }
+    ul > li {
+        list-style: none ;
+    }
+    ul > li >a {
+        color:  black;
+    }
+    .bigSearch{
+        -webkit-transition: width 3s;
+    }
+    .bigSearch:hover{
+        width:79vw;
+        -webkit-transition: width 3s;
+    }
+</style>
