@@ -1,16 +1,18 @@
 <template>
     <div style="z-index:1">
         <div id="addNcategoryModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
 
             <!-- Modal content-->
             <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Create Category Item</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                        <div class="row">
+                <div class="row">
+                  <div class="col-sm-6" style="margin-left:15px;">
+                      <div class="row">
                           <div class="col-md-3">
                             <label for="Title">Display Name*</label>
                           </div>
@@ -83,7 +85,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-3">
-                              <label for="">Current Page</label>
+                              <label for="">Category Page Header</label>
                             </div>
 
                             <div class="col-md-3">
@@ -122,7 +124,27 @@
 
 
                         <br/>
-                        
+                        <!-- todo45  -->
+                         <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Category Layout*</label>
+                          </div>
+
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.menubarDisplay"
+                            >
+                            
+                              <option value="1">single column</option>
+                              <option value="0">Double column</option>
+                              <option value="0">Full View</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+                        <br/>                       
                         <div class="row">
                           <div class="col-md-3">
                             <label for="Parent">Header Display*</label>
@@ -135,8 +157,8 @@
                               v-model="newCategory.headerDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -149,7 +171,7 @@
 
                         <div class="row">
                           <div class="col-md-3">
-                            <label for="Parent">Home Dispaly*</label>
+                            <label for="Parent">Home Page Dispaly*</label>
                           </div>
 
                           <div class="col-md-7">
@@ -159,8 +181,8 @@
                               v-model="newCategory.homeDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -182,8 +204,8 @@
                               v-model="newCategory.menubarDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">Inactive</option>
                               
                             </select>
                           </div>
@@ -205,8 +227,8 @@
                               v-model="newCategory.photoDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -227,8 +249,8 @@
                               v-model="newCategory.vedioDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -265,6 +287,11 @@
                             {{i.replace(`title`,`name`)}}
                           </p>
                         </div>
+
+                  </div>
+                </div> 
+                  <!-- todo45 -->
+  
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
@@ -343,6 +370,9 @@ export default {
         }
     },
     methods:{
+        clearData(){   
+          Object.keys(this.newCategory).forEach(k => this.newCategory[k] = ``)
+        },
         closeModal() {
             $('#addNcategoryModal').modal('toggle');
         },
@@ -352,12 +382,13 @@ export default {
         openModal(){
 
             $('#addNcategoryModal').modal('toggle');
+            this.clearData()
         } ,      
         selectHeaderImage(){
           this.$refs.headerImage.openModal()
         },
         addCategory(){
-          alert(`adding`)  
+          // alert(`adding`)  
           this.addLoader = true  
           if(this.update){
             this.newCategory.parent_id = this.selected_parent 
@@ -369,6 +400,7 @@ export default {
               
               this.$parent.getCategories()
               this.addLoader = false
+              this.clearData()
             }).catch(error=>{
               this.errors = error.response.data.errors
               this.addLoader = false
@@ -396,12 +428,12 @@ export default {
           // this.newCategory.title=''
           // this.newCategory.color=''
           // this.newCategory.parent_id=''
-          // this.newCategory.photo_display='Yes'
-          // this.newCategory.video_display='Yes'
-          // this.newCategory.header_display='Yes'
-          // this.newCategory.home_display='Yes'
+          // this.newCategory.photo_display='Active'
+          // this.newCategory.video_display='Active'
+          // this.newCategory.header_display='Active'
+          // this.newCategory.home_display='Active'
           // this.newCategory.status=''
-          // this.newCategory.menubar_display='Yes'
+          // this.newCategory.menubar_display='Active'
           
         },
 

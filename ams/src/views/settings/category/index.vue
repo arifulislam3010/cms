@@ -2,7 +2,7 @@
 <div>
     <div class="row">
         <div class="col-sm-3">
-            <button v-if="auth_permission.category_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Add Category</button>
+            <button v-if="auth_permission.category_create" class="btn btn-success contct-b pull-left" @click="openModal"><i class="fa fa-plus"></i> Create Category</button>
         </div>
     </div>
 

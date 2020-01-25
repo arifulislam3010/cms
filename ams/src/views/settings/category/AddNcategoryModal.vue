@@ -156,8 +156,8 @@
                               v-model="newCategory.headerDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -170,7 +170,7 @@
 
                         <div class="row">
                           <div class="col-md-3">
-                            <label for="Parent">Home Dispaly*</label>
+                            <label for="Parent">Home Page Dispaly*</label>
                           </div>
 
                           <div class="col-md-7">
@@ -180,8 +180,8 @@
                               v-model="newCategory.homeDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -203,15 +203,32 @@
                               v-model="newCategory.menubarDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
                         </div>
+                        <br/>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Parent">Category Layout*</label>
+                          </div>
 
-
-
+                          <div class="col-md-7">
+                            <select
+                              class="form-control"
+                              id="exampleFormControlSelect2"
+                              v-model="newCategory.menubarDisplay"
+                            >
+                            
+                              <option value="1">one</option>
+                              <option value="0">two</option>
+                              <option value="0">three</option>
+                              
+                            </select>
+                          </div>
+                        </div>
                         <br/>
 
                         <div class="row">
@@ -226,8 +243,8 @@
                               v-model="newCategory.photoDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -248,8 +265,8 @@
                               v-model="newCategory.vedioDisplay"
                             >
                             
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1">Active</option>
+                              <option value="0">InActive</option>
                               
                             </select>
                           </div>
@@ -432,12 +449,12 @@ export default {
           // this.newCategory.title=''
           // this.newCategory.color=''
           // this.newCategory.parent_id=''
-          // this.newCategory.photo_display='Yes'
-          // this.newCategory.video_display='Yes'
-          // this.newCategory.header_display='Yes'
-          // this.newCategory.home_display='Yes'
+          // this.newCategory.photo_display='Active'
+          // this.newCategory.video_display='Active'
+          // this.newCategory.header_display='Active'
+          // this.newCategory.home_display='Active'
           // this.newCategory.status=''
-          // this.newCategory.menubar_display='Yes'
+          // this.newCategory.menubar_display='Active'
           
         },
         openModal(){
@@ -449,11 +466,11 @@ export default {
               // this.newCategory.parent_id =''
               // this.newCategory.display_name =''
               // this.newCategory.color =''
-              // this.newCategory.header_display ='Yes'
-              // this.newCategory.home_display ='Yes'
-              // this.newCategory.menubar_display ='Yes'
-              // this.newCategory.photo_display ='Yes'
-              // this.newCategory.video_display ='Yes'
+              // this.newCategory.header_display ='Active'
+              // this.newCategory.home_display ='Active'
+              // this.newCategory.menubar_display ='Active'
+              // this.newCategory.photo_display ='Active'
+              // this.newCategory.video_display ='Active'
               // this.newCategory.status ='Active'
             }
         },

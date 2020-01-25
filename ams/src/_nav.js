@@ -168,7 +168,7 @@ export default {
         //   icon: 'fa fa-life-bouy'
         // },        
         {
-          name: 'Section',
+          name: 'Placement',
           url: '/settings/area',
           icon: 'fa fa-life-bouy'
         },

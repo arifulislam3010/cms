@@ -57,7 +57,7 @@
       </div>
       <div class="ml-auto">
         <span class="mr-1">Developed And Maintain By</span>
-        <a href="http://bemantech.com/">Bemantech</a>
+        <a href="http://tangail24.com/">zerOnebd</a>
       </div>
     </TheFooter>
   </div>

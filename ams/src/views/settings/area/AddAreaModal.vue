@@ -1,5 +1,5 @@
 <template>
-    <b-modal title="Area" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
+    <b-modal title="Create Placement" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
         <form @submit.prevent="addArea" >
 
             <b-row>

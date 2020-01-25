@@ -71,7 +71,7 @@
 
     @mouseout="searchBarBig=false"
     id="bigSearch"
-    style="margin-right:100px;"
+    style="margin-right:50px;"
     class="form-control"
     placeholder="অনুসন্ধান"
     v-if="searchBarBig">
