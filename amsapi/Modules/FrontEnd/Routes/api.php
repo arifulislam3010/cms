@@ -23,6 +23,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('/post/{id}', 'PostsController@details');
     Route::get('/area/{title}', 'PostsController@area');
     Route::get('/categories', 'PostsController@category');
+    Route::get('/categories/news', 'PostsController@categoryNews');
     Route::post('/categories/home', 'PostsController@homeCategory');
     Route::get('/postSections', 'PostsController@postSection');
     Route::get('/languages', 'FrontEndController@lanAll');

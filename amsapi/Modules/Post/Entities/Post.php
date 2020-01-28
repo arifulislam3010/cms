@@ -31,6 +31,15 @@ class Post extends Model
     // area *
     // content *
     // scroll
+    public function FeaturedImage()
+    {
+        return $this->belongsTo('Modules\FrontEnd\Entities\Content', 'featured_image_id','id')->select('file_name','title','type');
+    }
+
+    public function FeaturedVideo()
+    {
+        return $this->belongsTo('Modules\FrontEnd\Entities\Content', 'featured_video_id','id')->select('file_name','title','type');
+    }
     public function tags(){
 
         return $this->belongsToMany('Modules\Setting\Entities\Tag','post_tags');

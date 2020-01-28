@@ -36,6 +36,7 @@ class CategoryController extends Controller
         ]);
         $category = new Category ;
         $category->title = $request->title ;
+        $category->layout = $request->layout ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
         $category->displayName = $request->displayName ;
         $category->displayNameColor = $request->displayNameColor ;
@@ -113,6 +114,7 @@ class CategoryController extends Controller
         // $category->status = $request->status ;
         // $category->parent_id = $request->parent_id ? $request->parent_id : null;
         $category->title = $request->title ;
+        $category->layout = $request->layout ;
         $category->parent_id = $request->parent_id ? $request->parent_id : null;
         $category->displayName = $request->displayName ;
         $category->displayNameColor = $request->displayNameColor ;

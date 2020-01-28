@@ -219,12 +219,13 @@
                             <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="newCategory.menubarDisplay"
+                              v-model="newCategory.layout"
                             >
                             
-                              <option value="1">one</option>
-                              <option value="0">two</option>
-                              <option value="0">three</option>
+                              <option value="one">sinle column</option>
+                              <option value="two">double column</option>
+                              <option value="three">full view</option>
+                              <option value="slider">Slider </option>
                               
                             </select>
                           </div>
@@ -400,7 +401,8 @@ export default {
                   menubarDisplay : `` ,
                   photoDisplay : ``, 
                   vedioDisplay : `` ,
-                  categoryStatus  : `` ,             
+                  categoryStatus  : `` ,    
+                  layout :  `` ,         
             },
     
         }

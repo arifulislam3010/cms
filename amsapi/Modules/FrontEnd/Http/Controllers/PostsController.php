@@ -19,7 +19,7 @@ use Modules\FrontEnd\Transformers\PostSection as PostSectionResource;
 
 use Modules\Post\Transformers\PostDetail ;
 use Modules\Setting\Entities\Section;
-
+use Modules\Category\Transformers\CategoryNews ;
 class PostsController extends Controller
 {
     /**
@@ -77,6 +77,11 @@ class PostsController extends Controller
        return CategoryResource::collection($category);
    }
    
+   public function categoryNews(Request $request){
+    //    use Modules\Category\Transformers\categoryNews ;
+       $category = Category::all();
+       return CategoryNews::collection($category);
+   }
    public function homeCategory(Request $request)
    {
        $limit     = ($request->has('limit'))?$request['limit']:10;
