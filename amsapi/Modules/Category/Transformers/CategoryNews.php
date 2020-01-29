@@ -16,6 +16,7 @@ class categoryNews extends Resource
     {   
         return [
             'id' => $this->id,
+            'parent_id' => $this->parent_id,
             'title' => $this->title,
             'news'  => PostLite::collection( $this->posts) ,
             'layout' => $this->layout ,
