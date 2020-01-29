@@ -3,20 +3,22 @@
         <div class="container card">
         <!-- category layot three  / category laout full -->
         <!-- all careds same size  -->
-        <div class="row">
+        <div v-for="(topic,key) in topics" :key="key">
+
+        <div class="row"  v-if="topic.news.length>1">
 
             <div class="col-sm-12">
                 <div class="pull-left">
-                        <h2 class="catTitle "><a href="country.html"> {{fullView.title}} </a><span class="liner"></span></h2>
+                        <h2 class="catTitle "><a href="country.html"> {{topic.title}} </a><span class="liner"></span></h2>
                 </div>
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- {{fullView.news}} -->
+        <div class="row" >
+            <div class="col-sm-12" v-if="topic.news.length>1">
+                <!-- {{topicFirst}} -->
                 <div class="pull-left">
-                    <div v-for="(item,skey) in fullView.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
+                    <div v-for="(item,skey) in topic.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
                         <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
                             <SingleBlock :blockType='"subLead"' :item='item'></SingleBlock>
                         </nuxt-link>
@@ -24,6 +26,8 @@
                 </div>
             </div>
         </div>
+        </div>
+
         <!-- category layot one  -->
         
         <!-- category layot two  -->
@@ -40,6 +44,11 @@ export default {
     data(){
         return {
             categories: [] ,
+            topics:[],
+            topicFirst : {
+                title: ``,
+                news : [],
+            } ,
             showFullView : true ,
             fullView:{
                 title : `` ,
@@ -48,7 +57,8 @@ export default {
         }
     },
     mounted(){
-        this.fetchCategories()
+        // this.fetchCategories()
+        this.fetchTopics()
     },
     computed:{
  
@@ -60,6 +70,17 @@ export default {
                 this.categories = response.data;
                 this.mainLeadLoading = false;
                 this.setFullView() 
+            }).catch(function (error) {    
+                this.mainLeadLoading = true;
+            });
+        },
+        fetchTopics(){
+            axios.get('/api/frontend/topics/news').then((response) => {      
+                this.topics = response.data;
+                this.mainLeadLoading = false;
+                // topics.length>0? 
+                this.topicFirst = {...this.topics[3]} //: ``
+                // this.setFullView() 
             }).catch(function (error) {    
                 this.mainLeadLoading = true;
             });
@@ -81,3 +102,9 @@ export default {
     }
 }
 </script>
+<style  scoped>
+    .liner{
+        width: 10px;
+        color:black;
+    }
+</style>

@@ -7,6 +7,11 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\FrontEnd\Entities\SiteInfo;
 use Modules\FrontEnd\Entities\Language;
+use Modules\FrontEnd\Entities\Topic;
+use Modules\FrontEnd\Entities\Content;
+use Modules\FrontEnd\Transformers\topicNews ;
+use Illuminate\Support\Facades\DB;
+use Modules\FrontEnd\Transformers\Content as ContentResource ;
 use Modules\FrontEnd\Transformers\Language as LanguageResource;
 use Modules\FrontEnd\Transformers\SiteInfo as SiteInfoResource;
 class FrontEndController extends Controller
@@ -86,5 +91,20 @@ class FrontEndController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function topics(Request $request){
+        
+        $topics = Topic::all() ;
+        return topicNews::collection($topics) ;
+
+    }
+    // set of images from all albums 
+    public function albumImgs(){
+        $content_ids = DB::table('album_contents')->select('content_id')->get()->toArray() ;
+        $content_ids = array_map(function($v){return $v->content_id;},$content_ids);
+        $imgs = Content::whereIn('id',$content_ids)->where('type','image')->get();
+        return ContentResource::collection($imgs) ;
+
     }
 }

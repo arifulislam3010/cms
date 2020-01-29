@@ -1,4 +1,4 @@
-<template>
+    <template>
     <div class="col-sm-8 main-content">
       <div class="row">
         <div v-if="loading" class="col-lg-12">
@@ -14,14 +14,18 @@
                             </nuxt-link>
                         </li>
                         <li v-for="(category,key) in  item.PostCategory" v-bind:key="key">
-                                <nuxt-link :to="'/category/'+category.id+'/'+category.title">
+                                <!-- <nuxt-link :to="'/category/'+category.id+'/'+category.title"> -->
+                                <nuxt-link :to="'/category/'+category.id+'/'">
                                 {{category.title}}
                                 </nuxt-link>
                         </li>
                     </ol>
-                    <h1 class="no-margin">
-                    {{item.shoulder}}
+                    <h1 class="no-margin" v-html="item.headline">
+                    <!-- {{item.shoulder}} -->
                     </h1>
+                    <!-- todo43 -->
+                    <!-- {{item.PostContents}} -->
+                    <!-- {{item.FeaturedVideo!=null}} -->
                     <div class="dividerDetails"></div>
                     <blockquote class="no-margin no-padding">
                         <div class="row">
@@ -70,17 +74,74 @@
                         </div>
                     </blockquote>
                 </div>
-                <div v-if="item.FeaturedImage!='' || item.FeaturedImage!=null" class="paddingTop10">
-                    <div class="featured-image">
-                       <img class="media-object"    style="width:100%;" v-if="item.FeaturedImage.type=='image'" :src="item.FeaturedImage.file_name" :alt="item.shoulder">
-                        <video class="media-object"  style="width:100%;" v-else-if="item.FeaturedImage.type=='video'" :src="item.FeaturedImage.file_name" alt="Card video cap" controls ></video>
-                        <audio class="media-object"  style="width:100%;" v-if="item.FeaturedImage.type=='audio'" :src="item.FeaturedImage.file_name"  alt="Card audio cap" controls ></audio>
+                <!-- f.img / f.vid -->
+                <!-- 🛶 if video position is set to top video will be on top img bottom/mid -->
+                <!-- 🛶 if video position is bottom or null then video on bottom  -->
+                <!-- 🛶 if more then one image then slider of extra images  -->
+                <div v-if="item.video_position ==`top` ">
+                    <div v-if="item.FeaturedVideo!=null " class="paddingTop10">
+                    <!-- <div v-if="item.FeaturedVideo!='' ||  item.FeaturedVideo!=null " class="paddingTop10"> -->
+                        <div class="featured-image">
+                            <video class="media-object"  style="width:100%;" v-if="item.FeaturedImage.type=='video'" :src="item.FeaturedVideo.file_name" alt="Card video cap" controls ></video>
+                            <img class="media-object"    style="width:100%;"  v-else :src="item.FeaturedVideo.file_name" :alt="item.shoulder">
+                        </div>
                     </div>
                 </div>
+                <div v-else>
+      <!-- image slider  -->
+                    <div v-if="item.PostContents.length > 0">
+                        <div>
+                           <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p> 
+                           <p @click="slideChange(`next`)" class="pull-right">next &gt;</p> 
+                           <!-- <p><a href="#" class="pull-right" @click="slideChange(`next`)">next &gt;</a></p>  -->
+                        </div>
+                        <div class="slider-image">
+                            <img  style="width:100%; height:500px;" :src=sliderImg alt="">
+                        </div>
+                    </div>     
+                    <div v-else>
+                        <img  v-if="item.FeaturedImage!=null" style="width:100%; height:500px;" :src=item.FeaturedImage.file_name alt="">
+                    </div> 
+  
+                </div>
+                <!-- todo sholder  -->
+                <div class="content-details">
+                    <div v-html="item.shoulder"></div>
+                </div>
+                <!-- todo hanger -. this is is qotes -->
+                <!-- content -->
                 <div class="content-details">
                     <p v-html="item.content"></p>
                 
                 </div>
+
+                <!-- 🛶 if more then one image then slider of extra images  -->
+                <div v-if="item.video_position !=`top` ">
+                    <div v-if="item.FeaturedVideo!=null" class="paddingTop10">
+                        <div class="featured-image">
+                            <video class="media-object"  style="width:100%;" v-if="item.FeaturedImage.type=='video'" :src="item.FeaturedVideo.file_name" alt="Card video cap" controls ></video>
+                            <img class="media-object"    style="width:100%;"  v-else :src="item.FeaturedVideo.file_name" :alt="item.shoulder">
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <!-- image slider  -->
+                    <div v-if="item.PostContents.length > 0">
+                        <div>
+                           <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p> 
+                           <p @click="slideChange(`next`)" class="pull-right">next &gt;</p> 
+                           <!-- <p><a href="#" class="pull-right" @click="slideChange(`next`)">next &gt;</a></p>  -->
+                        </div>
+                        <div class="slider-image">
+                            <img  style="width:100%; height:500px;" :src=sliderImg alt="">
+                        </div>
+                    </div>     
+                    <div v-else>
+                        <img  v-if="item.FeaturedImage!=null" style="width:100%; height:500px;" :src=item.FeaturedImage.file_name alt="">
+                    </div>              
+                </div>
+
+                <!-- news tags  -->
                 <div class="paddingLeft10 paddingRight10 hidden-print photo-title">
                     <ul class="photo-tags">
                         <li><i class="fa fa-tags"></i></li>
@@ -146,6 +207,9 @@ export default {
   data() {
     return {
       title: "PostDetails",
+      sliderImg:``,
+      showSlider : true ,
+      ptr : 0 ,
       item:{},
       loading:true,
     };
@@ -167,12 +231,39 @@ export default {
   mounted() {
     this.$nextTick(function() {});
     this.getData();
+    // this.initSlider()
   },
   methods: {
+     slideChange(arg){
+         let len = this.item.PostContents.length 
+         if(arg == `next`){
+             this.ptr +=1 
+             this.ptr  = (this.ptr ) % len
+             this.sliderImg = this.item.PostContents[this.ptr].file_name
+            // alert(this.ptr)
+        //  alert(this.item.PostContents.length)
+         }else{
+             this.ptr -=1
+             this.ptr = this.ptr < 0 ?  this.ptr = len - 1 : this.ptr 
+             this.sliderImg = this.item.PostContents[this.ptr].file_name
+         }
+     },
+     initSlider(){
+         console.log(this.item.PostContents)
+         if(this.item.PostContents.length < 1){
+             this.showSlider = false
+         }else{
+             this.sliderImg = this.item.PostContents[0].file_name
+            //  this.sliderImg = this.PostContents[0].file_name
+         }
+     } ,
      getData(){
         axios.get('/api/frontend/post/'+this.$route.params.id).then((response) => {      
             this.item = response.data;
             this.loading = false;
+            this.initSlider()
+            setInterval(this.slideChange,3000,`next`)
+            this.item.PostContents = [...this.item.PostContents , this.item.FeaturedImage]
         }).catch(function (error) {    
             this.loading = true;
         });

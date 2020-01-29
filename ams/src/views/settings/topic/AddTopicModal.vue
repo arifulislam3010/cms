@@ -121,7 +121,8 @@
                     </div>
                     <div class="col-md-7">
                       
-                        <button v-if="!addLoader" @click="addTopic"  class="btn btn-success btn-block" >create</button>
+                        <button   @click="addTopic"  class="btn btn-success btn-block" type="button" >create</button>
+                        <!-- <button v-if="!addLoader" @click="addTopic"  class="btn btn-success btn-block" >create</button> -->
                         <button v-if="addLoader" class="btn btn-primaryt btn-block" type="button" disabled>
                           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           Submitting...

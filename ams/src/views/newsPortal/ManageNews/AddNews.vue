@@ -286,7 +286,7 @@
                     :multiple="true"
                     :flat="true"
                     v-model="news_data.selected_topics"
-                    :options="topic_parents.filter(v => v.status == 1)"
+                    :options="topic_parents"
                     
                     ></Treeselect>
                   </div>         

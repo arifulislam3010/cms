@@ -29,4 +29,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('/languages', 'FrontEndController@lanAll');
     Route::get('/language/{id}', 'FrontEndController@lanGet');
     Route::get('/site-info/{id}', 'FrontEndController@SiteInfo');
+    Route::get('/topics/news','FrontEndController@topics');
+    // album
+    Route::get('/album/imgs','FrontEndController@albumImgs');
 });
