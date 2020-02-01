@@ -11,8 +11,15 @@
             </a>
         </div>
         <div class="media-body" style="text-align: left;"><h4 class="media-heading">
-            <a href="#" class="media-heading max_two_lines_allow text_overflow">{{item.shoulder}}</a></h4>
-            <div class="meta"><i class="fa fa-tags"></i> <a href="#">জরিমানা</a>
+            <a href="#" class="media-heading max_two_lines_allow text_overflow" v-html="item.shoulder"></a></h4>
+            <div class="meta"><i class="fa fa-tags"></i> 
+                  <span v-if="item.hasOwnProperty(`PostTag`)">
+                    <span v-for="(v,k) in item.PostTag.slice(0,3)" :key="k">
+                         <nuxt-link :to="'/tag/'+v.id+'/'+v.title">
+                            {{v.title}}&nbsp;&nbsp;
+                         </nuxt-link>
+                    </span>
+                  </span>
             </div>
         </div>
     </div>

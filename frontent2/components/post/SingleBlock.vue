@@ -19,10 +19,17 @@
         <div class="meta">
             <span class="pull-left tags">
             <i class="fa fa-tags"></i> 
-            <a href="topic/%e0%a6%aa%e0%a7%81%e0%a6%b2%e0%a6%bf%e0%a6%b6.html">পুলিশ
+            <a href="topic/%e0%a6%aa%e0%a7%81%e0%a6%b2%e0%a6%bf%e0%a6%b6.html">
+               <span v-if="item.hasOwnProperty(`PostTag`)" >
+                <span v-for="(v,k) in item.PostTag.slice(0,2)" :key="k">{{v.title}} </span>
+               </span>
             </a>
             </span>
-            <a href="national.html" class="pull-right">জাতীয়</a>
+            <a href="national.html" class="pull-right">
+               <span v-if="item.hasOwnProperty(`PostCategory`)" >
+                 <span v-for="(v,k) in item.PostCategory.slice(0,2)" :key="k">{{v.title }} &nbsp; </span>
+               </span> 
+            </a>
         </div>
     </div>
 </template>

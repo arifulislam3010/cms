@@ -13,7 +13,7 @@
 
     </div>
     <div class="media-body">
-        <h4 class="media-heading max_two_lines_allow text_overflow"><a class="" href="#">{{item.shoulder}}</a></h4>
+        <h4 class="media-heading max_two_lines_allow text_overflow"><a class="" href="#" v-html="item.shoulder">{{``}}</a></h4>
     </div>
 </div>
 </template>

@@ -6,13 +6,14 @@
           <div class="col-sm-8 main-content">
               <div class="row">
                  <ol class="breadcrumb hidden-print" start="float: left;">
+                     <!-- hear -->
                         <li>
                              <nuxt-link to="/">
                                 <i class="fa fa-home text-danger"></i>
                             </nuxt-link>
                         </li>
                         <li v-for="(area,key) in  PostArea" v-bind:key="key">
-                            <nuxt-link :to="'/area/'+area.title">
+                            <nuxt-link :to="'/area/'+area.id">
                                 {{area.title}}
                             </nuxt-link>
                         </li>

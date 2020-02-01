@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('frontend')->group(function () {
     Route::post('/posts', 'PostsController@index');
     Route::get('/post/{id}', 'PostsController@details');
-    Route::get('/area/{title}', 'PostsController@area');
+    Route::get('/area/{id}', 'PostsController@area2');
+    // Route::get('/area/{title}', 'PostsController@area');
     Route::get('/categories', 'PostsController@category');
     Route::get('/categories/news', 'PostsController@categoryNews');
     Route::post('/categories/home', 'PostsController@homeCategory');
@@ -32,4 +33,11 @@ Route::prefix('frontend')->group(function () {
     Route::get('/topics/news','FrontEndController@topics');
     // album
     Route::get('/album/imgs','FrontEndController@albumImgs');
+    // search   
+    Route::get('/search','FrontEndController@search');
+    // area options 
+    // Route::get('/area/list','FrontEndController@')
+    Route::get('/areas','FrontEndController@areas');
+    Route::get('/areas/news','FrontEndController@areaSearch');
+
 });

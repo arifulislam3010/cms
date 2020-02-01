@@ -53,6 +53,8 @@
         </div> -->
     </div>
     <Section1Aside></Section1Aside>
+    <AreaSearch></AreaSearch>
+    <!-- <Section1Aside></Section1Aside> -->
 </div>
 </template>
 <script>
@@ -60,12 +62,14 @@ import axios from '@/plugins/axios'
 import SmallLoaderVerticle from "~/components/loader/SmallLoaderVerticle";
 import SingleBlock from '~/components/post/SingleBlock.vue'
 import Section1Aside from './Section1Aside.vue'
+import AreaSearch from "./AreaSearch"
 import SmallLoader from "@/components/loader/SmallLoader";
 export default {
   components: {
     SingleBlock,
     Section1Aside,
-    SmallLoader
+    SmallLoader ,
+    AreaSearch ,
   },
   data() {
     return {

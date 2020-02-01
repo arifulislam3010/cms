@@ -27,9 +27,26 @@ class PostsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
+    public function area2($id){
+        $area = Area::where('id',$id)->first();
+        if($area == null){
+            return [];
+        }else{
+            $garea = Area::where('parent_id',$area->id)->get();
+        }
+        // return $garea ;
+        return AreaResource::collection($garea);
+    }
     public function area($title){
         $area = Area::where('title',$title)->first();
-        $garea = Area::where('parent_id',$area->id)->get();
+        // $garea = Area::where('id',$area->id)->get();
+        // return strval( $area !== null);
+        if($area == null){
+            return [];
+        }else{
+            $garea = Area::where('parent_id',$area->id)->get();
+        }
+        // return $garea ;
         return AreaResource::collection($garea);
     }
     public function index(Request $request)
@@ -45,7 +62,8 @@ class PostsController extends Controller
         $popular     = ($request->has('popular'))?$request['popular']:null;
         $latest     = ($request->has('latest'))?$request['latest']:null;
         if($area!=null){
-            $garea = Area::where('title',$area)->first();
+            // $garea = Area::where('title',$area)->first();
+            $garea = Area::where('id',$area)->first();
             if($garea){
                 $area = $garea->id;
             }else{
@@ -59,7 +77,7 @@ class PostsController extends Controller
     
         $post = Post::select('posts.*')
         ->when($section,function($q) use($section){return $q->join('post_sections','post_sections.post_id','=','posts.id')->where('post_sections.section_id', $section);})
-        ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id', $category);})
+        ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id','=', $category);})
         ->when($tag,function($q) use($tag){return $q->join('post_tags','post_tags.post_id','=','posts.id')->where('post_tags.tag_id',$tag);})
         ->when($area,function($q) use($area){return $q->join('post_areas','post_areas.post_id','=','posts.id')->where('post_areas.area_id', $area);})
             ->orderBy('posts.id', 'DESC')

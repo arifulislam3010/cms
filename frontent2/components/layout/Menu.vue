@@ -31,7 +31,7 @@
            
             </div> -->
             <div class="container" style="position:relative;top:10px;">
-                <input type="text" class="bigSearch" style="position:absolute;right:60px;z-index:500;" placeholder="অনুসন্ধান">
+                <input v-model="q" type="text" class="bigSearch" style="position:absolute;right:60px;z-index:500;" placeholder="অনুসন্ধান" @keypress="searchNews">
                 <!-- <input type="text" class="" style="position:absolute;right:10px;width:85vw;"> -->
                 <span  class="sb-icon-search"><i class="fa fa-search" @click="searchNews"></i></span>
             </div>
@@ -47,7 +47,7 @@
 
                 <ul v-if="category.children.length<5" class="dropdown-menu" :style="hover==key?'display: block':'display: none'">
                     <li v-for="(item,keyi) in category.children" v-bind:key="keyi">
-                        <nuxt-link :to="'/category/' + item.label" class="dropdown-item">{{item.label}}</nuxt-link>
+                        <nuxt-link :to="'/category/' + item.id +'/' + item.label" class="dropdown-item">{{item.label}}</nuxt-link>
                     </li>
                 </ul>
 
@@ -67,9 +67,12 @@
             <div class="row col-sm-12" style="margin-top:10px;">
                 <!-- <div class="col-sm-8"> -->
                   <div class="row col-sm-4" v-for="(item,key) in selectedCategory.children" :key="key">
-                       <a href="#" style="font-size:18px;color:black;">
+                       <!-- <a href="#" style="font-size:18px;color:black;">
                         {{item.label}}
-                       </a>
+                       </a> -->
+                        <nuxt-link :to="'/category/'+item.id+'/'+item.label">
+                            {{item.label}}
+                        </nuxt-link>
                   </div>
                 <!-- </div> -->
             </div>
@@ -96,6 +99,7 @@ export default {
  
   data() {
     return {
+      q : ``,
       jumboDropDown : false ,  
       selectedCategory : `` ,
       categories:[],
@@ -108,8 +112,13 @@ export default {
   },
  
   methods: {
-     searchNews(){
-         alert(`:)`)
+     searchNews(e){
+         if(e.keyCode == 13){
+            //  alert(`search ${this.q}`)
+             // open in new window 
+             let routeData = this.$router.resolve({name: 'search', query: {q: this.q}});
+             window.open(routeData.href, '_blank');
+         }
      },
      megaCard(args){
          if(args.children.length>5){

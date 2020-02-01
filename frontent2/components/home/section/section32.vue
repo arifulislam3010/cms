@@ -18,7 +18,7 @@
                 <!-- {{fullView.news}} -->
                 <div class="pull-left">
                     <div v-for="(item,skey) in fullView.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
-                        <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                        <nuxt-link :to="'/post/'+item.id+'/'">
                             <SingleBlock :blockType='"subLead"' :item='item'></SingleBlock>
                         </nuxt-link>
                     </div>
@@ -44,14 +44,14 @@
                           <div class="row">
                               <div class="col-sm-8">
                                 <div v-for="(item,skey) in fullView.news.slice(0,1)" v-bind:key="skey" >
-                                    <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                    <nuxt-link :to="'/post/'+item.id+'/'">
                                         <SingleBlock :blockType='mainLead' :item='item'></SingleBlock>
                                     </nuxt-link>
                                 </div>                                 
                               </div>
                                 <div class="col-sm-4">
                                     <div v-for="(item,skey) in fullView.news.slice(0,2)" v-bind:key="skey" >
-                                        <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                        <nuxt-link :to="'/post/'+item.id+'/'">
                                             <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                                         </nuxt-link>
                                     </div>                                  
@@ -97,9 +97,12 @@
                         <div v-for="(v,k) in item.news.slice(0,4)" :key="k" >
                             <!-- {{item.title + item.news.length}} -->
                             <div class="col-sm-12">
-                                <a href="#">
+                                <!-- <a href="#">
                                  <span class="" v-html="v.headline"></span>
-                                </a>
+                                </a> -->
+                                <nuxt-link :to="'/post/'+v.id+'/'">
+                                     <span class="" v-html="v.headline" style="hover:{color:blue;}"></span>
+                                </nuxt-link>
                             <div style="height:1px;background:grey;width:100%"></div>
                             </div>
                             <!-- {{}} -->

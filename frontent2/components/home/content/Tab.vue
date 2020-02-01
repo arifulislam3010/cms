@@ -5,10 +5,10 @@
                 <div class="jagoTab2">
                     <ul class="nav nav-tabs nav-justified" role="tablist">
                         <li role="presentation" :class="tab_active==1?'active':''" @click="TabActive(1)">
-                            <a href="#" aria-controls="tab21" role="tab" data-toggle="tab">সর্বশেষ</a>
+                            <a href="" aria-controls="tab21" role="tab" data-toggle="tab">সর্বশেষ</a>
                         </li>
                         <li role="presentation" :class="tab_active==2?'active':''" @click="TabActive(2)">
-                            <a href="#" aria-controls="tab22" role="tab" data-toggle="tab">জনপ্রিয়</a>
+                            <a href="" aria-controls="tab22" role="tab" data-toggle="tab">জনপ্রিয়</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -20,7 +20,8 @@
                             <div v-else>
                                 <ul class="media-list" style="max-height:357px!important;">
                                     <li v-for="(item,lkey) in latestPosts.data" v-bind:key="lkey" class="media">
-                                        <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                        <!-- <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder"> -->
+                                        <nuxt-link :to="'/post/'+item.id+'/'">
                                         <List :item="item" :index="lkey"></List>
                                         </nuxt-link>
                                     </li>
@@ -40,7 +41,8 @@
                             <div v-else>
                                 <ul class="media-list" style="max-height:357px!important;">
                                     <li v-for="(item,pkey) in popularPosts.data" v-bind:key="pkey" class="media">
-                                        <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                        <!-- <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder"> -->
+                                        <nuxt-link :to="'/post/'+item.id+'/'">
                                         <List :item="item" :index="pkey"></List>
                                         </nuxt-link>
                                     </li>
