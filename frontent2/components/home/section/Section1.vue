@@ -39,7 +39,7 @@
                     <SmallLoader :counts='1'></SmallLoader>
                 </div>
                 <div v-else>
-                <div v-for="(item,skey) in subLeadData2" v-bind:key="skey" class="col-sm-4">
+                <div v-for="(item,skey) in subLeadData2.slice(0,3)" v-bind:key="skey" class="col-sm-4">
                     <nuxt-link :to="'/post/'+item.id+'/'">
                         <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                     </nuxt-link>

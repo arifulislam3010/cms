@@ -15,7 +15,7 @@
         </div>
         <div class="row" >
             <div class="col-sm-12" >
-                <!-- {{fullView.news}} -->
+                <!-- {{categories.filter(v => v.layout == 'three')[0].news.map(v => v.id)}} -->
                 <div class="pull-left">
                     <div v-for="(item,skey) in fullView.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
                         <nuxt-link :to="'/post/'+item.id+'/'">
@@ -28,11 +28,12 @@
         
 
         <!-- category layot two / two column -->
+        <!-- {{halfView}} -->
         <div class="row">
 
             <div class="col-sm-12">
                 <div class="pull-left">
-                        <h2 class="catTitle "><a href="country.html"> {{fullView.title}} </a><span class="liner"></span></h2>
+                        <h2 class="catTitle "><a href="country.html"> {{halfView.title}} </a><span class="liner"></span></h2>
                 </div>
             </div>
 
@@ -43,14 +44,14 @@
                       <div class="col-sm-12">
                           <div class="row">
                               <div class="col-sm-8">
-                                <div v-for="(item,skey) in fullView.news.slice(0,1)" v-bind:key="skey" >
+                                <div v-for="(item,skey) in halfView.news.slice(0,1)" v-bind:key="skey" >
                                     <nuxt-link :to="'/post/'+item.id+'/'">
                                         <SingleBlock :blockType='mainLead' :item='item'></SingleBlock>
                                     </nuxt-link>
                                 </div>                                 
                               </div>
                                 <div class="col-sm-4">
-                                    <div v-for="(item,skey) in fullView.news.slice(0,2)" v-bind:key="skey" >
+                                    <div v-for="(item,skey) in halfView.news.slice(1,3)" v-bind:key="skey" >
                                         <nuxt-link :to="'/post/'+item.id+'/'">
                                             <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                                         </nuxt-link>
@@ -65,7 +66,7 @@
                             <SmallLoader :counts='1'></SmallLoader>
                         </div>
                         <div v-else>
-                        <div v-for="(item,skey) in fullView.news.slice(1,7)" v-bind:key="skey" class="col-sm-4">
+                        <div v-for="(item,skey) in halfView.news.slice(3,7)" v-bind:key="skey" class="col-sm-4">
                             <nuxt-link :to="'/post/'+item.id+'/'">
                                 <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                             </nuxt-link>
@@ -89,12 +90,12 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <!-- {{item.news[0].FeaturedImage.file_name}} -->
-                            <img  :src=item.news[0].FeaturedImage.file_name alt="">
+                            <img  :src=item.news[0].FeaturedImage.file_name alt="" style="height:200px;">
                         </div>
                     </div>
                     <div class="row ">
                         
-                        <div v-for="(v,k) in item.news.slice(0,4)" :key="k" >
+                        <div v-for="(v,k) in item.news.slice(0,8)" :key="k" >
                             <!-- {{item.title + item.news.length}} -->
                             <div class="col-sm-12">
                                 <!-- <a href="#">
@@ -142,6 +143,10 @@ export default {
             fullView:{
                 title : `` ,
                 news : [],
+            },
+            halfView:{
+                title : `` ,
+                news : [],
             }
         }
     },
@@ -158,7 +163,13 @@ export default {
             axios.get('/api/frontend/categories/news').then((response) => {      
                 this.categories = response.data;
                 this.mainLeadLoading = false;
-                this.setFullView() 
+                try{
+
+                    this.setFullView() 
+                    this.setHalfView()
+                }catch(e){
+                    console.log(e)
+                }
             }).catch(function (error) {    
                 this.mainLeadLoading = true;
             });
@@ -167,14 +178,13 @@ export default {
             axios.get('/api/frontend/topics/news').then((response) => {      
                 this.topics = response.data;
                 this.mainLeadLoading = false;
-                // topics.length>0? 
                 this.topicFirst = {...this.topics[3]} //: ``
-                // this.setFullView() 
             }).catch(function (error) {    
                 this.mainLeadLoading = true;
             });
         },
         setFullView(){
+            // alert(`make noise`)
             this.showfullView = true 
             let _t = this.categories.filter(v => v.layout == 'three')
             if(_t.length == 0) {
@@ -182,12 +192,31 @@ export default {
                 return 
             }
             this.fullView = _t[0]
-            _t.forEach((v)=>{
-                this.fullView = v.news.length > fullView.news.length ? v : fullView 
+            let self = this
+            _t.forEach(function(v){
+                self.fullView = v.news.length > self.fullView.news.length ? v : self.fullView 
             })
-            if(this.fullView.news.length >4) this.fullView.news = this.fullView.news.slice(0,3)    
-            return this.fullView            
-        }
+            if(this.fullView.news.length >4) this.fullView.news = this.fullView.news.slice(0,4)    
+            // return this.fullView      
+
+        },
+        setHalfView(){
+            // alert(`in method`)
+            this.showfullView = true 
+            let _t = this.categories.filter(v => v.layout == 'two')
+            if(_t.length == 0) {
+                // this.showfullView = false 
+                return 
+            }
+            this.halfView = _t[0]
+            let self = this
+            _t.forEach(function(v){
+                self.halfView = v.news.length > self.halfView.news.length ? v : self.halfView 
+            })
+            // if(this.halfView.news.length >4) this.halfView.news = this.halfView.news.slice(0,3)    
+            // alert(this.halfView)
+            // return this.halfView             
+        },
     }
 }
 </script>

@@ -64,7 +64,7 @@
       <hr />
       <div class="row">
         <div class="col-sm-6">
-          <h3>Album Photos</h3>
+          <h3>Album  {{add_type}} </h3>
           <br />
           <br />
           <br />
@@ -108,6 +108,7 @@ export default {
   components: { MorePhoto, ContentManager ,Loader},
   data() {
     return {
+      add_type :``,
       errors:{},
       loading:false ,
       selected_content_type:'',
@@ -119,6 +120,7 @@ export default {
   },
 
   mounted() {
+    this.init()
     this.clearAlbum()
     this.getAlbums()
     this.handel_update()
@@ -129,7 +131,11 @@ export default {
       if(to.name == `AddAlbum`){
         this.clearAlbum()
       }
-    },    
+    },  
+    "$route.query.type"(val){
+      // alert(val)
+      this.add_type = val
+    },  
     content: function(val) {
       this.album_detail.cover_id = val.id;
       this.album_detail.cover = val;
@@ -142,6 +148,10 @@ export default {
     ...mapGetters(["auth_permission","album_detail","album_list"])
   },
   methods: {
+    init(){
+      // console.log(this.$route.query.type)
+      this.add_type = this.$route.query.type
+    },
     remove_album_cover(){
         // alert(`album cover removed`)
         this.album_detail.cover = {file:``}

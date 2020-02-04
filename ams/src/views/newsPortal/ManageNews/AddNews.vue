@@ -243,6 +243,11 @@
               :multiple="true"
               label="name_eng"
             ></Treeselect> 
+
+            <div style="position:relative;left:10px;top:5px;">
+              <i class="icon-plus" style="font-size:20px;" @click="add_scroll"></i>
+            </div>
+
           </div>                   
           <hr>
             <!-- tags hear   -->
@@ -740,6 +745,7 @@
     <AddTagModal ref="add_tag_modal"></AddTagModal>
     <AddNcategoryModal ref="add_category_modal"></AddNcategoryModal>
     <AddTopicModal ref="add_topic_modal"></AddTopicModal>
+    <AddScrollModal ref="add_scroll_modal"></AddScrollModal>
     <ScheduleBackPost ref="schedule_back_post"></ScheduleBackPost>
     <Loader v-if="loading"></Loader>
   </div>
@@ -762,6 +768,7 @@ import Loader from "@/views/common/Loader";
 import { quillEditor } from 'vue-quill-editor'
 import AddNcategoryModal from "../../settings/category/AddNcategoryModal"
 import AddTopicModal from "../../settings/topic/AddTopicModal"
+import AddScrollModal from "../../settings/scroll/AddScroll"
 import ScheduleBackPost from "./schedule_back_post"
 //
 // ClassicEditor
@@ -789,6 +796,7 @@ export default {
     AddTagModal ,
     AddNcategoryModal,
     AddTopicModal,
+    AddScrollModal,
     ScheduleBackPost,
   },
   data() {
@@ -1041,6 +1049,10 @@ export default {
 
   },
   methods: {
+    add_scroll(){
+      this.$refs.add_scroll_modal.openModal()
+      // alert(`add scroll`)
+    },
     schedule_post(){
       // alert(1)
       this.$refs.schedule_back_post.type = `Schedule`

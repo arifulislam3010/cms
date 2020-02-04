@@ -20,6 +20,8 @@ use Modules\FrontEnd\Transformers\PostSection as PostSectionResource;
 use Modules\Post\Transformers\PostDetail ;
 use Modules\Setting\Entities\Section;
 use Modules\Category\Transformers\CategoryNews ;
+
+use Carbon\Carbon ;
 class PostsController extends Controller
 {
     /**
@@ -80,7 +82,12 @@ class PostsController extends Controller
         ->when($category,function($q) use($category){return $q->join('post_categories','post_categories.post_id','=','posts.id')->where('post_categories.category_id','=', $category);})
         ->when($tag,function($q) use($tag){return $q->join('post_tags','post_tags.post_id','=','posts.id')->where('post_tags.tag_id',$tag);})
         ->when($area,function($q) use($area){return $q->join('post_areas','post_areas.post_id','=','posts.id')->where('post_areas.area_id', $area);})
-            ->orderBy('posts.id', 'DESC')
+        // manege scheduel post 
+        ->where(function($q){
+            $q->where('schedule_post_date','<=',Carbon::now())
+            ->orWhere('schedule_post_date','=',null);
+        })    
+        ->orderBy('posts.id', 'DESC')
             ->paginate($limit);
         return PostResource::collection($post);
     }
@@ -91,7 +98,9 @@ class PostsController extends Controller
 
    public function category()
    {
-       $category = Category::whereNull('parent_id')->get();
+    //    return "ok";
+       $category = Category::whereNull('parent_id')->where('categoryStatus',1) ->get();
+    //    return Category::where('parent_id',NULL)->get();
        return CategoryResource::collection($category);
    }
    

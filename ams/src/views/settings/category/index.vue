@@ -15,8 +15,8 @@
         </div>
     </div>
         <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
-        <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
-        <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
+        <!-- <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal> -->
+        <!-- <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal> -->
         <Loader v-if="loading"></Loader>  
 </div> 
 </template>
@@ -29,7 +29,7 @@ import axios from 'axios'
 import pagination from 'laravel-vue-pagination'
 import Loader from '@/views/common/Loader'
 
-import AddNcategoryModal from './AddNcategoryModal2'
+import AddNcategoryModal from './AddNcategoryModal'
 import EditNcategoryModal from './EditNcategoryModal'
 import ViewNcategoryModal from './ViewNcategoryModal'
 

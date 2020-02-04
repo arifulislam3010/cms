@@ -5,7 +5,15 @@
   <div class="card">
         <div class="container-fluid">
             <!-- <button  @click="openModal"><i class="fa fa-life-bouy"></i> New News</button> -->
-            <a href="#" @click="$router.push({name:`AddNews`})" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New News</a>
+            <router-link :to="{name:'AddNews'}">
+                
+                <span class="btn btn-primary">
+                    <i class="fa fa-life-bouy"></i>
+                    New News
+                </span> 
+
+            </router-link>
+            <!-- <a href="#" @click="$router.push({name:`AddNews`})" class="btn btn-primary contct-b pull-left"><i class="fa fa-life-bouy"></i> New News</a> -->
             <!-- <form class="form-inline contct my-2 my-lg-0 pull-right">
                 <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>

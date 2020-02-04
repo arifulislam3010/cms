@@ -113,7 +113,7 @@ export default {
           children: [
             {
               name: 'Create Gallery',
-              url: '/gallery/add-album',
+              url: '/gallery/add-album?type=photo',
               icon: 'fa fa-plus'
             },
             {
@@ -130,7 +130,7 @@ export default {
           children: [
             {
               name: 'Create Gallery',
-              url: '/gallery/add-album',
+              url: '/gallery/add-album?type=video',
               icon: 'fa fa-plus'
             },
             {
@@ -149,6 +149,11 @@ export default {
       children: [
         {
           name: 'Tag',
+          url: '/settings/tags',
+          icon: 'fa fa-tag'
+        },
+        {
+          name: 'Scroll',
           url: '/settings/scroll',
           icon: 'fa fa-tag'
         },
@@ -169,7 +174,7 @@ export default {
         // },        
         {
           name: 'Placement',
-          url: '/settings/area',
+          url: '/settings/placement',
           icon: 'fa fa-life-bouy'
         },
         {

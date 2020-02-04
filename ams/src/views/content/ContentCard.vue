@@ -1,8 +1,20 @@
 <template>
 <div class="row">
-<div class="col-md-3" v-for="(item,key) in items" v-bind:key="key">
+<div class="col-md-3" v-for="(item,key) in items" v-bind:key="key" style="width:800px;">
     <!-- <img src="../../static/selected.png" style="width:30px;"> -->
-<div class="card-content" style="margin-bottom:15px;">
+<div class="card-content " style="margin-bottom:15px;">
+    <div class="card-desc">
+        <div class="row">
+            <div class="col-sm-8">
+                <b>{{item.title}}</b>
+
+            </div>
+            <div class="col-sm-4">
+                <a href="#" class="pull-right" @click="delete_image(item.id)" style="color:red;font-size:20px;position:relative;top:-5px;" toggle="tooltip" title="delete" > <i class="fa fa-trash"></i> </a>
+
+            </div>
+        </div>
+    </div>
     <div class="card-img">
         
         <img :src="item.file" alt="" style="height:150px">
@@ -12,12 +24,7 @@
         </span>
         
     </div>
-    <div class="card-desc">
-        <h3>{{item.title}}</h3>
-        <!-- <a href="#" class="btn-card">Read</a>    -->
-        <a href="#" @click="delete_image(item.id)">delete</a>
-        <!-- <link></link> -->
-    </div>
+
 </div>
 </div>
 </div>
@@ -201,4 +208,7 @@ a.btn-card {
     color: #fff;
 }
 /* End card section */
+.col-md-3{
+    width: 100%;
+}
 </style>

@@ -119,7 +119,7 @@ class PostController extends Controller
         $post->author_id = $auth_user_id ;//$request->author['id'];
         $post->content   = $request->content;
 
-        $post->share_at = $request->share_at;
+        // $post->share_at = $request->share_at;
         $post->published_at = $request->publish_at;
         $post->status = $request->status;
         $post->instant_article = $request->instant_article;
@@ -130,9 +130,9 @@ class PostController extends Controller
         // video position 
         $post->video_position = $request->video_position ;
         // auto share 
-        // $post->auto_share_flag = $request->auto_share['flag'] ;    
-        // $post->auto_share_caption = $request->auto_share['caption'] ;    
-        // $post->auto_share_date = $request->auto_share['time'] ;    
+        $post->auto_share_flag = $request->auto_share['flag'] ;    
+        $post->auto_share_caption = $request->auto_share['caption'] ;    
+        $post->auto_share_date = $request->auto_share['time'] ;    
         
         // schedule date 
         $post->schedule_post_date  = $request->schedule_time;
@@ -230,13 +230,13 @@ class PostController extends Controller
         $post->featured_video_id = $request->featured_video_id ;
         $post->video_position = $request->video_position ;
         // auto share 
-        // $post->auto_share_flag = $request->auto_share['flag'] ;    
-        // $post->auto_share_caption = $request->auto_share['caption'] ;    
-        // $post->auto_share_date = $request->auto_share['time'] ;    
+        $post->auto_share_flag = $request->auto_share['flag'] ;    
+        $post->auto_share_caption = $request->auto_share['caption'] ;    
+        $post->auto_share_date = $request->auto_share['time'] ;    
         
         // schedule date 
-        // $post->schedule_post_date  = $request->schedule_time;
-        // $post->backdate_post_date  = $request->backdate_time;
+        $post->schedule_post_date  = $request->schedule_time;
+        $post->backdate_post_date  = $request->backdate_time;
         //
         $post->updated_by = $auth_user_id ;
 

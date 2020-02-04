@@ -107,6 +107,7 @@ const ContentIndex = () => import('@/views/content/index');
 
 //settings
 const Area = () => import('@/views/settings/area/index');
+const Placement = () => import('@/views/settings/placement/index');
 const NewsCategory = () => import('@/views/settings/category/index');
 const NewsTopic = () => import('@/views/settings/topic/index');
 const NewsScroll = () => import('@/views/settings/scroll/index');
@@ -236,6 +237,14 @@ export default new Router({
           path: '/settings/area',
           name: 'Area',
           component: Area,
+          meta: {
+            forAuth: true
+          }
+        },
+        {
+          path: '/settings/placement',
+          name: 'Placement',
+          component: Placement,
           meta: {
             forAuth: true
           }

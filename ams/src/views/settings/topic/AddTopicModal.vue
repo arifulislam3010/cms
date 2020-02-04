@@ -20,7 +20,11 @@
                       <b-form-input type="textarea" name="Title" :style="`color:${current_topic.color}`" v-model="current_topic.title" v-validate="'required'" placeholder="Topic"></b-form-input>
                     </div>
                     <div class="col-sm-1">
-                      <swatches v-model="current_topic.color" data-toggle="tooltip" title="select color"/>
+                      <!-- <swatches v-model="current_topic.color" data-toggle="tooltip" title="select color"/> -->
+
+                      <input type="color" v-model="current_topic.color" style="width:40px;height:35px;">  
+
+
                     </div>
                   </div>
                   <br/>

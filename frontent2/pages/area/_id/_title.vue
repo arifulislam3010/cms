@@ -26,7 +26,8 @@
                               </div>
                               <div v-else>
                                   <div v-for="(item,mkey) in postsOne" v-bind:key="mkey">
-                                      <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                      <!-- <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder"> -->
+                                      <nuxt-link :to="'/post/'+item.id+'/'">
                                           <SingleBlock :blockType='mainLead' :item='item'></SingleBlock>
                                       </nuxt-link>
                                   </div>
@@ -39,7 +40,8 @@
                               </div>
                               <div v-else>
                               <div v-for="(item,skey) in postsTwo" v-bind:key="skey">
-                                  <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                                  <!-- <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder"> -->
+                                  <nuxt-link :to="'/post/'+item.id+'/'">
                                       <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                                   </nuxt-link>
                               </div>
@@ -55,7 +57,8 @@
                       </div>
                       <div v-else>
                       <div v-for="(item,skey) in posts" v-bind:key="skey" class="col-sm-4">
-                          <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder">
+                          <!-- <nuxt-link :to="'/post/'+item.id+'/'+item.shoulder"> -->
+                          <nuxt-link :to="'/post/'+item.id+'/'">
                               <SingleBlock :blockType='subLead' :item='item'></SingleBlock>
                           </nuxt-link>
                       </div>

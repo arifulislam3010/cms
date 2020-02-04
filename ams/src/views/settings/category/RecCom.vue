@@ -21,7 +21,7 @@
             </div>
         </div>
         <AddNcategoryModal ref="add_ncategory_modal"></AddNcategoryModal>
-        <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal>
+        <!-- <EditNcategoryModal ref="edit_ncategory_modal"></EditNcategoryModal> -->
         <ViewNcategoryModal ref="view_ncategory_modal"></ViewNcategoryModal>
         <Loader v-if="loading"></Loader>    
 

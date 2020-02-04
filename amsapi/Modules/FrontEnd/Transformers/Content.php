@@ -16,7 +16,8 @@ class Content extends Resource
     {
         return [
             'title'=>$this->title,
-            'file_name'=>'http://localhost:8000/uploads/'.$this->file_name,
+            'file_name'=> \config::get("global.file_path").$this->file_name,
+            // 'file_name'=>'http://localhost:8000/uploads/'.$this->file_name,
             // 'file_name'=>'http://bpress.api.istiak.net/public/uploads/'.$this->file_name,
             'type'=>$this->type
         ];
