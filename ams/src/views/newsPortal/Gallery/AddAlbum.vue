@@ -135,6 +135,7 @@ export default {
     "$route.query.type"(val){
       // alert(val)
       this.add_type = val
+      this.clearAlbum()
     },  
     content: function(val) {
       this.album_detail.cover_id = val.id;
@@ -158,7 +159,11 @@ export default {
         this.content = {file:``}
     },
     clearAlbum(){
-    this.$store.dispatch(`EMPTY_ALBUM`)
+      this.$store.dispatch(`EMPTY_ALBUM`)
+      this.album_detail.title = ``
+      this.remove_album_cover()
+      this.album_detail.more_photo = []
+      this.album_detail.is_update = false
     },
     handel_update: function(){
       this.loading = true 
@@ -198,6 +203,8 @@ export default {
       this.content_list = [];
     },
     submit: function() {
+      // todo : loader true 
+      this.loading = true 
       this.album_detail.more_photo_ids = this.album_detail.more_photo.map(v => v.id);
       if (this.album_detail.is_update) {
         // update
@@ -213,6 +220,8 @@ export default {
               title: "Ok",
               message: "Album Added Updated"
             })
+            // todo : loading false 
+            this.loading = false 
           })
           .catch(error => {
             console.log(error)
@@ -222,6 +231,8 @@ export default {
               title: "error",
               message: "Could Not Update Album"
             });
+            // todo : loading false 
+            this.loading = false 
           });
       } else {
         // add
@@ -233,6 +244,10 @@ export default {
               title: "Ok",
               message: "Album Added Successsfully"
             });
+            // todo : clear data 
+            this.clearAlbum()
+            // loading flase 
+            this.loading = false 
           })
           .catch(error => {
             this.errors = error.response.data.errors
@@ -241,6 +256,8 @@ export default {
               title: "error",
               message: "Error adding album"
             });
+            // todo : loader false
+            this.loading = false  
           });
       }
     },

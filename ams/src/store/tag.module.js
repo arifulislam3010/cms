@@ -36,7 +36,7 @@ const actions = {
     },
     ['ADD_TAG']({commit},payload){
         return new Promise((resolve,reject)=>{
-            axios.post('/api/tag/',payload).then(response=>{
+            axios.post('api/tag/',payload).then(response=>{
                 // commit('SET_TAGS',response.data)
                 resolve(response)
             }).catch(error=>{

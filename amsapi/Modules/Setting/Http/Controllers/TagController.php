@@ -25,6 +25,7 @@ class TagController extends Controller
     }
 
     public function create(Request $request){
+        
         $validator = $request->validate([
             'title' => 'required|unique:tags',
         ]);

@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="row" >
 <div class="col-md-3" v-for="(item,key) in items" v-bind:key="key" style="width:800px;">
     <!-- <img src="../../static/selected.png" style="width:30px;"> -->
 <div class="card-content " style="margin-bottom:15px;">

@@ -84,9 +84,11 @@
         </div>
         <hr />
         <div class="col-md-12 row">
-          <div class="col-md-9">
-            <div class="row">
-              <ContentCard :items="content_list" :content="content"></ContentCard>
+          <div class="col-md-9" >
+            <div class="row" >
+              <div style="height:350px;overflow-y:scroll;overflow-x:hidden">
+                <ContentCard :items="content_list" :content="content"></ContentCard>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
@@ -162,11 +164,11 @@
       </b-row>
       <div class="form-group row" style="margin-top:50px">
         <div class="col-sm-12">
-          <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right" />
+          <!-- <input v-if="!addLoader" type="submit" value="Submit" class="btn btn-primary pull-right" />
           <button v-if="addLoader" class="btn btn-primary pull-right" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Submitting...
-          </button>
+          </button> -->
           <button
             v-if="!addLoader"
             @click.prevent="close"

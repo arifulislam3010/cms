@@ -88,7 +88,7 @@ const actions = {
 
 const mutations = {
     [`SET_ALBUM_EMPTY`](state){
-      state.album = { ...state.initial_album }
+      state.album = state.initial_album 
     },
     ['SET_ALBUM_DETAIL'](state,payload){
       state.album = payload
