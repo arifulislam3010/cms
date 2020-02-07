@@ -83,10 +83,12 @@ class PostsController extends Controller
         ->when($tag,function($q) use($tag){return $q->join('post_tags','post_tags.post_id','=','posts.id')->where('post_tags.tag_id',$tag);})
         ->when($area,function($q) use($area){return $q->join('post_areas','post_areas.post_id','=','posts.id')->where('post_areas.area_id', $area);})
         // manege scheduel post 
-        ->where(function($q){
-            $q->where('schedule_post_date','<=',Carbon::now())
-            ->orWhere('schedule_post_date','=',null);
-        })    
+        // ->where('schedule_post_date','<',Carbon::now()->toDateTimeString())
+        // ->orWhere('schedule_post_date','=',null)
+        // ->where(function($q){
+        //     $q->where('schedule_post_date','>',Carbon::now()->toDateTimeString())
+        //     ->orWhere('schedule_post_date','=',null);
+        // })    
         ->orderBy('posts.id', 'DESC')
             ->paginate($limit);
         return PostResource::collection($post);
@@ -99,7 +101,7 @@ class PostsController extends Controller
    public function category()
    {
     //    return "ok";
-       $category = Category::whereNull('parent_id')->where('categoryStatus',1) ->get();
+       $category = Category::whereNull('parent_id')->where('menubarDisplay',1) ->get();
     //    return Category::where('parent_id',NULL)->get();
        return CategoryResource::collection($category);
    }

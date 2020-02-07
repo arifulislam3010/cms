@@ -101,12 +101,15 @@ class PostController extends Controller
 
         // validate reqest data
         $validator = $request->validate([
-            'shoulder' => 'required',
+            // 'shoulder' => 'required',
             'headline' => 'required',
-            'reporter' => 'required',
+            // 'reporter' => 'required',
             // 'author' => 'required',
             'content' => 'required|min:10',    
-            'status' => 'required',
+            // 'status' => 'required',
+            'category_ids' => 'required' ,
+            'area_ids'     => 'required' ,
+
 
             ]);
             // return $request->selected_areas ;
@@ -206,11 +209,14 @@ class PostController extends Controller
 //        }
         $post = Post::findOrfail($id);
         $validator = $request->validate([
-            'shoulder' => 'required',
+            // 'shoulder' => 'required',
             'headline' => 'required',
-            'reporter' => 'required',
+            // 'reporter' => 'required',
             // 'author' => 'required',
-            'status' => 'required',
+            'content' => 'required|min:10',    
+            // 'status' => 'required',
+            'category_ids' => 'required' ,
+            'area_ids'     => 'required' ,
         ]);
         $auth_user_id = Auth()->user()->id ;
         $post->shoulder = $request->shoulder;

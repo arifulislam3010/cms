@@ -111,7 +111,11 @@
                             <b-form-input type="text" name="Title"  v-model="newCategory.title" v-validate="'required'" placeholder=""></b-form-input>
                           </div>
                         </div>
-
+                        <div v-show="errors.hasOwnProperty('title')" style="margin-top:5px;color:red;">
+                          <p v-for="(i,k) in errors[`title`]" :key="k">
+                            <i class="fa fa-check-circle"></i> &nbsp;{{i}}
+                          </p>
+                        </div>
                         <br/>
 
                         <div class="row">
@@ -156,7 +160,7 @@
                               v-model="newCategory.headerDisplay"
                             >
                             
-                              <option value="1">Active</option>
+                              <option value="1" >Active</option>
                               <option value="0">InActive</option>
                               
                             </select>
@@ -289,27 +293,30 @@
                               v-model="newCategory.categoryStatus"
                             >
                           
-                              <option value="1">Active</option>
+                              <option value="1" selected>Active</option>
                               <option value="0">Inactive</option>
                               
                             </select>
                           </div>
                         </div>
 
-
+                        <div v-show="errors.hasOwnProperty('categoryStatus')" style="margin-top:5px;color:red;">
+                          <p v-for="(i,k) in errors[`categoryStatus`]" :key="k">
+                            <i class="fa fa-check-circle"></i> &nbsp;{{i}}
+                          </p>
+                        </div> 
 
                         <!-- {{newCategory}} -->
 
 
 
                 
-
+<!-- 
                         <div v-show="errors.hasOwnProperty('title')" class="help-block alert alert-danger">
-                        <!-- {{  errors[`title`] }} -->
                           <p v-for="(i,k) in errors[`title`]" :key="k">
                             {{i.replace(`title`,`name`)}}
                           </p>
-                        </div>
+                        </div> -->
                       </b-form-group>
                     </b-col>
                   </b-row>

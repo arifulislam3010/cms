@@ -136,7 +136,8 @@ const AddPoll = () => import(`@/views/poll/Add`)
 const SiteList = () => import(`@/views/settings/site/index`)
 const SiteAdd = () => import(`@/views/settings/site/add`)
 export default new Router({
-  mode: 'history', // https://router.vuejs.org/api/#mode
+  // mode: 'history', // https://router.vuejs.org/api/#mode
+  mode : 'hash',
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [

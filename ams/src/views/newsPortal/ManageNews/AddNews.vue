@@ -55,7 +55,12 @@
             v-model="area_1"
             label="label"
           ></multiselect>  
-          </div>         
+          </div>  
+             <div v-show="errors.hasOwnProperty('area_ids')" style="margin-top:5px;color:red;">
+              <p v-for="(i,k) in errors[`area_ids`]" :key="k">
+                <i class="fa fa-check-circle"></i> &nbsp;{{i}}
+              </p>
+            </div>                 
           <!-- <label>Division
             <i class="icon-location-pin"></i>
           </label>
@@ -156,7 +161,12 @@
                 </i>
               </div>            
           </div> 
- 
+
+            <div v-show="errors.hasOwnProperty('category_ids')" style="margin-top:5px;color:red;">
+              <p v-for="(i,k) in errors[`category_ids`]" :key="k">
+                <i class="fa fa-check-circle"></i> &nbsp;{{i}}
+              </p>
+            </div> 
             <!-- sub cat 1  -->
            <div class="input-group mb-3" style="margin-top:20px;" v-if="category_1.children.length">
             <div class="input-group-prepend">
@@ -291,7 +301,7 @@
                     :multiple="true"
                     :flat="true"
                     v-model="news_data.selected_topics"
-                    :options="topic_parents"
+                    :options="topic_parents.filter(v=> v.status !=null )"
                     
                     ></Treeselect>
                   </div>         

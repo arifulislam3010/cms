@@ -20,6 +20,10 @@
                                 </nuxt-link>
                         </li>
                     </ol>
+                    <!-- <div class="content-details">
+                        <div v-html="item.shoulder"></div>
+                    </div>                    -->
+                    <h3 v-html="item.shoulder"></h3>
                     <h1 class="no-margin" v-html="item.headline">
                     <!-- {{item.shoulder}} -->
                     </h1>
@@ -38,10 +42,10 @@
                                     <div class="media-body">
                                         <span class="small text-muted time-with-author">
                                             <i class="fa fa-pencil"></i>
-                                            <a class="hidden-print" href="../../author/staff-reporter.html" style="display:inline-block;" rel="nofollow">লেখক : {{item.athor}}</a>
-                                            <a class="visible-print-view" rel="nofollow">প্রতিবেদক : {{item.reporter}}</a>
+                                            <a class="hidden-print" href="../../author/staff-reporter.html" style="display:inline-block;" rel="nofollow"> {{item.athor}}</a>
+                                            <a class="visible-print-view" rel="nofollow"> {{item.reporter}}</a>
                                             <br>
-                                            <i class="fa fa fa-clock-o text-danger"></i>প্রকাশিত: {{item.created_at}}
+                                            <i class="fa fa fa-clock-o text-danger"></i>  {{item.created_at}}
                                         </span>
                                     </div>
                                 </div>
@@ -91,8 +95,8 @@
       <!-- image slider  -->
                     <div v-if="item.PostContents.length > 0">
                         <div>
-                           <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p> 
-                           <p @click="slideChange(`next`)" class="pull-right">next &gt;</p> 
+                           <!-- <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p>  -->
+                           <!-- <p @click="slideChange(`next`)" class="pull-right">next &gt;</p>  -->
                            <!-- <p><a href="#" class="pull-right" @click="slideChange(`next`)">next &gt;</a></p>  -->
                         </div>
                         <div class="slider-image">
@@ -105,9 +109,7 @@
   
                 </div>
                 <!-- todo sholder  -->
-                <div class="content-details">
-                    <div v-html="item.shoulder"></div>
-                </div>
+ 
                 <!-- todo hanger -. this is is qotes -->
                 <!-- content -->
                 <div class="content-details">
@@ -128,8 +130,8 @@
                     <!-- image slider  -->
                     <div v-if="item.PostContents.length > 0">
                         <div>
-                           <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p> 
-                           <p @click="slideChange(`next`)" class="pull-right">next &gt;</p> 
+                           <!-- <p @click="slideChange(`prev`)" class="pull-left">&lt; prev </p>  -->
+                           <!-- <p @click="slideChange(`next`)" class="pull-right">next &gt;</p>  -->
                            <!-- <p><a href="#" class="pull-right" @click="slideChange(`next`)">next &gt;</a></p>  -->
                         </div>
                         <div class="slider-image">
@@ -142,6 +144,7 @@
                 </div>
 
                 <!-- news tags  -->
+                <!-- {{item.PostTag}} -->
                 <div class="paddingLeft10 paddingRight10 hidden-print photo-title">
                     <ul class="photo-tags">
                         <li><i class="fa fa-tags"></i></li>

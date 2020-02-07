@@ -32,7 +32,9 @@ class CategoryController extends Controller
         //return 'ok';
         $validator = $request->validate([
             'title'=>'required',
+            'categoryStatus'=>'required',
             // 'parent_id'=>'required',
+
         ]);
         $category = new Category ;
         $category->title = $request->title ;
@@ -101,6 +103,8 @@ class CategoryController extends Controller
         
         $validator = $request->validate([
             'title' => 'required',
+            'categoryStatus'=>'required',
+
         ]);
         $category = Category::findOrfail($id) ;    
         // $category->title = $request->title ;

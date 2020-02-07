@@ -1,14 +1,14 @@
   <template>
     <div class="single-block" :class="[blockType=='mainLead'?'mainLead':'',blockType=='subLead'?'subLead':'']">
         <div class="img-box">
-          <a  v-if="item.FeaturedImage!='' || item.FeaturedImage!=null" href="#">
-          <img class="img-responsive"   v-if="item.FeaturedImage.type=='image'" :src="item.FeaturedImage.file_name" :alt="item.shoulder">
-          <video class="tutorial_thumnail" v-else-if="item.FeaturedImage.type=='video'" :src="item.FeaturedImage.file_name" alt="Card video cap" controls ></video>
-          <audio class="tutorial_thumnail" v-if="item.FeaturedImage.type=='audio'" :src="item.FeaturedImage.file_name"  alt="Card audio cap" controls ></audio>
-        </a>
-        <a v-else href="#">
-          <img src="../../assets/media/common/placeholder-bg.png"  alt="রাজধানীতে পুলিশের ওপর বোমা হামলা, আহত ২" class="lazyload img-responsive">
-        </a>
+              <a  v-if="item.FeaturedImage!=null" href="#">
+              <img class="img-responsive"   v-if="item.FeaturedImage.type=='image'" :src="item.FeaturedImage.file_name" :alt="item.shoulder">
+              <video class="tutorial_thumnail" v-else-if="item.FeaturedImage.type=='video'" :src="item.FeaturedImage.file_name" alt="Card video cap" controls ></video>
+              <audio class="tutorial_thumnail" v-if="item.FeaturedImage.type=='audio'" :src="item.FeaturedImage.file_name"  alt="Card audio cap" controls ></audio>
+            </a>
+            <a v-else href="#">
+              <img src="../../assets/media/common/placeholder-bg.png"  alt="রাজধানীতে পুলিশের ওপর বোমা হামলা, আহত ২" class="lazyload img-responsive">
+            </a>
         </div>
         <div class="details">
             <h3 class="max_two_lines_allow text_overflow" >

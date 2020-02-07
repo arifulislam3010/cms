@@ -31,7 +31,7 @@ class TopicController extends Controller
         // $topic -> color = $request->input('color');
         $topic -> parent_id = $request->input('parent_id');
         // $topic->deadline = $request->deadline ;
-        // $topic->status   = $request->status ;
+        $topic->status   = $request->status ;
         // $topic->image_id = $request->image ;
 
         if($request->isMethod('put')){

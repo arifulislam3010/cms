@@ -1,6 +1,7 @@
 <template>
     <b-modal title="Category" hide-footer size="lg" v-model="largeModal" @ok="largeModal = false">
         <form @submit.prevent="addCategory" >
+            
              <div class="container custom_modal_body">
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Category Name</label>

@@ -5,6 +5,7 @@
       <b-row>
         <!-- {{this.current_topic}} -->
         <!-- {{this.content}} -->
+        <!-- hello -->
         <b-col sm="12">
          
             <b-row>
@@ -105,15 +106,16 @@
                     <div class="col-md-3">
                       <label for="Title">Topic Status*</label>
                     </div>
+                    <!-- {{current_topic.status}} -->
                     <div class="col-md-7">
                        <select
                               class="form-control"
                               id="exampleFormControlSelect2"
-                              v-model="temp_status"
+                              v-model="current_topic.status"
                             >
-                          
-                              <option>Active</option>
-                              <option>Inactive</option>
+                              
+                              <option value="1">Active</option>
+                              <option value="0">Inactive</option>
                               
                             </select>
                     </div>
@@ -203,8 +205,9 @@ export default {
         title: "",
         parent_id: "",
         deadline: null,
-        status:'Active',
+        status:1,
         topic_image:''
+        // status: `` ,
       }
     };
   },

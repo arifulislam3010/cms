@@ -66,6 +66,8 @@
               </div>
           </div>
           <Section1Aside></Section1Aside>
+          <!-- todo place area search head  -->
+          <AreaSearch></AreaSearch>
       </div>
     </div>
   </section>
@@ -77,11 +79,14 @@ import SmallLoaderVerticle from "~/components/loader/SmallLoaderVerticle";
 import SingleBlock from '~/components/post/SingleBlock.vue'
 import Section1Aside from '@/components/home/section/Section1Aside.vue'
 import SmallLoader from "@/components/loader/SmallLoader";
+// todo import and show area search 
+import AreaSearch from "../../../components/home/section/AreaSearch"
 export default {
   components: {
     SingleBlock,
     Section1Aside,
-    SmallLoader
+    SmallLoader,
+    AreaSearch ,
   },
   name:"CategoryPage",
   data() {

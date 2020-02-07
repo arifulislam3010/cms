@@ -17,6 +17,7 @@ class Category extends Resource
         return [
             'id'=> $this->id,
             'label'=> $this->title,
+            'categoryStatus'=> $this->categoryStatus,
             // 'parent'=> $this->parent->title,
             'parent_id' => $this->parent_id ,
             'display_name' => $this->displayName ,

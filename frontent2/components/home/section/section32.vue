@@ -5,7 +5,7 @@
         <!-- all careds same size  -->
 
         <div class="row">
-
+            <!-- {{'full view :' + fullView}} -->
             <div class="col-sm-12">
                 <div class="pull-left">
                         <h2 class="catTitle "><a href="country.html"> {{fullView.title}} </a><span class="liner"></span></h2>
@@ -14,13 +14,15 @@
 
         </div>
         <div class="row" >
-            <div class="col-sm-12" >
+            <div class="s" >
                 <!-- {{categories.filter(v => v.layout == 'three')[0].news.map(v => v.id)}} -->
                 <div class="pull-left">
-                    <div v-for="(item,skey) in fullView.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
-                        <nuxt-link :to="'/post/'+item.id+'/'">
-                            <SingleBlock :blockType='"subLead"' :item='item'></SingleBlock>
-                        </nuxt-link>
+                    <div v-for="(item,skey)  in fullView.news.slice(0,8)" v-bind:key="skey" class="col-sm-3">
+                        <div style="" class="">
+                            <nuxt-link :to="'/post/'+item.id+'/'">
+                                <SingleBlock :blockType='"subLead"' :item='item'></SingleBlock>
+                            </nuxt-link>
+                        </div>
                     </div>
                 </div>
             </div>
